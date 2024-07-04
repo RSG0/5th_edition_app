@@ -1,16 +1,15 @@
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { COLORS, FONTSIZE } from "../constants/theme";
-import {CLASSES, RACES, LEVELS, ELF_SUBRACE, DRAGONBORN_SUBRACE} from "../constants/characterinfo"
+import { COLORS, FONT, FONTSIZE } from "../constants/theme";
+import {CLASSES, RACES, NUMBER_TWENTY, ELF_SUBRACE, DRAGONBORN_SUBRACE, GENASI_SUBRACE} from "../constants/characterinfo"
 import { Dropdown } from "react-native-element-dropdown";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 
 
 
 const CreateCharacter = () => {
-    const [selectedRace, setSelectedRace] = useState();
+    const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
-    const [selectedSubrace, setSelectedSubrace] = useState();
+    const [selectedSubrace, setSelectedSubrace] = useState(null);
 
     const handleRaceChange = (item) =>
     {
@@ -25,9 +24,13 @@ const CreateCharacter = () => {
         {
             setSubraceOptions(DRAGONBORN_SUBRACE);
         }
+        else if (item.label == "Genasi")
+        {
+            setSubraceOptions(GENASI_SUBRACE);
+        }
         else
         {
-            setSubraceOptions(null);
+            setSubraceOptions([]);
         }
     }
 
@@ -35,7 +38,7 @@ const CreateCharacter = () => {
              <View style={{ flex: 1 }}>
                  <View style={styles.inputRow}>
                      <Text style={styles.labelStyle}>Name:</Text>
-                     <TextInput style={styles.input} placeholderStyle={FONTSIZE.xlarge} placeholder={"Enter name here..."} />
+                     <TextInput style={styles.input} placeholderStyle={styles} placeholder={"Enter name here..."} />
                  </View>
                      <View style={styles.inputRow}>
                          <Text style={styles.labelStyle}>Class:</Text>
@@ -50,7 +53,7 @@ const CreateCharacter = () => {
                          />
                          <Text style={styles.labelStyle}>Level:</Text>
                          <Dropdown style={styles.dropdownLevel}
-                         data={LEVELS}
+                         data={NUMBER_TWENTY}
                          labelField={"value"}
                          valueField={"value"}
                          onChange={item => (setSelectedSubrace(item))}
@@ -68,7 +71,7 @@ const CreateCharacter = () => {
                          onChange={handleRaceChange}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="Select race here..."
-                         maxHeight={500}
+                         maxHeight={200}
                          />
                      </View>
                      <View style={styles.inputRow}>
@@ -80,8 +83,21 @@ const CreateCharacter = () => {
                          onChange={item => (setSelectedSubrace(item))}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="---"
+                         maxHeight={200}
                          />
                      </View>
+                    <View style={styles.inputRow}>
+                        <Text style={styles.labelStyle}>STR:</Text>
+                        <Dropdown style={styles.dropdownLevel}
+                         data={NUMBER_TWENTY}
+                         labelField={"value"}
+                         valueField={"value"}
+                         onChange={item => (item)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="--"
+                         maxHeight={200}
+                         />
+                    </View>
              </View>
     );
 }
@@ -98,14 +114,17 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginRight: 8,
     },
-    input: {
+    input: 
+    {
+        fontSize: FONTSIZE.medium,
         height: 40,
         width: 180,
         borderWidth: 1,
         padding: 10,
         borderRadius: 10,
     },
-    dropdown: {
+    dropdown: 
+    {
         width: 150,
         borderWidth: 1,
         borderRadius: 10,
@@ -127,7 +146,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     placeholderColor:{
-        fontSize: 12,
+        fontSize: FONTSIZE.medium,
         color: 'grey'
     }
 });

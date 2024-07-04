@@ -58,13 +58,13 @@ const RACES =
 
 console.log(RACES);
 
-const LEVELS = 
+const NUMBER_TWENTY = 
 [ 
 
 ]
 for (let i = 1; i<= 20; i++)
 {
-        LEVELS.push({value: i.toString()});
+        NUMBER_TWENTY.push({value: i.toString()});
 }
 const ELF_SUBRACE = 
 [
@@ -89,7 +89,14 @@ const DRAGONBORN_SUBRACE =
     {label: "Silver", value: '9'},
     {label: "White", value: '10'}
 ];
+const GENASI_SUBRACE = 
+[
+    {label: "Air", value: '1'},
+    {label: "Earth", value: '2'},
+    {label: "Fire", value: '3'},
+    {label: "Water", value: '4'}
+];
 
 console.log(DRAGONBORN_SUBRACE);
 
-export {CLASSES, RACES, LEVELS, ELF_SUBRACE, DRAGONBORN_SUBRACE};
+export {CLASSES, RACES, NUMBER_TWENTY, ELF_SUBRACE, DRAGONBORN_SUBRACE, GENASI_SUBRACE};
