@@ -1,18 +1,25 @@
 const CLASSES = 
 [
-    {label: "Articier", value: '1'},
-    {label: "Bard", value: '2'},
-    {label: "Blood Hunter", value: '3'},
-    {label: "Barbarian", value: '4'},
+    {label: "Artificer", value: '1'},
+    {label: "Barbarian", value: '2'},
+    {label: "Bard", value: '3'},
+    {label: "Blood Hunter", value: '4'},
     {label: "Cleric", value: '5'},
-    {label: "Fighter", value: '6'},
-    {label: "Druid", value: '7'},
-    {label: "Paladin", value: '8'},
-    {label: "Ranger", value: '9'},
-    {label: "Sorceror", value: '10'},
-    {label: "Wizard", value: '11'}
-]
-const RACES = [
+    {label: "Druid", value: '6'},
+    {label: "Fighter", value: '7'},
+    {label: "Monk", value: '8'},
+    {label: "Paladin", value: '9'},
+    {label: "Ranger", value: '10'},
+    {label: "Rogue", value: '11'},
+    {label: "Sorcerer", value: '12'},
+    {label: "Warlock", value: '13'},
+    {label: "Wizard", value: '14'}
+];
+
+console.log(CLASSES);
+
+const RACES = 
+[
     {label: "Aarakocra", value: '1'},
     {label: "Aasimar", value: '2'},
     {label: "Bugbear", value: '3'},
@@ -59,17 +66,30 @@ for (let i = 1; i<= 20; i++)
 {
         LEVELS.push({value: i.toString()});
 }
-const ELF_SUBRACE =
+const ELF_SUBRACE = 
 [
-    {label:"Astral", value: '1'},
-    {label:"Drow", value: '2'},
-    {label:"High", value: '3'}
-
-]
-const DRAGONBORN_SUBRACE =
+    {label: "Astral", value: '1'},
+    {label: "Drow", value: '2'},
+    {label: "High", value: '3'},
+    {label: "Wood", value: '4'},
+    {label: "Eladrin", value: '5'},
+    {label: "Sea", value: '6'},
+    {label: "Shadar-kai", value: '7'}
+];
+const DRAGONBORN_SUBRACE = 
 [
     {label: "Black", value: '1'},
     {label: "Blue", value: '2'},
-    {label: "Brass", value: '3'}
-]
+    {label: "Brass", value: '3'},
+    {label: "Bronze", value: '4'},
+    {label: "Copper", value: '5'},
+    {label: "Gold", value: '6'},
+    {label: "Green", value: '7'},
+    {label: "Red", value: '8'},
+    {label: "Silver", value: '9'},
+    {label: "White", value: '10'}
+];
+
+console.log(DRAGONBORN_SUBRACE);
+
 export {CLASSES, RACES, LEVELS, ELF_SUBRACE, DRAGONBORN_SUBRACE};
