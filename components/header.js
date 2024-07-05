@@ -2,6 +2,11 @@ import { View, Text, StyleSheet } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
 import { HeaderToolWrapper, HeaderToolBar } from "../constants/UI_Wrappers"
 
+
+export default function header()
+{
+    
+}
 const styles = StyleSheet.create(
 {
     item:{

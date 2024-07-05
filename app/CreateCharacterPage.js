@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { COLORS, FONT, FONTSIZE } from "../constants/theme";
-import {CLASSES, RACES, NUMBER_TWENTY, ELF_SUBRACE, DRAGONBORN_SUBRACE, GENASI_SUBRACE} from "../constants/characterinfo"
+import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../constants/characterinformation/characterinfo"
+import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../constants/characterinformation/raceinfo";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
 
@@ -27,6 +28,10 @@ const CreateCharacter = () => {
         else if (item.label == "Genasi")
         {
             setSubraceOptions(GENASI_SUBRACE);
+        }
+        else if (item.label == "Aasimar")
+        {
+            setSubraceOptions(AASIMAR_SUBRACE)
         }
         else
         {
@@ -87,6 +92,18 @@ const CreateCharacter = () => {
                          />
                      </View>
                     <View style={styles.inputRow}>
+                        <Text style={styles.labelStyle}>Backgrounds:</Text>
+                        <Dropdown style={styles.dropdown}
+                         data={BACKGROUNDS}
+                         labelField={"label"}
+                         valueField={"label"}
+                         onChange={item => (item)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200}
+                         />
+                    </View>
+                    <View style={styles.inputRow}>
                         <Text style={styles.labelStyle}>STR:</Text>
                         <Dropdown style={styles.dropdownLevel}
                          data={NUMBER_TWENTY}
@@ -98,6 +115,7 @@ const CreateCharacter = () => {
                          maxHeight={200}
                          />
                     </View>
+
              </View>
     );
 }

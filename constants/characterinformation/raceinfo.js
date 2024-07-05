@@ -1,23 +1,3 @@
-const CLASSES = 
-[
-    {label: "Artificer", value: '1'},
-    {label: "Barbarian", value: '2'},
-    {label: "Bard", value: '3'},
-    {label: "Blood Hunter", value: '4'},
-    {label: "Cleric", value: '5'},
-    {label: "Druid", value: '6'},
-    {label: "Fighter", value: '7'},
-    {label: "Monk", value: '8'},
-    {label: "Paladin", value: '9'},
-    {label: "Ranger", value: '10'},
-    {label: "Rogue", value: '11'},
-    {label: "Sorcerer", value: '12'},
-    {label: "Warlock", value: '13'},
-    {label: "Wizard", value: '14'}
-];
-
-console.log(CLASSES);
-
 const RACES = 
 [
     {label: "Aarakocra", value: '1'},
@@ -55,17 +35,6 @@ const RACES =
     {label: "Warforged", value: '33'},
     {label: "Yuan-ti Pureblood", value: '34'}
 ];
-
-console.log(RACES);
-
-const NUMBER_TWENTY = 
-[ 
-
-]
-for (let i = 1; i<= 20; i++)
-{
-        NUMBER_TWENTY.push({value: i.toString()});
-}
 const ELF_SUBRACE = 
 [
     {label: "Astral", value: '1'},
@@ -89,6 +58,12 @@ const DRAGONBORN_SUBRACE =
     {label: "Silver", value: '9'},
     {label: "White", value: '10'}
 ];
+const AASIMAR_SUBRACE =
+[
+    {label: "Fallen", value: '1'},
+    {label: "Protector", value: '2'},
+    {label: "Scourage", value: '3'},
+];
 const GENASI_SUBRACE = 
 [
     {label: "Air", value: '1'},
@@ -96,7 +71,4 @@ const GENASI_SUBRACE =
     {label: "Fire", value: '3'},
     {label: "Water", value: '4'}
 ];
-
-console.log(DRAGONBORN_SUBRACE);
-
-export {CLASSES, RACES, NUMBER_TWENTY, ELF_SUBRACE, DRAGONBORN_SUBRACE, GENASI_SUBRACE};
+export {GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE,RACES};
