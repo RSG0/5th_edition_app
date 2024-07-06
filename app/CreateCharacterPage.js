@@ -1,13 +1,16 @@
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { COLORS, FONT, FONTSIZE } from "../constants/theme";
 import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../constants/characterinformation/characterinfo"
 import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../constants/characterinformation/raceinfo";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
+import { TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import NextButton from "../components/nextButton";
 
 
 
-const CreateCharacter = () => {
+const CreateCharacter = ({navigation}) => {
     const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
     const [selectedSubrace, setSelectedSubrace] = useState(null);
@@ -40,7 +43,9 @@ const CreateCharacter = () => {
     }
 
     return (
-             <View style={{ flex: 1 }}>
+        <SafeAreaView style={{backgroundColor: COLORS.background}}>
+                <ScrollView>
+                <View style={{ flex: 1 }}>
                  <View style={styles.inputRow}>
                      <Text style={styles.labelStyle}>Name:</Text>
                      <TextInput style={styles.input} placeholderStyle={styles} placeholder={"Enter name here..."} />
@@ -104,7 +109,7 @@ const CreateCharacter = () => {
                          />
                     </View>
                     <View style={styles.inputRow}>
-                        <Text style={styles.labelStyle}>STR:</Text>
+                        {/* <Text style={styles.labelStyle}>STR:</Text>
                         <Dropdown style={styles.dropdownLevel}
                          data={NUMBER_TWENTY}
                          labelField={"value"}
@@ -113,10 +118,15 @@ const CreateCharacter = () => {
                          placeholderStyle={styles.placeholderColor}
                          placeholder="--"
                          maxHeight={200}
-                         />
+                         /> */}
+                        <NextButton navigation={navigation}/>
+                                        
                     </View>
+                    <View style={{marginBottom: 200}}></View>
 
              </View>
+             </ScrollView>
+        </SafeAreaView>
     );
 }
 
@@ -166,7 +176,20 @@ const styles = StyleSheet.create({
     placeholderColor:{
         fontSize: FONTSIZE.medium,
         color: 'grey'
-    }
+    },
+    button:{
+        marginTop: 20,
+        backgroundColor: COLORS.mainColor,
+        alignItems: 'center',
+        padding: 5,
+        paddingHorizontal: 40,
+        borderRadius: 20,
+        borderWidth: 2,
+    },
+    buttonText:{
+        fontWeight: 'bold',
+        fontSize: FONTSIZE.medium,
+    }, 
 });
 
 export default CreateCharacter;

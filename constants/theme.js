@@ -1,7 +1,7 @@
 const COLORS =
 {
     background: "#F2EFBB",
-    mainColor: "CE3F3F"
+    mainColor: "#CE3F3F",
 };
 const FONT = {
     regular: "DMRegular",
