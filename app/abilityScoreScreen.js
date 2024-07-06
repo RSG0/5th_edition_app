@@ -7,7 +7,9 @@ const AbilityScoreScreen = ({ navigation }) => {
     return (
         <View style={styles.viewStyle}>
             <Text style={styles.textStyle}>This is the Ability Score Screen</Text>
-            <NextButton navigation={navigation} />
+            <NextButton 
+            navigation={navigation} 
+            nextScreen="Select Skills"/>
         </View>
     );
 };

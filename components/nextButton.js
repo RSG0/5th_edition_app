@@ -2,12 +2,12 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { COLORS, FONTSIZE } from '../constants/theme';
 
-export default NextButton = ({ navigation }) => {
+export default NextButton = ({ navigation }, nextScreen) => 
+{
     return (
         <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Select Skills')}
-        >
+            onPress={() => navigation.navigate({nextScreen})}>
             <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
     );

@@ -119,7 +119,9 @@ const CreateCharacter = ({navigation}) => {
                          placeholder="--"
                          maxHeight={200}
                          /> */}
-                        <NextButton navigation={navigation}/>
+                        <NextButton 
+                        navigation={navigation}
+                        currentScreen="Ability Score"/>
                                         
                     </View>
                     <View style={{marginBottom: 200}}></View>
