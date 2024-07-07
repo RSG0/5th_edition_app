@@ -119,9 +119,16 @@ const CreateCharacter = ({navigation}) => {
                          placeholder="--"
                          maxHeight={200}
                          /> */}
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => navigation.navigate("Ability Score")}>
+                            <Text style={styles.buttonText}>Next</Text>
+                        </TouchableOpacity>
+                        
                         <NextButton 
                         navigation={navigation}
-                        currentScreen="Ability Score"/>
+                        nextScreen={"Ability Score"}
+                        />
                                         
                     </View>
                     <View style={{marginBottom: 200}}></View>

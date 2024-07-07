@@ -7,6 +7,7 @@ import { COLORS } from "../constants/theme";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import { createNativeStackNavigator, createBottomTabNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet } from "react-native-web";
 
 
 const Stack = createNativeStackNavigator();
@@ -36,3 +37,22 @@ const App = () =>
     )
 }
 export default App;
+const styles = StyleSheet.create(
+    {
+        dropdown: 
+        {
+            width: 150,
+            borderWidth: 1,
+            borderRadius: 10,
+            padding: 10,
+            marginRight: 10,
+        },
+        dropdownLevel: {
+            width: 70,
+            borderWidth: 1,
+            borderRadius: 10,
+            padding: 10,
+            marginRight: 10,
+        },
+            }
+)
