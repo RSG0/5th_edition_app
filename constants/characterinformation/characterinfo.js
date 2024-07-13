@@ -15,6 +15,10 @@ const CLASSES =
     {label: "Warlock", value: '13'},
     {label: "Wizard", value: '14'}
 ];
+const CLASS_SKILLS =
+[
+    {"Monk", skills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"] }
+]
 const BACKGROUNDS = 
 [
     {label: "Acolyte", skillProficiencies: ["Insight", "Religion"], toolProficiencies: null, languages: ["", ""], 
