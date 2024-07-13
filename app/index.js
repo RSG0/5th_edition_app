@@ -24,8 +24,8 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() 
 {
     return (
-        <Tab.Navigator screenOptions={{tabBarStyle: {backgroundColor: COLORS.mainColor}, headerShown:false}}>
-            <Tab.Screen name="Character Page" component={StackNavigator} options={{headerShown:true}} />
+        <Tab.Navigator screenOptions={{tabBarStyle: {backgroundColor: COLORS.mainColor}, headerStyle:{backgroundColor:COLORS.mainColor}, headerShown:true,tabBarShowLabel:false}}>
+            <Tab.Screen name="Character Page" component={StackNavigator} options={{headerShown:false,}} />
             <Tab.Screen name="Compendium Page" component={CompendiumPage}/>
             <Tab.Screen name="Dice Roller Page" component={DiceRoller}/>
             <Tab.Screen name="Setting Page" component={SettingPage}/>            

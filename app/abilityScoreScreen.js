@@ -5,10 +5,12 @@ import { COLORS, FONTSIZE } from '../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
 import { NUMBER_TWENTY } from '../constants/characterinformation/characterinfo';
 
-const AbilityScoreScreen = ({ navigation }) => {
+const AbilityScoreScreen = ({ navigation, route }) => {
+    const {name} = route.params;
 
     return (
         <>
+        <Text>Name: {name}</Text>
         <View style={styles.inputRow}>
         <Text style={styles.labelStyle}>STR:</Text>
             <Dropdown style={styles.dropdownLevel}

@@ -14,6 +14,8 @@ const CreateCharacter = ({navigation}) => {
     const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
     const [selectedSubrace, setSelectedSubrace] = useState(null);
+    const [name, setName] = useState('');
+
 
     const handleRaceChange = (item) =>
     {
@@ -48,7 +50,11 @@ const CreateCharacter = ({navigation}) => {
                 <View style={{ flex: 1 }}>
                  <View style={styles.inputRow}>
                      <Text style={styles.labelStyle}>Name:</Text>
-                     <TextInput style={styles.input} placeholderStyle={styles} placeholder={"Enter name here..."} />
+                     <TextInput style={styles.input} 
+                        placeholderStyle={styles} 
+                        placeholder={"Enter name here..."} 
+                        value={name} 
+                        onChangeText={setName}/>
                  </View>
                      <View style={styles.inputRow}>
                          <Text style={styles.labelStyle}>Class:</Text>
@@ -109,27 +115,11 @@ const CreateCharacter = ({navigation}) => {
                          />
                     </View>
                     <View style={styles.inputRow}>
-                        {/* <Text style={styles.labelStyle}>STR:</Text>
-                        <Dropdown style={styles.dropdownLevel}
-                         data={NUMBER_TWENTY}
-                         labelField={"value"}
-                         valueField={"value"}
-                         onChange={item => (item)}
-                         placeholderStyle={styles.placeholderColor}
-                         placeholder="--"
-                         maxHeight={200}
-                         /> */}
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => navigation.navigate("Ability Score")}>
-                            <Text style={styles.buttonText}>Next</Text>
-                        </TouchableOpacity>
-                        
                         <NextButton 
                         navigation={navigation}
                         nextScreen={"Ability Score"}
-                        />
-                                        
+                        params={{name}}
+                        />              
                     </View>
                     <View style={{marginBottom: 200}}></View>
 

@@ -2,17 +2,19 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { COLORS, FONTSIZE } from '../constants/theme';
 
-export default NextButton = ({ navigation, nextScreen}) => 
+export default NextButton = ({ navigation, nextScreen, params}) => 
 {
-    console.log(nextScreen);
+    // console.log(nextScreen);
     const handlePress = () =>
     {
-        navigation.navigate(nextScreen);
+        navigation.navigate(nextScreen, params);
     }
     return (
         <TouchableOpacity
             style={styles.button}
-            onPress={handlePress}>
+            onPress=
+            {handlePress}
+            >
             <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
     );
