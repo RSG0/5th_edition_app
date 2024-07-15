@@ -3,14 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 import NextButton from '../components/nextButton';
 import { COLORS, FONTSIZE } from '../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
-import { NUMBER_TWENTY } from '../constants/characterinformation/characterinfo';
+import { NUMBER_TWENTY, CLASS_SKILLS } from '../constants/characterinformation/characterinfo';
 
 const AbilityScoreScreen = ({ navigation, route }) => {
-    const {name} = route.params;
+    const {name, classes, backgrounds} = route.params;
+
 
     return (
         <>
         <Text>Name: {name}</Text>
+        <Text>Class: {classes}</Text>
+        <Text>Backgrounds: {backgrounds}</Text>
         <View style={styles.inputRow}>
         <Text style={styles.labelStyle}>STR:</Text>
             <Dropdown style={styles.dropdownLevel}
@@ -29,6 +32,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
             <Text style={styles.textStyle}>This is the Ability Score Screen</Text>
             <NextButton 
             navigation={navigation} 
+            params={{classes, backgrounds, name}}
             nextScreen={"Select Skills"}/>
         </View>
         </>

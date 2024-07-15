@@ -14,7 +14,9 @@ const CreateCharacter = ({navigation}) => {
     const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
     const [selectedSubrace, setSelectedSubrace] = useState(null);
-    const [name, setName] = useState('');
+    const [name, setName] = useState("");
+    const [classes, setClasses] = useState("");
+    const [backgrounds, setBackgrounds] = useState("");
 
 
     const handleRaceChange = (item) =>
@@ -60,9 +62,11 @@ const CreateCharacter = ({navigation}) => {
                          <Text style={styles.labelStyle}>Class:</Text>
                          <Dropdown style={styles.dropdown}
                          data={CLASSES}
+                         value={classes}
                          labelField={"label"}
-                         valueField={"value"}
-                         onChange={item => (item)}
+                         valueField={"label"}
+                        //  onChangeText={setClasses}
+                         onChange={item => setClasses(item.label)}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="Select class here..."
                          maxHeight={200}
@@ -108,7 +112,8 @@ const CreateCharacter = ({navigation}) => {
                          data={BACKGROUNDS}
                          labelField={"label"}
                          valueField={"label"}
-                         onChange={item => (item)}
+                         value={backgrounds}
+                         onChange={item => setBackgrounds(item.label)}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="---"
                          maxHeight={200}
@@ -118,7 +123,7 @@ const CreateCharacter = ({navigation}) => {
                         <NextButton 
                         navigation={navigation}
                         nextScreen={"Ability Score"}
-                        params={{name}}
+                        params={{name, classes, backgrounds}}
                         />              
                     </View>
                     <View style={{marginBottom: 200}}></View>

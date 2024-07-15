@@ -15,6 +15,10 @@ const CLASSES =
     {label: "Warlock", value: '13'},
     {label: "Wizard", value: '14'}
 ];
+const CLASS_SKILLS =
+[
+    {label: "Cleric", skills:["History", "Insight", "Medicine", "Persuasion", "Religon"]}
+]
 const BACKGROUNDS = 
 [
     {label: "Acolyte", skillProficiencies: ["Insight", "Religion"], toolProficiencies: null, languages: ["", ""], 
@@ -82,4 +86,4 @@ for (let i = 1; i<= 20; i++)
 
 
 
-export {CLASSES, NUMBER_TWENTY, BACKGROUNDS};
+export {CLASSES, CLASS_SKILLS, NUMBER_TWENTY, BACKGROUNDS};
