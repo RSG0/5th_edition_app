@@ -15,10 +15,21 @@ const CLASSES =
     {label: "Warlock", value: '13'},
     {label: "Wizard", value: '14'}
 ];
-const CLASS_SKILLS =
-[
-    {label: "Cleric", skills:["History", "Insight", "Medicine", "Persuasion", "Religon"]}
-]
+const CLASS_SKILLS = [
+    { label: "Barbarian", skills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"] },
+    { label: "Bard", skills: ["Acrobatics", "Animal Handling", "Arcana", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth"] },
+    { label: "Cleric", skills: ["History", "Insight", "Medicine", "Persuasion", "Religion"] },
+    { label: "Druid", skills: ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"] },
+    { label: "Fighter", skills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"] },
+    { label: "Monk", skills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"] },
+    { label: "Paladin", skills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"] },
+    { label: "Ranger", skills: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"] },
+    { label: "Rogue", skills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"] },
+    { label: "Sorcerer", skills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"] },
+    { label: "Warlock", skills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"] },
+    { label: "Wizard", skills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"] }
+];
+
 const BACKGROUNDS = 
 [
     {label: "Acolyte", skillProficiencies: ["Insight", "Religion"], toolProficiencies: null, languages: ["", ""], 

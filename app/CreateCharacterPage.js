@@ -22,7 +22,7 @@ const CreateCharacter = ({navigation}) => {
     const checkForChange = (nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck) =>
     {
         console.log('Checking for changes:', { nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck });
-        if (nameCheck == null || classCheck == null || levelCheck == null || raceCheck == null || backgroundCheck == null)
+        if (!nameCheck || classCheck == null || levelCheck == null || raceCheck == null || backgroundCheck == "")
         {
             Alert.alert("OOPS", "You need to fill all the information")
             return false;
