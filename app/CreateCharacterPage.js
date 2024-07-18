@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
 import { COLORS, FONT, FONTSIZE } from "../constants/theme";
 import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../constants/characterinformation/characterinfo"
 import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../constants/characterinformation/raceinfo";
@@ -14,14 +14,25 @@ const CreateCharacter = ({navigation}) => {
     const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
     const [selectedSubrace, setSelectedSubrace] = useState(null);
+    const [level, setLevel] = useState(null);
     const [name, setName] = useState("");
     const [classes, setClasses] = useState("");
     const [backgrounds, setBackgrounds] = useState("");
 
+    const checkForChange = (nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck) =>
+    {
+        console.log('Checking for changes:', { nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck });
+        if (nameCheck == null || classCheck == null || levelCheck == null || raceCheck == null || backgroundCheck == null)
+        {
+            Alert.alert("OOPS", "You need to fill all the information")
+            return false;
+        }
+        return true;
+    };
 
     const handleRaceChange = (item) =>
     {
-        setSelectedRace(null);
+        setSelectedRace(item.value);
         setSelectedSubrace(null);
 
         if (item.label == "Elf")
@@ -47,6 +58,8 @@ const CreateCharacter = ({navigation}) => {
     }
 
     return (
+        // <TouchableWithoutFeedback onPress={ () => console.log("User has touched the screen")}>
+
         <SafeAreaView style={{backgroundColor: COLORS.background}}>
                 <ScrollView>
                 <View style={{ flex: 1 }}>
@@ -65,8 +78,7 @@ const CreateCharacter = ({navigation}) => {
                          value={classes}
                          labelField={"label"}
                          valueField={"label"}
-                        //  onChangeText={setClasses}
-                         onChange={item => setClasses(item.label)}
+                         onChange={(item) => setClasses(item.label)}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="Select class here..."
                          maxHeight={200}
@@ -76,7 +88,7 @@ const CreateCharacter = ({navigation}) => {
                          data={NUMBER_TWENTY}
                          labelField={"value"}
                          valueField={"value"}
-                         onChange={item => (setSelectedSubrace(item))}
+                         onChange={item => (setLevel(item))}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="--"
                          maxHeight={200}
@@ -123,7 +135,8 @@ const CreateCharacter = ({navigation}) => {
                         <NextButton 
                         navigation={navigation}
                         nextScreen={"Ability Score"}
-                        params={{name, classes, backgrounds}}
+                        params={{name, classes,level, selectedRace, backgrounds}}
+                        checkforChange={() => checkForChange(name, classes, level, selectedRace, backgrounds)}
                         />              
                     </View>
                     <View style={{marginBottom: 200}}></View>
@@ -131,6 +144,8 @@ const CreateCharacter = ({navigation}) => {
              </View>
              </ScrollView>
         </SafeAreaView>
+        // </TouchableWithoutFeedback>
+
     );
 }
 

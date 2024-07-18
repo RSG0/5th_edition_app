@@ -8,6 +8,10 @@ import { NUMBER_TWENTY, CLASS_SKILLS } from '../constants/characterinformation/c
 const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds} = route.params;
 
+    const checkForChange = () =>
+    {
+        return true;
+    }
 
     return (
         <>
@@ -33,6 +37,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
             <NextButton 
             navigation={navigation} 
             params={{classes, backgrounds, name}}
+            checkforChange={() => checkForChange}
             nextScreen={"Select Skills"}/>
         </View>
         </>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet } from "react-native";
-import SelectingSkillsScreen from "./SelectingSkillsScreen";
+import SelectingSkillsScreen from "./SelectingSkillScreen";
 import CreateCharacter from "./CreateCharacterPage";
-import AbilityScoreScreen from "./abilityScoreScreen";
+import AbilityScoreScreen from "./AbilityScoreScreen";
 import CharacterPage from "./CharacterPage";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants/theme";

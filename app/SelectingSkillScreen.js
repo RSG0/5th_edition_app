@@ -4,14 +4,19 @@ import { CLASS_SKILLS } from "../constants/characterinformation/characterinfo";
 
 const SelectingSkillsScreen = ({route}) =>
 {
-    const {name, backgrounds, classes} = route.params;
-    function skillsHandler(item) 
+    const checkForChange = () =>
     {
-        if (item.label == CLASS_SKILLS.label)
+        return true;
+    }
+    const {name, backgrounds, classes} = route.params;
+    function displayClassSkills(item) 
+    {
+        if (item.label == CLASS_SKILLS[0].label)
         {
-            return(
-                <Text>{CLASS_SKILLS.skills}</Text>
-            )
+            return CLASS_SKILLS[0].skills;
+            // return(
+            //     <Text>{CLASS_SKILLS[0].skills[0]}</Text>
+            // )
         }
     }
 
@@ -22,13 +27,14 @@ const SelectingSkillsScreen = ({route}) =>
         <Text>Name: {name}</Text>
         <Text>Class: {classes}</Text>
         <Text>Backgrounds: {backgrounds}</Text>
-        <View>{skillsHandler}</View>
+        <Text>Skills: {displayClassSkills(classes)}</Text>
+        {/* <View>{skillsHandler}</View> */}
         <View style={styles.viewStyle}>
         {/* <FlatList
             data={CLASS_SKILLS}
             renderItem={CLASS_SKILLS}
             /> */}
-
+        
             <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text>
         </View>
         </>
