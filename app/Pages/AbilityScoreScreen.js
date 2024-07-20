@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import NextButton from '../components/nextButton';
-import { COLORS, FONTSIZE } from '../constants/theme';
+import NextButton from '../../components/nextButton';
+import { COLORS, FONTSIZE } from '../../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
-import { NUMBER_TWENTY, CLASS_SKILLS } from '../constants/characterinformation/characterinfo';
+import { NUMBER_TWENTY, CLASS_SKILLS } from '../../constants/characterinformation/characterinfo';
 
 const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds} = route.params;

@@ -1,17 +1,17 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet } from "react-native";
-import SelectingSkillsScreen from "./SelectingSkillScreen";
-import CreateCharacter from "./CreateCharacterPage";
-import AbilityScoreScreen from "./AbilityScoreScreen";
-import CharacterPage from "./CharacterPage";
+import SelectingSkillsScreen from "./Pages/SelectingSkillScreen";
+import CreateCharacter from "./Pages/CreateCharacterPage";
+import AbilityScoreScreen from "./Pages/AbilityScoreScreen";
+import CharacterPage from "./Pages/characterPage"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
-import DiceRoller from "./DiceRoller";
-import SettingPage from "./SettingPage";
-import CompendiumPage from "./CompendiumPage";
+import DiceRoller from "./Pages/diceRollerPage";
+import SettingPage from "./Pages/SettingPage";
+import CompendiumPage from "./Pages/compendiumPage";
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
 const Stack = createNativeStackNavigator();
@@ -44,8 +44,8 @@ function TabNavigator() {
       })}
     >
       <Tab.Screen name="Character Page" component={StackNavigator} options={{ headerShown: false }} />
-      <Tab.Screen name="Compendium Page" component={CompendiumPage} />
       <Tab.Screen name="Dice Roller Page" component={DiceRoller} />
+      <Tab.Screen name="Compendium Page" component={CompendiumPage} />
       <Tab.Screen name="Setting Page" component={SettingPage} />
     </Tab.Navigator>
   );

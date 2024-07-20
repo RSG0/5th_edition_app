@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, StatusBar } from "react-native";
-import { COLORS, FONTSIZE } from "../constants/theme";
+import { COLORS, FONTSIZE } from "../../constants/theme";
 
 export default SettingPage = () =>
 {

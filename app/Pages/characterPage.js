@@ -1,11 +1,11 @@
 import { View, StyleSheet, Text, StatusBar } from "react-native";
-import { COLORS, FONTSIZE } from "../constants/theme";
+import { COLORS, FONTSIZE } from "../../constants/theme";
 
-export default CompendiumPage = () =>
+export default CharacterPage = () =>
 {
     return (
         <View style={styles.viewStyle}>
-            <Text style={styles.textStyle}>This is the Compendium Screen</Text>
+            <Text style={styles.textStyle}>This is the Character Page</Text>
         </View>
     );
 }
