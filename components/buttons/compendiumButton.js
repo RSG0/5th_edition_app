@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { COLORS, FONT, FONTSIZE } from "../constants/theme";
+import { COLORS, FONT, FONTSIZE } from "../../constants/theme";
 
-export default CompendiumButton = ({text, nextScreen}) =>
+export default CompendiumButton = ({text, nextScreen, navigation}) =>
 {
     return(
         <View style={styles.item}>
-            <TouchableOpacity style={styles.components}>
+            <TouchableOpacity style={styles.components} onPress={() => navigation.navigate(nextScreen)}>
                 <View style={styles.square}/>
                 <Text style={styles.text}>View {text}</Text>
             </TouchableOpacity>

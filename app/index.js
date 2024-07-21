@@ -9,14 +9,26 @@ import { COLORS } from "../constants/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
+
 import DiceRoller from "./Pages/diceRollerPage"
 import SettingPage from "./Pages/SettingPage";
 import CompendiumPage from "./Pages/compendiumPage";
+import EquipmentPage from "./Pages/equipmentPage";
+
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+function StackNavigator2()
+{
+    return(
+     <Stack.Navigator initialRouteName="Compendium Page" screenOptions={{headerShown:false}}>
+        <Stack.Screen name="Compendium Page Stack" component={CompendiumPage}/>
+        <Stack.Screen name="Equipment Page" component={EquipmentPage}/>
+     </Stack.Navigator>  
+    )
+}
 function TabNavigator() {
   return (
     <Tab.Navigator
@@ -46,7 +58,7 @@ function TabNavigator() {
     >
       <Tab.Screen name="Character Page" component={StackNavigator} options={{ headerShown: false }} />
       <Tab.Screen name="Dice Roller Page" component={DiceRoller} />
-      <Tab.Screen name="Compendium Page" component={CompendiumPage} />
+      <Tab.Screen name="Compendium Page" component={StackNavigator2} />
       <Tab.Screen name="Setting Page" component={SettingPage} />
     </Tab.Navigator>
   );

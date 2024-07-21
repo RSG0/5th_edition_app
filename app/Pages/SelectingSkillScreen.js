@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, StatusBar, FlatList } from "react-native";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import { BACKGROUNDS, CLASS_SKILLS } from "../../constants/characterinformation/characterinfo";
-import NextButton from "../../components/nextButton";
+import NextButton from "../../components/buttons/nextButton";
 
 const SelectingSkillsScreen = ({route}) =>
 {

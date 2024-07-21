@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
-import { COLORS, FONTSIZE } from '../constants/theme';
+import { COLORS, FONTSIZE } from '../../constants/theme';
 
 export default NextButton = ({ navigation, nextScreen, params, checkforChange}) => 
 {

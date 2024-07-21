@@ -6,7 +6,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import NextButton from "../../components/nextButton";
+import NextButton from "../../components/buttons/nextButton";
 
 
 

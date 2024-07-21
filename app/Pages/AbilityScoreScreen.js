@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import NextButton from '../../components/nextButton';
+import NextButton from '../../components/buttons/nextButton';
 import { COLORS, FONTSIZE } from '../../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
 import { NUMBER_TWENTY, CLASS_SKILLS } from '../../constants/characterinformation/characterinfo';
