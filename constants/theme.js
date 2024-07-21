@@ -1,6 +1,6 @@
 const COLORS =
 {
-    background: "#F2EFBB",
+    background: "#FFF4BB",
     mainColor: "#CE3F3F",
 };
 const FONT = {

@@ -11,6 +11,16 @@ export default CompendiumPage = () =>
         <View style={styles.viewStyle}>
             <CompendiumButton text={"Equipment"} />
             <CompendiumButton text={"Classes"}/>
+            <CompendiumButton text={"Races"}/>
+            <CompendiumButton text={"Magic-Items"}/>
+
+            <CompendiumButton text={"Magic-Items"}/>
+            <CompendiumButton text={"Magic-Items"}/>
+            <CompendiumButton text={"Magic-Items"}/>
+            <CompendiumButton text={"Magic-Items"}/>
+            <CompendiumButton text={"Magic-Items"}/>
+            <CompendiumButton text={"Magic-Items"}/>
+
 
             {/* <Text style={styles.textStyle}>This is the Compendium Screen</Text> */}
         </View>

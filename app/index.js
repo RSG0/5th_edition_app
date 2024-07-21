@@ -9,7 +9,7 @@ import { COLORS } from "../constants/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
-import DiceRoller from "./Pages/diceRollerPage";
+import DiceRoller from "./Pages/diceRollerPage"
 import SettingPage from "./Pages/SettingPage";
 import CompendiumPage from "./Pages/compendiumPage";
 import Icon from 'react-native-vector-icons/FontAwesome6';
@@ -23,6 +23,7 @@ function TabNavigator() {
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: COLORS.mainColor },
         headerStyle: { backgroundColor: COLORS.mainColor },
+        headerTintColor: 'white',
         headerShown: true,
         tabBarActiveTintColor: 'white',
         tabBarShowLabel: false,
