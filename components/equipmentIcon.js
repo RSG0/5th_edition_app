@@ -7,13 +7,13 @@ export default EquipmentIcon = ({itemName, type, weight, cost}) =>
         <View style={styles.item}>
             <TouchableOpacity style={{width: 335, display:'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <View style={styles.square}/>
-                <View style={{flexDirection:'column', maxWidth: "80%", width: 140}}>
+                <View style={{flexDirection:'column', maxWidth: "80%", width: 200}}>
                     <Text style={{fontSize:16, fontWeight:'bold'}}>{itemName}</Text>
                     <Text style={{fontSize: 12, fontStyle: 'italic'}}>{type}</Text>
                     <Text style={{fontSize: 12, marginTop: 5}}>{weight} lbs.</Text>
                 </View>
                 <View>
-                    <Text style={{fontSize: 30, marginLeft: 40, textAlign: 'right', width: 100}}>{cost}</Text>
+                    <Text style={{fontSize: 30, marginLeft: 5, textAlign: 'right', width: 80}}>{cost}</Text>
                 </View>
             </TouchableOpacity>
         </View>

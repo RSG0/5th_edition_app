@@ -22,7 +22,7 @@ export const ARMOR = [
 ];
 
 
-const TOOLS = [
+export const TOOLS = [
     {title: "Alchemist's Supplies", cost: 50, weight: 8, currency: "gp"},
     {title: "Brewer's Supplies", cost: 20, weight: 9, currency: "gp"},
     {title: "Calligrapher's Supplies", cost: 10, weight: 5, currency: "gp"},
@@ -62,8 +62,23 @@ const TOOLS = [
     {title: "Thieves' Tools", cost: 25, weight: 1, currency: "gp"}
 ];
 
-const MARTIAL_MELEE_WEAPONS = [
+export const MARTIAL_MELEE_WEAPONS = [
     {title: "Battleaxe", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "slashing", cost: 10, weight: 4, properties: ["Versatile: d10"], currency: "gp"},
     {title: "Flail", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "bludgeoning", cost: 10, weight: 2, properties: [], currency: "gp"},
-    {title: "Glaive", numOfDice: 1, reach: 10, damageDie: "d10", damageType: "bludgeoning", cost: 10, weight: 2, properties: ["Heavy", "Reach", "Two-handed"], currency: "gp"}
+    {title: "Glaive", numOfDice: 1, reach: 10, damageDie: "d10", damageType: "slashing", cost: 20, weight: 6, properties: ["Heavy", "Reach", "Two-handed"], currency: "gp"},
+    {title: "Greataxe", numOfDice: 1, reach: 5, damageDie: "d12", damageType: "slashing", cost: 30, weight: 7, properties: ["Heavy", "Two-handed"], currency: "gp"},
+    {title: "Greatsword", numOfDice: 2, reach: 5, damageDie: "d6", damageType: "slashing", cost: 50, weight: 6, properties: ["Heavy", "Two-handed"], currency: "gp"},
+    {title: "Halberd", numOfDice: 1, reach: 10, damageDie: "d10", damageType: "slashing", cost: 20, weight: 6, properties: ["Heavy", "Reach", "Two-handed"], currency: "gp"},
+    {title: "Lance", numOfDice: 1, reach: 10, damageDie: "d12", damageType: "piercing", cost: 10, weight: 6, properties: ["Reach", "Special"], currency: "gp"},
+    {title: "Longsword", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "slashing", cost: 15, weight: 3, properties: ["Versatile: d10"], currency: "gp"},
+    {title: "Maul", numOfDice: 2, reach: 5, damageDie: "d6", damageType: "bludgeoning", cost: 10, weight: 10, properties: ["Heavy", "Two-handed"], currency: "gp"},
+    {title: "Morningstar", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "piercing", cost: 15, weight: 4, properties: [], currency: "gp"},
+    {title: "Pike", numOfDice: 1, reach: 10, damageDie: "d10", damageType: "piercing", cost: 5, weight: 18, properties: ["Heavy", "Reach", "Two-handed"], currency: "gp"},
+    {title: "Rapier", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "piercing", cost: 25, weight: 2, properties: ["Finesse"], currency: "gp"},
+    {title: "Scimitar", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "slashing", cost: 25, weight: 3, properties: ["Finesse", "Light"], currency: "gp"},
+    {title: "Shortsword", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "piercing", cost: 10, weight: 2, properties: ["Finesse", "Light"], currency: "gp"},
+    {title: "Trident", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "piercing", cost: 5, weight: 4, properties: ["Thrown: range 20/60", "Versatile: d8"], currency: "gp"},
+    {title: "War Pick", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "piercing", cost: 5, weight: 2, properties: [], currency: "gp"},
+    {title: "Warhammer", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "bludgeoning", cost: 15, weight: 2, properties: ["Versatile: d10"], currency: "gp"},
+    {title: "Whip", numOfDice: 1, reach: 10, damageDie: "d4", damageType: "slashing", cost: 2, weight: 3, properties: ["Finesse", "Reach"], currency: "gp"}
 ];

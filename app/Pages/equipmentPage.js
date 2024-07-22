@@ -2,13 +2,25 @@ import { View, Text, TouchableOpacity, StyleSheet,ScrollView } from "react-nativ
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import EquipmentIcon from "../../components/equipmentIcon";
-import {ARMOR} from "../../constants/characterinformation/equipment"
+import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../constants/characterinformation/equipment"
 
 
 function displayArmor()
 {
     return ARMOR.map((armor, index) => (
         <EquipmentIcon key={index} itemName={armor.title} type={"Armor"} cost={armor.cost} weight={armor.weight}> </EquipmentIcon>
+    ));
+}
+function displayMeleeWeapons()
+{
+    return MARTIAL_MELEE_WEAPONS.map((weapons, index) => (
+        <EquipmentIcon key={index} itemName={weapons.title} type={"Melee Weapon"} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
+    ));
+}
+function displayTools()
+{
+    return TOOLS.map((tools, index) => (
+        <EquipmentIcon key={index} itemName={tools.title} type={"Tools"} cost={tools.cost} weight={tools.weight}> </EquipmentIcon>
     ));
 }
 export default EquipmentPage = ({navigation}) =>
@@ -18,8 +30,12 @@ export default EquipmentPage = ({navigation}) =>
             <ScrollView>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
-                <Text>Armor:</Text>
+                <Text style={styles.textStyle}>Armor:</Text>
                 <Text>{displayArmor()} </Text>
+                <Text style={styles.textStyle}>Tools:</Text>
+                <Text>{displayTools()}</Text>
+                <Text style={styles.textStyle}>Martial Weapon:</Text>
+                <Text>{displayMeleeWeapons()}</Text>
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -35,9 +51,11 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textStyle: {
+        width: 350,
         fontWeight: 'bold',
         fontSize: FONTSIZE.xxlarge,
-        textAlign: 'center'
+        textAlign: 'left',
+        marginBottom: 10
     },
     backScreen:{
         width: 333,
