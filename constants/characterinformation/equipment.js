@@ -1,25 +1,26 @@
-const ARMOR = [
+export const ARMOR = [
     // Light Armor
-    {title: "Padded", weight: 8, cost: 5, armorClass: 11 + "{DEX}", strengthPreq: null, stealthDis: true, currency: "gp"},
-    {title: "Leather", weight: 10, cost: 10, armorClass: 11 + "{DEX}", strengthPreq: null, stealthDis: false, currency: "gp"},
-    {title: "Studded Leather", weight: 13, cost: 45, armorClass: 12 + "{DEX}", strengthPreq: null, stealthDis: false, currency: "gp"},
+    {title: "Padded", weight: 8, cost: 5, armorClass: 11 + "{DEX}", strengthPreq: null, stealthDis: true, currency: "gp", armorType: "Light"},
+    {title: "Leather", weight: 10, cost: 10, armorClass: 11 + "{DEX}", strengthPreq: null, stealthDis: false, currency: "gp", armorType: "Light"},
+    {title: "Studded Leather", weight: 13, cost: 45, armorClass: 12 + "{DEX}", strengthPreq: null, stealthDis: false, currency: "gp", armorType: "Light"},
 
     // Medium Armor
-    {title: "Hide", weight: 12, cost: 10, armorClass: 12 + "{DEX (max 2)}", strengthPreq: null, stealthDis: false, currency: "gp"},
-    {title: "Chain Shirt", weight: 20, cost: 50, armorClass: 13 + "{DEX (max 2)}", strengthPreq: null, stealthDis: false, currency: "gp"},
-    {title: "Scale Mail", weight: 45, cost: 50, armorClass: 14 + "{DEX (max 2)}", strengthPreq: null, stealthDis: true, currency: "gp"},
-    {title: "Breastplate", weight: 20, cost: 400, armorClass: 14 + "{DEX (max 2)}", strengthPreq: null, stealthDis: false, currency: "gp"},
-    {title: "Half Plate", weight: 40, cost: 750, armorClass: 15 + "{DEX (max 2)}", strengthPreq: null, stealthDis: true, currency: "gp"},
+    {title: "Hide", weight: 12, cost: 10, armorClass: 12 + "{DEX (max 2)}", strengthPreq: null, stealthDis: false, currency: "gp", armorType: "Medium"},
+    {title: "Chain Shirt", weight: 20, cost: 50, armorClass: 13 + "{DEX (max 2)}", strengthPreq: null, stealthDis: false, currency: "gp", armorType: "Medium"},
+    {title: "Scale Mail", weight: 45, cost: 50, armorClass: 14 + "{DEX (max 2)}", strengthPreq: null, stealthDis: true, currency: "gp", armorType: "Medium"},
+    {title: "Breastplate", weight: 20, cost: 400, armorClass: 14 + "{DEX (max 2)}", strengthPreq: null, stealthDis: false, currency: "gp", armorType: "Medium"},
+    {title: "Half Plate", weight: 40, cost: 750, armorClass: 15 + "{DEX (max 2)}", strengthPreq: null, stealthDis: true, currency: "gp", armorType: "Medium"},
 
     // Heavy Armor
-    {title: "Ring Mail", weight: 40, cost: 30, armorClass: 14, strengthPreq: null, stealthDis: true, currency: "gp"},
-    {title: "Chain Mail", weight: 55, cost: 75, armorClass: 16, strengthPreq: 13, stealthDis: true, currency: "gp"},
-    {title: "Splint", weight: 60, cost: 200, armorClass: 17, strengthPreq: 15, stealthDis: true, currency: "gp"},
-    {title: "Plate", weight: 65, cost: 1500, armorClass: 18, strengthPreq: 15, stealthDis: true, currency: "gp"},
+    {title: "Ring Mail", weight: 40, cost: 30, armorClass: 14, strengthPreq: null, stealthDis: true, currency: "gp", armorType: "Heavy"},
+    {title: "Chain Mail", weight: 55, cost: 75, armorClass: 16, strengthPreq: 13, stealthDis: true, currency: "gp", armorType: "Heavy"},
+    {title: "Splint", weight: 60, cost: 200, armorClass: 17, strengthPreq: 15, stealthDis: true, currency: "gp", armorType: "Heavy"},
+    {title: "Plate", weight: 65, cost: 1500, armorClass: 18, strengthPreq: 15, stealthDis: true, currency: "gp", armorType: "Heavy"},
 
     // Shields
-    {title: "Shield", weight: 6, cost: 10, armorClass: +2, strengthPreq: null, stealthDis: false, currency: "gp"}
+    {title: "Shield", weight: 6, cost: 10, armorClass: +2, strengthPreq: null, stealthDis: false, currency: "gp", armorType: "Shield"}
 ];
+
 
 const TOOLS = [
     {title: "Alchemist's Supplies", cost: 50, weight: 8, currency: "gp"},

@@ -21,9 +21,9 @@ export default DiceRoller = () =>
             <DiceButton text={"D8"}/>
         </View>
         <View style={styles.buttonLayout}>
-            <DiceButton/>
-            <DiceButton/>
-            <DiceButton/>
+            <DiceButton text={"D10"}/>
+            <DiceButton text={"D12"}/>
+            <DiceButton text={"D20"}/>
         </View>
         </ScrollView>
         </SafeAreaView>

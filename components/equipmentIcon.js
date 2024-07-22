@@ -1,19 +1,19 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
 
-export default EquipmentIcon = () =>
+export default EquipmentIcon = ({itemName, type, weight, cost}) =>
 {
     return(
         <View style={styles.item}>
             <TouchableOpacity style={{width: 335, display:'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <View style={styles.square}/>
-                <View style={{flexDirection:'column', maxWidth: "80%"}}>
-                    <Text style={{fontSize:16, fontWeight:'bold'}}>Chain Mail</Text>
-                    <Text style={{fontSize: 12, fontStyle: 'italic'}}>Armor</Text>
-                    <Text style={{fontSize: 12, marginTop: 5}}>55 lbs.</Text>
+                <View style={{flexDirection:'column', maxWidth: "80%", width: 140}}>
+                    <Text style={{fontSize:16, fontWeight:'bold'}}>{itemName}</Text>
+                    <Text style={{fontSize: 12, fontStyle: 'italic'}}>{type}</Text>
+                    <Text style={{fontSize: 12, marginTop: 5}}>{weight} lbs.</Text>
                 </View>
                 <View>
-                    <Text style={{fontSize: 25, marginLeft: 100, textAlign: 'right', width: 100}}>7005</Text>
+                    <Text style={{fontSize: 30, marginLeft: 40, textAlign: 'right', width: 100}}>{cost}</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         height: 65,
         borderRadius: 10,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom: 10,
     },
     square:{
         width: 25,
