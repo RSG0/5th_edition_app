@@ -1,17 +1,23 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Button } from "react-native-paper";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 
-export default DiceButton= ({text}) =>
+export default DiceButton = ({value, onDiceRoll}) =>
 {
+    function randomDice(maxRange)
+    {
+        let diceResult = Math.floor(Math.random() * maxRange) + 1
+        console.log(diceResult)
+        onDiceRoll(diceResult);
+        return diceResult;
+        
+    }
     return(
-        <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>{text}</Text>
+        <TouchableOpacity style={styles.button} onPress={() => randomDice(value)}>
+            <Text style={styles.text}>D{value}</Text>
             
         </TouchableOpacity>
     )
 }
-
 const styles = StyleSheet.create({
     button: {
         width: 100,

@@ -31,7 +31,7 @@ function StackNavigator2()
 }
 function TabNavigator() {
   return (
-    <Tab.Navigator
+    <Tab.Navigator initialRouteName='Dice Roller Page'
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: COLORS.mainColor },
         headerStyle: { backgroundColor: COLORS.mainColor },
