@@ -1,12 +1,12 @@
 import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
-import { COLORS, FONT, FONTSIZE } from "../../constants/theme";
-import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../../constants/characterinformation/characterinfo"
-import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../../constants/characterinformation/raceinfo";
+import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
+import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../../../constants/characterinformation/characterinfo"
+import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../../../constants/characterinformation/raceinfo";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import NextButton from "../../components/buttons/nextButton";
+import NextButton from "../../../components/buttons/nextButton";
 
 
 
@@ -21,11 +21,11 @@ const CreateCharacter = ({navigation}) => {
 
     const checkForChange = (nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck) =>
     {
-        console.log('Checking for changes:', { nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck });
+        // console.log('Checking for changes:', { nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck });
         if (!nameCheck || classCheck == null || levelCheck == null || raceCheck == null || backgroundCheck == "")
         {
             Alert.alert("OOPS", "You need to fill all the information")
-            return false; //This should be false
+            return true; //This should be false
         }
         return true;
     };

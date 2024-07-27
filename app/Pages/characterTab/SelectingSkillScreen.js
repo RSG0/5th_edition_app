@@ -1,8 +1,8 @@
 import { View, StyleSheet, Text, StatusBar, FlatList } from "react-native";
-import { COLORS, FONTSIZE } from "../../constants/theme";
-import { BACKGROUNDS, CLASS_SKILLS } from "../../constants/characterinformation/characterinfo";
-import NextButton from "../../components/buttons/nextButton";
-
+import { FONTSIZE, COLORS } from "../../../constants/theme";
+import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformation/characterinfo";
+import NextButton from "../../../components/buttons/nextButton";
+import SkillsButton from "../../../components/buttons/skillsButton"
 const SelectingSkillsScreen = ({route}) =>
 {
     const {name, backgrounds, classes} = route.params;
@@ -44,9 +44,10 @@ const SelectingSkillsScreen = ({route}) =>
         <Text>Background Skills: {displayBackgroundSkills(backgrounds)}</Text>
         <Text>Class Skills: {displayClassSkills(classes)}</Text>
         <View style={styles.viewStyle}>
-            <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text>
-            <NextButton
-            />
+            {/* <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text> */}
+            <SkillsButton skill={"Se"}/>
+            {console.log(CLASS_SKILLS.skills)}
+            <NextButton/>
         </View>
         </>
     )

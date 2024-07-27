@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet } from "react-native";
-import SelectingSkillsScreen from "./Pages/SelectingSkillScreen";
-import CreateCharacter from "./Pages/CreateCharacterPage";
-import AbilityScoreScreen from "./Pages/AbilityScoreScreen";
-import CharacterPage from "./Pages/characterPage"
+import SelectingSkillsScreen from "./Pages/characterTab/SelectingSkillScreen";
+import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
+import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
+import CharacterPage from "./Pages/characterTab/characterPage"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -31,7 +31,7 @@ function StackNavigator2()
 }
 function TabNavigator() {
   return (
-    <Tab.Navigator initialRouteName='Dice Roller Page'
+    <Tab.Navigator initialRouteName='Character Page'
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: COLORS.mainColor },
         headerStyle: { backgroundColor: COLORS.mainColor },
@@ -67,7 +67,7 @@ function TabNavigator() {
 function StackNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Create Character"
+      initialRouteName="Create Character" // Should be Create Character
       screenOptions={{
         headerStyle: {
           backgroundColor: COLORS.mainColor,
