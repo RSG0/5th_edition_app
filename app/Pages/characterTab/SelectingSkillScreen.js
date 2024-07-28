@@ -20,30 +20,38 @@ const SelectingSkillsScreen = ({route}) =>
         if (classes == "Bard") return 3; // Bard get access to 3 skills
         else return 2; // everyone else gets 2
     }
-    const handleSkills = (skillBtnNum) =>
+    const handleSkills = (skill) =>
     {
-        setSelectSkills(prevSkills => [...prevSkills, skillBtnNum]);
-        console.log(selectSkills);
-
-        if (selectSkills.length > checkForSkills(classes))
+        setSelectSkills(prevSkills => { 
+        // remove redundant skills that conflict with background
+        if (prevSkills.includes(skill))  // if the skill is already included remove it from the array
         {
-            setSelectSkills((jsx) => jsx.pop())
-            console.log("More than accepted paramater")
+            return prevSkills.filter((s) => s !== skill)
+        }
+        else if (prevSkills.length < checkForSkills(classes)) // if the skill is less than the add it to the array
+        {
+            return  [...prevSkills, skill]
 
         }
+        else
+        {
+            console.log("More than accepted paramater")
+            return [...prevSkills.slice(1), skill]
+        }
+    })
 
     }
-
-    
     function displayClassSkills(selectedClass, selectedBackground) 
     { 
         const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass);
         const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground)
 
+        // const filterSkills = classSkills.filter((s) => s !== backgroundSkills.skillProficiencies)
+
         
         if (classSkills) {
             return classSkills.skills.map((skill, index) => (
-                <SkillsButton key={index} skill={skill}  numOfSkills={checkForSkills(classes)} onSkillPress={handleSkills}></SkillsButton>
+                <SkillsButton key={index} skill={skill}  isSelected={selectSkills.includes(skill)} onSkillPress={handleSkills}></SkillsButton>
             ));
         } else {
             return <Text>No skills available for this class.</Text>;

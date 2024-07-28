@@ -1,22 +1,18 @@
-import { View, StyleSheet, Text, StatusBar, FlatList, TouchableOpacity } from "react-native";
+import {StyleSheet, Text, TouchableOpacity } from "react-native";
 import { COLORS, FONTSIZE } from "../../constants/theme";
-import { CLASS_SKILLS, BACKGROUNDS } from "../../constants/characterinformation/characterinfo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default SkillsButton = ({skill, onSkillPress}) =>
+export default SkillsButton = ({skill, isSelected, onSkillPress}) =>
 {
-
-    const [isPressed, setIsPressed] = useState(false);
-
-    const handlePressIn = () => {
+    const handlePress = () => {
         console.log(`${skill} was pressed`);
-        setIsPressed(!isPressed);
-        onSkillPress(!isPressed);
+        onSkillPress(skill);
     };
 
     return (
-        <TouchableOpacity style={[styles.button, isPressed && styles.buttonPressed]} onPressIn={handlePressIn} >
-            {/* {console.log(CLASS_SKILLS.skills)} */}
+        <TouchableOpacity 
+        style={[styles.button, isSelected && styles.buttonPressed]} 
+        onPress={handlePress} >
             <Text style={styles.textStyle}>{skill}</Text>
         </TouchableOpacity>
     )
