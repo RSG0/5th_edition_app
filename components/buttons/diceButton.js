@@ -6,7 +6,7 @@ export default DiceButton = ({value, onDiceRoll}) =>
     function randomDice(maxRange)
     {
         let diceResult = Math.floor(Math.random() * maxRange) + 1
-        console.log(diceResult)
+        // console.log(diceResult)
         onDiceRoll(diceResult);
         return diceResult;
         
