@@ -46,11 +46,24 @@ const SelectingSkillsScreen = ({route}) =>
         const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass);
         const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground)
 
-        // const filterSkills = classSkills.filter((s) => s !== backgroundSkills.skillProficiencies)
+        console.clear();
+        console.log(classSkills.skills)
+        console.log(backgroundSkills.skillProficiencies)
+        /*
+        const arr = [1,2,3,4,5]
+        const arr2 = [2,3,4]
 
-        
-        if (classSkills) {
-            return classSkills.skills.map((skill, index) => (
+        // const filterSkills = arr.filter((s) => s !== arr2) //This won't work, This compares element s with the whole array
+        const filterSkills = arr.filter((s) => !arr2.includes(s)) 
+
+        console.log(filterSkills);
+        */
+        const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s))
+        console.log(filterSkills);
+
+
+        if (filterSkills) {
+            return filterSkills.map((skill, index) => (
                 <SkillsButton key={index} skill={skill}  isSelected={selectSkills.includes(skill)} onSkillPress={handleSkills}></SkillsButton>
             ));
         } else {
@@ -80,7 +93,7 @@ const SelectingSkillsScreen = ({route}) =>
         <Text style={styles.text}>Background Skills: {displayBackgroundSkills(backgrounds)}</Text>
         {/* {console.log(checkForChange(classes))} */}
         <Text style={styles.text}>Select {checkForSkills(classes)} Skills: </Text>
-        <Text>{(displayClassSkills(classes))} </Text> 
+        <Text>{(displayClassSkills(classes, backgrounds))} </Text> 
             {/* <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text> */}
         <NextButton/>
         </View>
