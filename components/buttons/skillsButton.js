@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export default SkillsButton = ({skill, isSelected, onSkillPress}) =>
 {
     const handlePress = () => {
-        console.log(`${skill} was pressed`);
+        // console.log(`${skill} was pressed`);
         onSkillPress(skill);
     };
 
