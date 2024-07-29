@@ -20,6 +20,15 @@ const SelectingSkillsScreen = ({route}) =>
         if (classes == "Bard") return 3; // Bard get access to 3 skills
         else return 2; // everyone else gets 2
     }
+    function skillChosen(skills)
+    {
+        if (skills.length == 1) return skills
+        else if (skills.length >= 2)
+        {
+            const combinedSkills = skills.join(", ")
+            return combinedSkills
+        }
+    }
     const handleSkills = (skill) =>
     {
         setSelectSkills(prevSkills => { 
@@ -30,7 +39,7 @@ const SelectingSkillsScreen = ({route}) =>
         }
         else if (prevSkills.length < checkForSkills(classes)) // if the skill is less than the add it to the array
         {
-            return  [...prevSkills, skill]
+            return  [...prevSkills, skill] 
 
         }
         else
@@ -96,6 +105,7 @@ const SelectingSkillsScreen = ({route}) =>
         <Text>{(displayClassSkills(classes, backgrounds))} </Text> 
             {/* <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text> */}
         <NextButton/>
+        <Text>You've chosen: {skillChosen(selectSkills)} </Text>
         </View>
         </SafeAreaView>
     )

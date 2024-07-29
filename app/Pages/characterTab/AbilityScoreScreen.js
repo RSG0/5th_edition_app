@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import NextButton from '../../../components/buttons/nextButton';
 import { COLORS, FONTSIZE } from '../../../constants/theme';
@@ -9,9 +9,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds} = route.params;
+    const [abilityArray, setAbilityArray] = useState([]);
     const STANDARD_ARRAY = [15,14,13,12,10,8].map(num => ({value: num.toString()}) ) // blue parentheses are needed to return an object
 
+    const handleStandardArray = (ability) =>
+    {
 
+    }
     // console.log(NUMBER_TWENTY)
     // console.log(STANDARD_ARRAY)
     const checkForChange = () =>
@@ -25,8 +29,8 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         <Text>Class: {classes}</Text>
         <Text>Backgrounds: {backgrounds}</Text>
         <View style={styles.inputRow}>
-            <AbilityDropdown name={"STR"} data={STANDARD_ARRAY}></AbilityDropdown>
-            <AbilityDropdown name={"DEX"} data={NUMBER_TWENTY}></AbilityDropdown>
+            <AbilityDropdown name={"STR"} data={STANDARD_ARRAY} isStandardArray={true}></AbilityDropdown>
+            <AbilityDropdown name={"DEX"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
         </View>
 
 
