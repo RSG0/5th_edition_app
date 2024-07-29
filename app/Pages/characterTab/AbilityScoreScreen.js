@@ -4,43 +4,39 @@ import NextButton from '../../../components/buttons/nextButton';
 import { COLORS, FONTSIZE } from '../../../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
 import { NUMBER_TWENTY, CLASS_SKILLS } from '../../../constants/characterinformation/characterinfo';
+import AbilityDropdown from '../../../components/abilityDropdown';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds} = route.params;
+    const STANDARD_ARRAY = [15,14,13,12,10,8].map(num => ({value: num.toString()}) ) // blue parentheses are needed to return an object
 
+
+    // console.log(NUMBER_TWENTY)
+    // console.log(STANDARD_ARRAY)
     const checkForChange = () =>
     {
         return true;
     }
 
     return (
-        <>
+        <SafeAreaView style={styles.viewStyle}>
         <Text>Name: {name}</Text>
         <Text>Class: {classes}</Text>
         <Text>Backgrounds: {backgrounds}</Text>
         <View style={styles.inputRow}>
-        <Text style={styles.labelStyle}>STR:</Text>
-            <Dropdown style={styles.dropdownLevel}
-            data={NUMBER_TWENTY}
-            labelField={"value"}
-            valueField={"value"}
-            onChange={item => (item)}
-            placeholderStyle={styles.placeholderColor}
-            placeholder="--"
-            maxHeight={200}
-            />
+            <AbilityDropdown name={"STR"} data={STANDARD_ARRAY}></AbilityDropdown>
+            <AbilityDropdown name={"DEX"} data={NUMBER_TWENTY}></AbilityDropdown>
         </View>
 
-        <View style={styles.viewStyle}>
 
-            <Text style={styles.textStyle}>This is the Ability Score Screen</Text>
+            {/* <Text style={styles.textStyle}>This is the Ability Score Screen</Text> */}
             <NextButton 
             navigation={navigation} 
             params={{classes, backgrounds, name}}
             checkforChange={() => checkForChange}
             nextScreen={"Select Skills"}/>
-        </View>
-        </>
+        </SafeAreaView>
     );
 };
 
@@ -68,11 +64,6 @@ const styles = StyleSheet.create(
         borderRadius: 20,
         borderWidth: 2
     },
-    labelStyle: {
-        fontSize: FONTSIZE.xlarge,
-        fontWeight: 'bold',
-        marginRight: 8,
-    },
     inputRow: {
         backgroundColor: COLORS.background,
         flexDirection: 'row',
@@ -84,13 +75,6 @@ const styles = StyleSheet.create(
         fontWeight: 'bold',
         fontSize: FONTSIZE.medium,
     }, 
-    dropdownLevel: {
-        width: 70,
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 10,
-        marginRight: 10,
-    },
 }
 )
 export default AbilityScoreScreen;

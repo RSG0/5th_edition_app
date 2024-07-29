@@ -47,8 +47,8 @@ const SelectingSkillsScreen = ({route}) =>
         const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground)
 
         console.clear();
-        console.log(classSkills.skills)
-        console.log(backgroundSkills.skillProficiencies)
+        // console.log(classSkills.skills)
+        // console.log(backgroundSkills.skillProficiencies)
         /*
         const arr = [1,2,3,4,5]
         const arr2 = [2,3,4]
