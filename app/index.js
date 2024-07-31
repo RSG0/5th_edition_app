@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, Text, View, StyleSheet } from "react-native";
 import SelectingSkillsScreen from "./Pages/characterTab/SelectingSkillScreen";
 import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
+import SubclassesPage from './Pages/characterTab/subclassesPage';
+
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
 import CharacterPage from "./Pages/characterTab/characterPage"
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,6 +18,7 @@ import CompendiumPage from "./Pages/compendiumPage";
 import EquipmentPage from "./Pages/equipmentPage";
 
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import subclassesPage from './Pages/characterTab/subclassesPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,6 +84,7 @@ function StackNavigator() {
       <Stack.Screen name="Create Character" component={CreateCharacter} />
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
+      <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
     </Stack.Navigator>
   );
 }

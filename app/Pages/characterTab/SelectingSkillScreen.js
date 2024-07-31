@@ -5,7 +5,7 @@ import NextButton from "../../../components/buttons/nextButton";
 import SkillsButton from "../../../components/buttons/skillsButton"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
-const SelectingSkillsScreen = ({route}) =>
+const SelectingSkillsScreen = ({route, navigation}) =>
 {
     const {name, backgrounds, classes} = route.params;
     const [selectSkills, setSelectSkills] = useState([]);
@@ -104,7 +104,11 @@ const SelectingSkillsScreen = ({route}) =>
         <Text style={styles.text}>Select {checkForSkills(classes)} Skills: </Text>
         <Text>{(displayClassSkills(classes, backgrounds))} </Text> 
             {/* <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text> */}
-        <NextButton/>
+        <NextButton
+            navigation={navigation}
+            nextScreen={"Select Subclasses"}
+            params={{name, classes, backgrounds}}
+            checkforChange={() => checkForChange}/>
         <Text>You've chosen: {skillChosen(selectSkills)} </Text>
         </View>
         </SafeAreaView>
