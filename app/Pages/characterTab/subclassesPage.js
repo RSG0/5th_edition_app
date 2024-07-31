@@ -9,39 +9,15 @@ export default SubclassesPage = ({route}) =>
 {
     const {name, classes, backgrounds} = route.params;
     const [subclass, setSubclass] = useState(null);
+    const [spells, setSpells] = useState(null);
+
     const [subclassOptions, setSubclassOptions] = useState([])
-    function checkingSubclass(item)
-    {
-        if (item === CLERIC_SUBCLASS.label[0])
-        {
-            console.log("Correct");
-        }
-        else
-        {
-            console.log("Issue has arose")
-        }
-    }
+
     if (subclassOptions.length === 0)
     {
         handleSubclassChange(classes)
     }
-    // const handleSubclassChange = (selectedClass) =>
-    // {
-    //     setSubclass(null);
-    //     if (selectedClass == "Cleric")
-    //     {
-    //         console.log("This should be a Cleric")
-    //         setSubclassOptions(CLERIC_SUBCLASS);
-    //     }
-    //     else if (selectedClass == "Bard")
-    //     {
-    //         setSubclassOptions(BARD_SUBCLASS)
-    //     }
-    //     else
-    //     {
-    //         console.log("User has selected an invalid options")
-    //     }
-    // }
+
     function handleSubclassChange()
         {
             setSubclass(null);
@@ -59,6 +35,15 @@ export default SubclassesPage = ({route}) =>
                 console.log("User has selected an invalid options")
             }
         }
+    function handleSpells(spells)
+    {
+        if (spells) return spells.join(", ");
+        else
+        {
+            return "No spells available";
+        }
+
+    }
     return (
         <SafeAreaView style={styles.viewStyle}>
             <Text style={styles.textStyle}>Chosen Class: {classes}</Text>
@@ -68,11 +53,17 @@ export default SubclassesPage = ({route}) =>
             data={subclassOptions}
             labelField={"label"}
             valueField={"value"}
-            onChange={item => (setSubclass(item.label))}
+            onChange={item => { // this curly brace allows for multiple on change's to work
+                (setSubclass(item.label)); 
+                (setSpells(item.spells_first));
+            }
+            }
             placeholder="---"
             maxHeight={200}
             ></Dropdown>
-            <Text>These are the subclasses: {subclass}</Text>
+            <Text>This are the subclasses: {subclass}</Text>
+            {console.log(spells + "56")}
+            <Text>Bonus Spells: {handleSpells(spells)}</Text>
         </SafeAreaView>
     );
 }

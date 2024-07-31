@@ -8,8 +8,16 @@ import AbilityDropdown from '../../../components/abilityDropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AbilityScoreScreen = ({ navigation, route }) => {
-    const {name, classes, backgrounds} = route.params;
+    const {name, classes, backgrounds, level, selectedRace} = route.params;
     const [abilityArray, setAbilityArray] = useState([]);
+
+    const [str, setSTR] = useState(null);
+    const [dex, setDEX] = useState(null);
+    const [cnt, setCNT] = useState(null);
+    const [int, setINT] = useState(null);
+    const [wis, setWIS] = useState(null);
+    const [cha, setCHA] = useState(null);
+
     const STANDARD_ARRAY = [15,14,13,12,10,8].map(num => ({value: num.toString()}) ) // blue parentheses are needed to return an object
 
     const handleStandardArray = (ability) =>
@@ -31,14 +39,20 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         <View style={styles.inputRow}>
             <AbilityDropdown name={"STR"} data={STANDARD_ARRAY} isStandardArray={true}></AbilityDropdown>
             <AbilityDropdown name={"DEX"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
+            <AbilityDropdown name={"CNT"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
         </View>
-
+        <View style={styles.inputRow}>
+            <AbilityDropdown name={"INT"} data={STANDARD_ARRAY} isStandardArray={true}></AbilityDropdown>
+            <AbilityDropdown name={"WIS"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
+            <AbilityDropdown name={"CHA"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
+        </View>
 
             {/* <Text style={styles.textStyle}>This is the Ability Score Screen</Text> */}
             <NextButton 
             navigation={navigation} 
             params={{classes, backgrounds, name}}
-            checkforChange={() => checkForChange}
+            checkforChange={() => checkForChange()}
+
             nextScreen={"Select Skills"}/>
         </SafeAreaView>
     );

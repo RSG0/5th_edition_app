@@ -1,7 +1,16 @@
 export const CLERIC_SUBCLASS = 
 [
-    {label: "Cleric", value: '0'},
-    {label: "Knowledge", value: '1'},
+    {
+        label: "Cleric", value: '0'
+    },
+    {label: "Knowledge", value: '1', 
+        spells_first: ["Command", "Identify"], spells_third: ["Augury", "Suggestion"], 
+        spells_fifth: ["Nondetection", "Speak with Dead"], spells_seventh: ["Arcane Eye", "Confusion"],
+
+        additionalSkills: ["Arcana", "History", "Nature", "Religon"],
+        bonusProficiency: ["Heavy Armor"],
+
+        channelDivinity: ["Knowledge of the Ages", "Read Thoughts"]},
     {label: "Life", value: '2'},
     {label: "Light", value: '3'},
     {label: "Nature", value: '4'},
@@ -14,6 +23,10 @@ export const CLERIC_SUBCLASS =
     {label: "Peace", value: '11'},
     {label: "Twilight", value: '12'}
 ];
+export function awe()
+{
+
+}
 
 export const BARD_SUBCLASS = 
 [
