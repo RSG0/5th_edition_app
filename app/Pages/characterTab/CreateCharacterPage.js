@@ -32,8 +32,8 @@ const CreateCharacter = ({navigation}) => {
 
     const handleRaceChange = (item) =>
     {
-        setSelectedRace(item.value);
-        setSelectedSubrace(null);
+        setSelectedRace(item.label);
+        setSelectedSubrace(item.label);
 
         if (item.label == "Elf")
         {
@@ -112,7 +112,7 @@ const CreateCharacter = ({navigation}) => {
                          data={subraceOptions}
                          labelField={"label"}
                          valueField={"value"}
-                         onChange={item => (setSelectedSubrace(item))}
+                         onChange={item => (setSelectedSubrace(item.label))}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="---"
                          maxHeight={200}
@@ -135,8 +135,8 @@ const CreateCharacter = ({navigation}) => {
                         <NextButton 
                         navigation={navigation}
                         nextScreen={"Ability Score"}
-                        params={{name, classes,level, selectedRace, backgrounds}}
-                        checkforChange={() => checkForChange(name, classes, level, selectedRace, backgrounds)}
+                        params={{name, classes,level, selectedRace, backgrounds, selectedSubrace}}
+                        checkforChange={() => checkForChange(name, classes, level, selectedRace, backgrounds, selectedSubrace)}
                         />              
                     </View>
                     <View style={{marginBottom: 200}}></View>

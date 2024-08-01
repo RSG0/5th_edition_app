@@ -7,7 +7,7 @@ export default NextButton = ({ navigation, nextScreen, params, checkforChange}) 
     // console.log(nextScreen);
     const handlePress = () =>
     {
-        if (checkforChange())
+        if (checkforChange()) // check for change asks if all parameters are needed to move on
         {
         navigation.navigate(nextScreen, params);
         }
