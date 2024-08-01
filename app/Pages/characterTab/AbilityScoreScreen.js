@@ -13,11 +13,13 @@ const AbilityScoreScreen = ({ navigation, route }) => {
     const [abilityArray, setAbilityArray] = useState([]);
 
     const [str, setSTR] = useState(0);
-    const [dex, setDEX] = useState(0);
-    const [con, setCON] = useState(0);
-    const [int, setINT] = useState(0);
-    const [wis, setWIS] = useState(0);
-    const [cha, setCHA] = useState(0);
+
+    const [strBonus, setSTRBonus] = useState(0);
+    const [dexBonus, setDEXBonus] = useState(0);
+    const [conBonus, setCONBonus] = useState(0);
+    const [intBonus, setINTBonus] = useState(0);
+    const [wisBonus, setWISBonus] = useState(0);
+    const [chaBonus, setCHABonus] = useState(0);
 
     const STANDARD_ARRAY = [15,14,13,12,10,8].map(num => ({value: num.toString()}) ) // blue parentheses are needed to return an object
 
@@ -41,12 +43,12 @@ const AbilityScoreScreen = ({ navigation, route }) => {
 
     function renderRacialBonus() {
         const bonuses = [];
-        if (str) { bonuses.push(`STR: ${str}`); }
-        if (dex) { bonuses.push(`DEX: ${dex}`); }
-        if (con) { bonuses.push(`CON: ${con}`); }
-        if (int) { bonuses.push(`INT: ${int}`); }
-        if (wis) { bonuses.push(`WIS: ${wis}`); }
-        if (cha) { bonuses.push(`CHA: ${cha}`); }
+        if (strBonus) { bonuses.push(`STR: ${strBonus}`); }
+        if (dexBonus) { bonuses.push(`DEX: ${dexBonus}`); }
+        if (conBonus) { bonuses.push(`CON: ${conBonus}`); }
+        if (intBonus) { bonuses.push(`INT: ${intBonus}`); }
+        if (wisBonus) { bonuses.push(`WIS: ${wisBonus}`); }
+        if (chaBonus) { bonuses.push(`CHA: ${chaBonus}`); }
         return bonuses.length > 0 ? bonuses.join(', ') : "Need to add in information for this subrace";
     }
     function racialStatBonus(race, subrace)
@@ -82,12 +84,12 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         function displayingModifiers(r) {
             console.log(r);
                     
-            setSTR((prev) => prev + (r.STR || 0));
-            setDEX((prev) => prev + (r.DEX || 0));
-            setCON((prev) => prev + (r.CON || 0));
-            setINT((prev) => prev + (r.INT || 0));
-            setWIS((prev) => prev + (r.WIS || 0));
-            setCHA((prev) => prev + (r.CHA || 0));
+            setSTRBonus((prev) => prev + (r.STR || 0));
+            setDEXBonus((prev) => prev + (r.DEX || 0));
+            setCONBonus((prev) => prev + (r.CON || 0));
+            setINTBonus((prev) => prev + (r.INT || 0));
+            setWISBonus((prev) => prev + (r.WIS || 0));
+            setCHABonus((prev) => prev + (r.CHA || 0));
         }
     }
 
