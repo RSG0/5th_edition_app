@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import NextButton from '../../../components/buttons/nextButton';
 import { COLORS, FONTSIZE } from '../../../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
-import { ELF_SUBRACE } from '../../../constants/characterinformation/raceinfo';
+import { DRAGONBORN_SUBRACE, ELF_SUBRACE, RACES } from '../../../constants/characterinformation/raceinfo';
 
 import AbilityDropdown from '../../../components/abilityDropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,12 +12,12 @@ const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds, level, selectedRace, selectedSubrace} = route.params;
     const [abilityArray, setAbilityArray] = useState([]);
 
-    const [str, setSTR] = useState(null);
-    const [dex, setDEX] = useState(null);
-    const [con, setCON] = useState(null);
-    const [int, setINT] = useState(null);
-    const [wis, setWIS] = useState(null);
-    const [cha, setCHA] = useState(null);
+    const [str, setSTR] = useState(0);
+    const [dex, setDEX] = useState(0);
+    const [con, setCON] = useState(0);
+    const [int, setINT] = useState(0);
+    const [wis, setWIS] = useState(0);
+    const [cha, setCHA] = useState(0);
 
     const STANDARD_ARRAY = [15,14,13,12,10,8].map(num => ({value: num.toString()}) ) // blue parentheses are needed to return an object
 
@@ -34,57 +34,60 @@ const AbilityScoreScreen = ({ navigation, route }) => {
     useEffect(() => {
         if (selectedSubrace)
         {
-            racialStatBonus(selectedRace)
-            renderRacialBonus()
+            racialStatBonus(selectedRace, selectedSubrace)
+            // renderRacialBonus()
         }
     }, [selectedRace, selectedSubrace])
 
-    function renderRacialBonus()
-    {
-        console.log("Beginning");
-        if (str !== null) {console.log("STR: " + str)}
-        if (dex !== null) {console.log("DEX: " + dex)}
-        if (con !== null) {console.log("CON: " + con)}
-        if (int !== null) {console.log("INT: " + int)}
-        if (wis !== null) {console.log("WIS: " + wis)}
-        if (cha !== null) {console.log("CHA: " + cha)}
-
+    function renderRacialBonus() {
+        const bonuses = [];
+        if (str) { bonuses.push(`STR: ${str}`); }
+        if (dex) { bonuses.push(`DEX: ${dex}`); }
+        if (con) { bonuses.push(`CON: ${con}`); }
+        if (int) { bonuses.push(`INT: ${int}`); }
+        if (wis) { bonuses.push(`WIS: ${wis}`); }
+        if (cha) { bonuses.push(`CHA: ${cha}`); }
+        return bonuses.length > 0 ? bonuses.join(', ') : "Need to add in information for this subrace";
     }
-    function racialStatBonus(race)
+    function racialStatBonus(race, subrace)
     {
-        // console.log(race)
-        if (race == "Elf")
+        console.log(`Selected Race: ${race}, Selected Subrace: ${subrace}`);
+        
+        const chosenRace = RACES.find(r => r.label === race)
+        if (chosenRace)
         {
-            const chosenSubRace = ELF_SUBRACE.find(subrace => subrace.label === selectedSubrace)
-            // console.log(chosenSubRace.DEX)
-            if (selectedSubrace == "Drow")
-            {
-                displayingModifiers(chosenSubRace);
-            }
+            displayingModifiers(chosenRace)
+        }
+        else
+        {
+            console.error("Race not found", race)
         }
 
-        function displayingModifiers(race) {
-            console.log(race);
-            if (race.STR !== null) {
-                // console.log("Is this triggered")
-                setSTR((prevSTR) => prevSTR + race.STR);
-            }
-            if (race.DEX !== null) {
-                // console.log("Is this triggered")
-                setDEX(race.DEX);
-            }
-            if (race.CON !== null) {
-                setCON(race.CON);
-            }
-            if (race.INT !== null) {
-                setINT((prev) => prev + race.INT);
-            }
-            if (race.WIS !== null) {
-                setWIS((prev) => prev + race.WIS);
-            }
-            if (race.CHA !== null) {
-                setCHA((prev) => prev + race.CHA);
-            }
+
+        if (race == "Elf")
+        {
+            const chosenSubRace = ELF_SUBRACE.find(subr => subr.label === subrace)
+            // console.log(chosenSubRace.DEX)
+            if (selectedSubrace) {displayingModifiers(chosenSubRace);}
+            else { console.error("Subclass not found.", subrace)}
+        }
+        else if (race == "Dragonborn")
+        {
+            const chosenSubRace = DRAGONBORN_SUBRACE.find(subr => subr.label === subrace)
+            if (selectedSubrace) {displayingModifiers(chosenSubRace);}
+            else { console.error("Subclass not found.", subrace)}
+        }
+
+
+        function displayingModifiers(r) {
+            console.log(r);
+                    
+            setSTR((prev) => prev + (r.STR || 0));
+            setDEX((prev) => prev + (r.DEX || 0));
+            setCON((prev) => prev + (r.CON || 0));
+            setINT((prev) => prev + (r.INT || 0));
+            setWIS((prev) => prev + (r.WIS || 0));
+            setCHA((prev) => prev + (r.CHA || 0));
         }
     }
 
@@ -112,9 +115,10 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         </View>
         {/* {console.log(dex)} */}
         <Text>Racial Stat Bonus:</Text>
+        <Text>{renderRacialBonus()}</Text>
 
 
-            <NextButton 
+        <NextButton 
             navigation={navigation} 
             params={{classes, backgrounds, name}}
             checkforChange={() => checkForChange()}

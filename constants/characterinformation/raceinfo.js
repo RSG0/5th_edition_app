@@ -87,9 +87,9 @@ const ELF_SUBRACE =
         subraceFeatures: ["Astral Fire", "Keen Senses", "Astral Trance", "Starlight Step"]},
     {label: "Drow", value: '2', STR: null, DEX: null, CON: null, INT: null, WIS: null, CHA: 1, abilityScoreIncrease: false, 
         subraceFeatures: ["Superior Darkvision", "Sunlight Sensitivity", "Drow Magic", "Drow Weapon Training"] },
-    {label: "High", value: '3', STR: null, DEX: 2, CON: null, INT: 1, WIS: null, CHA: null, abilityScoreIncrease: false, 
+    {label: "High", value: '3', STR: null, DEX: null, CON: null, INT: 1, WIS: null, CHA: null, abilityScoreIncrease: false, 
         subraceFeatures: ["Elf Weapon Training", "Cantrip", "Extra Language"]},
-    {label: "Wood", value: '4', STR: null, DEX: 2, CON: null, INT: null, WIS: 1, CHA: null, abilityScoreIncrease: false, 
+    {label: "Wood", value: '4', STR: null, DEX: null, CON: null, INT: null, WIS: 1, CHA: null, abilityScoreIncrease: false, 
         subraceFeatures: ["Elf Weapon Training", "Fleet of Foot", "Mask of the Wild"]},
     {label: "Eladrin", value: '5', STR: null, DEX: 2, CON: null, INT: 1, WIS: null, CHA: null, abilityScoreIncrease: false, 
         subraceFeatures: ["Fey Step"]},
@@ -98,20 +98,65 @@ const ELF_SUBRACE =
     {label: "Shadar-kai", value: '7', STR: null, DEX: 2, CON: null, INT: null, WIS: null, CHA: 1, abilityScoreIncrease: false, 
         subraceFeatures: ["Necrotic Resistance", "Blessing of the Raven Queen"]}
 ];
+const ELF_SUBRACE_ALT = 
+[
+    {label: "Astral", value: '1', STR: null, DEX: null, CON: null, INT: null, WIS: null, CHA: null, abilityScoreIncrease: true, 
+        subraceFeatures: [
+            {label: "Astral Fire", description:"You can deal radiant damage once per long rest."},
+            {label: "Keen Senses",  description: "Advantage on Wisdom (Perception) checks that rely on sight."},
+            {label: "Astral Trance", description: "You can enter a trance-like state to gain benefits."},
+            {label: "Starlight Step", description: "You can teleport short distances once per rest."}
+        ]},
+    {label: "Drow", value: '2', STR: null, DEX: null, CON: null, INT: null, WIS: null, CHA: 1, abilityScoreIncrease: false, 
+        subraceFeatures: [
+            "Superior Darkvision: Can see in darkness within 120 feet.",
+            "Sunlight Sensitivity: Disadvantage on attack rolls and Wisdom (Perception) checks in bright light.",
+            "Drow Magic: Innate spellcasting including Dancing Lights, Faerie Fire, and Darkness.",
+            "Drow Weapon Training: Proficiency with rapiers, shortswords, and hand crossbows."
+        ]},
+    {label: "High", value: '3', STR: null, DEX: null, CON: null, INT: 1, WIS: null, CHA: null, abilityScoreIncrease: false, 
+        subraceFeatures: [
+            "Elf Weapon Training: Proficiency with longswords, shortswords, shortbows, and longbows.",
+            "Cantrip: Know one cantrip from the Wizard spell list.",
+            "Extra Language: You can speak, read, and write one additional language of your choice."
+        ]},
+    {label: "Wood", value: '4', STR: null, DEX: null, CON: null, INT: null, WIS: 1, CHA: null, abilityScoreIncrease: false, 
+        subraceFeatures: [
+            "Elf Weapon Training: Proficiency with longswords, shortswords, shortbows, and longbows.",
+            "Fleet of Foot: Your base walking speed is 35 feet.",
+            "Mask of the Wild: Can attempt to hide even when only lightly obscured by natural phenomena."
+        ]},
+    {label: "Eladrin", value: '5', STR: null, DEX: 2, CON: null, INT: 1, WIS: null, CHA: null, abilityScoreIncrease: false, 
+        subraceFeatures: [
+            "Fey Step: Ability to teleport up to 30 feet as a bonus action once per short or long rest."
+        ]},
+    {label: "Sea", value: '6', STR: null, DEX: 2, CON: 1, INT: null, WIS: null, CHA: null, abilityScoreIncrease: false, 
+        subraceFeatures: [
+            "Sea Elf Training: Proficiency with the spear, trident, light crossbow, and net.",
+            "Child of the Sea: You can breathe underwater and have a swimming speed of 30 feet.",
+            "Friend of the Sea: Can communicate with sea creatures."
+        ]},
+    {label: "Shadar-kai", value: '7', STR: null, DEX: 2, CON: null, INT: null, WIS: null, CHA: 1, abilityScoreIncrease: false, 
+        subraceFeatures: [
+            "Necrotic Resistance: Resistance to necrotic damage.",
+            "Blessing of the Raven Queen: Can use the shadow teleportation ability as a bonus action once per short or long rest."
+        ]}
+];
 
 const DRAGONBORN_SUBRACE = 
 [
-    {label: "Black", value: '1'},
-    {label: "Blue", value: '2'},
-    {label: "Brass", value: '3'},
-    {label: "Bronze", value: '4'},
-    {label: "Copper", value: '5'},
-    {label: "Gold", value: '6'},
-    {label: "Green", value: '7'},
-    {label: "Red", value: '8'},
-    {label: "Silver", value: '9'},
-    {label: "White", value: '10'}
+    {label: "Black", value: '1', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Blue", value: '2', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Brass", value: '3', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Bronze", value: '4', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Copper", value: '5', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Gold", value: '6', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Green", value: '7', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Red", value: '8', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "Silver", value: '9', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1},
+    {label: "White", value: '10', STR: 2, DEX: null, CON: null, INT: null, WIS: null, CHA: 1}
 ];
+
 const AASIMAR_SUBRACE =
 [
     {label: "Fallen", value: '1'},
