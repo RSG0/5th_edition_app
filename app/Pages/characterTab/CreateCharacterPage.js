@@ -14,7 +14,7 @@ const CreateCharacter = ({navigation}) => {
     const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
     const [selectedSubrace, setSelectedSubrace] = useState(null);
-    const [level, setLevel] = useState(null);
+    const [level, setLevel] = useState(0);
     const [name, setName] = useState("");
     const [classes, setClasses] = useState("");
     const [backgrounds, setBackgrounds] = useState("");
@@ -88,7 +88,7 @@ const CreateCharacter = ({navigation}) => {
                          data={NUMBER_TWENTY}
                          labelField={"value"}
                          valueField={"value"}
-                         onChange={item => (setLevel(item))}
+                         onChange={item => (setLevel(item.value))}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="--"
                          maxHeight={200}

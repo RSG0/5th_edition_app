@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default SubclassesPage = ({route}) =>
 {
-    const {name, classes, backgrounds} = route.params;
+    const {name, classes, backgrounds, level} = route.params;
     const [subclass, setSubclass] = useState(null);
     const [spells, setSpells] = useState(null);
 
@@ -30,6 +30,10 @@ export default SubclassesPage = ({route}) =>
             {
                 setSubclassOptions(BARD_SUBCLASS)
             }
+            else if (classes == "Barbarian")
+            {
+                setSubclassOptions(BARBARIAN_SUBCLASS)
+            }
             else
             {
                 console.log("User has selected an invalid options")
@@ -37,6 +41,15 @@ export default SubclassesPage = ({route}) =>
         }
     function handleSpells(spells)
     {
+        /* Work in progress
+        const spellsList = []
+        if (level => 9) { spellsList.push(spells.spells_ninth)} 
+        if (level => 7) { spellsList.push(spells.spells_seventh)} 
+        if (level => 5) { spellsList.push(spells.spells_fifth)} 
+        if (level => 5) { spellsList.push(spells.spells_third)} 
+        if (level => 1) { spellsList.push(spells.spells_first)} 
+        
+        */
         if (spells) return spells.join(", ");
         else
         {
@@ -47,6 +60,7 @@ export default SubclassesPage = ({route}) =>
     return (
         <SafeAreaView style={styles.viewStyle}>
             <Text style={styles.textStyle}>Chosen Class: {classes}</Text>
+            <Text style={styles.textStyle}>Current Level: {level}</Text>
             <Text style={styles.textStyle}>Select your Subclass</Text>
             {/* <Text>{CLERIC_SUBCLASS}</Text> */}
             <Dropdown style={styles.dropdown}

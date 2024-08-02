@@ -58,7 +58,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         const chosenRace = RACES.find(r => r.label === race)
         if (chosenRace)
         {
-            displayingModifiers(chosenRace)
+            calculatingModifiers(chosenRace)
         }
         else
         {
@@ -70,18 +70,18 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         {
             const chosenSubRace = ELF_SUBRACE.find(subr => subr.label === subrace)
             // console.log(chosenSubRace.DEX)
-            if (selectedSubrace) {displayingModifiers(chosenSubRace);}
+            if (selectedSubrace) {calculatingModifiers(chosenSubRace);}
             else { console.error("Subclass not found.", subrace)}
         }
         else if (race == "Dragonborn")
         {
             const chosenSubRace = DRAGONBORN_SUBRACE.find(subr => subr.label === subrace)
-            if (selectedSubrace) {displayingModifiers(chosenSubRace);}
+            if (selectedSubrace) {calculatingModifiers(chosenSubRace);}
             else { console.error("Subclass not found.", subrace)}
         }
 
 
-        function displayingModifiers(r) {
+        function calculatingModifiers(r) {
             console.log(r);
                     
             setSTRBonus((prev) => prev + (r.STR || 0));
@@ -104,6 +104,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         <Text>Name: {name}</Text>
         <Text>Class: {classes}</Text>
         <Text>Backgrounds: {backgrounds}</Text>
+        <Text>Level: {level}</Text>
 
         <View style={styles.inputRow}>
             <AbilityDropdown name={"STR"} data={STANDARD_ARRAY} isStandardArray={true}></AbilityDropdown>
@@ -122,7 +123,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
 
         <NextButton 
             navigation={navigation} 
-            params={{classes, backgrounds, name}}
+            params={{classes, backgrounds, name, level}}
             checkforChange={() => checkForChange()}
 
             nextScreen={"Select Skills"}/>

@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 const SelectingSkillsScreen = ({route, navigation}) =>
 {
-    const {name, backgrounds, classes} = route.params;
+    const {name, backgrounds, classes, level} = route.params;
     const [selectSkills, setSelectSkills] = useState([]);
 
 
@@ -107,7 +107,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         <NextButton
             navigation={navigation}
             nextScreen={"Select Subclasses"}
-            params={{name, classes, backgrounds}}
+            params={{name, classes, backgrounds, level}}
             checkforChange={() => checkForChange}/>
         <Text>You've chosen: {skillChosen(selectSkills)} </Text>
         </View>
