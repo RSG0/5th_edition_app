@@ -10,10 +10,7 @@ export default SubclassesPage = ({route}) =>
     const {name, classes, backgrounds, level} = route.params;
     const [subclass, setSubclass] = useState(null);
     const [spells, setSpells] = useState(null);
-
-    const [subclassOptions, setSubclassOptions] = useState([])
-    // const clericSpells = CLERIC_SUBCLASS.find(subclassSpell => subclassSpell.label === "Knowledge")
-    // console.log(clericSpells.spells_fifth + "!!!!!!!")
+    const [subclassOptions, setSubclassOptions] = useState([]);
 
     useEffect(() => // triggered whenever classes get changed
     {
@@ -29,6 +26,7 @@ export default SubclassesPage = ({route}) =>
             // subclassOptions is used as an array 
             // used to subsitute for all the subraces
             const selectedSubclass = subclassOptions.find(option => option.label === subclass)
+            // if the user has selected a subclass calculate the spells they should be given (if any)
             if (selectedSubclass)
             {
                 calculatingSpells(selectedSubclass);
@@ -57,7 +55,8 @@ export default SubclassesPage = ({route}) =>
             {
                 console.log("User has selected an invalid options")
             }
-            setSubclassOptions(options)
+            // set their classes subclass options to what the user has selected
+            setSubclassOptions(options) 
         }
     function handleSpells(sp)
     {
@@ -74,7 +73,7 @@ export default SubclassesPage = ({route}) =>
         if (level >= 1) { spellsList.push(`1st: ${spells.spells_first}`); }
         
         console.log(`\n\nThe Spell List is:\n ${spellsList.reverse()}`)
-        setSpells(spellsList.length > 0? spellsList.join("\n"): null);
+        setSpells(spellsList.length > 0? spellsList.join("\n"): null); // will only display if there are spell lists
         // return (spellsList.length > 0? <Text>{spellsList.join("\n")}</Text> : "No spells available")
     }
     return (
