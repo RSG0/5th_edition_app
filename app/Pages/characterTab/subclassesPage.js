@@ -3,7 +3,7 @@ import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dropdown } from "react-native-element-dropdown";
 import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS } from "../../../constants/characterinformation/classinfo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default SubclassesPage = ({route}) =>
 {
@@ -12,50 +12,70 @@ export default SubclassesPage = ({route}) =>
     const [spells, setSpells] = useState(null);
 
     const [subclassOptions, setSubclassOptions] = useState([])
+    // const clericSpells = CLERIC_SUBCLASS.find(subclassSpell => subclassSpell.label === "Knowledge")
+    // console.log(clericSpells.spells_fifth + "!!!!!!!")
 
-    if (subclassOptions.length === 0)
+    useEffect(() => // triggered whenever classes get changed
     {
-        handleSubclassChange(classes)
-    }
+        if (subclass)
+        {
+            handleSubclassChange(classes)
+        }
+    }, [classes])
+    useEffect (() => // triggered whenever subclasses get changed
+    {
+        if (subclass)
+        {
+            // subclassOptions is used as an array 
+            // used to subsitute for all the subraces
+            const selectedSubclass = subclassOptions.find(option => option.label === subclass)
+            if (selectedSubclass)
+            {
+                calculatingSpells(selectedSubclass);
+            }
+        }
+    }, [subclass])
 
     function handleSubclassChange()
         {
             setSubclass(null);
+            let options = []
             if (classes == "Cleric")
             {
-                console.log("This should be a Cleric")
-                setSubclassOptions(CLERIC_SUBCLASS);
+                options = CLERIC_SUBCLASS
+                console.log("This should be a Cleric")            
             }
             else if (classes == "Bard")
             {
-                setSubclassOptions(BARD_SUBCLASS)
+                options = BARD_SUBCLASS
             }
             else if (classes == "Barbarian")
             {
-                setSubclassOptions(BARBARIAN_SUBCLASS)
+               options = (BARBARIAN_SUBCLASS)
             }
             else
             {
                 console.log("User has selected an invalid options")
             }
+            setSubclassOptions(options)
         }
-    function handleSpells(spells)
+    function handleSpells(sp)
     {
-        /* Work in progress
-        const spellsList = []
-        if (level => 9) { spellsList.push(spells.spells_ninth)} 
-        if (level => 7) { spellsList.push(spells.spells_seventh)} 
-        if (level => 5) { spellsList.push(spells.spells_fifth)} 
-        if (level => 5) { spellsList.push(spells.spells_third)} 
-        if (level => 1) { spellsList.push(spells.spells_first)} 
-        
-        */
-        if (spells) return spells.join(", ");
-        else
-        {
-            return "No spells available";
-        }
+        if (!sp) { return "No spells given"}
+        else {return sp;}
+    }
+    function calculatingSpells(spells) {
+        const spellsList = [];
 
+        if (level >= 9) { spellsList.push(`9th: ${spells.spells_ninth}`); }
+        if (level >= 7) { spellsList.push(`7th: ${spells.spells_seventh}`); }
+        if (level >= 5) { spellsList.push(`5th: ${spells.spells_fifth}`); }
+        if (level >= 3) { spellsList.push(`3rd: ${spells.spells_third}`); }
+        if (level >= 1) { spellsList.push(`1st: ${spells.spells_first}`); }
+        
+        console.log(`\n\nThe Spell List is:\n ${spellsList.reverse()}`)
+        setSpells(spellsList.length > 0? spellsList.join("\n"): null);
+        // return (spellsList.length > 0? <Text>{spellsList.join("\n")}</Text> : "No spells available")
     }
     return (
         <SafeAreaView style={styles.viewStyle}>
@@ -68,16 +88,15 @@ export default SubclassesPage = ({route}) =>
             labelField={"label"}
             valueField={"value"}
             onChange={item => { // this curly brace allows for multiple on change's to work
-                (setSubclass(item.label)); 
-                (setSpells(item.spells_first));
+                (setSubclass(item.label));                 
             }
             }
             placeholder="---"
             maxHeight={200}
             ></Dropdown>
             <Text>This are the subclasses: {subclass}</Text>
-            {console.log(spells + "56")}
-            <Text>Bonus Spells: {handleSpells(spells)}</Text>
+            <Text>Bonus spells</Text>            
+            <Text>{handleSpells(spells)}</Text>
         </SafeAreaView>
     );
 }
@@ -97,7 +116,7 @@ const styles = StyleSheet.create(
     },
     dropdown: 
     {
-        width: 200,
+        width: 250,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
