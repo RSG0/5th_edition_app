@@ -5,6 +5,7 @@ import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
 import SubclassesPage from './Pages/characterTab/subclassesPage';
 
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
+import HitPointPage from './Pages/hitPointPage';
 import CharacterPage from "./Pages/characterTab/characterPage"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants/theme";
@@ -18,7 +19,6 @@ import CompendiumPage from "./Pages/compendiumPage";
 import EquipmentPage from "./Pages/equipmentPage";
 
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import subclassesPage from './Pages/characterTab/subclassesPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -85,7 +85,7 @@ function StackNavigator() {
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
-      <Stack.Screen name="Hit Points" component={SubclassesPage} />
+      <Stack.Screen name="Hit Points" component={HitPointPage} />
 
     </Stack.Navigator>
   );
