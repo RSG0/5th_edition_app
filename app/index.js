@@ -19,6 +19,7 @@ import CompendiumPage from "./Pages/compendiumPage";
 import EquipmentPage from "./Pages/equipmentPage";
 
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import characterPage from './Pages/characterTab/characterPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,6 +82,7 @@ function StackNavigator() {
         headerBackVisible: false,
       }}
     >
+      {/* <Stack.Screen name="View a Character" component={characterPage}/> */}
       <Stack.Screen name="Create Character" component={CreateCharacter} />
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
