@@ -85,6 +85,8 @@ function StackNavigator() {
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
+      <Stack.Screen name="Hit Points" component={SubclassesPage} />
+
     </Stack.Navigator>
   );
 }

@@ -2,14 +2,16 @@ import { View, StyleSheet, Text, StatusBar } from "react-native";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dropdown } from "react-native-element-dropdown";
-import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS } from "../../../constants/characterinformation/classinfo";
+import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS } from "../../../constants/characterinformation/subclassinfo";
 import { useEffect, useState } from "react";
+import NextButton from "../../../components/buttons/nextButton";
 
-export default SubclassesPage = ({route}) =>
+export default SubclassesPage = ({navigation, route}) =>
 {
-    const {name, classes, backgrounds, level} = route.params;
+    const {name, classes, backgrounds, level, races} = route.params;
     const [subclass, setSubclass] = useState(null);
-    const [spells, setSpells] = useState(null);
+    const [subclassSpells, setSubclassSpells] = useState(null);
+    const [subclassFeatures, setSubclassFeatures] = useState(null);
     const [subclassOptions, setSubclassOptions] = useState([]);
 
     useEffect(() => // triggered whenever classes get changed
@@ -31,6 +33,7 @@ export default SubclassesPage = ({route}) =>
             if (selectedSubclass)
             {
                 calculatingSpells(selectedSubclass);
+                renderFeatures(selectedSubclass)
             }
         }
     }, [subclass])
@@ -59,6 +62,11 @@ export default SubclassesPage = ({route}) =>
             // set their classes subclass options to what the user has selected
             setSubclassOptions(options) 
         }
+    function checkForChange(parameters)
+    {
+        // need to include infromation that requires the user to enter subclass to move on
+        return true;
+    }
     function handleSpells(sp)
     {
         if (!sp) { return "No spells given"}
@@ -67,20 +75,36 @@ export default SubclassesPage = ({route}) =>
     function handleFeatures(ft)
     {
         if (!ft) {return "No available features"}
-        else {return ft}
+        else {return ft} // shouldn't happen because the lowest available level is 1
     }
-    function calculatingSpells(spells) {
+    function renderFeatures(ft)
+    {
+        const featrureList = [];
+        if (level >= 17 && ft.level17Feature) { featrureList.push(`At 17th level: ${ft.level17Feature.label}`);}
+        if (level >= 13 && ft.level13Feature) { featrureList.push(`At 13th level: ${ft.level13Feature.label}`); }  
+        if (level >= 9 && ft.level9Feature) { featrureList.push(`At 9th level: ${ft.level9Feature.label}`);}
+        if (level >= 7 && ft.level7Feature) { featrureList.push(`At 7th level: ${ft.level7Feature.label}`); }
+        if (level >= 6 && ft.level6Feature) { featrureList.push(`At 6th level: ${ft.level6Feature.label}`);; }
+        if (level >= 5 && ft.level5Feature) { featrureList.push(`At 5th level: ${ft.level5Feature.label}`);; }
+        if (level >= 3 && ft.level3Feature) { featrureList.push(`At 3rd level: ${ft.level3Feature.label}`); }
+        if (level >= 1 && ft.level1Feature) { featrureList.push(`At 1st level: ${ft.level1Feature.label}`); }
+        console.log(featrureList)
+
+        setSubclassFeatures(featrureList.length > 0? featrureList.reverse().join("\n"): null);
+
+    }
+    function calculatingSpells(sp) {
         const spellsList = [];
-        if (level >= 17 && spells.spells_seventeenth) { spellsList.push(`17th: ${spells.spells_seventeenth}`); }
-        if (level >= 13 && spells.spells_thirteenth) { spellsList.push(`13th: ${spells.spells_thirteenth}`); }  
-        if (level >= 9 && spells.spells_ninth) { spellsList.push(`9th: ${spells.spells_ninth}`); }
-        if (level >= 7 && spells.spells_seventh) { spellsList.push(`7th: ${spells.spells_seventh}`); }
-        if (level >= 5 && spells.spells_fifth) { spellsList.push(`5th: ${spells.spells_fifth}`); }
-        if (level >= 3 && spells.spells_third) { spellsList.push(`3rd: ${spells.spells_third}`); }
-        if (level >= 1 && spells.spells_fifth) { spellsList.push(`1st: ${spells.spells_first}`); }
+        if (level >= 17 && sp.spells_seventeenth) { spellsList.push(`17th: ${sp.spells_seventeenth}`); }
+        if (level >= 13 && sp.spells_thirteenth) { spellsList.push(`13th: ${sp.spells_thirteenth}`); }  
+        if (level >= 9 && sp.spells_ninth) { spellsList.push(`9th: ${sp.spells_ninth}`); }
+        if (level >= 7 && sp.spells_seventh) { spellsList.push(`7th: ${sp.spells_seventh}`); }
+        if (level >= 5 && sp.spells_fifth) { spellsList.push(`5th: ${sp.spells_fifth}`); }
+        if (level >= 3 && sp.spells_third) { spellsList.push(`3rd: ${sp.spells_third}`); }
+        if (level >= 1 && sp.spells_fifth) { spellsList.push(`1st: ${sp.spells_first}`); }
         
         console.log(`\n\nThe Spell List is:\n ${spellsList.reverse()}`)
-        setSpells(spellsList.length > 0? spellsList.join("\n"): null); // will only display if there are spell lists
+        setSubclassSpells(spellsList.length > 0? spellsList.join("\n"): null); // will only display if there are spell lists
         // return <Text>{handleSpells(spells)}</Text> Doesn't work
     }
     function calculatingFeatures()
@@ -107,7 +131,16 @@ export default SubclassesPage = ({route}) =>
             ></Dropdown>
             <Text>This are the subclasses: {subclass}</Text>
             <Text>Bonus spells</Text>            
-            <Text>{handleSpells(spells)}</Text>
+            <Text>{handleSpells(subclassSpells)}</Text>
+            <Text>Bonus Features:</Text>
+            <Text>{}</Text>
+            <Text>{handleFeatures(subclassFeatures)}</Text>
+            <NextButton 
+                navigation={navigation}
+                params={{name, backgrounds, subclass, level, races}}
+                checkforChange={(item) => checkForChange(item)}
+                // nextScreen={""}
+                ></NextButton>
         </SafeAreaView>
     );
 }
