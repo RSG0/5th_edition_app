@@ -14,8 +14,9 @@ export default SubclassesPage = ({route}) =>
 
     useEffect(() => // triggered whenever classes get changed
     {
-        if (subclass)
+        if (classes)
         {
+            console.log("SO FAR SO GOOD")
             handleSubclassChange(classes)
         }
     }, [classes])
@@ -63,18 +64,28 @@ export default SubclassesPage = ({route}) =>
         if (!sp) { return "No spells given"}
         else {return sp;}
     }
+    function handleFeatures(ft)
+    {
+        if (!ft) {return "No available features"}
+        else {return ft}
+    }
     function calculatingSpells(spells) {
         const spellsList = [];
-
-        if (level >= 9) { spellsList.push(`9th: ${spells.spells_ninth}`); }
-        if (level >= 7) { spellsList.push(`7th: ${spells.spells_seventh}`); }
-        if (level >= 5) { spellsList.push(`5th: ${spells.spells_fifth}`); }
-        if (level >= 3) { spellsList.push(`3rd: ${spells.spells_third}`); }
-        if (level >= 1) { spellsList.push(`1st: ${spells.spells_first}`); }
+        if (level >= 17 && spells.spells_seventeenth) { spellsList.push(`17th: ${spells.spells_seventeenth}`); }
+        if (level >= 13 && spells.spells_thirteenth) { spellsList.push(`13th: ${spells.spells_thirteenth}`); }  
+        if (level >= 9 && spells.spells_ninth) { spellsList.push(`9th: ${spells.spells_ninth}`); }
+        if (level >= 7 && spells.spells_seventh) { spellsList.push(`7th: ${spells.spells_seventh}`); }
+        if (level >= 5 && spells.spells_fifth) { spellsList.push(`5th: ${spells.spells_fifth}`); }
+        if (level >= 3 && spells.spells_third) { spellsList.push(`3rd: ${spells.spells_third}`); }
+        if (level >= 1 && spells.spells_fifth) { spellsList.push(`1st: ${spells.spells_first}`); }
         
         console.log(`\n\nThe Spell List is:\n ${spellsList.reverse()}`)
         setSpells(spellsList.length > 0? spellsList.join("\n"): null); // will only display if there are spell lists
-        // return (spellsList.length > 0? <Text>{spellsList.join("\n")}</Text> : "No spells available")
+        // return <Text>{handleSpells(spells)}</Text> Doesn't work
+    }
+    function calculatingFeatures()
+    {
+
     }
     return (
         <SafeAreaView style={styles.viewStyle}>
@@ -87,11 +98,12 @@ export default SubclassesPage = ({route}) =>
             labelField={"label"}
             valueField={"value"}
             onChange={item => { // this curly brace allows for multiple on change's to work
-                (setSubclass(item.label));                 
+                (setSubclass(item.label));       
+                console.log(subclass)          
             }
             }
             placeholder="---"
-            maxHeight={200}
+            maxHeight={400}
             ></Dropdown>
             <Text>This are the subclasses: {subclass}</Text>
             <Text>Bonus spells</Text>            
