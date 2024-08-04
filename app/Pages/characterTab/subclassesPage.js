@@ -79,18 +79,18 @@ export default SubclassesPage = ({navigation, route}) =>
     }
     function renderFeatures(ft)
     {
-        const featrureList = [];
-        if (level >= 17 && ft.level17Feature) { featrureList.push(`At 17th level: ${ft.level17Feature.label}`);}
-        if (level >= 13 && ft.level13Feature) { featrureList.push(`At 13th level: ${ft.level13Feature.label}`); }  
-        if (level >= 9 && ft.level9Feature) { featrureList.push(`At 9th level: ${ft.level9Feature.label}`);}
-        if (level >= 7 && ft.level7Feature) { featrureList.push(`At 7th level: ${ft.level7Feature.label}`); }
-        if (level >= 6 && ft.level6Feature) { featrureList.push(`At 6th level: ${ft.level6Feature.label}`);; }
-        if (level >= 5 && ft.level5Feature) { featrureList.push(`At 5th level: ${ft.level5Feature.label}`);; }
-        if (level >= 3 && ft.level3Feature) { featrureList.push(`At 3rd level: ${ft.level3Feature.label}`); }
-        if (level >= 1 && ft.level1Feature) { featrureList.push(`At 1st level: ${ft.level1Feature.label}`); }
-        console.log(featrureList)
+        const featureList = [];
+        if (level >= 17 && ft.level17Feature) { featureList.push(`At 17th level: ${ft.level17Feature.label}`);}
+        if (level >= 13 && ft.level13Feature) { featureList.push(`At 13th level: ${ft.level13Feature.label}`); }  
+        if (level >= 9 && ft.level9Feature) { featureList.push(`At 9th level: ${ft.level9Feature.label}`);}
+        if (level >= 7 && ft.level7Feature) { featureList.push(`At 7th level: ${ft.level7Feature.label}`); }
+        if (level >= 6 && ft.level6Feature) { featureList.push(`At 6th level: ${ft.level6Feature.label}`);; }
+        if (level >= 5 && ft.level5Feature) { featureList.push(`At 5th level: ${ft.level5Feature.label}`);; }
+        if (level >= 3 && ft.level3Feature) { featureList.push(`At 3rd level: ${ft.level3Feature.label}`); }
+        if (level >= 1 && ft.level1Feature) { featureList.push(`At 1st level: ${ft.level1Feature.label}`); }
+        console.log(featureList)
 
-        setSubclassFeatures(featrureList.length > 0? featrureList.reverse().join("\n"): null);
+        setSubclassFeatures(featureList.length > 0? featureList.reverse().join("\n"): null);
 
     }
     function calculatingSpells(sp) {
@@ -101,7 +101,8 @@ export default SubclassesPage = ({navigation, route}) =>
         if (level >= 7 && sp.spells_seventh) { spellsList.push(`7th: ${sp.spells_seventh}`); }
         if (level >= 5 && sp.spells_fifth) { spellsList.push(`5th: ${sp.spells_fifth}`); }
         if (level >= 3 && sp.spells_third) { spellsList.push(`3rd: ${sp.spells_third}`); }
-        if (level >= 1 && sp.spells_fifth) { spellsList.push(`1st: ${sp.spells_first}`); }
+        if (level >= 1 && sp.spells_first) { spellsList.push(`1st: ${sp.spells_first}`); }
+        //issue with arrays
         
         console.log(`\n\nThe Spell List is:\n ${spellsList.reverse()}`)
         setSubclassSpells(spellsList.length > 0? spellsList.join("\n"): null); // will only display if there are spell lists
@@ -115,7 +116,7 @@ export default SubclassesPage = ({navigation, route}) =>
         <SafeAreaView style={styles.viewStyle}>
             <Text style={styles.textStyle}>Chosen Class: {classes}</Text>
             <Text style={styles.textStyle}>Current Level: {level}</Text>
-            <Text style={styles.textStyle}>Select your Subclass</Text>
+            <Text style={[styles.textStyle]}>Select your Subclass</Text>
             {/* <Text>{CLERIC_SUBCLASS}</Text> */}
             <Dropdown style={styles.dropdown}
             data={subclassOptions}
@@ -130,7 +131,7 @@ export default SubclassesPage = ({navigation, route}) =>
             maxHeight={400}
             ></Dropdown>
             <Text>This are the subclasses: {subclass}</Text>
-            <Text>Bonus spells</Text>            
+            <Text>Bonus Spells</Text>            
             <Text>{handleSpells(subclassSpells)}</Text>
             <Text>Bonus Features:</Text>
             <Text>{}</Text>
@@ -139,7 +140,7 @@ export default SubclassesPage = ({navigation, route}) =>
                 navigation={navigation}
                 params={{name, backgrounds, subclass, level, races}}
                 checkforChange={(item) => checkForChange(item)}
-                // nextScreen={""}
+                nextScreen={"Hit Points"}
                 ></NextButton>
         </SafeAreaView>
     );
@@ -165,6 +166,7 @@ const styles = StyleSheet.create(
         borderRadius: 10,
         padding: 10,
         marginRight: 10,
+        margin: 10
     },
 
 }

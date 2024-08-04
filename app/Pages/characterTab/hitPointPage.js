@@ -1,7 +1,6 @@
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, FONTSIZE } from "../../constants/theme";
-
+import { COLORS, FONTSIZE } from "../../../constants/theme";
 export default HitPointPage = () =>
 {
     return (

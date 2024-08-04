@@ -5,7 +5,7 @@ import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
 import SubclassesPage from './Pages/characterTab/subclassesPage';
 
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
-import HitPointPage from './Pages/hitPointPage';
+import HitPointPage from './Pages/characterTab/hitPointPage';
 import CharacterPage from "./Pages/characterTab/characterPage"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants/theme";

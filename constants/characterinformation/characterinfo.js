@@ -1,19 +1,19 @@
 const CLASSES = 
 [
-    {label: "Artificer", value: '1'},
-    {label: "Barbarian", value: '2'},
-    {label: "Bard", value: '3'},
-    {label: "Blood Hunter", value: '4'},
-    {label: "Cleric", value: '5'},
-    {label: "Druid", value: '6'},
-    {label: "Fighter", value: '7'},
-    {label: "Monk", value: '8'},
-    {label: "Paladin", value: '9'},
-    {label: "Ranger", value: '10'},
-    {label: "Rogue", value: '11'},
-    {label: "Sorcerer", value: '12'},
-    {label: "Warlock", value: '13'},
-    {label: "Wizard", value: '14'}
+    {label: "Artificer", value: '1', hitDice: "d8"},
+    {label: "Barbarian", value: '2', hitDice: "d12"},
+    {label: "Bard", value: '3', hitDice: "d8"},
+    {label: "Blood Hunter", value: '4', hitDice: "d10"},
+    {label: "Cleric", value: '5', hitDice: "d8"},
+    {label: "Druid", value: '6', hitDice: "d8"},
+    {label: "Fighter", value: '7', hitDice: "d10"},
+    {label: "Monk", value: '8', hitDice: "d8"},
+    {label: "Paladin", value: '9', hitDice: "d10"},
+    {label: "Ranger", value: '10', hitDice: "d10"},
+    {label: "Rogue", value: '11', hitDice: "d8"},
+    {label: "Sorcerer", value: '12', hitDice: "d6"},
+    {label: "Warlock", value: '13', hitDice: "d8"},
+    {label: "Wizard", value: '14', hitDice: "d6"}
 ];
 const CLASS_SKILLS = [
     { label: "Barbarian", skills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"] },
