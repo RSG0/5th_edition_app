@@ -12,7 +12,9 @@ const HitPoint = () => {
     };
     const renderDropdown = () =>
     {
-
+        return(
+        <Text>{CANTRIPS.map( (can) => can.name)}</Text>
+        )
     }
     const dropdown = (text, setState, state) =>
     {
@@ -27,6 +29,8 @@ const HitPoint = () => {
         {state && (
           <View style={{ paddingTop: 10 }}>
             <Text>This is more information about the item.</Text>
+            <Text>{renderDropdown()}</Text>
+            
           </View>
         )}
         </View>
