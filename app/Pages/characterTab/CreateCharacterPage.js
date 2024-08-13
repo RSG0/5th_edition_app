@@ -139,6 +139,7 @@ const CreateCharacter = ({navigation}) => {
                         checkforChange={() => checkForChange(name, classes, level, selectedRace, backgrounds, selectedSubrace)}
                         />              
                     </View>
+                    
                     <View style={{marginBottom: 200}}></View>
 
              </View>

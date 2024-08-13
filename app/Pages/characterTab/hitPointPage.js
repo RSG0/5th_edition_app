@@ -1,33 +1,46 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, FONTSIZE } from "../../../constants/theme";
-export default HitPointPage = () =>
-{
-    return (
-        <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
-        {/* <ScrollView> */}
-        <View style={styles.viewStyle}>
-            <Text style={styles.textStyle}>This is the Hit Point Screen</Text>
-        </View>
-        {/* </ScrollView> */}
-        </SafeAreaView>
-    );
-}
-const styles = StyleSheet.create(
-{
-    viewStyle: {
-        
-        backgroundColor: COLORS.background,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
-    },
-    textStyle: {
-        fontWeight: 'bold',
-        fontSize: FONTSIZE.xxlarge,
-        textAlign: 'center'
-    },
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
+import { CANTRIPS } from '../../../constants/characterinformation/spells';
 
-}
-)
+const HitPoint = () => {
+  const [isCantripOpen, setIsCantripOpen] = useState(false);
+
+
+    const toggleDropdown = (toggle, toggleState) => {
+        toggle(!toggleState);
+    };
+    const renderDropdown = () =>
+    {
+
+    }
+    const dropdown = (text, setState, state) =>
+    {
+        return(
+            <View>
+            <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={{ fontSize: 18 }}>{text}</Text>
+                <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
+            </TouchableOpacity>
+  
+          {/**This feature is a JSX exclusive */}
+        {state && (
+          <View style={{ paddingTop: 10 }}>
+            <Text>This is more information about the item.</Text>
+          </View>
+        )}
+        </View>
+        )
+    }
+
+  return (
+    <View style={{ padding: 10 }}>
+        <Text>Cantrips: ___</Text>
+        <Text>Prepared Spells:</Text>
+        {dropdown("Cantrips", setIsCantripOpen, isCantripOpen)}
+
+    </View>
+  );
+};
+
+export default HitPoint;
