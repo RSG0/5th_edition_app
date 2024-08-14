@@ -7,12 +7,19 @@ import { DRAGONBORN_SUBRACE, ELF_SUBRACE, RACES } from '../../../constants/chara
 
 import AbilityDropdown from '../../../components/abilityDropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NUMBER_TWENTY } from '../../../constants/characterinformation/characterinfo';
 
 const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds, level, selectedRace, selectedSubrace} = route.params;
     const [abilityArray, setAbilityArray] = useState([]);
 
     const [str, setSTR] = useState(0);
+    const [dex, setDEX] = useState(0);
+    const [con, setCON] = useState(0);
+    const [int, setINT] = useState(0);
+    const [wis, setWIS] = useState(0);
+    const [cha, setCHA] = useState(0);
+
 
     const [strBonus, setSTRBonus] = useState(0);
     const [dexBonus, setDEXBonus] = useState(0);
@@ -26,6 +33,15 @@ const AbilityScoreScreen = ({ navigation, route }) => {
     const handleStandardArray = (ability) =>
     {
 
+    }
+    const handleAbilityChange = (ability, value) =>
+    {
+        if (ability === "STR") {setSTR(value)}
+        else if (ability === "DEX") {setDEX(value)}
+        else if (ability === "CON") {setCON(value)}
+        else if (ability === "INT") {setINT(value)}
+        else if (ability === "WIS") {setWIS(value)}
+        else if (ability === "CHA") {setCHA(value)}
     }
     // console.log(NUMBER_TWENTY)
     // console.log(STANDARD_ARRAY)
@@ -93,12 +109,6 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         }
     }
 
-    // if (selectedRace) // happens at the beginning of the page causes a continuous loop
-    // {
-    //     console.log("Race has been selected")
-    //     console.log(selectedSubrace)
-    //     racialStatBonus(selectedRace);
-    // }
     return (
         <SafeAreaView style={styles.viewStyle}>
         <Text>Name: {name}</Text>
@@ -107,23 +117,22 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         <Text>Level: {level}</Text>
 
         <View style={styles.inputRow}>
-            <AbilityDropdown name={"STR"} data={STANDARD_ARRAY} isStandardArray={true}></AbilityDropdown>
-            <AbilityDropdown name={"DEX"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
-            <AbilityDropdown name={"CON"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
+            <AbilityDropdown name={"STR"} data={NUMBER_TWENTY} isStandardArray={true} onAbilityPress={handleAbilityChange}></AbilityDropdown>
+            <AbilityDropdown name={"DEX"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
+            <AbilityDropdown name={"CON"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
         </View>
         <View style={styles.inputRow}>
-            <AbilityDropdown name={"INT"} data={STANDARD_ARRAY} isStandardArray={true}></AbilityDropdown>
-            <AbilityDropdown name={"WIS"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
-            <AbilityDropdown name={"CHA"} data={STANDARD_ARRAY} isStandardArray={false}></AbilityDropdown>
+            <AbilityDropdown name={"INT"} data={NUMBER_TWENTY} isStandardArray={true} onAbilityPress={handleAbilityChange}></AbilityDropdown>
+            <AbilityDropdown name={"WIS"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
+            <AbilityDropdown name={"CHA"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
         </View>
-        {/* {console.log(dex)} */}
         <Text>Racial Stat Bonus:</Text>
         <Text>{renderRacialBonus()}</Text>
 
 
         <NextButton 
             navigation={navigation} 
-            params={{classes, backgrounds, name, level, selectedRace, selectedSubrace}}
+            params={{classes, backgrounds, name, level, selectedRace, selectedSubrace, int, wis, cha}}
             checkforChange={() => checkForChange()}
 
             nextScreen={"Select Skills"}/>

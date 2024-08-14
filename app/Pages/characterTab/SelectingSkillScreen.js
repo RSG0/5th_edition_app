@@ -4,12 +4,11 @@ import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformati
 import NextButton from "../../../components/buttons/nextButton";
 import SkillsButton from "../../../components/buttons/skillsButton"
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useState } from "react";
+import {useState } from "react";
 const SelectingSkillsScreen = ({route, navigation}) =>
 {
-    const {name, backgrounds, classes, level} = route.params;
+    const {name, backgrounds, classes, level, int, wis, cha} = route.params;
     const [selectSkills, setSelectSkills] = useState([]);
-
 
     const checkForChange = () =>
     {
@@ -54,22 +53,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     { 
         const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass);
         const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground)
-
-        console.clear();
-        // console.log(classSkills.skills)
-        // console.log(backgroundSkills.skillProficiencies)
-        /*
-        const arr = [1,2,3,4,5]
-        const arr2 = [2,3,4]
-
-        // const filterSkills = arr.filter((s) => s !== arr2) //This won't work, This compares element s with the whole array
-        const filterSkills = arr.filter((s) => !arr2.includes(s)) 
-
-        console.log(filterSkills);
-        */
         const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s))
-        // console.log(filterSkills);
-
 
         if (filterSkills) {
             return filterSkills.map((skill, index) => (
@@ -90,8 +74,6 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         }
     }
 
-    // const {class_skills} = route.params;
-    // const {background_skills} = route.params;
     return (
         <SafeAreaView style={styles.viewStyle}>
         {/* <Text>Name: {name}</Text>
@@ -107,7 +89,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         <NextButton
             navigation={navigation}
             nextScreen={"Select Subclasses"}
-            params={{name, classes, backgrounds, level}}
+            params={{name, classes, backgrounds, level, int, wis, cha}}
             checkforChange={() => checkForChange}/>
         <Text>You've chosen: {skillChosen(selectSkills)} </Text>
         </View>

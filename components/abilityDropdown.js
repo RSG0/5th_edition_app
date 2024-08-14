@@ -2,22 +2,23 @@ import { Text, StyleSheet, View } from "react-native"
 import { Dropdown } from "react-native-element-dropdown"
 import { COLORS, FONTSIZE } from "../constants/theme"
 
-export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress}) =>
+export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, value}) =>
 {
     const handleDropdownChange = (item) =>
-    {
-        if (isStandardArray)
         {
-            const st = data.filter((s) => !data.includes(s))
+            if (isStandardArray) {
+                const st = data.filter((s) => !data.includes(s));
+                console.log(item);
+                onAbilityPress(name, item.value); // Notify parent of the change
+                console.log(item.value)
+                return st;
+            } else {
+                onAbilityPress(name, item.value); // Notify parent of the change
+                console.log(item.value)
 
-            console.log(item)
-            return st;
-        }
-        else
-        {
-            return item;
-        }
-    }
+                return item;
+            }
+        };
     return(
 
         <View style={{flexDirection:'row', alignContent: 'center', alignItems: 'center'}}>

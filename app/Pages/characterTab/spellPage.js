@@ -6,11 +6,15 @@ import { CANTRIPS, FIRST_LEVEL_SPELLS } from '../../../constants/characterinform
 export default SpellPage = ({navigation, route}) => 
 {
 
-  const {name, classes, backgrounds, level, races} = route.params;
+  const {name, classes, backgrounds, level, races, int, wis, cha} = route.params;
 
   const [isCantripOpen, setIsCantripOpen] = useState(false);
   const [is1stLevelOpen, setIs1stLevelOpen] = useState(false);
 
+    const calculateScoreMod = (score) =>
+    {
+      return Math.floor((score - 10)/2);
+    }
     const calculateNumOfCantrips = () =>
     {
       if (classes == "Artificer")
@@ -46,12 +50,23 @@ export default SpellPage = ({navigation, route}) =>
     }
     const calculateSpellsKnown = () =>
     {
-      if (classes === "Cleric")
-      {
-
-      }
+      if (classes === "Cleric" || classes === "Druid" || classes === "Ranger") {return calculateScoreMod(wis)}
+      else if (classes === "Wizard" || classes === "Artificer") {return calculateScoreMod(int)}
+      else if (classes === "Paladin" || classes === "Warlock" || classes === "") {return calculateScoreMod(cha)}
     }
-
+    const renderCantrips = () =>
+    {
+      return(
+        <Text>Cantrips: __/{calculateNumOfCantrips()}</Text>
+      )
+    }
+    const renderSpells = () =>
+    {
+      console.log("Wisdom Score: " + wis);
+      return(
+        <Text>Prepared Spells: ___/{calculateSpellsKnown() + Number(level)} </Text> // Class Level + Class MOD
+      )
+    }
     const toggleDropdown = (toggle, toggleState) => {
         toggle(!toggleState);
     };
@@ -93,7 +108,8 @@ export default SpellPage = ({navigation, route}) =>
 
   return (
     <View style={{ padding: 10 }}>
-        <Text>Cantrips: _/{calculateNumOfCantrips()} </Text>
+        {renderCantrips()}
+        {renderSpells()}
         <Text>Chosen Class: {classes}</Text>
         <Text>Prepared Spells:</Text>
         {dropdown("Cantrips", setIsCantripOpen, isCantripOpen, CANTRIPS)}
