@@ -1,0 +1,11 @@
+        // console.log(classSkills.skills)
+        // console.log(backgroundSkills.skillProficiencies)
+        /*
+        const arr = [1,2,3,4,5]
+        const arr2 = [2,3,4]
+
+        // const filterSkills = arr.filter((s) => s !== arr2) //This won't work, This compares element s with the whole array
+        const filterSkills = arr.filter((s) => !arr2.includes(s)) 
+
+        console.log(filterSkills);
+        */

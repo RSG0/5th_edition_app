@@ -18,7 +18,7 @@ export default SubclassesPage = ({navigation, route}) =>
     {
         if (classes)
         {
-            console.log("SO FAR SO GOOD")
+            // console.log("SO FAR SO GOOD") unndeed now
             handleSubclassChange(classes)
         }
     }, [classes])
@@ -138,9 +138,9 @@ export default SubclassesPage = ({navigation, route}) =>
             <Text>{handleFeatures(subclassFeatures)}</Text>
             <NextButton 
                 navigation={navigation}
-                params={{name, backgrounds, subclass, level, races}}
+                params={{name, classes, backgrounds, subclass, level, races}}
                 checkforChange={(item) => checkForChange(item)}
-                nextScreen={"Hit Points"}
+                nextScreen={"Spell Page"}
                 ></NextButton>
         </SafeAreaView>
     );

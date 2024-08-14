@@ -68,7 +68,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         console.log(filterSkills);
         */
         const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s))
-        console.log(filterSkills);
+        // console.log(filterSkills);
 
 
         if (filterSkills) {

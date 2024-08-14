@@ -5,7 +5,7 @@ import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
 import SubclassesPage from './Pages/characterTab/subclassesPage';
 
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
-import HitPointPage from './Pages/characterTab/hitPointPage';
+import SpellPage from './Pages/characterTab/spellPage';
 import CharacterPage from "./Pages/characterTab/characterPage"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../constants/theme";
@@ -87,7 +87,7 @@ function StackNavigator() {
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
-      <Stack.Screen name="Hit Points" component={HitPointPage} />
+      <Stack.Screen name="Spell Page" component={SpellPage} />
 
     </Stack.Navigator>
   );
