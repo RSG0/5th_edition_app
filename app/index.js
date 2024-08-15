@@ -3,6 +3,7 @@ import { ScrollView, Text, View, StyleSheet } from "react-native";
 import SelectingSkillsScreen from "./Pages/characterTab/SelectingSkillScreen";
 import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
 import SubclassesPage from './Pages/characterTab/subclassesPage';
+import HitPoint from './Pages/characterTab/hitPointScreen';
 
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
 import SpellPage from './Pages/characterTab/spellPage';
@@ -88,6 +89,7 @@ function StackNavigator() {
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
       <Stack.Screen name="Spell Page" component={SpellPage} />
+      <Stack.Screen name="Hit Point" component={HitPoint} />
 
     </Stack.Navigator>
   );

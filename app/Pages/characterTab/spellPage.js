@@ -4,11 +4,19 @@ import { AntDesign } from '@expo/vector-icons'; // package provides a variety of
 import { CANTRIPS, FIRST_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS } from '../../../constants/characterinformation/spells';
 import { COLORS } from '../../../constants/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import NextButton from '../../../components/buttons/nextButton';
 
 export default SpellPage = ({navigation, route}) => 
 {
 
+
   const {name, classes, backgrounds, level, races, int, wis, cha} = route.params;
+
+  const checkForChange = () =>
+  {
+    //include important infomration
+    return true
+  }
 
   // drops down spells
   const [cantripDropdown, setCantripDropdown] = useState(false); 
@@ -166,6 +174,14 @@ export default SpellPage = ({navigation, route}) =>
         {dropdown("2nd Level Spells", setSecondLevelDropdown, secondLevelDropdown, SECOND_LEVEL_SPELLS, isSecondLevel)}
         {dropdown("3rd Level Spells", setThirdLevelDropdown, thirdLevelDropdown, THIRD_LEVEL_SPELLS, isThirdLevel)}
         {dropdown("4th Level Spells", setFourthLevelDropdown, fourthLevelDropdown, FOURTH_LEVEL_SPELLS, isFourthLevel)}
+        <View style={styles.nextButton}> 
+          <NextButton
+            navigation={navigation}
+            params={{name, classes, backgrounds, level, races, int, wis, cha}}
+            checkforChange={() => checkForChange()}
+            nextScreen={"Hit Point"}
+          />
+          </View>
 
         </ScrollView>
     </SafeAreaView>
@@ -184,6 +200,13 @@ const styles = StyleSheet.create(
   {
     flex: 1,
     padding: 20,
+    // alignContent: 'center',
+    // alignItems: 'center',
     backgroundColor: COLORS.background  
+  },
+  nextButton:
+  {
+    alignContent: 'center',
+    alignItems: 'center',
   }
 })
