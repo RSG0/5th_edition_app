@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
-import { CANTRIPS, FIRST_LEVEL_SPELLS } from '../../../constants/characterinformation/spells';
+import { CANTRIPS, FIRST_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS } from '../../../constants/characterinformation/spells';
+import { COLORS } from '../../../constants/theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default SpellPage = ({navigation, route}) => 
 {
 
   const {name, classes, backgrounds, level, races, int, wis, cha} = route.params;
 
-  const [isCantripOpen, setIsCantripOpen] = useState(false);
-  const [is1stLevelOpen, setIs1stLevelOpen] = useState(false);
+  // drops down spells
+  const [cantripDropdown, setCantripDropdown] = useState(false); 
+  const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
+  const [secondLevelDropdown, setSecondLevelDropdown] = useState(false);
+  const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
+  const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
 
+
+  const [isSecondLevel, setIsSecondLevel] = useState(false);
+  const [isThirdLevel, setIsThirdLevel] = useState(false);
+  const [isFourthLevel, setIsFourthLevel] = useState(false);
+
+
+    useEffect( () =>
+    {
+      calculateLevelOfSpellsKnown()
+    }, [classes])
     const calculateScoreMod = (score) =>
     {
       return Math.floor((score - 10)/2);
@@ -48,11 +64,31 @@ export default SpellPage = ({navigation, route}) =>
           else if (level <= 20) return 6;
         }
     }
-    const calculateSpellsKnown = () =>
+    const calculateNumOfSpellsKnown = () =>
     {
       if (classes === "Cleric" || classes === "Druid" || classes === "Ranger") {return calculateScoreMod(wis)}
       else if (classes === "Wizard" || classes === "Artificer") {return calculateScoreMod(int)}
-      else if (classes === "Paladin" || classes === "Warlock" || classes === "") {return calculateScoreMod(cha)}
+      else if (classes === "Paladin" || classes === "Warlock" || classes === "Bard") {return calculateScoreMod(cha)}
+    }
+    const calculateLevelOfSpellsKnown = () =>
+    {
+      if (classes === "Cleric" || classes === "Wizard" || classes === "Sorceror" || classes === "Druid")
+      {
+        if (level >= 17) {} // opens 9th level spells
+        if (level >= 15) {} // opens 8th level spells
+        if (level >= 13) {} // opens 7th level spells
+        if (level >= 11) {} // opens 6th level spells
+        if (level >= 9) {}  // opens 5th level spells
+        if (level >= 7) {setIsFourthLevel(true)}  // opens 4th level spells
+        if (level >= 5) {setIsThirdLevel(true)}  // opens 3rd level spells
+        if (level >= 3) {setIsSecondLevel(true)}  // opens 2rd level spells
+
+          
+      }
+      else if (classes === "Paladin" || classes === "Ranger")
+      {
+
+      }
     }
     const renderCantrips = () =>
     {
@@ -62,9 +98,16 @@ export default SpellPage = ({navigation, route}) =>
     }
     const renderSpells = () =>
     {
-      console.log("Wisdom Score: " + wis);
+      const numOfSpellsKnown = () =>
+      {
+        if (calculateNumOfSpellsKnown() + Number(level) < 1)
+        {
+          return 1;
+        }
+        return calculateNumOfSpellsKnown() + Number(level)
+      }
       return(
-        <Text>Prepared Spells: ___/{calculateSpellsKnown() + Number(level)} </Text> // Class Level + Class MOD
+        <Text>Prepared Spells: ___/{numOfSpellsKnown()} </Text> // Class Level + Class MOD
       )
     }
     const toggleDropdown = (toggle, toggleState) => {
@@ -85,36 +128,62 @@ export default SpellPage = ({navigation, route}) =>
         </>
       )
     }
-    const dropdown = (text, setState, state, spellList) =>
+    const dropdown = (text, setState, state, spellList, isActive) =>
     {
-        return(
-            <View>
+      if (isActive)
+      {
+      return(
+          <View>
+            <View style={[styles.dropdownClosed, {marginBottom: state? 0: 10 }]}>
             <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={{ fontSize: 18 }}>{text}</Text>
                 <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
             </TouchableOpacity>
+            </View>
   
-          {/**This feature is a JSX exclusive */}
-        {state && (
-          <View style={{ paddingTop: 10 }}>
-            <Text>This is more information about the item.</Text>
-            <Text>{renderDropdown(spellList)}</Text>
-            
-          </View>
-        )}
+        {/**This feature is a JSX exclusive */}
+      {state && (
+          <View style={{ }}>
+          {/* <Text>This is more information about the item.</Text> */}
+          <Text>{renderDropdown(spellList)}</Text>
+          
         </View>
-        )
+      )}
+      </View>
+      )
+      }
     }
 
   return (
-    <View style={{ padding: 10 }}>
+    <SafeAreaView style={styles.background}>
+      <ScrollView>
         {renderCantrips()}
         {renderSpells()}
         <Text>Chosen Class: {classes}</Text>
         <Text>Prepared Spells:</Text>
-        {dropdown("Cantrips", setIsCantripOpen, isCantripOpen, CANTRIPS)}
-        {dropdown("1st Level Spells", setIs1stLevelOpen, is1stLevelOpen, FIRST_LEVEL_SPELLS)}
+        {dropdown("Cantrips", setCantripDropdown, cantripDropdown, CANTRIPS, true)}
+        {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, FIRST_LEVEL_SPELLS, true)}
+        {dropdown("2nd Level Spells", setSecondLevelDropdown, secondLevelDropdown, SECOND_LEVEL_SPELLS, isSecondLevel)}
+        {dropdown("3rd Level Spells", setThirdLevelDropdown, thirdLevelDropdown, THIRD_LEVEL_SPELLS, isThirdLevel)}
+        {dropdown("4th Level Spells", setFourthLevelDropdown, fourthLevelDropdown, FOURTH_LEVEL_SPELLS, isFourthLevel)}
 
-    </View>
+        </ScrollView>
+    </SafeAreaView>
   );
 };
+const styles = StyleSheet.create(
+{
+  dropdownClosed:
+  {
+    backgroundColor: COLORS.dropdown,
+    // marginBottom: 10,
+    borderRadius: 10,
+    padding: 10
+  },  
+  background: 
+  {
+    flex: 1,
+    padding: 20,
+    backgroundColor: COLORS.background  
+  }
+})

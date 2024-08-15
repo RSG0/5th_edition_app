@@ -1,6 +1,7 @@
 const COLORS =
 {
     background: "#FFF4BB",
+    dropdown: "#d1c899",
     mainColor: "#CE3F3F",
 };
 const FONT = {
