@@ -132,7 +132,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
 
         <NextButton 
             navigation={navigation} 
-            params={{classes, backgrounds, name, level, selectedRace, selectedSubrace, int, wis, cha}}
+            params={{classes, backgrounds, name, level, selectedRace, selectedSubrace, con, int, wis, cha}}
             checkforChange={() => checkForChange()}
 
             nextScreen={"Select Skills"}/>

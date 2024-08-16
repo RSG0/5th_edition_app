@@ -10,7 +10,7 @@ export default SpellPage = ({navigation, route}) =>
 {
 
 
-  const {name, classes, backgrounds, level, races, int, wis, cha} = route.params;
+  const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params;
 
   const checkForChange = () =>
   {
@@ -177,7 +177,7 @@ export default SpellPage = ({navigation, route}) =>
         <View style={styles.nextButton}> 
           <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level, races, int, wis, cha}}
+            params={{name, classes, backgrounds, level, races, con ,int, wis, cha}}
             checkforChange={() => checkForChange()}
             nextScreen={"Hit Point"}
           />

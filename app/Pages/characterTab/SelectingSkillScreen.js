@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, StatusBar, FlatList } from "react-native";
+import { View, StyleSheet, Text, StatusBar, FlatList, } from "react-native";
 import { FONTSIZE, COLORS } from "../../../constants/theme";
 import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformation/characterinfo";
 import NextButton from "../../../components/buttons/nextButton";
@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import {useState } from "react";
 const SelectingSkillsScreen = ({route, navigation}) =>
 {
-    const {name, backgrounds, classes, level, int, wis, cha} = route.params;
+    const {name, backgrounds, classes, level, con, int, wis, cha} = route.params;
     const [selectSkills, setSelectSkills] = useState([]);
 
     const checkForChange = () =>
@@ -89,7 +89,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         <NextButton
             navigation={navigation}
             nextScreen={"Select Subclasses"}
-            params={{name, classes, backgrounds, level, int, wis, cha}}
+            params={{name, backgrounds, classes, level, con, int, wis, cha}}
             checkforChange={() => checkForChange}/>
         <Text>You've chosen: {skillChosen(selectSkills)} </Text>
         </View>

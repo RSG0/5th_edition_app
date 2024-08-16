@@ -8,7 +8,7 @@ import NextButton from "../../../components/buttons/nextButton";
 
 export default SubclassesPage = ({navigation, route}) =>
 {
-    const {name, classes, backgrounds, level, races, int, wis, cha} = route.params;
+    const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params;
     const [subclass, setSubclass] = useState(null);
     const [subclassSpells, setSubclassSpells] = useState(null);
     const [subclassFeatures, setSubclassFeatures] = useState(null);
@@ -138,7 +138,7 @@ export default SubclassesPage = ({navigation, route}) =>
             <Text>{handleFeatures(subclassFeatures)}</Text>
             <NextButton 
                 navigation={navigation}
-                params={{name, classes, backgrounds, subclass, level, races,int, wis, cha}}
+                params={{name, classes, backgrounds, subclass, level, races, con,int, wis, cha}}
                 checkforChange={(item) => checkForChange(item)}
                 nextScreen={"Spell Page"}
                 ></NextButton>
