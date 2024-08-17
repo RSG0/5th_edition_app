@@ -21,6 +21,7 @@ import EquipmentPage from "./Pages/equipmentPage";
 
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import characterPage from './Pages/characterTab/characterPage';
+import selectEquipmentScreen from './Pages/characterTab/selectEquipmentScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -90,6 +91,7 @@ function StackNavigator() {
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
       <Stack.Screen name="Spell Page" component={SpellPage} />
       <Stack.Screen name="Hit Point" component={HitPoint} />
+      <Stack.Screen name="Select Equipment" component={selectEquipmentScreen} />
 
     </Stack.Navigator>
   );

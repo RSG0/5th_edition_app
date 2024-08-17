@@ -4,6 +4,7 @@ import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { CLASSES } from "../../../constants/characterinformation/characterinfo";
 import { averageHitDice, averageMaxHp, translateHitDice, calculateScoreMod, checkPositive } from "../../../constants/characterinformation/math";
 import { useState, useEffect } from "react";
+import NextButton from "../../../components/buttons/nextButton";
 
 export default HitPoint = ({navigation, route}) =>
 {
@@ -17,6 +18,12 @@ export default HitPoint = ({navigation, route}) =>
     const [standard, setStandard] = useState(true)
     const [maxHp, setMaxHp] = useState(0);
     const [customHpInputs, setCustomHpInputs] = useState([]);
+
+    const checkforChange = () =>
+    {
+        // Need to add functionality and alerts
+        return true
+    }
 
     useEffect(() =>
     {
@@ -91,6 +98,11 @@ export default HitPoint = ({navigation, route}) =>
             <Text style={styles.textStyle}>Max Hp: {maxHp}</Text>
 
             <View style={styles.bottom}></View>
+            <NextButton
+            navigation={navigation}
+            params={{name, classes, backgrounds, level, races, con, int, wis, cha}}
+            checkforChange={() => checkforChange()}
+            nextScreen={"Select Equipment"}></NextButton>
 
         </View>
         </ScrollView>
@@ -149,7 +161,7 @@ const styles = StyleSheet.create(
         fontSize: FONTSIZE.xlarge
     },
     bottom:{
-        marginBottom: 550,
+        marginBottom: 150,
     }
 
 }
