@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { CLASSES } from "../../../constants/characterinformation/characterinfo";
 import { averageHitDice, averageMaxHp, translateHitDice, calculateScoreMod, checkPositive } from "../../../constants/characterinformation/math";
+import { useState, useEffect } from "react";
 
 export default HitPoint = ({navigation, route}) =>
 {
@@ -11,37 +12,62 @@ export default HitPoint = ({navigation, route}) =>
 
     const selectedClass = CLASSES.find(cls => cls.label === classes)
     const selectedHitDice = selectedClass.hitDice
-    let isStandard = true;
+    const conMOD = calculateScoreMod(con);
 
+    const [standard, setStandard] = useState(true)
+    const [maxHp, setMaxHp] = useState(0);
+    const [customHpInputs, setCustomHpInputs] = useState([]);
+
+    useEffect(() =>
+    {
+        if (standard) {setMaxHp(averageMaxHp(translateHitDice(selectedHitDice), Number(level), conMOD)) }
+        else {
+            const totalCustomHp = (customHpInputs.reduce((a, b) => a + parseInt(b || 0), 0))
+            setMaxHp( (translateHitDice(selectedHitDice) + parseInt(conMOD)) + ( (totalCustomHp + (parseInt(level-1) * parseInt(conMOD))) ) )
+            //Doesn't work past level 1
+
+        }
+
+    },[maxHp, customHpInputs]);
+    
+
+    useEffect(() =>
+    {
+        if (standard) {setMaxHp(averageMaxHp(translateHitDice(selectedHitDice), Number(level), conMOD)) }
+        else {
+            setMaxHp(0)}
+    }, [standard, selectedHitDice, level, con]);
+
+    const handleCustomHpInputChange = (value, index) => {
+        const updatedInputs = [...customHpInputs];
+        updatedInputs[index] = value;
+        setCustomHpInputs(updatedInputs);
+    };
     const displayCustomHitDice = ()=>
     {
-        if(isStandard === false)
+        if(standard === false)
         {
             const numOfHitDice = [];
 
-            for (let i =1; i <= Number(level); i++)
+            for (let i =2; i <= Number(level); i++)
             {
                 // console.log("Should be working")
                 numOfHitDice.push( 
                 <View key={i} style={styles.rowStyle}>
                     <Text style={styles.textStyle}>Level {i}: </Text>
-                    <TextInput style={styles.inputStyle} keyboardType="numeric"></TextInput>            
+                    <TextInput style={styles.inputStyle} onChangeText={(value) => handleCustomHpInputChange(value, i-1)} keyboardType="numeric"></TextInput>            
+
                 </View>
                 )
             }
             return numOfHitDice;
         }
-        else if (isStandard === true)
-        {
-
-        }
-
     }
     const renderButton = (text, type) =>
     {
         return(
             <View>
-                <TouchableOpacity style={styles.button} onPress={() => [isStandard = !isStandard, console.log(isStandard)]}>
+                <TouchableOpacity style={styles.button} onPress={() => [setStandard(type)]}>
                     <Text style={styles.buttonText}>{text}</Text>
                 </TouchableOpacity>
             </View>
@@ -51,24 +77,19 @@ export default HitPoint = ({navigation, route}) =>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView showsVerticalScrollIndicator={false}>
-        {console.log("The selected class is: " + selectedClass.label)}
-
 
         <View style={styles.background}>
             <Text style={styles.title}>Current Hit Dice: {level}{selectedHitDice} </Text>
             <View style={styles.rowStyle}>
-            {renderButton("Standard", isStandard)}
-            {renderButton("Custom", isStandard)}
+            {renderButton("Standard", true)}
+            {renderButton("Custom", false)}
 
         </View>
-            {/* <View style={styles.rowStyle}>
-                <Text style={styles.textStyle}>Level 1: </Text>
-                <TextInput style={styles.inputStyle} keyboardType="numeric"></TextInput>
 
-            </View> */}
+            <Text style={styles.textStyle}>CON MOD: {checkPositive(conMOD)}</Text>
             {displayCustomHitDice()}
-            <Text style={styles.textStyle}>CON MOD: {checkPositive(calculateScoreMod(con))}</Text>
-            <Text style={styles.textStyle}>Max Hp: {averageMaxHp(translateHitDice(selectedHitDice), Number(level), calculateScoreMod(con))}</Text>
+            <Text style={styles.textStyle}>Max Hp: {maxHp}</Text>
+
             <View style={styles.bottom}></View>
 
         </View>
@@ -90,7 +111,7 @@ const styles = StyleSheet.create(
     rowStyle:{
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },  
     inputStyle: {
         borderRadius: 20,
@@ -126,6 +147,9 @@ const styles = StyleSheet.create(
         color: 'white',
         fontWeight: 'bold',
         fontSize: FONTSIZE.xlarge
+    },
+    bottom:{
+        marginBottom: 550,
     }
 
 }
