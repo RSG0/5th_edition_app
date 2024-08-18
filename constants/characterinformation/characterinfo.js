@@ -29,7 +29,7 @@ const CLASS_SKILLS = [
     { label: "Warlock", skills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"] },
     { label: "Wizard", skills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"] }
 ];
-CLASS_EQUIPMENT = 
+const CLASS_EQUIPMENT = 
 [
     {label: "Barbarian", equipmentA: ["a greataxe", "any martial weapon"], equipmentB: ["two handaxes", "any simple weapon"], equipmentC: ["an explorer's pack"], equipmentD: ["four javelins"]},
     {label: "Bard", equipmentA: ["a rapier", "a longsword", "any simple weapon"], equipmentB: ["a diplomat's pack", "an entertainer's pack", "any simple weapon"], equipmentC: ["a lute", "any other musical instrument"], equipmentD: ["leather armor"], equipmentE: ["a dagger"]},
@@ -43,7 +43,7 @@ CLASS_EQUIPMENT =
     {label: "Sorcerer", value: '10', hitDice: "d6"},
     {label: "Warlock", value: '11', hitDice: "d8"},
     {label: "Wizard", value: '12', hitDice: "d6"}
-]
+];
 const BACKGROUNDS = 
 [
     {label: "Acolyte", skillProficiencies: ["Insight", "Religion"], toolProficiencies: null, languages: ["", ""], 
@@ -111,4 +111,4 @@ for (let i = 1; i<= 20; i++)
 
 
 
-export {CLASSES, CLASS_SKILLS, NUMBER_TWENTY, BACKGROUNDS};
+export {CLASSES, CLASS_SKILLS, CLASS_EQUIPMENT, NUMBER_TWENTY, BACKGROUNDS};

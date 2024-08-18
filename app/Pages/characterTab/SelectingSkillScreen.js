@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, StatusBar, FlatList, } from "react-native";
 import { FONTSIZE, COLORS } from "../../../constants/theme";
 import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformation/characterinfo";
 import NextButton from "../../../components/buttons/nextButton";
-import SkillsButton from "../../../components/buttons/skillsButton"
+import SkillsButton from "../../../components/buttons/selectionButton"
 import { SafeAreaView } from "react-native-safe-area-context";
 import {useState } from "react";
 const SelectingSkillsScreen = ({route, navigation}) =>
@@ -57,7 +57,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
 
         if (filterSkills) {
             return filterSkills.map((skill, index) => (
-                <SkillsButton key={index} skill={skill}  isSelected={selectSkills.includes(skill)} onSkillPress={handleSkills}></SkillsButton>
+                <SkillsButton key={index} name={skill} disableFixedWidth={false} isSelected={selectSkills.includes(skill)} onSkillPress={handleSkills}></SkillsButton>
             ));
         } else {
             return <Text>No skills available for this class.</Text>;

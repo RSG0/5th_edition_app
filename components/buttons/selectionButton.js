@@ -2,18 +2,18 @@ import {StyleSheet, Text, TouchableOpacity } from "react-native";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import { useState, useEffect } from "react";
 
-export default SkillsButton = ({skill, isSelected, onSkillPress}) =>
+export default SkillsButton = ({name, isSelected, onSkillPress, disableFixedWidth}) =>
 {
     const handlePress = () => {
         // console.log(`${skill} was pressed`);
-        onSkillPress(skill);
+        onSkillPress(name);
     };
 
     return (
         <TouchableOpacity 
-        style={[styles.button, isSelected && styles.buttonPressed]} 
+        style={[styles.button, isSelected && styles.buttonPressed, disableFixedWidth && {width: 'auto', paddingHorizontal: 15}]} 
         onPress={handlePress} >
-            <Text style={styles.textStyle}>{skill}</Text>
+            <Text style={styles.textStyle}>{name}</Text>
         </TouchableOpacity>
     )
     
