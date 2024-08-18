@@ -25,6 +25,8 @@ export default SpellPage = ({navigation, route}) =>
   const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
   const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
 
+  const [isSpellcaster, setIsSpellcaster] = useState(false);
+
   const [isSecondLevel, setIsSecondLevel] = useState(false);
   const [isThirdLevel, setIsThirdLevel] = useState(false);
   const [isFourthLevel, setIsFourthLevel] = useState(false);
@@ -32,8 +34,16 @@ export default SpellPage = ({navigation, route}) =>
 
     useEffect( () =>
     {
+      verifySpellcaster()
+      // console.log(isSpellcaster.length)
       calculateLevelOfSpellsKnown()
     }, [classes])
+
+    const verifySpellcaster = () =>
+    {
+      if (classes === "Fighter" || classes === "Monk" || classes === "Barbarian") {setIsSpellcaster(false)}
+      else {isSpellcaster(true)}
+    }
     const calculateScoreMod = (score) =>
     {
       return Math.floor((score - 10)/2);
@@ -136,7 +146,7 @@ export default SpellPage = ({navigation, route}) =>
     }
     const dropdown = (text, setState, state, spellList, isActive) =>
     {
-      if (isActive)
+      if (isActive && isSpellcaster)
       {
       return(
           <View>
