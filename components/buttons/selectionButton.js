@@ -2,11 +2,11 @@ import {StyleSheet, Text, TouchableOpacity } from "react-native";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import { useState, useEffect } from "react";
 
-export default SkillsButton = ({name, isSelected, onSkillPress, disableFixedWidth}) =>
+export default SkillsButton = ({name, isSelected, onSelectionPress, disableFixedWidth}) =>
 {
     const handlePress = () => {
         // console.log(`${skill} was pressed`);
-        onSkillPress(name);
+        onSelectionPress(name);
     };
 
     return (

@@ -57,7 +57,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
 
         if (filterSkills) {
             return filterSkills.map((skill, index) => (
-                <SkillsButton key={index} name={skill} disableFixedWidth={false} isSelected={selectSkills.includes(skill)} onSkillPress={handleSkills}></SkillsButton>
+                <SkillsButton key={index} name={skill} disableFixedWidth={false} isSelected={selectSkills.includes(skill)} onSelectionPress={handleSkills}></SkillsButton>
             ));
         } else {
             return <Text>No skills available for this class.</Text>;
@@ -76,10 +76,6 @@ const SelectingSkillsScreen = ({route, navigation}) =>
 
     return (
         <SafeAreaView style={styles.viewStyle}>
-        {/* <Text>Name: {name}</Text>
-        <Text>Class: {classes}</Text>
-        <Text>Backgrounds: {backgrounds}</Text>
-        <Text>Class Skills: {displayClassSkills(classes)}</Text> */}
         <View style={styles.viewStyle}>
         <Text style={styles.text}>Background Skills: {displayBackgroundSkills(backgrounds)}</Text>
         {/* {console.log(checkForChange(classes))} */}

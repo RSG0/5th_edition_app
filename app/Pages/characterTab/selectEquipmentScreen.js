@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinformation/characterinfo";
 import SelectButton from "../../../components/buttons/selectionButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default SelectEquipmentPage = ({route}) =>
 {
@@ -18,19 +18,32 @@ export default SelectEquipmentPage = ({route}) =>
     const equipmentE = selectedClass.equipmentE;
     const equipmentF = selectedClass.equipmentF;
 
+    const [selectEquipment, setSelectEquipment] = useState([])
+
     const backgroundEquipment = selectedBackground.equipment;
 
     useEffect(() => 
     {
 
     }, [classes])
-    const handleSkills = () =>
+    const handleEquipment = (equip) =>
     {
-
+        console.log(selectEquipment);
+        setSelectEquipment((prevEquipment) => 
+        {
+            if (prevEquipment.length < 1)
+            {
+                return [...prevEquipment, equip]
+            }
+            else
+            {
+                return[...prevEquipment.slice(1), equip]
+            }
+        });
     }
     const renderBackgroundEquipment = (equip) =>
     {
-        {console.log("SO FAR SO GOOD")}
+        // {console.log("SO FAR SO GOOD")}
         return equip.join(", ");
 
     }
@@ -39,12 +52,23 @@ export default SelectEquipmentPage = ({route}) =>
             if (equip)
             {
             return(
-            <ScrollView
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                >
-                {equip.map( (item) => <SelectButton key={item} disableFixedWidth={true} name={captitalize(removeIndefinteArticles_and(item))}> </SelectButton> )}
-                </ScrollView> )
+                <>
+                    <Text style={[styles.textStyle, { marginLeft: 10 }]}>Select 1 Item</Text>
+                    <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        {equip.map((item) => (
+                            <SelectButton 
+                                key={item} 
+                                disableFixedWidth={true} 
+                                onSelectionPress={() => handleEquipment(item)} 
+                                isSelected={selectEquipment.includes(item)} 
+                                name={captitalize(removeIndefinteArticles_and(item))} 
+                            />
+                        ))}
+                    </ScrollView>
+                </>)
             }    
         }
     const captitalize = (word) =>
@@ -76,21 +100,14 @@ export default SelectEquipmentPage = ({route}) =>
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.viewStyle}>
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
-            {/* <Text>{equipmentA.join(", ")}</Text> */}
+
             {renderClassEquipment(equipmentA)}
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
             {renderClassEquipment(equipmentB)}
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
             {renderClassEquipment(equipmentC)}
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
             {renderClassEquipment(equipmentD)}
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
             {renderClassEquipment(equipmentE)}
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
             {renderClassEquipment(equipmentF)}
-            <Text style={[styles.textStyle, {marginLeft: 10}]}>Current Equipment</Text>
-            {console.log("The selected class is: " + selectedBackground.label)}
+            {console.log("The selected background is: " + selectedBackground.label)}
             <Text>{renderBackgroundEquipment(backgroundEquipment)}</Text>
 
         </View>
