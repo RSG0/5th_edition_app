@@ -5,6 +5,7 @@ import { CANTRIPS, FIRST_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS, 
 import { COLORS } from '../../../constants/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NextButton from '../../../components/buttons/nextButton';
+import { FONTSIZE } from '../../../constants/theme';
 
 export default SpellPage = ({navigation, route}) => 
 {
@@ -42,7 +43,7 @@ export default SpellPage = ({navigation, route}) =>
     const verifySpellcaster = () =>
     {
       if (classes === "Fighter" || classes === "Monk" || classes === "Barbarian") {setIsSpellcaster(false)}
-      else {isSpellcaster(true)}
+      else {setIsSpellcaster(true)}
     }
     const calculateScoreMod = (score) =>
     {
@@ -112,6 +113,23 @@ export default SpellPage = ({navigation, route}) =>
         <Text>Cantrips: __/{calculateNumOfCantrips()}</Text>
       )
     }
+    const renderAll = () =>
+  {
+    if (isSpellcaster)
+    {
+    return(      
+    <View>
+    {renderCantrips()}
+    {renderSpells()}
+    <Text>Chosen Class: {classes}</Text>
+    <Text>Prepared Spells:</Text>
+    </View>  )
+    }
+    else 
+    {
+      return(<Text style={styles.textStyle}>No Spells currently available</Text>)
+    }
+  }
     const renderSpells = () =>
     {
       const numOfSpellsKnown = () =>
@@ -168,15 +186,17 @@ export default SpellPage = ({navigation, route}) =>
       </View>
       )
       }
+      else
+      {
+        // return(<Text>No Spells Available</Text>)
+        //Not needed any more
+      }
     }
 
   return (
     <SafeAreaView style={styles.background}>
       <ScrollView>
-        {renderCantrips()}
-        {renderSpells()}
-        <Text>Chosen Class: {classes}</Text>
-        <Text>Prepared Spells:</Text>
+        {renderAll()}
         {dropdown("Cantrips", setCantripDropdown, cantripDropdown, CANTRIPS, true)}
         {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, FIRST_LEVEL_SPELLS, true)}
         {dropdown("2nd Level Spells", setSecondLevelDropdown, secondLevelDropdown, SECOND_LEVEL_SPELLS, isSecondLevel)}
@@ -216,5 +236,10 @@ const styles = StyleSheet.create(
   {
     alignContent: 'center',
     alignItems: 'center',
-  }
+  },
+  textStyle: {
+    fontWeight: 'bold',
+    fontSize: FONTSIZE.xxlarge,
+    textAlign: 'center'
+},
 })
