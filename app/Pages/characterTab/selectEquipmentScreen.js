@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, ScrollView, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
-import { CLASS_EQUIPMENT } from "../../../constants/characterinformation/characterinfo";
+import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinformation/characterinfo";
 import SelectButton from "../../../components/buttons/selectionButton";
 import { useEffect } from "react";
 
@@ -10,12 +10,15 @@ export default SelectEquipmentPage = ({route}) =>
     const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
 
     const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes)
+    const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds)
     const equipmentA = selectedClass.equipmentA;
     const equipmentB = selectedClass.equipmentB;
     const equipmentC = selectedClass.equipmentC;
     const equipmentD = selectedClass.equipmentD;
     const equipmentE = selectedClass.equipmentE;
     const equipmentF = selectedClass.equipmentF;
+
+    const backgroundEquipment = selectedBackground.equipment;
 
     useEffect(() => 
     {
@@ -25,20 +28,13 @@ export default SelectEquipmentPage = ({route}) =>
     {
 
     }
-    // const renderEquipment = (equip) =>
-    // {
-    //     {console.log("SO FAR SO GOOD")}
-    //     return(
-    //     <FlatList
-    //         horizontal
-    //         data={equip}
-    //             renderItem={ ({item}) => {
-    //                 return( <Text>{item.equipmentA}</Text>)
-    //         }}
-        
-    //         /> )
-    // }
-    const renderEquipment = (equip) =>
+    const renderBackgroundEquipment = (equip) =>
+    {
+        {console.log("SO FAR SO GOOD")}
+        return equip.join(", ");
+
+    }
+    const renderClassEquipment = (equip) =>
         {
             if (equip)
             {
@@ -47,7 +43,7 @@ export default SelectEquipmentPage = ({route}) =>
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 >
-                {equip.map( (item) => <SelectButton key={item} disableFixedWidth={true} name={captitalize((item))}> </SelectButton> )}
+                {equip.map( (item) => <SelectButton key={item} disableFixedWidth={true} name={captitalize(removeIndefinteArticles_and(item))}> </SelectButton> )}
                 </ScrollView> )
             }    
         }
@@ -59,19 +55,21 @@ export default SelectEquipmentPage = ({route}) =>
         return (firstLetter + remainingLetters)
 
     }
-    const removeIndefinteArticles_and = (word) =>
-    {
-        if (word.includes("an "))
-        {
-            newWord = word.replace("an ", "")
+    const removeIndefinteArticles_and = (word) => {
+        let newWord = word;
+        if (newWord.includes("an ")) {
+            newWord = newWord.replace("an ", "");
         }
-        if (word.includes("a "))
-        {
-            newWord = word.replace("a ", "")
-        }        
-
-        return newWord;
-
+        if (newWord.includes("a ")) {
+            newWord = newWord.replace("a ", "");
+        }
+        if (newWord.includes("any ")) {
+            newWord = newWord.replace("any ", "");
+        } 
+        if (newWord.includes(" and ")) {
+            newWord = newWord.replace(" and ", " & "); // Optional: Replace 'and' with '&' for better visual rendering
+        }
+        return newWord.trim();
     }
 
     return (
@@ -80,17 +78,21 @@ export default SelectEquipmentPage = ({route}) =>
         <View style={styles.viewStyle}>
             <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
             {/* <Text>{equipmentA.join(", ")}</Text> */}
-            {renderEquipment(equipmentA)}
+            {renderClassEquipment(equipmentA)}
             <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
-            {renderEquipment(equipmentB)}
+            {renderClassEquipment(equipmentB)}
             <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
-            {renderEquipment(equipmentC)}
+            {renderClassEquipment(equipmentC)}
             <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
-            {renderEquipment(equipmentD)}
+            {renderClassEquipment(equipmentD)}
             <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
-            {renderEquipment(equipmentE)}
+            {renderClassEquipment(equipmentE)}
             <Text style={[styles.textStyle, {marginLeft: 10}]}>Select Item</Text>
-            {renderEquipment(equipmentF)}
+            {renderClassEquipment(equipmentF)}
+            <Text style={[styles.textStyle, {marginLeft: 10}]}>Current Equipment</Text>
+            {console.log("The selected class is: " + selectedBackground.label)}
+            <Text>{renderBackgroundEquipment(backgroundEquipment)}</Text>
+
         </View>
         </ScrollView>
         </SafeAreaView>

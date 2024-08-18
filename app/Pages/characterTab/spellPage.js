@@ -25,7 +25,6 @@ export default SpellPage = ({navigation, route}) =>
   const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
   const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
 
-
   const [isSecondLevel, setIsSecondLevel] = useState(false);
   const [isThirdLevel, setIsThirdLevel] = useState(false);
   const [isFourthLevel, setIsFourthLevel] = useState(false);
@@ -90,7 +89,6 @@ export default SpellPage = ({navigation, route}) =>
         if (level >= 7) {setIsFourthLevel(true)}  // opens 4th level spells
         if (level >= 5) {setIsThirdLevel(true)}  // opens 3rd level spells
         if (level >= 3) {setIsSecondLevel(true)}  // opens 2rd level spells
-
           
       }
       else if (classes === "Paladin" || classes === "Ranger")
