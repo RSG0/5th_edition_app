@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinformation/characterinfo";
 import SelectButton from "../../../components/buttons/selectionButton";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default SelectEquipmentPage = ({route}) =>
 {
@@ -11,13 +11,16 @@ export default SelectEquipmentPage = ({route}) =>
 
     const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes)
     const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds)
-    const equipmentA = selectedClass.equipmentA;
-    const equipmentB = selectedClass.equipmentB;
-    const equipmentC = selectedClass.equipmentC;
-    const equipmentD = selectedClass.equipmentD;
-    const equipmentE = selectedClass.equipmentE;
-    const equipmentF = selectedClass.equipmentF;
-
+    const equipmentOptions =
+    [    
+    selectedClass.equipmentA,
+    selectedClass.equipmentB,
+    selectedClass.equipmentC,
+    selectedClass.equipmentD,
+    selectedClass.equipmentE,
+    selectedClass.equipmentF,
+    ]
+    
     const [selectEquipment, setSelectEquipment] = useState([])
 
     const backgroundEquipment = selectedBackground.equipment;
@@ -26,33 +29,38 @@ export default SelectEquipmentPage = ({route}) =>
     {
 
     }, [classes])
-    const handleEquipment = (equip) =>
+    const handleEquipment = ((equip) =>
     {
-        console.log(selectEquipment);
         setSelectEquipment((prevEquipment) => 
         {
-            if (prevEquipment.includes(equip))  // if the skill is already selected remove it from the array
+            if (prevEquipment.includes(equip)) {return prevEquipment.filter(item => item !== equip);}// Remove the selected item if it was already selected
+            else if (prevEquipment.length < 1) // 
             {
-                return prevEquipment.filter((s) => s !== equip)
-            }
-            else if (prevEquipment.length < 1)
-            {
-                return [...prevEquipment, equip]
+                return [...prevEquipment, equip] // if the selected item is less than the max than add it to the array
             }
             else
             {
                 return[...prevEquipment.slice(1), equip]
             }
-        });
-    }
+        })
+    })
     const renderBackgroundEquipment = (equip) =>
     {
         // {console.log("SO FAR SO GOOD")}
         return equip.join(", ");
 
     }
+    const renderCurrentEquipment = () =>
+    {
+        return(
+        <>
+        {renderBackgroundEquipment()}
+        </>
+        )
+    }
     const renderClassEquipment = (equip) =>
         {
+            console.log(selectEquipment);
             if (equip)
             {
             return(
@@ -105,12 +113,7 @@ export default SelectEquipmentPage = ({route}) =>
         <ScrollView>
         <View style={styles.viewStyle}>
 
-            {renderClassEquipment(equipmentA)}
-            {renderClassEquipment(equipmentB)}
-            {renderClassEquipment(equipmentC)}
-            {renderClassEquipment(equipmentD)}
-            {renderClassEquipment(equipmentE)}
-            {renderClassEquipment(equipmentF)}
+            {equipmentOptions.map(renderClassEquipment)}
             {console.log("The selected background is: " + selectedBackground.label)}
             <Text>{renderBackgroundEquipment(backgroundEquipment)}</Text>
 
