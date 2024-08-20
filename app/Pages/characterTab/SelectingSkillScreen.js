@@ -32,16 +32,16 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     {
         setSelectSkills(prevSkills => { 
         // remove redundant skills that conflict with background
-        if (prevSkills.includes(skill))  // if the skill is already included remove it from the array
+        if (prevSkills.includes(skill))  // if the skill is already selected remove it from the array
         {
             return prevSkills.filter((s) => s !== skill)
         }
-        else if (prevSkills.length < checkForSkills(classes)) // if the skill is less than the add it to the array
+        else if (prevSkills.length < checkForSkills(classes)) // if the skill is less than the max than add it to the array
         {
             return  [...prevSkills, skill] 
 
         }
-        else
+        else // if the skills selected are more than the max remove the oldest skill in the array
         {
             console.log("More than accepted paramater")
             return [...prevSkills.slice(1), skill]
@@ -51,11 +51,12 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     }
     function displayClassSkills(selectedClass, selectedBackground) 
     { 
-        const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass);
-        const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground)
-        const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s))
+        const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass); // finds the chosen class
+        const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground) //finds the chosen background
+        const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s)) //removes all skills that are in BOTH CLASS_SKILLS and backgroundSkills
 
-        if (filterSkills) {
+        console.log(selectSkills);
+        if (filterSkills) { // if the filterSkills array contains something
             return filterSkills.map((skill, index) => (
                 <SkillsButton key={index} name={skill} disableFixedWidth={false} isSelected={selectSkills.includes(skill)} onSelectionPress={handleSkills}></SkillsButton>
             ));
@@ -65,7 +66,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     }
     function displayBackgroundSkills(selectedBackground) {
         const backgroundSkills = BACKGROUNDS.find(skill => skill.label === selectedBackground);
-        if (backgroundSkills) {
+        if (backgroundSkills) { // if backgroundSkills contain some value than
             return backgroundSkills.skillProficiencies.map((skill, index) => (
                 <Text key={index}>{skill}, </Text>
             ));

@@ -31,7 +31,11 @@ export default SelectEquipmentPage = ({route}) =>
         console.log(selectEquipment);
         setSelectEquipment((prevEquipment) => 
         {
-            if (prevEquipment.length < 1)
+            if (prevEquipment.includes(equip))  // if the skill is already selected remove it from the array
+            {
+                return prevEquipment.filter((s) => s !== equip)
+            }
+            else if (prevEquipment.length < 1)
             {
                 return [...prevEquipment, equip]
             }
