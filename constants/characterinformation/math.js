@@ -29,3 +29,8 @@ export const averageMaxHp = (hitDice, level, conMod) => //hitDice is MAX
         else {return ((hitDice + (conMod)) + (level - 1) * (averageHitDice(hitDice) +conMod) )}
         // (8 + 5) * 5 + (19 * 5)
 }
+//CONSTS TO BE IMPLEMENTED
+// calculateProficiencyBonus
+// calculateSpellDC
+// calculateSpellAttackBonus
+// calculateWeaponAttackBonus
