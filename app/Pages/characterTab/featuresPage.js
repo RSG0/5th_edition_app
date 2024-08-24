@@ -22,6 +22,7 @@ export default FeaturesPage = () =>
                 <Text style={styles.textStyle}>{borderName}</Text>
                 <TextInput 
                     placeholder="enter text here...  (optional)"
+                    // placeholderStyle={{backg}}
                     style={styles.textInput} 
                     value={borderInput} 
                     onChangeText={setBorderInput}
@@ -29,8 +30,7 @@ export default FeaturesPage = () =>
                     textAlignVertical="top"
                     scrollEnabled={false}
                     // onScroll={false}
-                >
-                </TextInput>
+                />
             </View>
         )
     }
@@ -46,6 +46,8 @@ export default FeaturesPage = () =>
 
             {/* <Text style={styles.textStyle}>{personalityTraits}</Text> */}
         </View>
+        <View style={{paddingBottom: 220}} />
+
         </ScrollView>
         </SafeAreaView>
     );
@@ -76,15 +78,17 @@ const styles = StyleSheet.create(
     },
     textInput: {
         width: "100%",
+        fontStyle: 'italic',
         flex: 1,
         padding: 10,
         // backgroundColor: 'red',
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.medium,
         flexWrap: 'wrapf'
     },
     textStyle: {
         fontWeight: 'bold',
         fontSize: FONTSIZE.xlarge,
+        textDecorationLine: 'underline',
         textAlign: 'center'
     },
     square: {
