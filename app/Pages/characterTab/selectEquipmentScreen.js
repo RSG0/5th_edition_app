@@ -1,69 +1,52 @@
-import { View, StyleSheet, Text, ScrollView, FlatList } from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinformation/characterinfo";
 import SelectButton from "../../../components/buttons/selectionButton";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export default SelectEquipmentPage = ({route}) =>
-{
+export default SelectEquipmentPage = ({route}) => {
     const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
 
-    const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes)
-    const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds)
-    const equipmentOptions =
-    [    
-    selectedClass.equipmentA,
-    selectedClass.equipmentB,
-    selectedClass.equipmentC,
-    selectedClass.equipmentD,
-    selectedClass.equipmentE,
-    selectedClass.equipmentF,
-    ]
-    
-    const [selectEquipment, setSelectEquipment] = useState([])
+    const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes);
+    const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds);
+
+    const equipmentOptions = [
+        selectedClass.equipmentA,
+        selectedClass.equipmentB,
+        selectedClass.equipmentC,
+        selectedClass.equipmentD,
+        selectedClass.equipmentE,
+        selectedClass.equipmentF,
+    ];
+
+    const [selectedEquipments, setSelectedEquipments] = useState(Array(equipmentOptions.length).fill(null));
 
     const backgroundEquipment = selectedBackground.equipment;
 
-    useEffect(() => 
-    {
+    useEffect(() => {
+        // Any effect to run when the class changes
+    }, [classes]);
 
-    }, [classes])
-    const handleEquipment = ((equip) =>
-    {
-        setSelectEquipment((prevEquipment) => 
-        {
-            if (prevEquipment.includes(equip)) {return prevEquipment.filter(item => item !== equip);}// Remove the selected item if it was already selected
-            else if (prevEquipment.length < 1) // 
+    const handleEquipment = (equip, index) => {
+        setSelectedEquipments((prevSelected) => {
+            const updatedSelection = [...prevSelected];
+            if (updatedSelection[index] === equip ) // if the icon selected is already selected
             {
-                return [...prevEquipment, equip] // if the selected item is less than the max than add it to the array
+                updatedSelection[index] = null; // deselect it ()
             }
             else
             {
-                return[...prevEquipment.slice(1), equip]
+                updatedSelection[index] = equip; // else select it
             }
-        })
-    })
-    const renderBackgroundEquipment = (equip) =>
-    {
-        // {console.log("SO FAR SO GOOD")}
-        return equip.join(", ");
+            // updatedSelection[index] = updatedSelection[index] === equip ? null : equip; //Ternary Operator
+            return updatedSelection;
+        });
+    };
 
-    }
-    const renderCurrentEquipment = () =>
-    {
-        return(
-        <>
-        {renderBackgroundEquipment()}
-        </>
-        )
-    }
-    const renderClassEquipment = (equip) =>
-        {
-            console.log(selectEquipment);
-            if (equip)
-            {
-            return(
+    const renderClassEquipment = (equip, index) => {
+        if (equip) {
+            return (
                 <>
                     <Text style={[styles.textStyle, { marginLeft: 10 }]}>Select 1 Item</Text>
                     <ScrollView
@@ -74,23 +57,23 @@ export default SelectEquipmentPage = ({route}) =>
                             <SelectButton 
                                 key={item} 
                                 disableFixedWidth={true} 
-                                onSelectionPress={() => handleEquipment(item)} 
-                                isSelected={selectEquipment.includes(item)} 
+                                onSelectionPress={() => handleEquipment(item, index)} 
+                                isSelected={selectedEquipments[index] === item} 
                                 name={captitalize(removeIndefinteArticles_and(item))} 
                             />
                         ))}
                     </ScrollView>
-                </>)
-            }    
+                </>
+            );
         }
-    const captitalize = (word) =>
-    {
+    };
+
+    const captitalize = (word) => {
         const firstLetter = word.charAt(0).toUpperCase();
         const remainingLetters = word.slice(1);
+        return (firstLetter + remainingLetters);
+    };
 
-        return (firstLetter + remainingLetters)
-
-    }
     const removeIndefinteArticles_and = (word) => {
         let newWord = word;
         if (newWord.includes("an ")) {
@@ -106,27 +89,36 @@ export default SelectEquipmentPage = ({route}) =>
             newWord = newWord.replace(" and ", " & "); // Optional: Replace 'and' with '&' for better visual rendering
         }
         return newWord.trim();
+    };
+
+    const renderBackgroundEquipment = (equip) => {
+        return equip.join(", ");
+    };
+
+    const renderEquipment = () => 
+    {
+        return backgroundEquipment.join(", ") //+ ", " + selectedEquipments.join(", ")
     }
 
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
-        <ScrollView>
-        <View style={styles.viewStyle}>
-
-            {equipmentOptions.map(renderClassEquipment)}
-            {console.log("The selected background is: " + selectedBackground.label)}
-            <Text>{renderBackgroundEquipment(backgroundEquipment)}</Text>
-
-        </View>
-        </ScrollView>
+            <ScrollView>
+                <View style={styles.viewStyle}>
+                    {equipmentOptions.map((equip, index) => renderClassEquipment(equip, index))}
+                    <Text style={styles.textStyle}>Background Equipment</Text>
+                    <Text>{renderEquipment()}</Text>
+                    {console.log(selectedEquipments)}
+                    <View style={{paddingBottom: 30}}/>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
-const styles = StyleSheet.create(
-{
-    viewStyle: 
-    {
+
+const styles = StyleSheet.create({
+    viewStyle: {
         margin: 10,
+        padding: 10,
         backgroundColor: '#acacac',
         borderRadius: 20,
         display: 'flex',
@@ -139,6 +131,4 @@ const styles = StyleSheet.create(
         fontSize: FONTSIZE.xlarge,
         textAlign: 'center'
     },
-
-}
-)
+});
