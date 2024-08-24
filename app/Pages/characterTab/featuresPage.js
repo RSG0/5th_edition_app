@@ -1,7 +1,9 @@
-import { View, StyleSheet, Text, ScrollView, TextInput } from "react-native";
+import { View, StyleSheet, Text, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { useEffect, useState } from "react";
+import * as ImagePicker from 'expo-image-picker'
+import { ImagePickerIOS } from "react-native";
 
 export default FeaturesPage = () =>
 {
@@ -9,21 +11,41 @@ export default FeaturesPage = () =>
     const [bonds, setBonds] = useState("")
     const [ideals, setIdeals] = useState("")
     const [flaw, setFlaw] = useState("")
+    const [alliesAndOrgs, setAlliesAndOrgs] = useState("")
+    const [addtitionalFeatures, setAdditionalFeatures] = useState("")
+    const [backstory, setBackstory] = useState("")
+
+    const [image, setImage] = useState('')
 
     useEffect(() =>
     {
-        console.log(personalityTraits)
-    }, [personalityTraits])
 
+        
+    }, [])
+
+    const handleImagePickerPress = async() =>
+    {
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [1,1],
+            quality: 1
+        })
+        if (!result.canceled)
+        {
+            setImage(result.assets[0].uri)
+        }
+    }
     const borderBubble = (borderName, borderInput, setBorderInput) =>
     {
         return(
             <View style={styles.textBorder}>
                 <Text style={styles.textStyle}>{borderName}</Text>
-                <TextInput 
+                <TextInput
+                    // onChange={txt => this.setState({ enteredText: txt })} fontStyle={this.state.enteredText.length == 0 ? 'italic' : 'normal'}
                     placeholder="enter text here...  (optional)"
                     // placeholderStyle={{backg}}
-                    style={styles.textInput} 
+                    style={[styles.textInput, {fontStyle: borderInput.length === 0 ? 'italic': 'normal' }]} 
                     value={borderInput} 
                     onChangeText={setBorderInput}
                     multiline={true}
@@ -38,11 +60,17 @@ export default FeaturesPage = () =>
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.background}>
-            <View style={styles.square}/>
+            <TouchableOpacity style={styles.square} onPress={handleImagePickerPress}>
+                <Text style={styles.imageText} >press image here ...</Text>
+            </TouchableOpacity>
             {borderBubble("Personality Traits", personalityTraits, setPersonalityTraits)}
             {borderBubble("Bonds", bonds, setBonds)}
             {borderBubble("Ideals", ideals, setIdeals)}
             {borderBubble("Flaw", flaw, setFlaw)}
+            {borderBubble("Allies and Organizations", alliesAndOrgs, setAlliesAndOrgs)}
+            {borderBubble("Additional Features and Traits", addtitionalFeatures, setAdditionalFeatures)}
+            {borderBubble("Character Backstory", backstory, setBackstory)}
+
 
             {/* <Text style={styles.textStyle}>{personalityTraits}</Text> */}
         </View>
@@ -54,7 +82,7 @@ export default FeaturesPage = () =>
 }
 const styles = StyleSheet.create(
 {
-    const: squareSize = 130,
+    const: squareSize = 150,
 
     background: {        
         backgroundColor: '#acacac',
@@ -68,7 +96,7 @@ const styles = StyleSheet.create(
     },
     textBorder: {
         width: "100%",
-        minHeight: 100,
+        minHeight: 120,
         padding: 10,
         backgroundColor: 'white',
         borderRadius: 20,
@@ -96,7 +124,19 @@ const styles = StyleSheet.create(
         height: squareSize,
         backgroundColor: 'white',
         borderRadius: 20,
-        marginBottom: 20
+        marginBottom: 20,
+
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
     },
+    imageText: {
+        width: 80,
+        fontStyle: 'italic',
+        color: 'grey',
+        alignItems: 'center',
+        textAlign: 'center',
+    }
 }
 )
