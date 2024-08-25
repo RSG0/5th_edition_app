@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import NewCharacterButton from "../../../components/buttons/newCharacterButton";
 
-export default CharacterPage = () =>
+export default characterPage = () =>
 {
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
