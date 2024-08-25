@@ -75,7 +75,7 @@ function TabNavigator() {
 function StackNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Create Character" // Should be Create Character
+      initialRouteName="Character Selection" // Should be Create Character
       screenOptions={{
         headerStyle: {
           backgroundColor: COLORS.mainColor,
@@ -88,7 +88,8 @@ function StackNavigator() {
     >
       {/**Feature Page needs to be switched with CreateCharacter*/}
       {/* <Stack.Screen name="View a Character" component={characterPage}/> */}
-      <Stack.Screen name="Create Character" component={CharacterPage} /> 
+      <Stack.Screen name="Character Selection" component={CharacterPage} /> 
+      <Stack.Screen name="Create Character" component={CreateCharacter} /> 
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />

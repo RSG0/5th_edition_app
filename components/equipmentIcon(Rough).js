@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         height: 65,
         borderRadius: 10,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     square:{
         width: 25,
