@@ -1,5 +1,7 @@
-import { View, StyleSheet, Text, ScrollView, TextInput, TouchableOpacity, Platform, Alert } from "react-native";
+import { View, StyleSheet, Text, ScrollView, TextInput, TouchableOpacity, Platform, Alert, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from 'react-native-vector-icons/FontAwesome6';
+
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
@@ -16,12 +18,16 @@ export default FeaturesPage = () =>
 
     const [image, setImage] = useState('')
 
+    const iconSize = 30
+    const imageSquareSize = 150
+
+
     useEffect(() =>
     {
         (async() => {
             if (Platform.OS === 'ios')
                 {
-                    console.log("Working...")
+                    console.log(image)
                     const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
                     if (status !== "granted")
                     {
@@ -33,7 +39,7 @@ export default FeaturesPage = () =>
 
     }, [])
 
-    const handleImagePickerPress = async() =>
+    const handleImagePickerPress_Camera = async() =>
     {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -46,6 +52,19 @@ export default FeaturesPage = () =>
             setImage(result.assets[0].uri)
         }
     }
+    const handleImagePickerPress_Gallery = async() =>
+        {
+            let result = await ImagePicker.launchCameraAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                allowsEditing: true,
+                aspect: [1,1],
+                quality: 1
+            })
+            if (!result.canceled)
+            {
+                setImage(result.assets[0].uri)
+            }
+        }
     const borderBubble = (borderName, borderInput, setBorderInput) =>
     {
         return(
@@ -70,17 +89,30 @@ export default FeaturesPage = () =>
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.background}>
+            <View style={{marginTop: 10}}/>
             <View style={styles.imageContainer}>
-                <TouchableOpacity style={styles.imageSquare} onPress={handleImagePickerPress}>
-                    <Text style={styles.imageText} >press image here ...</Text>
-                </TouchableOpacity>
-                <View style={{margin: 20}} />
+                    <View style={styles.imageSquare}>
+                                {image ? (
+                                    <Image source={{ uri: image }} style={{ width: imageSquareSize, height: imageSquareSize, borderRadius: 20 }} />
+                                ) : (
+                                    <Text style={styles.imageText}>Import image here ...</Text>
+                                )}
+                    </View>
+                <View style={{margin: 15}} />
                     <View style={styles.buttonContainer}>
                         <View style={styles.iconContainer}>
-                            <TouchableOpacity style={styles.iconSquare}></TouchableOpacity>
-                            <TouchableOpacity style={styles.iconSquare}></TouchableOpacity>
+                            <TouchableOpacity style={styles.iconSquare} onPress={handleImagePickerPress_Camera} >
+                                <Icon name="image" size={iconSize} solid={true} color={"white"}/>
+                            </TouchableOpacity>
+                            <View style={{}}/>
+                            <TouchableOpacity style={styles.iconSquare} onPress={handleImagePickerPress_Gallery}>
+                            <Icon name="camera" size={iconSize} solid={false} color={"white"}/>
+
+                            </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={styles.resetButton}></TouchableOpacity>
+                        <TouchableOpacity style={styles.resetButton} onPress={() => setImage(null)}>
+                            <Text style={styles.resetButtonText}>RESET</Text>
+                        </TouchableOpacity>
                     </View>
             </View>
             {borderBubble("Personality Traits", personalityTraits, setPersonalityTraits)}
@@ -102,7 +134,7 @@ export default FeaturesPage = () =>
 }
 
 const imageSquareSize = 150
-const iconSquareSize = 40
+const iconSquareSize = 50
 
 const styles = StyleSheet.create(
 {
@@ -157,6 +189,8 @@ const styles = StyleSheet.create(
     iconSquare: {
         width: iconSquareSize,
         height: iconSquareSize,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#9D9D9D', //gray
         margin: 10,
         borderRadius: 10,
@@ -176,21 +210,30 @@ const styles = StyleSheet.create(
     imageText: {
         width: 80,
         fontStyle: 'italic',
-        color: 'grey',
+        color: 'white',
         alignItems: 'center',
         textAlign: 'center',
     },
     buttonContainer: {
+        justifyContent: 'center',
         flexDirection: 'column',
         alignContent: 'center',
         alignSelf: 'center'
     },
     resetButton:{
-        width: 90,
+        width: 100,
         height: 40,
         borderRadius: 30,
+
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#9D9D9D', //gray
-        marginLeft: 15
-    }
+        marginLeft: 20
+    },
+    resetButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
 }
 )
