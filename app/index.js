@@ -4,6 +4,7 @@ import SelectingSkillsScreen from "./Pages/characterTab/SelectingSkillScreen";
 import CreateCharacter from "./Pages/characterTab/CreateCharacterPage";
 import SubclassesPage from './Pages/characterTab/subclassesPage';
 import HitPoint from './Pages/characterTab/hitPointScreen';
+import FeaturesPage from './Pages/characterTab/featuresPage';
 
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
 import SpellPage from './Pages/characterTab/spellPage';
@@ -84,8 +85,9 @@ function StackNavigator() {
         headerBackVisible: false,
       }}
     >
+      {/**Feature Page needs to be switched with CreateCharacter*/}
       {/* <Stack.Screen name="View a Character" component={characterPage}/> */}
-      <Stack.Screen name="Create Character" component={CreateCharacter} />
+      <Stack.Screen name="Create Character" component={FeaturesPage} /> 
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
