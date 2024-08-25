@@ -87,7 +87,7 @@ function StackNavigator() {
     >
       {/**Feature Page needs to be switched with CreateCharacter*/}
       {/* <Stack.Screen name="View a Character" component={characterPage}/> */}
-      <Stack.Screen name="Create Character" component={FeaturesPage} /> 
+      <Stack.Screen name="Create Character" component={CreateCharacter} /> 
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
