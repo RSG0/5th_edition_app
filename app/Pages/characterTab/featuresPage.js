@@ -106,8 +106,7 @@ export default FeaturesPage = () =>
                             </TouchableOpacity>
                             <View style={{}}/>
                             <TouchableOpacity style={styles.iconSquare} onPress={handleImagePickerPress_Gallery}>
-                            <Icon name="camera" size={iconSize} solid={false} color={"white"}/>
-
+                                <Icon name="camera" size={iconSize} solid={false} color={"white"}/>
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={styles.resetButton} onPress={() => setImage(null)}>
