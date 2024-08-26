@@ -1,16 +1,25 @@
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
+import HitDiceIcon from "../../../components/characterComponents/hitDiceIcon";
+import InitativeIcon from "../../../components/characterComponents/initativeIcon";
+import ArmorClassIcon from "../../../components/characterComponents/armorClassIcon";
+import HitPointIcon from "../../../components/characterComponents/hitPointIcon";
+import AbilityScoreIcon from "../../../components/characterComponents/abilityScoreIcon";
 
 export default characterPage1 = () =>
 {
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
-        {/* <ScrollView> */}
-        <View style={styles.viewStyle}>
-            <Text style={styles.textStyle}>This is the Setting Screen</Text>
-        </View>
-        {/* </ScrollView> */}
+        <ScrollView>
+        {/* <View style={styles.viewStyle}>
+        </View> */}
+        {/* <HitDiceIcon/>       
+        <InitativeIcon/>
+        <HitPointIcon/>
+        <ArmorClassIcon/> */}
+        <AbilityScoreIcon/>
+        </ScrollView>
         </SafeAreaView>
     );
 }
@@ -22,7 +31,8 @@ const styles = StyleSheet.create(
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flex: 1
+        flex: 1,
+
     },
     textStyle: {
         fontWeight: 'bold',

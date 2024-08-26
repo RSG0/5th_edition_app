@@ -18,4 +18,5 @@ const FONTSIZE = {
     xlarge: 20, //Used for Character Names in Ability Score Page
     xxlarge: 32, //Used for Ability SCore Text in Ability Score Page
 };
+export const characterBorderWidth = 5
 export {COLORS, FONT, FONTSIZE};
