@@ -6,6 +6,7 @@ import InitativeIcon from "../../../components/characterComponents/initativeIcon
 import ArmorClassIcon from "../../../components/characterComponents/armorClassIcon";
 import HitPointIcon from "../../../components/characterComponents/hitPointIcon";
 import AbilityScoreIcon from "../../../components/characterComponents/abilityScoreIcon";
+import ProfBonusAndSpeedIcon from "../../../components/characterComponents/profBonusAndSpeedIcon";
 
 export default characterPage1 = () =>
 {
@@ -17,8 +18,9 @@ export default characterPage1 = () =>
         {/* <HitDiceIcon/>       
         <InitativeIcon/>
         <HitPointIcon/>
-        <ArmorClassIcon/> */}
-        <AbilityScoreIcon/>
+        <ArmorClassIcon/>
+        <AbilityScoreIcon/> */}
+        <ProfBonusAndSpeedIcon/>
         </ScrollView>
         </SafeAreaView>
     );

@@ -7,7 +7,7 @@ export default AbilityScoreIcon = ({abilityName,score,mod}) =>
         <>
         <View style={styles.viewStyle}>
             <Text style={styles.titleTextStyle} >
-                STRENGTH{} 
+                STRENGTH{} {/**Need to lower fontSize for Constiution */}
             </Text>
             <Text style={styles.textStyle}>+2</Text>
             {/* <Text style={styles.textStyle } >0</Text> */}
