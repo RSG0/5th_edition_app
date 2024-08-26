@@ -8,7 +8,7 @@ import HitPointIcon from "../../../components/characterComponents/hitPointIcon";
 import AbilityScoreIcon from "../../../components/characterComponents/abilityScoreIcon";
 import ProfBonusAndSpeedIcon from "../../../components/characterComponents/profBonusAndSpeedIcon";
 
-export default characterPage1 = () =>
+export default CharacterPage1 = () =>
 {
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
@@ -17,9 +17,9 @@ export default characterPage1 = () =>
         </View> */}
         {/* <HitDiceIcon/>       
         <InitativeIcon/>
-        <HitPointIcon/>
+        <HitPointIcon/> */}
         <ArmorClassIcon/>
-        <AbilityScoreIcon/> */}
+        {/* <AbilityScoreIcon/> */}
         <ProfBonusAndSpeedIcon/>
         </ScrollView>
         </SafeAreaView>
