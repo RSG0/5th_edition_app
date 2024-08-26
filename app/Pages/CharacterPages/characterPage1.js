@@ -6,7 +6,9 @@ import InitativeIcon from "../../../components/characterComponents/initativeIcon
 import ArmorClassIcon from "../../../components/characterComponents/armorClassIcon";
 import HitPointIcon from "../../../components/characterComponents/hitPointIcon";
 import AbilityScoreIcon from "../../../components/characterComponents/abilityScoreIcon";
+import SavingThrowIcon from "../../../components/characterComponents/savingThrowIcon";
 import ProfBonusAndSpeedIcon from "../../../components/characterComponents/profBonusAndSpeedIcon";
+import SensesIcon from "../../../components/characterComponents/sensesIcon";
 
 export default CharacterPage1 = () =>
 {
@@ -19,8 +21,10 @@ export default CharacterPage1 = () =>
         <InitativeIcon/>
         <HitPointIcon/> */}
         <ArmorClassIcon/>
-        {/* <AbilityScoreIcon/> */}
+        {/* <AbilityScoreIcon/>
         <ProfBonusAndSpeedIcon/>
+        <SavingThrowIcon/>
+        <SensesIcon/> */}
         </ScrollView>
         </SafeAreaView>
     );

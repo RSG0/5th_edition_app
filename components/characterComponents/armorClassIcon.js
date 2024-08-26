@@ -25,16 +25,18 @@ const styles = StyleSheet.create({
     iconContainer: {
         height: armorSize,
         width: armorSize,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     filledShield: {
         position: 'absolute',
-        bottom: 0,
-        left: 0,
+        // bottom: 0,
+        // left: 0,
     },
     acText: {
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xxlarge,
+        top: 15,
+        fontSize: FONTSIZE.xxlarge + 15,
         textAlign: 'center',
         position: 'absolute',
         alignSelf: 'center'
