@@ -9,6 +9,7 @@ import AbilityScoreIcon from "../../../components/characterComponents/abilitySco
 import SavingThrowIcon from "../../../components/characterComponents/savingThrowIcon";
 import ProfBonusAndSpeedIcon from "../../../components/characterComponents/profBonusAndSpeedIcon";
 import SensesIcon from "../../../components/characterComponents/sensesIcon";
+import MagicItemModal from "../../../components/modals/magicItemModal";
 
 export default CharacterPage1 = () =>
 {
@@ -20,11 +21,12 @@ export default CharacterPage1 = () =>
         {/* <HitDiceIcon/>       
         <InitativeIcon/>
         <HitPointIcon/> */}
-        <ArmorClassIcon/>
+        {/* <ArmorClassIcon/> */}
         {/* <AbilityScoreIcon/>
         <ProfBonusAndSpeedIcon/>
         <SavingThrowIcon/>
         <SensesIcon/> */}
+        <MagicItemModal/>
         </ScrollView>
         </SafeAreaView>
     );

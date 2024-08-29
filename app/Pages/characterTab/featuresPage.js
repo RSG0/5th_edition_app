@@ -21,6 +21,12 @@ export default FeaturesPage = () =>
     const iconSize = 30
     const imageSquareSize = 150
 
+    const checkforChange = () =>
+        {
+            // Need to add functionality and alerts
+            return true
+        }
+    
 
     useEffect(() =>
     {

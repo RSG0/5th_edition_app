@@ -5,7 +5,7 @@ import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinform
 import SelectButton from "../../../components/buttons/selectionButton";
 import { useEffect, useState } from "react";
 
-export default SelectEquipmentPage = ({route}) => {
+export default SelectEquipmentPage = ({navigation,route}) => {
     const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
 
     const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes);
@@ -43,7 +43,11 @@ export default SelectEquipmentPage = ({route}) => {
             return updatedSelection;
         });
     };
-
+    const checkforChange = () =>
+        {
+            // Need to add functionality and alerts
+            return true
+        }
     const renderClassEquipment = (equip, index) => {
         if (equip) {
             return (
@@ -109,6 +113,11 @@ export default SelectEquipmentPage = ({route}) => {
                     <Text>{renderEquipment()}</Text>
                     {console.log(selectedEquipments)}
                     <View style={{paddingBottom: 30}}/>
+                    <NextButton
+                navigation={navigation}
+                params={{name, classes, backgrounds, level, races, con, int, wis, cha}}
+                checkforChange={() => checkforChange()}
+                nextScreen={"Secondary Features"}></NextButton>
                 </View>
             </ScrollView>
         </SafeAreaView>
