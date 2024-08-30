@@ -78,6 +78,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     return (
         <SafeAreaView style={styles.viewStyle}>
         <View style={styles.viewStyle}>
+        <Text>Races: {selectedRace}</Text>
         <Text style={styles.text}>Background Skills: {displayBackgroundSkills(backgrounds)}</Text>
         {/* {console.log(checkForChange(classes))} */}
         <Text style={styles.text}>Select {checkForSkills(classes)} Skills: </Text>

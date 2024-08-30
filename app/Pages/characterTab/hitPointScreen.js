@@ -86,6 +86,8 @@ export default HitPoint = ({navigation, route}) =>
         <ScrollView showsVerticalScrollIndicator={false}>
 
         <View style={styles.background}>
+        <Text>Races: {selectedRace}</Text>
+
             <Text style={styles.title}>Current Hit Dice: {level}{selectedHitDice} </Text>
             <View style={styles.rowStyle}>
             {renderButton("Standard", true)}
@@ -100,7 +102,7 @@ export default HitPoint = ({navigation, route}) =>
             <View style={styles.bottom}></View>
             <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level, selectedRace, races, con, int, wis, cha}}
+            params={{name, classes, backgrounds, level,selectedRace, con, int, wis, cha}}
             checkforChange={() => checkforChange()}
             nextScreen={"Select Equipment"}></NextButton>
 

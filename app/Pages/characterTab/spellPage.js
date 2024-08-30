@@ -11,7 +11,7 @@ export default SpellPage = ({navigation, route}) =>
 {
 
 
-  const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params;
+  const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params;
 
   const checkForChange = () =>
   {
@@ -197,6 +197,9 @@ export default SpellPage = ({navigation, route}) =>
     <SafeAreaView style={styles.background}>
       <ScrollView>
         {renderAll()}
+        <Text>Races: {selectedRace}</Text>
+
+        {console.log(selectedRace)}
         {dropdown("Cantrips", setCantripDropdown, cantripDropdown, CANTRIPS, true)}
         {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, FIRST_LEVEL_SPELLS, true)}
         {dropdown("2nd Level Spells", setSecondLevelDropdown, secondLevelDropdown, SECOND_LEVEL_SPELLS, isSecondLevel)}
@@ -205,7 +208,7 @@ export default SpellPage = ({navigation, route}) =>
         <View style={styles.nextButton}> 
           <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level, races, con ,int, wis, cha}}
+            params={{name, classes, backgrounds, level, selectedRace, con ,int, wis, cha}}
             checkforChange={() => checkForChange()}
             nextScreen={"Hit Point"}
           />

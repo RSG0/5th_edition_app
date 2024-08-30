@@ -8,7 +8,7 @@ import NextButton from "../../../components/buttons/nextButton";
 
 export default SubclassesPage = ({navigation, route}) =>
 {
-    const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params;
+    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params;
     const [subclass, setSubclass] = useState(null);
     const [subclassSpells, setSubclassSpells] = useState(null);
     const [subclassFeatures, setSubclassFeatures] = useState(null);
@@ -130,6 +130,8 @@ export default SubclassesPage = ({navigation, route}) =>
             placeholder="---"
             maxHeight={400}
             ></Dropdown>
+            <Text>Races: {selectedRace}</Text>
+
             <Text>This are the subclasses: {subclass}</Text>
             <Text>Bonus Spells</Text>            
             <Text>{handleSpells(subclassSpells)}</Text>
@@ -138,7 +140,7 @@ export default SubclassesPage = ({navigation, route}) =>
             <Text>{handleFeatures(subclassFeatures)}</Text>
             <NextButton 
                 navigation={navigation}
-                params={{name, classes, backgrounds, subclass, level, races, con,int, wis, cha}}
+                params={{name, classes, backgrounds, subclass, level, selectedRace, con,int, wis, cha}}
                 checkforChange={(item) => checkForChange(item)}
                 nextScreen={"Spell Page"}
                 ></NextButton>

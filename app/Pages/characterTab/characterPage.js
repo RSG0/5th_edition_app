@@ -8,7 +8,7 @@ import NewCharacterButton from "../../../components/buttons/newCharacterButton";
 
 export default CharacterPage = ({navigation, route}) =>
 {
-    const { name, classes, level, races, image } = route.params || {};
+    const { name, classes, level, selectedRace, image } = route.params || {};
 
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
@@ -23,7 +23,7 @@ export default CharacterPage = ({navigation, route}) =>
                 name={name}
                 classes={classes}
                 level={level}
-                race={races}/>)}
+                race={selectedRace}/>)}
 
 
 

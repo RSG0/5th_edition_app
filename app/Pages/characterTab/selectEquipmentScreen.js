@@ -6,7 +6,7 @@ import SelectButton from "../../../components/buttons/selectionButton";
 import { useEffect, useState } from "react";
 
 export default SelectEquipmentPage = ({navigation,route}) => {
-    const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
+    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params; 
 
     const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes);
     const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds);
@@ -115,7 +115,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
                     <View style={{paddingBottom: 30}}/>
                     <NextButton
                 navigation={navigation}
-                params={{name, classes, backgrounds, level, races, con, int, wis, cha}}
+                params={{name, classes, backgrounds, level, selectedRace, con, int, wis, cha}}
                 checkforChange={() => checkforChange()}
                 nextScreen={"Secondary Features"}></NextButton>
                 </View>

@@ -113,6 +113,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         <SafeAreaView style={styles.viewStyle}>
         <Text>Name: {name}</Text>
         <Text>Class: {classes}</Text>
+        <Text>Races: {selectedRace}</Text>
         <Text>Backgrounds: {backgrounds}</Text>
         <Text>Level: {level}</Text>
 
