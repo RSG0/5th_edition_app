@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
 
-export default NewCharacterIcon = () =>
+export default NewCharacterIcon = ({name, classes, race}) =>
 {
     const moreButton = 
     <TouchableOpacity style={styles.moreButton}>
@@ -16,7 +16,7 @@ export default NewCharacterIcon = () =>
 
                 <View style={[styles.viewStyle ,{flexDirection:'column', maxWidth: "80%"}]}>
 
-                    <Text style={styles.textStyle}>Alphonse Legguro (Elric) {"\n"} Cleric 5 Fighter 3 | Warforged </Text>
+                    <Text style={styles.textStyle}>{name} {"\n"} {classes} {level} | {race} </Text>
                     {/* <Text style={styles.textStyle}>Cleric 5 | Warforged</Text> */}
                     {/* <Text style={styles.textStyle}>Cleric 5 Fighter 3 | Warforged</Text> */}
 

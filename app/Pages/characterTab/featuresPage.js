@@ -6,8 +6,10 @@ import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
 
-export default FeaturesPage = () =>
+export default FeaturesPage = ({route, navigation}) =>
 {
+    const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
+
     const [personalityTraits, setPersonalityTraits] = useState("")
     const [bonds, setBonds] = useState("")
     const [ideals, setIdeals] = useState("")
@@ -127,6 +129,12 @@ export default FeaturesPage = () =>
             {borderBubble("Allies and Organizations", alliesAndOrgs, setAlliesAndOrgs)}
             {borderBubble("Additional Features and Traits", addtitionalFeatures, setAdditionalFeatures)}
             {borderBubble("Character Backstory", backstory, setBackstory)}
+
+            <NextButton
+                navigation={navigation}
+                params={{name, classes, backgrounds, level, races, con, int, wis, cha, image}}
+                checkforChange={() => checkforChange()}
+                nextScreen={"Character Page"}></NextButton>
 
 
             {/* <Text style={styles.textStyle}>{personalityTraits}</Text> */}
