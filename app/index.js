@@ -100,7 +100,7 @@ function StackNavigator() {
       <Stack.Screen name="Hit Point" component={HitPoint} />
       <Stack.Screen name="Select Equipment" component={selectEquipmentScreen} />
       <Stack.Screen name="Secondary Features" component={featuresPage} />
-      <Stack.Screen name="Character Page 1" component={CharacterPage1} />
+      {/* <Stack.Screen name="Character Page 1" component={CharacterPage1} /> */}
 
 
     </Stack.Navigator>

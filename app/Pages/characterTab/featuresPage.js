@@ -8,7 +8,7 @@ import * as ImagePicker from 'expo-image-picker'
 
 export default FeaturesPage = ({route, navigation}) =>
 {
-    const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
+    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params; 
 
     const [personalityTraits, setPersonalityTraits] = useState("")
     const [bonds, setBonds] = useState("")
@@ -132,9 +132,9 @@ export default FeaturesPage = ({route, navigation}) =>
 
             <NextButton
                 navigation={navigation}
-                params={{name, classes, backgrounds, level, races, con, int, wis, cha, image}}
+                params={{name, classes, backgrounds, level, selectedRace, con, int, wis, cha, image}}
                 checkforChange={() => checkforChange()}
-                nextScreen={"Character Page"}></NextButton>
+                nextScreen={"Character Selection"}></NextButton>
 
 
             {/* <Text style={styles.textStyle}>{personalityTraits}</Text> */}

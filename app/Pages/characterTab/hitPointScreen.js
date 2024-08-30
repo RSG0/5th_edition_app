@@ -8,7 +8,7 @@ import NextButton from "../../../components/buttons/nextButton";
 
 export default HitPoint = ({navigation, route}) =>
 {
-    const {name, classes, backgrounds, level, races, con, int, wis, cha} = route.params; 
+    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params; 
     //REMINDER: level IS A STRING
 
     const selectedClass = CLASSES.find(cls => cls.label === classes)
@@ -100,7 +100,7 @@ export default HitPoint = ({navigation, route}) =>
             <View style={styles.bottom}></View>
             <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level, races, con, int, wis, cha}}
+            params={{name, classes, backgrounds, level, selectedRace, races, con, int, wis, cha}}
             checkforChange={() => checkforChange()}
             nextScreen={"Select Equipment"}></NextButton>
 

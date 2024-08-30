@@ -2,19 +2,29 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-nati
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 
-import NewCharacterIcon from "../../../components/newCharacterIcon(Rough)";
+import NewCharacterIcon_Rough from "../../../components/newCharacterIcon(Rough)";
+import NewCharacterIcon from "../../../components/newCharacterIcon";
 import NewCharacterButton from "../../../components/buttons/newCharacterButton";
 
-export default CharacterPage = ({navigation}) =>
+export default CharacterPage = ({navigation, route}) =>
 {
+    const { name, classes, level, races, image } = route.params || {};
+
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.viewStyle}>
             {/* <Text style={styles.textStyle}>This is the Character Screen</Text> */}
-            <NewCharacterIcon/>
-            <NewCharacterIcon/>
-            <NewCharacterIcon/>
+            <NewCharacterIcon_Rough/>
+            <NewCharacterIcon_Rough/>
+            <NewCharacterIcon_Rough/>
+            {name && (<NewCharacterIcon
+                image={image}
+                name={name}
+                classes={classes}
+                level={level}
+                race={races}/>)}
+
 
 
         </View>

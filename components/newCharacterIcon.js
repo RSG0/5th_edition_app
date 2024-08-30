@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
 
-export default NewCharacterIcon = ({name, classes, race}) =>
+export default NewCharacterIcon = ({name, classes, race, image, level}) =>
 {
     const moreButton = 
     <TouchableOpacity style={styles.moreButton}>
@@ -12,19 +12,23 @@ export default NewCharacterIcon = ({name, classes, race}) =>
 
             <TouchableOpacity style={{width: 335, display:'flex', flexDirection: 'row', alignItems: 'center'}}>
             {moreButton}
-                <View style={styles.square}/>
-
-                <View style={[styles.viewStyle ,{flexDirection:'column', maxWidth: "80%"}]}>
-
-                    <Text style={styles.textStyle}>{name} {"\n"} {classes} {level} | {race} </Text>
-                    {/* <Text style={styles.textStyle}>Cleric 5 | Warforged</Text> */}
-                    {/* <Text style={styles.textStyle}>Cleric 5 Fighter 3 | Warforged</Text> */}
-
-                    {/* <Text style={{fontSize: 12, fontStyle: 'italic'}}>Armor</Text>
-                    <Text style={{fontSize: 12, marginTop: 5}}>55 lbs.</Text> */}
+                <View style={styles.square}>
+                    {image ? (
+                            <Image
+                                source={{ uri: image}}
+                                style={{ width: imageSize, height: imageSize, borderRadius: 10 }}
+                            />
+                        ) : (
+                            <Text style={styles.imagePlaceholder}>No Image</Text>
+                        )}                
                 </View>
+
+                    <View style={[styles.viewStyle ,{flexDirection:'column', maxWidth: "80%"}]}>
+
+                        <Text style={styles.textStyle}>{name} {"\n"}{race} | {classes} {level}  </Text>
+
+                    </View>
                 <View>
-                    {/* <Text style={{fontSize: 25, marginLeft: 100, textAlign: 'right', width: 100}}>7005</Text> */}
                 </View>
             </TouchableOpacity>
         </View>
