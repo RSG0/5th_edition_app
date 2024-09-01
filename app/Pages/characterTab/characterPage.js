@@ -38,7 +38,7 @@ export default CharacterPage = ({ navigation, route }) => {
     };
 
     const removeCharacter = (index) => {
-        const updatedCharacters = characters.filter((_, i) => i !== index); //_ refers to the current item
+        const updatedCharacters = characters.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
         setCharacters(updatedCharacters);
     };
 
