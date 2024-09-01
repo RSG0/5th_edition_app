@@ -57,9 +57,9 @@ export default SelectEquipmentPage = ({navigation,route}) => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     >
-                        {equip.map((item) => (
+                        {equip.map((item, i) => (
                             <SelectButton 
-                                key={item} 
+                                key={i} 
                                 disableFixedWidth={true} 
                                 onSelectionPress={() => handleEquipment(item, index)} 
                                 isSelected={selectedEquipments[index] === item} 
