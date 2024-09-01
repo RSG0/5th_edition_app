@@ -16,23 +16,67 @@ export default CharacterPage1 = () =>
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
-        {/* <View style={styles.viewStyle}>
-        </View> */}
-        {/* <HitDiceIcon/>       
-        <InitativeIcon/>
-        <HitPointIcon/> */}
-        {/* <ArmorClassIcon/> */}
-        {/* <AbilityScoreIcon/>
-        <ProfBonusAndSpeedIcon/>
-        <SavingThrowIcon/>
-        <SensesIcon/> */}
-        <MagicItemModal/>
+        {/**First Row: */}
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <HitDiceIcon/>       
+                <InitativeIcon/>
+            </View>
+            <View style={{justifyContent: 'center'}}>
+                <View style={styles.circle} />
+            </View>
+            <View>
+                <HitPointIcon/>
+                <ArmorClassIcon/>
+            </View>
+        </View>
+
+        {/**Second Row: */}
+        <View>
+            <ProfBonusAndSpeedIcon/>
+        </View>
+
+        {/**Third Row: Ability Score Rows 1-2 */}
+        <View>
+            {/**First Row: */}
+            <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+            </View>
+            {/**Second Row: */}
+        </View>
+        <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+            </View>
+        <View>
+            <Text>Saving Throws:</Text>
+            <SavingThrowIcon/>
+            <SavingThrowIcon/>
+            <SavingThrowIcon/>
+            <SavingThrowIcon/>
+            <SavingThrowIcon/>
+            <SavingThrowIcon/>
+
+        </View>
         </ScrollView>
         </SafeAreaView>
     );
 }
+const circleSize = 130;
 const styles = StyleSheet.create(
 {
+    circle:
+    {
+        margin:10,
+        backgroundColor: COLORS.mainColor,
+        width: circleSize,
+        height: circleSize,
+        borderRadius: 80,
+        borderWidth: 5
+    },
     viewStyle: {
         
         backgroundColor: COLORS.background,

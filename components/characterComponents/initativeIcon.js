@@ -19,6 +19,7 @@ const squareSize = 90
 const styles = StyleSheet.create(
 {
     viewStyle: {
+        margin: 10,
         width: squareSize,
         height: squareSize,
         backgroundColor: COLORS.mainColor,
