@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
 
-export default NewCharacterIcon = ({name, classes, race, image, level}) =>
+export default NewCharacterIcon = ({name, classes, race, image, level, removeCharacter}) =>
 {
     const moreButton = 
-    <TouchableOpacity style={styles.moreButton}>
+    <TouchableOpacity style={styles.moreButton} onPress={removeCharacter}>
         <Text style={styles.moreButtonIcon}>...</Text>
     </TouchableOpacity>
     return(

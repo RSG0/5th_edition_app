@@ -1,21 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, SafeAreaView, As } from "react-native";
+import { View, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import NewCharacterIcon from "../../../components/newCharacterIcon";
 import NewCharacterButton from "../../../components/buttons/newCharacterButton";
 
 export default CharacterPage = ({ navigation, route }) => {
-    const [characters, setCharacters] = useState([
-        // Initial characters can be added here or left empty
-    ]);
+    const [characters, setCharacters] = useState([]);
 
+    useEffect(() => {
+        load();
+    }, []);
+
+    useEffect(() => {
+        if (characters.length > 0) {
+            save();
+        }
+    }, [characters]);
+
+    const save = async () => {
+        try {
+            await AsyncStorage.setItem("Character1", JSON.stringify(characters));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const load = async () => {
+        try {
+            const charactersJSON = await AsyncStorage.getItem("Character1");
+            if (charactersJSON) {
+                setCharacters(JSON.parse(charactersJSON));
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const removeCharacter = (index) => {
+        const updatedCharacters = characters.filter((_, i) => i !== index); //_ refers to the current item
+        setCharacters(updatedCharacters);
+    };
 
     const { name, classes, level, selectedRace, image } = route.params || {};
 
     useEffect(() => {
         if (name) {
             const newCharacter = { name, classes, level, race: selectedRace, image };
-            setCharacters(prevCharacters => [...prevCharacters, newCharacter]);
+            setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
         }
     }, [name, classes, level, selectedRace, image]);
 
@@ -31,6 +63,7 @@ export default CharacterPage = ({ navigation, route }) => {
                             level={character.level}
                             race={character.race}
                             image={character.image}
+                            removeCharacter={() => removeCharacter(index)}
                         />
                     ))}
                 </View>
@@ -38,7 +71,7 @@ export default CharacterPage = ({ navigation, route }) => {
             <NewCharacterButton navigation={navigation} nextScreen={"Create Character"} />
         </SafeAreaView>
     );
-}
+};
 
 const addSize = 60;
 const styles = StyleSheet.create({
