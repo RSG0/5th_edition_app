@@ -3,23 +3,21 @@ import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 
 export default AbilityScoreIcon = ({abilityName,score,mod}) =>
 {
-    if (!abilityName && !score && !mod) //dummy values
-    {
-        abilityName = "STRENGTH";
-        score = "23"
-        mod = "+2"
+    //Display Dummy Values 
+    const displayAbilityName = abilityName || "STRENGTH";
+    const displayScore = score || "NN";
+    const displayMod = mod || "+N";
 
-    }
     return (
         <>
         <View style={styles.viewStyle}>
             <Text style={styles.titleTextStyle} >
-                {abilityName} {/**Need to lower fontSize for Constiution */}
+                {displayAbilityName} {/**Need to lower fontSize for Constiution */}
             </Text>
-            <Text style={styles.textStyle}>{mod}</Text>
+            <Text style={styles.textStyle}>{displayMod}</Text>
             {/* <Text style={styles.textStyle } >0</Text> */}
             <View style={styles.scoreBorder}>
-                <Text style={[styles.textStyle, { marginTop: 0,fontSize: 20}]}>{score}</Text>
+                <Text style={[styles.textStyle, { marginTop: 0,fontSize: 20}]}>{displayScore}</Text>
             </View>
 
         </View>
