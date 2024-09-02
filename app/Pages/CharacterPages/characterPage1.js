@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, FONTSIZE } from "../../../constants/theme";
+import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import HitDiceIcon from "../../../components/characterComponents/hitDiceIcon";
 import InitativeIcon from "../../../components/characterComponents/initativeIcon";
 import ArmorClassIcon from "../../../components/characterComponents/armorClassIcon";
@@ -13,6 +13,49 @@ import MagicItemModal from "../../../components/modals/magicItemModal";
 
 export default CharacterPage1 = () =>
 {
+    const displayAbilityScores = () =>
+    {
+        return(
+        <>
+        <View>
+            {/**First Row: */}
+            <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+            </View>
+            {/**Second Row: */}
+        </View>
+        <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+                <AbilityScoreIcon/>
+            </View>
+        <View></View>
+        </>)
+    }
+    const displaySavingThrows = () =>
+    {
+        return(
+            <>
+        <View>
+            <Text style={{marginTop: 10, fontSize: FONTSIZE.xlarge, fontWeight: 'bold', marginLeft: 20}}>Saving Throws:</Text>
+            <View style={styles.savingThrowRow}>
+                <SavingThrowIcon/>
+                <SavingThrowIcon/>
+            </View>
+            <View style={styles.savingThrowRow}>
+                <SavingThrowIcon/>
+                <SavingThrowIcon/>
+            </View>
+            <View style={styles.savingThrowRow}>
+                <SavingThrowIcon/>
+                <SavingThrowIcon/>
+            </View>
+        </View>
+        </>
+        )
+    }
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
@@ -37,30 +80,18 @@ export default CharacterPage1 = () =>
         </View>
 
         {/**Third Row: Ability Score Rows 1-2 */}
-        <View>
-            {/**First Row: */}
-            <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
-            </View>
-            {/**Second Row: */}
-        </View>
-        <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
-            </View>
-        <View>
-            <Text>Saving Throws:</Text>
-            <SavingThrowIcon/>
-            <SavingThrowIcon/>
-            <SavingThrowIcon/>
-            <SavingThrowIcon/>
-            <SavingThrowIcon/>
-            <SavingThrowIcon/>
+        {displayAbilityScores()}
+        {/**5th Row: Saving Throw Rows 1-3 */}
+        {displaySavingThrows()}
+        {/**6th Row: Senses Icon */}
+        <Text style={styles.subTitleText}>Senses:</Text>
+        <View style={{justifyContent: 'center'}}>
+            <SensesIcon/>
+            <SensesIcon/>
+            <SensesIcon/>
 
         </View>
+
         </ScrollView>
         </SafeAreaView>
     );
@@ -91,6 +122,17 @@ const styles = StyleSheet.create(
         fontSize: FONTSIZE.xxlarge,
         textAlign: 'center'
     },
+    savingThrowRow:
+    {
+        flexDirection: "row", 
+        justifyContent: 'center'
+    },
+    subTitleText: {
+        marginTop: 10, 
+        fontSize: FONTSIZE.xlarge, 
+        fontWeight: 'bold', 
+        marginLeft: 20
+    }
 
 }
 )
