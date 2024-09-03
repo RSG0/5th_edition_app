@@ -1,6 +1,7 @@
 const COLORS =
 {
     background: "#FFF4BB",
+    grayBackground: '#D9D9D9',
     dropdown: "#d1c899",
     mainColor: "#CE3F3F",
 };
