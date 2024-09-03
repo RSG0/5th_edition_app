@@ -58,7 +58,7 @@ export default CharacterPage1 = () =>
     }
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
         {/**First Row: */}
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
