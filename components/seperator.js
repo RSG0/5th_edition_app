@@ -4,7 +4,7 @@ export default Seperator = () =>
 {
     return (
         <View style={styles.seperator}>
-                    {console.log("Able to get here")}
+                    {/* {console.log("Able to get here")} */}
         </View>
     );
 }
