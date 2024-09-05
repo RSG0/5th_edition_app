@@ -4,6 +4,8 @@ import { View, FlatList, Dimensions } from 'react-native';
 import CharacterPage1 from './characterPage1';
 import CharacterPage2 from './characterPage2';
 import CharacterPage3 from './characterPage3';
+import CharacterPage4 from './characterPage4';
+
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -15,6 +17,7 @@ export default CharacterCarousel =() =>
         { key: '1', component: <CharacterPage1 /> },
         { key: '2', component: <CharacterPage2 /> },
         { key: '3', component: <CharacterPage3 /> },
+        { key: '4', component: <CharacterPage4 /> },
 
     ];
 
