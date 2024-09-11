@@ -24,10 +24,10 @@ import EquipmentPage from "./Pages/equipmentPage";
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import CharacterPage from './Pages/characterTab/characterPage';
 import selectEquipmentScreen from './Pages/characterTab/selectEquipmentScreen';
-import CharacterPage1 from './Pages/CharacterPages/characterPage1';
-import characterPage from './Pages/characterTab/characterPage';
+
 import featuresPage from './Pages/characterTab/featuresPage';
-import CharacterPage2 from './Pages/CharacterPages/characterPage2';
+
+import CharacterCarousel from './Pages/CharacterPages/characterCarousel';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -92,7 +92,7 @@ function StackNavigator() {
     >
       {/**Feature Page needs to be switched with CreateCharacter*/}
       {/* <Stack.Screen name="View a Character" component={characterPage}/> */}
-      <Stack.Screen name="Character Selection" component={CharacterPage2} /> 
+      <Stack.Screen name="Character Selection" component={CharacterPage} /> 
       <Stack.Screen name="Create Character" component={CreateCharacter} /> 
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
@@ -110,9 +110,12 @@ function StackNavigator() {
 
 const App = () => {
   return (
-    <NavigationContainer independent={true}>
-      <TabNavigator />
-    </NavigationContainer>
+    // <NavigationContainer independent={true}>
+    //   <TabNavigator />
+    // </NavigationContainer>
+    <View style={{backgroundColor: 'red', flex: 1}}>
+      <Text>RADFADSF{"\n"}ADSFEW</Text>
+    </View>
   );
 };
 
