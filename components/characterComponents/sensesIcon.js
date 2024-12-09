@@ -50,6 +50,6 @@ const styles = StyleSheet.create(
     modifierText: {
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge
+        fontSize: FONTSIZE.large
     }
 });

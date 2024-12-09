@@ -39,7 +39,7 @@ export default CharacterPage1 = () =>
         return(
             <>
         <View>
-            <Text style={{marginTop: 10, fontSize: FONTSIZE.xlarge, fontWeight: 'bold', marginLeft: 20}}>Saving Throws:</Text>
+            <Text style={{marginTop: 10, fontSize: FONTSIZE.large, fontWeight: 'bold', marginLeft: 20}}>Saving Throws:</Text>
             <View style={styles.savingThrowRow}>
                 <SavingThrowIcon/>
                 <SavingThrowIcon/>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create(
     },
     subTitleText: {
         marginTop: 10, 
-        fontSize: FONTSIZE.xlarge, 
+        fontSize: FONTSIZE.large, 
         fontWeight: 'bold', 
         marginLeft: 20
     }

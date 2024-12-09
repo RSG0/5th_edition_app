@@ -16,7 +16,7 @@ export default CompendiumButton = ({text, nextScreen, navigation}) =>
 const styles = StyleSheet.create(
 {
     item:{
-        width: 334,
+        width: "80%",
         height: 108,
         backgroundColor: 'white',
         borderRadius: 20,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create(
     text:
     {
         // width: 120,
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.large,
         fontWeight: 'bold',
         textAlign: 'center'
     }

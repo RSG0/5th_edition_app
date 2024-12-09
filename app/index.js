@@ -110,12 +110,13 @@ function StackNavigator() {
 
 const App = () => {
   return (
-    // <NavigationContainer independent={true}>
-    //   <TabNavigator />
-    // </NavigationContainer>
-    <View style={{backgroundColor: 'red', flex: 1}}>
-      <Text>RADFADSF{"\n"}ADSFEW</Text>
-    </View>
+    <NavigationContainer independent={true}>
+      {/* <Text>Testing</Text> */}
+      <TabNavigator />
+    </NavigationContainer>
+    // <View style={{backgroundColor: 'red', flex: 1}}>
+    //   <Text>TESTING CREATED BY YOU{"\n"}ADSFEW</Text>
+    // </View>
   );
 };
 

@@ -23,11 +23,11 @@ export default NextButton = ({ navigation, nextScreen, params, checkforChange}) 
 
 const styles = StyleSheet.create({
     button: {
-        marginTop: 20,
+        marginTop: "5%",
         backgroundColor: COLORS.mainColor,
         alignItems: 'center',
-        padding: 10,
-        paddingHorizontal: 40,
+        padding: "2.5%",
+        paddingHorizontal: "7.5%",
         borderRadius: 20,
         borderWidth: 2,
     },

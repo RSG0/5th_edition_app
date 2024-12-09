@@ -158,7 +158,7 @@ const styles = StyleSheet.create(
     },
     textStyle: {
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.large,
         textAlign: 'center'
     },
     dropdown: 

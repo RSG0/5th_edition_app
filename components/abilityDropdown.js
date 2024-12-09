@@ -1,6 +1,7 @@
 import { Text, StyleSheet, View } from "react-native"
 import { Dropdown } from "react-native-element-dropdown"
-import { COLORS, FONTSIZE } from "../constants/theme"
+import { COLORS, FONTSIZE, DROPDOWNSTYLE } from "../constants/theme"
+
 
 export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, value}) =>
 {
@@ -24,7 +25,9 @@ export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, 
         <View style={{flexDirection:'row', alignContent: 'center', alignItems: 'center'}}>
         <Text style={styles.labelStyle}>{name}:</Text>
         <Dropdown style={styles.dropdownLevel}
+        dropdownPosition="auto"
         data={data}
+        selectedTextStyle={DROPDOWNSTYLE.dropdownTextStyle}
         labelField={"value"}
         valueField={"value"}
         onChange={handleDropdownChange}
@@ -37,7 +40,7 @@ export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, 
 }
 const styles = StyleSheet.create({
     labelStyle: {
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.large,
         fontWeight: 'bold',
         marginRight: 8,
     },
@@ -46,6 +49,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
-        marginRight: 10,
+        marginHorizontal: "2.5%",
     },
 })

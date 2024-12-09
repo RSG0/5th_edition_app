@@ -45,7 +45,7 @@ const styles = StyleSheet.create(
         alignSelf: 'center',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.large,
     },
     textStyle: {
         marginTop: 10,

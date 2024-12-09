@@ -8,7 +8,7 @@ import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../constants/characterinfo
 function displayArmor()
 {
     return ARMOR.map((armor, index) => (
-        <EquipmentIcon key={index} itemName={armor.title} type={"Armor"} cost={armor.cost} weight={armor.weight}> </EquipmentIcon>
+        <EquipmentIcon key={index} itemName={armor.title} type={"Armor"} cost={armor.cost} weight={armor.weight}/>
     ));
 }
 function displayMeleeWeapons()
@@ -30,12 +30,15 @@ export default EquipmentPage = ({navigation}) =>
             <ScrollView>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
+                {/**Armor Section*/}
                 <Text style={styles.textStyle}>Armor:</Text>
-                <Text>{displayArmor()} </Text>
+                <>{displayArmor()} </>
+                {/**Tools Section */}
                 <Text style={styles.textStyle}>Tools:</Text>
-                <Text>{displayTools()}</Text>
+                <>{displayTools()}</>
+                {/**Martial Weapons */}
                 <Text style={styles.textStyle}>Martial Weapon:</Text>
-                <Text>{displayMeleeWeapons()}</Text>
+                <View>{displayMeleeWeapons()}</View>
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     viewStyle: {
         backgroundColor: COLORS.background,
         display: 'flex',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         flex: 1
     },

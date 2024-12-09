@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import NextButton from '../../../components/buttons/nextButton';
 import { COLORS, FONTSIZE } from '../../../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -117,6 +117,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
         <Text>Backgrounds: {backgrounds}</Text>
         <Text>Level: {level}</Text>
 
+        {/* <ScrollView style={{}} contentContainerStyle={{flexGrow: 1}} horizontal={true}> */}
         <View style={styles.inputRow}>
             <AbilityDropdown name={"STR"} data={NUMBER_TWENTY} isStandardArray={true} onAbilityPress={handleAbilityChange}></AbilityDropdown>
             <AbilityDropdown name={"DEX"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
@@ -127,6 +128,8 @@ const AbilityScoreScreen = ({ navigation, route }) => {
             <AbilityDropdown name={"WIS"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
             <AbilityDropdown name={"CHA"} data={NUMBER_TWENTY} isStandardArray={false} onAbilityPress={handleAbilityChange}></AbilityDropdown>
         </View>
+        {/* </ScrollView> */}
+
         <Text>Racial Stat Bonus:</Text>
         <Text>{renderRacialBonus()}</Text>
 

@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../../../constants/characterinformation/characterinfo"
 import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../../../constants/characterinformation/raceinfo";
@@ -10,7 +10,10 @@ import NextButton from "../../../components/buttons/nextButton";
 
 
 
+
+
 const CreateCharacter = ({navigation}) => {
+
     const [selectedRace, setSelectedRace] = useState(null);
     const [subraceOptions, setSubraceOptions] = useState([])
     const [selectedSubrace, setSelectedSubrace] = useState(null);
@@ -60,9 +63,9 @@ const CreateCharacter = ({navigation}) => {
     return (
         // <TouchableWithoutFeedback onPress={ () => console.log("User has touched the screen")}>
 
-        <SafeAreaView style={{backgroundColor: COLORS.background}}>
+        <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
                 <ScrollView>
-                <View style={{ flex: 1 }}>
+                <View style={{ }}>
                  <View style={styles.inputRow}>
                      <Text style={styles.labelStyle}>Name:</Text>
                      <TextInput style={styles.input} 
@@ -74,6 +77,7 @@ const CreateCharacter = ({navigation}) => {
                      <View style={styles.inputRow}>
                          <Text style={styles.labelStyle}>Class:</Text>
                          <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
                          data={CLASSES}
                          value={classes}
                          labelField={"label"}
@@ -85,6 +89,7 @@ const CreateCharacter = ({navigation}) => {
                          />
                          <Text style={styles.labelStyle}>Level:</Text>
                          <Dropdown style={styles.dropdownLevel}
+                         selectedTextStyle={styles.dropdownTextStyle}
                          data={NUMBER_TWENTY}
                          labelField={"value"}
                          valueField={"value"}
@@ -97,6 +102,7 @@ const CreateCharacter = ({navigation}) => {
                      <View style={styles.inputRow}>
                          <Text style={styles.labelStyle}>Races:</Text>
                          <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
                          data={RACES}
                          labelField={"label"}
                          valueField={"value"}
@@ -109,6 +115,7 @@ const CreateCharacter = ({navigation}) => {
                      <View style={styles.inputRow}>
                          <Text style={styles.labelStyle}>Subraces:</Text>
                          <Dropdown style={styles.dropdownSubrace}
+                         selectedTextStyle={styles.dropdownTextStyle}
                          data={subraceOptions}
                          labelField={"label"}
                          valueField={"value"}
@@ -121,6 +128,7 @@ const CreateCharacter = ({navigation}) => {
                     <View style={styles.inputRow}>
                         <Text style={styles.labelStyle}>Backgrounds:</Text>
                         <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
                          data={BACKGROUNDS}
                          labelField={"label"}
                          valueField={"label"}
@@ -151,6 +159,7 @@ const CreateCharacter = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+
     inputRow: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -158,43 +167,48 @@ const styles = StyleSheet.create({
         margin: 12,
     },
     labelStyle: {
-        fontSize: FONTSIZE.xlarge,
+        fontSize: (FONTSIZE.large),
         fontWeight: 'bold',
         marginRight: 8,
     },
     input: 
     {
-        fontSize: FONTSIZE.medium,
-        height: 40,
-        width: 180,
+        fontSize: (FONTSIZE.medium),
+        // height: "100%",
+        width: "45%",
         borderWidth: 1,
         padding: 10,
         borderRadius: 10,
     },
+    dropdownTextStyle:
+    {
+        fontSize: FONTSIZE.medium
+    },  
     dropdown: 
     {
-        width: 150,
+        width: "35%",
+        // fontSize: FONTSIZE.medium,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
         marginRight: 10,
     },
     dropdownSubrace: {
-        width: 100,
+        width: "25%",
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
         marginRight: 10,
     },
     dropdownLevel: {
-        width: 70,
+        width: "20%",
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
         marginRight: 10,
     },
     placeholderColor:{
-        fontSize: FONTSIZE.medium,
+        fontSize: (FONTSIZE.medium),
         color: 'grey'
     },
     button:{
@@ -208,7 +222,7 @@ const styles = StyleSheet.create({
     },
     buttonText:{
         fontWeight: 'bold',
-        fontSize: FONTSIZE.medium,
+        fontSize: (FONTSIZE.medium),
     }, 
 });
 

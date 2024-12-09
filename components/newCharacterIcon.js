@@ -10,7 +10,7 @@ export default NewCharacterIcon = ({name, classes, race, image, level, removeCha
     return(
         <View style={styles.item}>
 
-            <TouchableOpacity style={{width: 335, display:'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity style={{width: "100%", display:'flex', flexDirection: 'row', alignItems: 'center'}}>
             {moreButton}
                 <View style={styles.square}>
                     {image ? (
@@ -39,13 +39,14 @@ const moreButtonSize = 30
 
 const styles = StyleSheet.create({
     item:{
-        width: 340,
+        width: "80%",
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',
         height: 124,
         borderRadius: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        margin: 10
     },
     viewStyle: {
         display: 'flex',
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     },
     textStyle:{
         marginTop: 10,
-        width: 200,
+        width: "100%",
         // backgroundColor: 'red',
         textAlign: 'center',
         justifyContent: 'center',
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.medium
     },
     moreButton: {
+        margin: 10,
         borderRadius: 5,
         backgroundColor: 'gray',
         width: moreButtonSize,
@@ -89,7 +91,8 @@ const styles = StyleSheet.create({
 
     },
     moreButtonIcon: {
-        fontSize: FONTSIZE.xlarge,
+        // fontSize: FONTSIZE.medium,
+        color: 'white',
         textAlign: 'center',
         fontWeight: 'bold'
     }

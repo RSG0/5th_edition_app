@@ -130,7 +130,7 @@ const styles = StyleSheet.create(
     inputStyle: {
         borderRadius: 20,
         textAlign: 'center',
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.large,
         borderWidth: 4,
         width: 92,
         height: 42,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create(
     },
     textStyle: {
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge
+        fontSize: FONTSIZE.large
     },
     button: {
         backgroundColor: COLORS.mainColor,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create(
     buttonText:{
         color: 'white',
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge
+        fontSize: FONTSIZE.large
     },
     bottom:{
         marginBottom: 150,

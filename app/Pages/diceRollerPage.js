@@ -97,7 +97,7 @@ const styles = StyleSheet.create(
         justifyContent: 'center',
         alignContent: 'center',
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge
+        fontSize: FONTSIZE.large
     },
     textStyle: {
         fontWeight: 'bold',

@@ -195,7 +195,7 @@ const styles = StyleSheet.create(
     },
     textStyle: {
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge,
+        fontSize: FONTSIZE.large,
         textDecorationLine: 'underline',
         textAlign: 'center'
     },

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xlarge
+        fontSize: FONTSIZE.large
     },
     buttonLayout:{
         flexDirection: 'row'

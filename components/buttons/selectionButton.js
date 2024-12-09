@@ -23,13 +23,14 @@ const styles = StyleSheet.create(
     button: {
         backgroundColor: COLORS.mainColor,
         borderWidth: 2,
-        width: 155,
-        height: 44,
+        // width: "65%",
+        width: 300,
+        // height: "15%",
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        margin: 5
+        margin: 15
     },
     buttonPressed: {
         backgroundColor: 'gray'
