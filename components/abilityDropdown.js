@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from "react-native"
+import { Text, StyleSheet, View, Dimensions } from "react-native"
 import { Dropdown } from "react-native-element-dropdown"
 import { COLORS, FONTSIZE, DROPDOWNSTYLE } from "../constants/theme"
 
@@ -38,17 +38,19 @@ export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, 
         </View>
     )
 }
+const {width, height} = Dimensions.get('screen');
+
 const styles = StyleSheet.create({
     labelStyle: {
         fontSize: FONTSIZE.large,
         fontWeight: 'bold',
-        marginRight: 8,
+        marginRight: width * .01,
     },
     dropdownLevel: {
         width: 70,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
-        marginHorizontal: "2.5%",
+        marginHorizontal: width * .01,
     },
 })

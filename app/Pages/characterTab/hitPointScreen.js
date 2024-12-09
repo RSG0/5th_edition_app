@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, ScrollView, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { CLASSES } from "../../../constants/characterinformation/characterinfo";
@@ -112,6 +112,8 @@ export default HitPoint = ({navigation, route}) =>
         </TouchableWithoutFeedback>
     );
 }
+const {width, height} = Dimensions.get('screen');
+
 const styles = StyleSheet.create(
 {
     background: {
@@ -149,8 +151,9 @@ const styles = StyleSheet.create(
     button: {
         backgroundColor: COLORS.mainColor,
         borderWidth: 2,
-        width: 155,
-        height: 44,
+        width: width * .3,
+        // width: "100%",
+        height: height * .05,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

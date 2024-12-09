@@ -13,7 +13,7 @@ export default EquipmentIcon = ({itemName, type, weight, cost}) =>
                     <Text style={{fontSize: 12, marginTop: 5}}>{weight} lbs.</Text>
                 </View>
                 <View>
-                    <Text style={{fontSize: FONTSIZE.medium, marginLeft: 5, textAlign: 'right', width: 80}}>{cost}</Text>
+                    <Text style={{fontSize: FONTSIZE.xlarge, marginLeft: 5, textAlign: 'right', width: 80}}>{cost}</Text>
                 </View>
             </TouchableOpacity>
         </View>

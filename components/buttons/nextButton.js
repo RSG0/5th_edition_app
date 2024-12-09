@@ -1,9 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Alert, Dimensions } from 'react-native';
 import { COLORS, FONTSIZE } from '../../constants/theme';
 
 export default NextButton = ({ navigation, nextScreen, params, checkforChange}) => 
 {
+
     // console.log(nextScreen);
     const handlePress = () =>
     {
@@ -19,10 +20,14 @@ export default NextButton = ({ navigation, nextScreen, params, checkforChange}) 
             <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
     );
+
 };
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
     button: {
+        width: width * .3,
+        height: height * .08,
         marginTop: "5%",
         backgroundColor: COLORS.mainColor,
         alignItems: 'center',

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Title } from "react-native-paper";
@@ -23,6 +23,8 @@ export default MagicItemModal = ({name, type}) =>
 
     );
 }
+const {width, height} = Dimensions.get('screen');
+
 const styles = StyleSheet.create(
 {
     viewStyle: {

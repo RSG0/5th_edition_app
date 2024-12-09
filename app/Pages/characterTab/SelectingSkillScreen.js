@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, StatusBar, FlatList, } from "react-native";
+import { View, StyleSheet, Text, StatusBar, FlatList, TouchableOpacity, } from "react-native";
 import { FONTSIZE, COLORS } from "../../../constants/theme";
 import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformation/characterinfo";
 import NextButton from "../../../components/buttons/nextButton";
@@ -58,7 +58,10 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         console.log(selectSkills);
         if (filterSkills) { // if the filterSkills array contains something
             return filterSkills.map((skill, index) => (
-                <SkillsButton key={index} name={skill} disableFixedWidth={false} isSelected={selectSkills.includes(skill)} onSelectionPress={handleSkills}></SkillsButton>
+                <SkillsButton key={index} name={skill} disableFixedWidth={true} isSelected={selectSkills.includes(skill)}     onSelectionPress={() => handleSkills(skill)} // Ensure proper callback
+                ></SkillsButton>
+                /* <TouchableOpacity style={{width: 10, height: 20, backgroundColor: 'red'}}></TouchableOpacity> */
+                
             ));
         } else {
             return <Text>No skills available for this class.</Text>;
@@ -97,6 +100,12 @@ const SelectingSkillsScreen = ({route, navigation}) =>
 }
 const styles = StyleSheet.create(
 {
+    skillsContainer:{
+        flexWrap: 'wrap', // Allow buttons to wrap
+        flexDirection: 'row', // Arrange buttons in a row
+        justifyContent: 'space-between', // Space out buttons evenly
+        marginTop: 20, // Add margin to separate from other elements
+    },
     viewStyle: {
         backgroundColor: COLORS.background,
         // display: 'flex',
