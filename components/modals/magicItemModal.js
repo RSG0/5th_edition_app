@@ -2,31 +2,51 @@ import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Title } from "react-native-paper";
-export default MagicItemModal = ({name, type}) =>
+export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,rarity, decription, weight}) =>
 {
+    const handleAttunement = (isAttunement) =>
+    {
+        if (isAttunement == true)
+            return "Yes"
+        else if (isAttunement == false)
+        {
+            return "No"
+        }
+    }
+    const handleCharges = (hasCharges, numOfCharges) =>
+    {
+        if (hasCharges == true)
+        {
+            return (numOfCharges/numOfCharges);
+        }
+        else
+        {
+            return "N/A"
+        }
+    }
     return (
         <View style={styles.viewStyle}>
                     <View style={{ justifyContent: 'space-between', flexDirection:'column'}}>
                     <View>
-                        <Text style={styles.title} >Amulet of Health:{}</Text>
-                        <Text style={{fontStyle:'italic', fontSize: FONTSIZE.small}}>Wondurous Item</Text>
+                        <Text style={styles.title} >{name}:{}</Text>
+                        <Text style={{fontStyle:'italic', fontSize: FONTSIZE.small}}>{type}</Text>
 
                     </View>
                     <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
                         <Text style={{padding: 20, fontSize: FONTSIZE.xxsmall}}>
-                        Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is already 19 or higher without it. 
+                        {decription}
   
                         </Text>
                     </ScrollView>
-                    <Text >Weight: 1 lbs.</Text>
+                    <Text >Weight: {weight} lbs.</Text>
                         <View style={{position: 'absolute', right: -10, width: width * .45, justifyContent:'center', height: height * .08, flexDirection:'row', flexWrap:'wrap', alignContent:'center', backgroundColor: ''}}>
 
                             <Text style={ [styles.upperPortion, {fontWeight: 'bold' }]}>Attunment: </Text> 
-                                <Text style={styles.upperPortion}>Yes</Text>
+                                <Text style={styles.upperPortion}>{handleAttunement(attunment)}</Text>
                             <Text style={{fontSize: FONTSIZE.xsmall, marginLeft: 10,  fontWeight: 'bold'}} >Charges: </Text> 
-                                <Text style={styles.upperPortion}>7/7</Text>
+                                <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
                             <Text style={{fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }} >Rarity: </Text> 
-                                <Text style={{fontSize: FONTSIZE.small, fontStyle: 'italic', color: 'green'}}>Common</Text>
+                                <Text style={{fontSize: FONTSIZE.small, fontStyle: 'italic', color: 'green'}}>{rarity}</Text>
 
                         </View>
                     </View>
