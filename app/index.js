@@ -28,6 +28,7 @@ import selectEquipmentScreen from './Pages/characterTab/selectEquipmentScreen';
 import featuresPage from './Pages/characterTab/featuresPage';
 
 import CharacterCarousel from './Pages/CharacterPages/characterCarousel';
+import TestingPage from './Pages/CharacterPages/testingPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,7 +72,7 @@ function TabNavigator() {
       <Tab.Screen name="Character Page" component={StackNavigator} options={{ headerShown: false }} />
       <Tab.Screen name="Dice Roller Page" component={DiceRoller} />
       <Tab.Screen name="Compendium Page" component={StackNavigator2} />
-      <Tab.Screen name="Setting Page" component={SettingPage} />
+      <Tab.Screen name="Setting Page" component={TestingPage} />
     </Tab.Navigator>
   );
 }

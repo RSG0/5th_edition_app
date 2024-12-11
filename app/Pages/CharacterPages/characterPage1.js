@@ -9,7 +9,7 @@ import AbilityScoreIcon from "../../../components/characterComponents/abilitySco
 import SavingThrowIcon from "../../../components/characterComponents/savingThrowIcon";
 import ProfBonusAndSpeedIcon from "../../../components/characterComponents/profBonusAndSpeedIcon";
 import SensesIcon from "../../../components/characterComponents/sensesIcon";
-import MagicItemModal from "../../../components/modals/magicItemModal";
+import MagicItemModal from "../../../components/modals/magicItemModal(Rough)";
 
 export default CharacterPage1 = () =>
 {
