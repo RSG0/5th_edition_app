@@ -17,11 +17,22 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
     {
         if (hasCharges == true)
         {
-            return (numOfCharges/numOfCharges);
+            return `(${numOfCharges}/${numOfCharges})`;
         }
         else
         {
             return "N/A"
+        }
+    }
+    const handleRarity = (rarity) =>
+    {
+        if (rarity = "Uncommon")
+        {
+            //Change text color to green
+        }
+        else if (rarity = "Rare")
+        {
+            //Change text color
         }
     }
     return (

@@ -28,7 +28,7 @@ import selectEquipmentScreen from './Pages/characterTab/selectEquipmentScreen';
 import featuresPage from './Pages/characterTab/featuresPage';
 
 import CharacterCarousel from './Pages/CharacterPages/characterCarousel';
-import TestingPage from './Pages/CharacterPages/testingPage';
+import TestingPage from './Pages/CharacterPages/testingPage2';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
