@@ -7,4 +7,16 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center', // Ensures alignment vertically as well
         alignSelf: 'center'
     },
+    uncommonRarityBackgroundColor: {backgroundColor: "#4CFF48"},
+    rareRarityBackgroundColor: {backgroundColor: "#4850FF"},
+    veryRareRarityBackgroundColor: {backgroundColor: "#48F4FF"},
+    legendaryRarityBackgroundColor: {backgroundColor: "#FBFF48"},
+    artifactRarityBackgroundColor: {backgroundColor: "#A448FF"},
+
+    uncommonRarityColor: {color: "#4CFF48"},
+    rareRarityColor: {color: "#4850FF"},
+    veryRareRarityColor: {color: "#48F4FF"},
+    legendaryRarityColor: {color: "#FBFF48"},
+    artifactRarityColor: {color: "#A448FF"},
+
 })

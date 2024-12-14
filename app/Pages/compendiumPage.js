@@ -4,7 +4,6 @@ import CompendiumButton from "../../components/buttons/compendiumButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {NavigationContainer} from "@react-navigation/native-stack"
-import EquipmentPage from "../Pages/equipmentPage"
 
 const Stack = createNativeStackNavigator();
 
@@ -17,9 +16,9 @@ export default CompendiumPage = ({navigation}) =>
         <ScrollView>
         <View style={styles.viewStyle}>
             <CompendiumButton text={"Equipment"} nextScreen={"Equipment Page"} navigation={navigation}/>
-            <CompendiumButton text={"Classes"}/>
+            <CompendiumButton text={"Classes"} />
             <CompendiumButton text={"Races"}/>
-            <CompendiumButton text={"Magic-Items"}/>
+            <CompendiumButton text={"Magic-Items"} nextScreen={"Magic-Item Page"} navigation={navigation}/>
 
 
 

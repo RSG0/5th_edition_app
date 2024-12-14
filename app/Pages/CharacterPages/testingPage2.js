@@ -5,17 +5,16 @@ import { globalStyles } from "../../../constants/global";
 import MagicItemModalRough from "../../../components/modals/magicItemModal(Rough)";
 import MagicItemModal from "../../../components/modals/magicItemModal";
 import { useState } from "react";
-import MagicItemIcon from "../../../components/magicItemIcon(Rough)";
+import MagicItemIcon from "../../../components/magicItemIcon";
 
 const {width, height} = Dimensions.get('screen');
 export default TestingPage = () =>
 {
-    const [isModalVisible, setIsModalVisible] = useState(false);
 
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
             <View style={[globalStyles.centerRow, {flex: 1}]}>
-                <MagicItemIcon/>
+                <MagicItemIcon key={"23"} name={"Dragon"} type={"Armor"} weight={23} attunment={true} decription={"Loren"} rarity={"Uncommon"} charges={true} numOfCharges={4}/>
             </View>
             
         </SafeAreaView>

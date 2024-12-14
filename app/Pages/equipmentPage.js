@@ -5,12 +5,22 @@ import EquipmentIcon from "../../components/equipmentIcon";
 import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../constants/characterinformation/equipment"
 
 
-function displayArmor()
-{
+function displayArmor() {
     return ARMOR.map((armor, index) => (
-        <EquipmentIcon key={index} itemName={armor.title} type={"Armor"} cost={armor.cost} weight={armor.weight}/>
+        <>
+        {console.log("Index: " + index)}
+
+        <EquipmentIcon 
+        key={`armor-${index}`} // Use armor.id if available, fallback to index
+        itemName={armor.title || "Unknown Armor"}
+        type={"Armor"}
+        cost={armor.cost || "N/A"}
+        weight={armor.weight || "0"}
+        />
+        </>
     ));
 }
+
 function displayMeleeWeapons()
 {
     return MARTIAL_MELEE_WEAPONS.map((weapons, index) => (
@@ -32,13 +42,14 @@ export default EquipmentPage = ({navigation}) =>
             <View style={styles.viewStyle}>
                 {/**Armor Section*/}
                 <Text style={styles.textStyle}>Armor:</Text>
-                <>{displayArmor()} </>
+                {displayArmor()}
+                {/* <EquipmentIcon itemName={"Dragon"} type={"Tool"} cost={12} weight={230}/> */}
                 {/**Tools Section */}
                 <Text style={styles.textStyle}>Tools:</Text>
-                <>{displayTools()}</>
+                {/* <>{displayTools()}</> */}
                 {/**Martial Weapons */}
                 <Text style={styles.textStyle}>Martial Weapon:</Text>
-                <View>{displayMeleeWeapons()}</View>
+                {/* <View>{displayMeleeWeapons()}</View> */}
             </View>
             </ScrollView>
         </SafeAreaView>

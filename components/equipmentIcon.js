@@ -4,7 +4,9 @@ import { COLORS, FONTSIZE } from "../constants/theme"
 export default EquipmentIcon = ({itemName, type, weight, cost}) =>
 {
     return(
+
         <View style={styles.item}>
+        {/* {console.log(itemName, type, weight, cost ) } */}
             <TouchableOpacity style={{width: 335, display:'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <View style={styles.square}/>
                 <View style={{flexDirection:'column', maxWidth: "80%", width: 200}}>
@@ -17,6 +19,7 @@ export default EquipmentIcon = ({itemName, type, weight, cost}) =>
                 </View>
             </TouchableOpacity>
         </View>
+
     )
 }
 const styles = StyleSheet.create({
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
         height: 65,
         borderRadius: 10,
         justifyContent: 'space-between',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     square:{
         width: 25,

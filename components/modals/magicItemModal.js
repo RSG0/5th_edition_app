@@ -2,22 +2,50 @@ import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Title } from "react-native-paper";
+import { globalStyles } from "../../constants/global";
 export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,rarity, decription, weight}) =>
 {
+    {console.log("Rarity is: " + rarity)}
+    const getRarityStyle = (rarity) => {
+        switch (rarity?.toLowerCase()) {
+            case "uncommon":
+                return globalStyles.uncommonRarityColor;
+            case "rare":
+                return globalStyles.rareRarityColor;
+            case "very rare":
+                return globalStyles.veryRareRarityColor;
+            case "legendary":
+                return globalStyles.legendaryRarityColor;
+            case "artifact":
+                return globalStyles.artifactRarityColor;
+            default:
+                return null; // Default to no background color if rarity is not recognized
+        }
+    }
+    const handleNameSize = (name) =>
+    {
+        if (name.length <= 15)
+        {
+            return FONTSIZE.medium
+        }
+        else {return FONTSIZE.small}
+
+    }
     const handleAttunement = (isAttunement) =>
     {
-        if (isAttunement == true)
+        if (isAttunement === true)
             return "Yes"
-        else if (isAttunement == false)
+        else if (isAttunement === false)
         {
             return "No"
         }
     }
-    const handleCharges = (hasCharges, numOfCharges) =>
+    const handleCharges = (isACharge, num) =>
     {
-        if (hasCharges == true)
+        if (isACharge === true)
         {
-            return `(${numOfCharges}/${numOfCharges})`;
+            console.log(num);
+            return `(${Number(numOfCharges)}/${num})`;
         }
         else
         {
@@ -26,11 +54,11 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
     }
     const handleRarity = (rarity) =>
     {
-        if (rarity = "Uncommon")
+        if (rarity === "Uncommon")
         {
             //Change text color to green
         }
-        else if (rarity = "Rare")
+        else if (rarity === "Rare")
         {
             //Change text color
         }
@@ -39,27 +67,28 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
         <View style={styles.viewStyle}>
                     <View style={{ justifyContent: 'space-between', flexDirection:'column'}}>
                     <View>
-                        <Text style={styles.title} >{name}:{}</Text>
+                        <Text style={[styles.title]}>{name}:</Text>
                         <Text style={{fontStyle:'italic', fontSize: FONTSIZE.small}}>{type}</Text>
 
                     </View>
                     <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
-                        <Text style={{padding: 20, fontSize: FONTSIZE.xxsmall}}>
+                        <Text style={{padding: 10, fontSize: FONTSIZE.xsmall}}>
                         {decription}
   
                         </Text>
                     </ScrollView>
                     <Text >Weight: {weight} lbs.</Text>
-                        <View style={{position: 'absolute', right: -10, width: width * .45, justifyContent:'center', height: height * .08, flexDirection:'row', flexWrap:'wrap', alignContent:'center', backgroundColor: ''}}>
+                    <View style={{ position: 'absolute', right: -10, width: width * 0.5, justifyContent: 'center', height: height * 0.08, flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', backgroundColor: '' }}>
+                        <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>Attunement: </Text>
+                        <Text style={styles.upperPortion}>{handleAttunement(attunment)}</Text>
+                        <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold' }}>Charges: </Text>
+                        {console.log("numOfCharges: " +numOfCharges)}
+                        <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
+                        
+                        <Text style={{ fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }}>Rarity: </Text>
+                        <Text style={[{ fontSize: FONTSIZE.small, fontStyle: 'italic' }, getRarityStyle(rarity)]}>{rarity}</Text>
+                    </View>
 
-                            <Text style={ [styles.upperPortion, {fontWeight: 'bold' }]}>Attunment: </Text> 
-                                <Text style={styles.upperPortion}>{handleAttunement(attunment)}</Text>
-                            <Text style={{fontSize: FONTSIZE.xsmall, marginLeft: 10,  fontWeight: 'bold'}} >Charges: </Text> 
-                                <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
-                            <Text style={{fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }} >Rarity: </Text> 
-                                <Text style={{fontSize: FONTSIZE.small, fontStyle: 'italic', color: 'green'}}>{rarity}</Text>
-
-                        </View>
                     </View>
         </View>
 
@@ -96,10 +125,12 @@ const styles = StyleSheet.create(
     },
     title: {
         justifyContent: 'space-between',
+        width: width * .35,
         // margin: 20,
         fontWeight: 'bold',
         fontSize: FONTSIZE.medium,
-        // textAlign: 'center'
+        // textAlign: 'center',
+        backgroundColor: ''
     },
     infoRow: {
         flexDirection: 'row',
