@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity, StyleSheet,ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet,ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../constants/theme";
-import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS } from "../../constants/characterinformation/magicitems";
+import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WONDROUS } from "../../constants/characterinformation/magicitems";
 import MagicItemIcon from "../../components/magicItemIcon";
 
+const {width, height} = Dimensions.get('screen');
 
 function displayMagicArmor()
 {
@@ -24,6 +25,12 @@ function displayMagicRings()
         <MagicItemIcon key={index} name={armor.name} type={"Ring"} weight={armor.weight} attunment={armor.attunement} decription={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
+function displayWondorousItems()
+{
+    return MAGICITEMS_WONDROUS.map((armor, index) => (
+        <MagicItemIcon key={index} name={armor.name} type={"Ring"} weight={armor.weight} attunment={armor.attunement} decription={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+    ));
+}
 export default MagicItemPage = ({navigation}) =>
 {
     return(
@@ -40,6 +47,9 @@ export default MagicItemPage = ({navigation}) =>
                 {/**Ring Section */}
                 <Text style={styles.textStyle}>Rings:</Text>
                 {displayMagicRings()}
+                {/**Wondorous Items Section */}
+                <Text style={styles.textStyle}>Wondorous Items:</Text>
+                {displayWondorousItems()}
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textStyle: {
-        width: 350,
+        width: width,
         fontWeight: 'bold',
         fontSize: FONTSIZE.xxlarge,
         textAlign: 'left',

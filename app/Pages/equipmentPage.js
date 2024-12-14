@@ -7,8 +7,6 @@ import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../constants/characterinfo
 
 function displayArmor() {
     return ARMOR.map((armor, index) => (
-        <>
-        {console.log("Index: " + index)}
 
         <EquipmentIcon 
         key={`armor-${index}`} // Use armor.id if available, fallback to index
@@ -17,7 +15,6 @@ function displayArmor() {
         cost={armor.cost || "N/A"}
         weight={armor.weight || "0"}
         />
-        </>
     ));
 }
 

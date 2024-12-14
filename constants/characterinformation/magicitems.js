@@ -229,4 +229,71 @@ export const MAGICITEMS_RINGS = [
         weight: 0,
         description: "While wearing this ring, you can cast the telekinesis spell at will, but only target objects that aren’t being worn or carried."
     }
+
+];
+export const MAGICITEMS_WONDROUS = [
+    // Wondrous Items
+    {
+        name: "Cloak of Protection",
+        rarity: "Uncommon",
+        attunement: true,
+        charges: false,
+        numOfCharges: false,
+        weight: 1,
+        description: "You gain a +1 bonus to AC and saving throws while wearing this cloak."
+    },
+    {
+        name: "Boots of Speed",
+        rarity: "Rare",
+        attunement: true,
+        charges: true,
+        numOfCharges: 3,
+        weight: 1,
+        description: "While wearing these boots, you can use a bonus action to double your speed for 1 minute. The boots regain expended charges at dawn."
+    },
+    {
+        name: "Bag of Holding",
+        rarity: "Uncommon",
+        attunement: false,
+        charges: false,
+        numOfCharges: false,
+        weight: 15,
+        description: "This bag can hold up to 500 pounds of material, but always weighs 15 pounds, regardless of its contents."
+    },
+    {
+        name: "Amulet of Health",
+        rarity: "Uncommon",
+        attunement: true,
+        charges: false,
+        numOfCharges: false,
+        weight: 0,
+        description: "While wearing this amulet, your Constitution score is 19, unless it is already 19 or higher."
+    },
+    {
+        name: "Cape of the Mountebank",
+        rarity: "Rare",
+        attunement: true,
+        charges: true,
+        numOfCharges: 1,
+        weight: 1,
+        description: "This cape has 1 charge. While wearing it, you can use a bonus action to teleport up to 30 feet to an unoccupied space you can see. The cape regains expended charges at dawn."
+    },
+    {
+        name: "Helm of Teleportation",
+        rarity: "Very Rare",
+        attunement: true,
+        charges: true,
+        numOfCharges: 3,
+        weight: 3,
+        description: "This helm has 3 charges. While wearing it, you can cast *Teleport* by expending 1 charge. The helm regains all expended charges at dawn."
+    },
+    {
+        name: "Ioun Stone of Insight",
+        rarity: "Rare",
+        attunement: false,
+        charges: false,
+        numOfCharges: false,
+        weight: 0,
+        description: "While this stone orbits around your head, you gain a +2 bonus to Wisdom (Insight) checks."
+    }
 ];
