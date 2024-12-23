@@ -30,6 +30,7 @@ import featuresPage from './Pages/characterTab/featuresPage';
 import CharacterCarousel from './Pages/CharacterPages/characterCarousel';
 import TestingPage from './Pages/CharacterPages/testingPage2';
 import magicItemPage from './Pages/magicItemPage';
+import NewMagicItemPage from './Pages/newMagicItemPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,6 +42,7 @@ function StackNavigator2()
         <Stack.Screen name="Compendium Page Stack" component={CompendiumPage}/>
         <Stack.Screen name="Equipment Page" component={EquipmentPage}/>
         <Stack.Screen name="Magic-Item Page" component={magicItemPage}/>
+        <Stack.Screen name="Create Magic-Item Page" component={NewMagicItemPage} />
      </Stack.Navigator>  
     )
 }

@@ -15,6 +15,10 @@ const CLASSES =
     {label: "Warlock", value: '13', hitDice: "d8"},
     {label: "Wizard", value: '14', hitDice: "d6"}
 ];
+export const TRUEORFALSE = [
+    {label: "True"},
+    {label: "False"}
+]
 const CLASS_SKILLS = [
     { label: "Barbarian", skills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"] },
     { label: "Bard", skills: ["Acrobatics", "Animal Handling", "Arcana", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth"] },

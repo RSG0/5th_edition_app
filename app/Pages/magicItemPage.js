@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WONDROUS } from "../../constants/characterinformation/magicitems";
 import MagicItemIcon from "../../components/magicItemIcon";
+import NewMagicItemButton from "../../components/buttons/newMagicItemButton";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -52,6 +53,8 @@ export default MagicItemPage = ({navigation}) =>
                 {displayWondorousItems()}
             </View>
             </ScrollView>
+            <NewMagicItemButton navigation={navigation} nextScreen={"Create Magic-Item Page"}/>
+
         </SafeAreaView>
     )
 }

@@ -1,0 +1,277 @@
+import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
+import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
+import { Dropdown } from "react-native-element-dropdown";
+import { useState } from "react";
+import { TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import NextButton from "../../components/buttons/nextButton";
+import { MAGICITEMS_RARITY, MAGICITEMS_TYPE as MAGICITEMS_Type, MAGICITEMS_TYPE_WEAPONS } from "../../constants/characterinformation/magicitems";
+import { NUMBER_TWENTY, TRUEORFALSE } from "../../constants/characterinformation/characterinfo";
+
+
+const {width, height} = Dimensions.get('screen');
+
+export default NewMagicItemPage = ({navigation}) => {
+
+    const [name, setName] = useState("");
+    const [itemType, setItemType] = useState(null);
+    const [weaponType, setWeaponType] = useState(null);
+    const [isChargable, setIsChargable] = useState(null);
+    const [numOfCharges, setNumOfCharges] = useState(null);
+    const [attunement, setAttunment] = useState(false);
+    const [rarity, setRarity] = useState(null);
+    const [description, setDescription] = useState(null);
+    const [weight, setWeight] = useState(0);
+
+    const [itemOptions, setItemOptions] = useState([]);
+    const [weaponOptions, setWeaponOptions] = useState([]);
+    const [isChargableOptions, setIsChargableOptions] = useState([]);
+    const [attunmentOptions, setAttunementOptions] = useState([]);
+    const [rarityOptions, setRarityOptions] = useState([]);
+
+
+    const checkForChange = (nameCheck, itemCheck, chargeCheck, attunementCheck, rarityCheck, weightCheck) =>
+    {
+        // console.log('Checking for changes:', { nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck });
+        if (!nameCheck || itemCheck == null || chargeCheck == null || attunementCheck == null || rarityCheck == "")
+        {
+            Alert.alert("OOPS", "You need to fill all the information")
+            return true; //This should be false
+        }
+        return true;
+    };
+
+    return (
+        // <TouchableWithoutFeedback onPress={ () => console.log("User has touched the screen")}>
+
+        <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
+                <ScrollView>
+                <View style={{ }}>
+                 <View style={styles.inputRow}>
+                     <Text style={styles.labelStyle}>Name:</Text>
+                     <TextInput style={styles.input} 
+                        placeholderStyle={styles} 
+                        placeholder={"Enter name here..."} 
+                        value={name} 
+                        onChangeText={setName}/>
+                 </View>
+                     <View style={styles.inputRow}>
+                         <Text style={styles.labelStyle}>Type:</Text>
+                         <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={MAGICITEMS_Type}
+                         value={itemType}
+                         labelField={"label"}
+                         valueField={"label"}
+                         onChange={(item) => setItemType(item.label)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="..."
+                         maxHeight={200}
+                         />
+                        <Text style={styles.labelStyle}>Weapon Type:</Text>
+                        <Dropdown
+                           style={styles.dropdownLevel}
+                           selectedTextStyle={styles.dropdownTextStyle}
+                           data={MAGICITEMS_TYPE_WEAPONS}
+                           value={weaponType}
+                           labelField={"label"}
+                           valueField={"label"}
+                           onChange={(item) => setWeaponType(item.label)}
+                           placeholderStyle={styles.placeholderColor}
+                           placeholder="..."
+                           maxHeight={200}
+                        />
+                     </View>
+                     <View style={styles.inputRow}>
+                         <Text style={styles.labelStyle}>Charges:</Text>
+                         <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={TRUEORFALSE}
+                         value={isChargable}
+                         labelField={"label"}
+                         valueField={"label"}
+                         onChange={item => (setIsChargable(item))}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="..."
+                         maxHeight={200}
+                         />
+                         <Text style={styles.labelStyle}># of Charges:</Text>
+                         <Dropdown style={styles.dropdownSubrace}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={NUMBER_TWENTY}
+                         labelField={"value"}
+                         valueField={"value"}
+                         onChange={item => (setNumOfCharges(item.label))}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200} />
+                     </View>
+                     <View style={styles.inputRow}>
+
+                     </View>
+                    <View style={styles.inputRow}>
+                        <Text style={styles.labelStyle}>Attunment:</Text>
+                        <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={TRUEORFALSE}
+                        //  labelField={"label"}
+                        //  valueField={"label"}
+                         value={attunement}
+                         onChange={item => setAttunementOptions(item.label)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200}
+                         />
+
+                        <Text style={styles.labelStyle}>Rarity:</Text>
+                        <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={MAGICITEMS_RARITY}
+                         value={rarity}
+                        labelField={"label"}
+                         valueField={"label"}
+                         onChange={item => setRarity(item.label)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200}
+                         />
+                    </View>
+                    <View style={styles.inputRow}>
+                        <Text style={styles.labelStyle}>Description:</Text>
+                    </View>
+                    <View style={styles.inputRow}>
+                        <TextInput
+                            // onChange={txt => this.setState({ enteredText: txt })} fontStyle={this.state.enteredText.length == 0 ? 'italic' : 'normal'}
+                            placeholder="enter text here...  (optional)"
+                            // placeholderStyle={{backg}}
+                            style={[styles.textInput]} 
+                            value={description} 
+                            onChangeText={setDescription}
+                            multiline={true}
+                            textAlignVertical="top"
+                            scrollEnabled={false}
+                            // onScroll={false}
+                        />
+                    </View>
+                 <View style={styles.inputRow}>
+                     <Text style={styles.labelStyle}>Weight:</Text>
+                     <TextInput style={styles.weightinput} 
+                        placeholderStyle={styles} 
+                        placeholder={"..."} 
+                        value={weight} 
+                        onChangeText={setWeight}/>
+                 </View>
+                    {/* <View style={styles.inputRow}>
+                        <NextButton 
+                        navigation={navigation}
+                        nextScreen={"Ability Score"}
+                        params={{name, classes,level, selectedRace, backgrounds, selectedSubrace}}
+                        checkforChange={() => checkForChange(name, classes, level, selectedRace, backgrounds, selectedSubrace)}
+                        />              
+                    </View> */}
+                    
+                    <View style={{marginBottom: 200}}></View>
+             </View>
+             </ScrollView>
+        </SafeAreaView>
+        // </TouchableWithoutFeedback>
+
+    );
+}
+const styles = StyleSheet.create({
+
+    inputRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',   
+        margin: 12,
+    },
+    labelStyle: {
+        fontSize: (FONTSIZE.medium),
+        fontWeight: 'bold',
+        marginRight: 8,
+    },
+    input: 
+    {
+        fontSize: (FONTSIZE.medium),
+        // height: "100%",
+        width: "45%",
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+    },
+    weightinput:
+    {
+        fontSize: (FONTSIZE.medium),
+        // height: "100%",
+        width: width * .2,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+    },
+    dropdownTextStyle:
+    {
+        fontSize: FONTSIZE.medium
+    },  
+    textInput: {
+        // width: width * .85,
+        // height: height * .2,
+        // maxHeight: height * .5,
+        // // backgroundColor: 'red',
+        borderRadius: width * .02,
+        // fontStyle: '',
+        // // flex: 1,
+        // padding: 10,
+        // fontSize: FONTSIZE.medium,
+        borderWidth: characterBorderWidth * .5,
+        minHeight: height * .1,
+        marginHorizontal: width * .05,
+        fontStyle: 'italic',
+        flex: 1,
+        padding: width * .01,
+        // backgroundColor: 'red',
+        fontSize: FONTSIZE.medium,
+        // flexWrap: 'wrapf'
+    },
+    dropdown: 
+    {
+        width: width * .2,
+        // fontSize: FONTSIZE.medium,
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,
+        marginRight: 10,
+    },
+    dropdownSubrace: {
+        width: width * .2,
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,
+        marginRight: 10,
+    },
+    dropdownLevel: {
+        width: width * .2,
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,
+        marginRight: 10,
+    },
+    placeholderColor:{
+        fontSize: (FONTSIZE.medium),
+        color: 'grey'
+    },
+    button:{
+        marginTop: 20,
+        backgroundColor: COLORS.mainColor,
+        alignItems: 'center',
+        padding: 5,
+        paddingHorizontal: 40,
+        borderRadius: 20,
+        borderWidth: 2,
+    },
+    buttonText:{
+        fontWeight: 'bold',
+        fontSize: (FONTSIZE.medium),
+    }, 
+});
+

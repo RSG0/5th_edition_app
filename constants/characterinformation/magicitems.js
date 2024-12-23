@@ -1,4 +1,70 @@
-export const MAGICITEMS_ARMOR =
+  export const MAGICITEMS_TYPE = [
+    { label: "Armor", value: "Armor" },
+    { label: "Potion", value: "Potion" },
+    { label: "Ring", value: "Ring" },
+    { label: "Rod", value: "Rod" },
+    { label: "Scroll", value: "Scroll" },
+    { label: "Staff", value: "Staff" },
+    { label: "Wand", value: "Wand" },
+    { label: "Weapon", value: "Weapon" },
+    { label: "Wondorous Item", value: "Wondorous Item" },
+  ];
+  export const MAGICITEMS_RARITY = [
+    { label: "Common", value: "Common" },
+    { label: "Uncommon", value: "Uncommon" },
+    { label: "Rare", value: "Rare" },
+    { label: "Very Rare", value: "Very Rare" },
+    { label: "Legendary", value: "Legendary" },
+    { label: "Artifact", value: "Artifact" },
+  ];
+  export const MAGICITEMS_TYPE_WEAPONS = [
+    // Simple Melee Weapons
+    { label: "Club", value: "Club" },
+    { label: "Dagger", value: "Dagger" },
+    { label: "Greatclub", value: "Greatclub" },
+    { label: "Handaxe", value: "Handaxe" },
+    { label: "Javelin", value: "Javelin" },
+    { label: "Light Hammer", value: "Light Hammer" },
+    { label: "Mace", value: "Mace" },
+    { label: "Quarterstaff", value: "Quarterstaff" },
+    { label: "Sickle", value: "Sickle" },
+    { label: "Spear", value: "Spear" },
+  
+    // Simple Ranged Weapons
+    { label: "Crossbow, Light", value: "Crossbow, Light" },
+    { label: "Dart", value: "Dart" },
+    { label: "Shortbow", value: "Shortbow" },
+    { label: "Sling", value: "Sling" },
+  
+    // Martial Melee Weapons
+    { label: "Battleaxe", value: "Battleaxe" },
+    { label: "Flail", value: "Flail" },
+    { label: "Glaive", value: "Glaive" },
+    { label: "Greataxe", value: "Greataxe" },
+    { label: "Greatsword", value: "Greatsword" },
+    { label: "Halberd", value: "Halberd" },
+    { label: "Lance", value: "Lance" },
+    { label: "Longsword", value: "Longsword" },
+    { label: "Maul", value: "Maul" },
+    { label: "Morningstar", value: "Morningstar" },
+    { label: "Pike", value: "Pike" },
+    { label: "Rapier", value: "Rapier" },
+    { label: "Scimitar", value: "Scimitar" },
+    { label: "Shortsword", value: "Shortsword" },
+    { label: "Trident", value: "Trident" },
+    { label: "War Pick", value: "War Pick" },
+    { label: "Warhammer", value: "Warhammer" },
+    { label: "Whip", value: "Whip" },
+  
+    // Martial Ranged Weapons
+    { label: "Blowgun", value: "Blowgun" },
+    { label: "Crossbow, Hand", value: "Crossbow, Hand" },
+    { label: "Crossbow, Heavy", value: "Crossbow, Heavy" },
+    { label: "Longbow", value: "Longbow" },
+    { label: "Net", value: "Net" },
+  ];
+  
+  export const MAGICITEMS_ARMOR =
 [
     //Armor
     {name: "Adamantine Armor", rarity: "Uncommon", attunement: true, charges: false, numOfCharges: false, weight: "Various",
