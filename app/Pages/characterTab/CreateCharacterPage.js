@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import {CLASSES, NUMBER_TWENTY, BACKGROUNDS} from "../../../constants/characterinformation/characterinfo"
 import { RACES, GENASI_SUBRACE, DRAGONBORN_SUBRACE, ELF_SUBRACE, AASIMAR_SUBRACE } from "../../../constants/characterinformation/raceinfo";

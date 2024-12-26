@@ -6,7 +6,7 @@ import { globalStyles } from "../constants/global";
 const {width, height} = Dimensions.get('screen');
 
 
-export default MagicItemIcon = ({name, type, attunment, charges, numOfCharges,rarity, decription, weight} ) =>
+export default MagicItemIcon = ({name, type, attunment, charges, numOfCharges,rarity, description, weight} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
     // Function to map rarity to styles
@@ -79,7 +79,7 @@ export default MagicItemIcon = ({name, type, attunment, charges, numOfCharges,ra
                                 type={type}
                                 attunment={attunment}
                                 charges={charges}
-                                decription={decription}
+                                description={description}
                                 numOfCharges={numOfCharges}
                                 weight={weight}
                                 rarity={rarity}

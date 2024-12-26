@@ -3,9 +3,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { globalStyles } from "../../constants/global";
-export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,rarity, decription, weight}) =>
+export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,rarity, description, weight}) =>
 {
-    {console.log("Rarity is: " + rarity)}
+    // {console.log("Rarity is: " + rarity)}
     const getRarityStyle = (rarity) => {
         switch (rarity?.toLowerCase()) {
             case "uncommon":
@@ -39,12 +39,16 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
         {
             return "No"
         }
+        else
+        {
+            return "No"
+        }
     }
     const handleCharges = (isACharge, num) =>
     {
         if (isACharge === true)
         {
-            console.log(num);
+            // console.log(num);
             return `(${Number(numOfCharges)}/${num})`;
         }
         else
@@ -73,7 +77,7 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
                     </View>
                     <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
                         <Text style={{padding: 10, fontSize: FONTSIZE.xsmall}}>
-                        {decription}
+                        {description}
   
                         </Text>
                     </ScrollView>
@@ -82,7 +86,6 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
                         <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>Attunement: </Text>
                         <Text style={styles.upperPortion}>{handleAttunement(attunment)}</Text>
                         <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold' }}>Charges: </Text>
-                        {console.log("numOfCharges: " +numOfCharges)}
                         <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
                         
                         <Text style={{ fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }}>Rarity: </Text>

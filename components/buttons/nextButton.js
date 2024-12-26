@@ -10,7 +10,7 @@ export default NextButton = ({ navigation, nextScreen, params, checkforChange}) 
     {
         if (checkforChange()) // check for change asks if all parameters are needed to move on
         {
-        navigation.navigate(nextScreen, params);
+            navigation.navigate(nextScreen, params);
         }
     }
     return (
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         marginTop: "5%",
         backgroundColor: COLORS.mainColor,
         alignItems: 'center',
+        justifyContent: 'center',
         padding: "2.5%",
         paddingHorizontal: "7.5%",
         borderRadius: 20,

@@ -1,7 +1,7 @@
 import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Dropdown } from "react-native-element-dropdown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NextButton from "../../components/buttons/nextButton";
@@ -25,22 +25,49 @@ export default NewMagicItemPage = ({navigation}) => {
 
     const [itemOptions, setItemOptions] = useState([]);
     const [weaponOptions, setWeaponOptions] = useState([]);
+    const [numOfChargesOptions, setNumOfChargesOptions] = useState([]);
+
     const [isChargableOptions, setIsChargableOptions] = useState([]);
     const [attunmentOptions, setAttunementOptions] = useState([]);
     const [rarityOptions, setRarityOptions] = useState([]);
 
 
-    const checkForChange = (nameCheck, itemCheck, chargeCheck, attunementCheck, rarityCheck, weightCheck) =>
+    const checkForChange = (nameCheck, itemCheck, weaponCheck, chargeCheck, numOfChargeCheck, attunementCheck, rarityCheck, descriptionCheck, weightCheck) =>
     {
-        // console.log('Checking for changes:', { nameCheck, classCheck, levelCheck, raceCheck, backgroundCheck });
-        if (!nameCheck || itemCheck == null || chargeCheck == null || attunementCheck == null || rarityCheck == "")
+        if (!nameCheck || itemCheck == null || chargeCheck == null || attunementCheck == null || rarityCheck == null || !weightCheck)
         {
             Alert.alert("OOPS", "You need to fill all the information")
-            return true; //This should be false
+            return false; //This should be false
         }
         return true;
     };
-
+    const handleItemChange = (item) =>
+    {
+        setItemType(item.label);
+        if (item.label == "Weapon")
+        {
+            setWeaponOptions(MAGICITEMS_TYPE_WEAPONS);
+        }
+        else
+        {
+            setWeaponOptions([]);
+        }
+    }
+    const handleChargeChange = (item) =>
+    {
+        console.log(item);
+        setIsChargable(item.label);
+        if (item.label == "True")
+        {
+            console.log("Printing")
+            setNumOfChargesOptions(NUMBER_TWENTY);
+        }
+        else
+        {
+            console.log("not working...")
+            setNumOfChargesOptions([]);
+        }
+    }
     return (
         // <TouchableWithoutFeedback onPress={ () => console.log("User has touched the screen")}>
 
@@ -63,7 +90,7 @@ export default NewMagicItemPage = ({navigation}) => {
                          value={itemType}
                          labelField={"label"}
                          valueField={"label"}
-                         onChange={(item) => setItemType(item.label)}
+                         onChange={handleItemChange}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="..."
                          maxHeight={200}
@@ -72,7 +99,7 @@ export default NewMagicItemPage = ({navigation}) => {
                         <Dropdown
                            style={styles.dropdownLevel}
                            selectedTextStyle={styles.dropdownTextStyle}
-                           data={MAGICITEMS_TYPE_WEAPONS}
+                           data={weaponOptions}
                            value={weaponType}
                            labelField={"label"}
                            valueField={"label"}
@@ -90,20 +117,21 @@ export default NewMagicItemPage = ({navigation}) => {
                          value={isChargable}
                          labelField={"label"}
                          valueField={"label"}
-                         onChange={item => (setIsChargable(item))}
+                         onChange={handleChargeChange}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="..."
                          maxHeight={200}
                          />
                          <Text style={styles.labelStyle}># of Charges:</Text>
-                         <Dropdown style={styles.dropdownSubrace}
+                         <Dropdown style={[styles.dropdown, {minWidth: width * .1}]}
                          selectedTextStyle={styles.dropdownTextStyle}
-                         data={NUMBER_TWENTY}
+                         data={numOfChargesOptions}
+                         value={numOfCharges}
                          labelField={"value"}
                          valueField={"value"}
-                         onChange={item => (setNumOfCharges(item.label))}
+                         onChange={(item) => setNumOfCharges(item.value)}
                          placeholderStyle={styles.placeholderColor}
-                         placeholder="---"
+                         placeholder="--"
                          maxHeight={200} />
                      </View>
                      <View style={styles.inputRow}>
@@ -114,10 +142,10 @@ export default NewMagicItemPage = ({navigation}) => {
                         <Dropdown style={styles.dropdown}
                          selectedTextStyle={styles.dropdownTextStyle}
                          data={TRUEORFALSE}
-                        //  labelField={"label"}
-                        //  valueField={"label"}
                          value={attunement}
-                         onChange={item => setAttunementOptions(item.label)}
+                         labelField={"label"}
+                         valueField={"label"}
+                         onChange={item => setAttunment(item.label)}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="---"
                          maxHeight={200}
@@ -141,12 +169,10 @@ export default NewMagicItemPage = ({navigation}) => {
                     </View>
                     <View style={styles.inputRow}>
                         <TextInput
-                            // onChange={txt => this.setState({ enteredText: txt })} fontStyle={this.state.enteredText.length == 0 ? 'italic' : 'normal'}
                             placeholder="enter text here...  (optional)"
-                            // placeholderStyle={{backg}}
                             style={[styles.textInput]} 
                             value={description} 
-                            onChangeText={setDescription}
+                            onChangeText={item => setDescription(item)}
                             multiline={true}
                             textAlignVertical="top"
                             scrollEnabled={false}
@@ -161,17 +187,25 @@ export default NewMagicItemPage = ({navigation}) => {
                         value={weight} 
                         onChangeText={setWeight}/>
                  </View>
-                    {/* <View style={styles.inputRow}>
-                        <NextButton 
-                        navigation={navigation}
-                        nextScreen={"Ability Score"}
-                        params={{name, classes,level, selectedRace, backgrounds, selectedSubrace}}
-                        checkforChange={() => checkForChange(name, classes, level, selectedRace, backgrounds, selectedSubrace)}
-                        />              
-                    </View> */}
-                    
+                 <View style={styles.inputRow}>
+                 <NextButton 
+                 navigation={navigation} 
+                 nextScreen={"Magic-Item Page"} 
+                 params={{name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, weight}}
+                 checkforChange={() => checkForChange(name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight)}/>
+                 </View>
+                    {console.log("Name: " + name)}
+                    {console.log("ItemType: " + itemType)}
+                    {console.log("WeaponsType: " + weaponType)}
+                    {console.log("isChargable: " + isChargable)}
+                    {console.log("numOfCharges: " + numOfCharges)}
+                    {console.log("Attunment: " + attunement)}
+                    {console.log("Rarity: " + rarity)}
+                    {console.log("Description: " + description)}
+                    {console.log("Weight: " + weight)}
                     <View style={{marginBottom: 200}}></View>
              </View>
+
              </ScrollView>
         </SafeAreaView>
         // </TouchableWithoutFeedback>
@@ -211,7 +245,7 @@ const styles = StyleSheet.create({
     },
     dropdownTextStyle:
     {
-        fontSize: FONTSIZE.medium
+        fontSize: FONTSIZE.small
     },  
     textInput: {
         // width: width * .85,
@@ -235,7 +269,8 @@ const styles = StyleSheet.create({
     },
     dropdown: 
     {
-        width: width * .2,
+        flex: 1,
+        minWidth: width * .2,
         // fontSize: FONTSIZE.medium,
         borderWidth: 1,
         borderRadius: 10,
