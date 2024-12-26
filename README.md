@@ -23,3 +23,22 @@ While not required for Expo projects, having the React Native CLI installed can 
 - **Install React Native CLI**:
   ```sh
   npm install -g react-native-cli
+  ```
+- After installation, verify the installation by running:
+  ```sh
+  expo --version
+  ```
+### 3. Install Project Dependencies
+Inside the project directory, install dependencies using:
+```sh
+npm install
+```
+
+### 5. Start the Development Server
+Run the following command to start the development server:
+```sh
+expo start
+```
+Use the QR code displayed in the terminal or Expo Developer Tools in the browser to open the app on your device:
+On physical devices: Install the Expo Go app from the App Store or Google Play, and scan the QR code.
+On emulators: Ensure you have an Android Emulator or iOS Simulator set up, then select the appropriate option in the Expo Developer Tools.
