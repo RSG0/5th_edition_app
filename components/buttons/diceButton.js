@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { COLORS, FONTSIZE } from "../../constants/theme";
+
+const {width, height} = Dimensions.get('screen');
 
 export default DiceButton = ({value, onDiceRoll}) =>
 {
@@ -20,8 +22,8 @@ export default DiceButton = ({value, onDiceRoll}) =>
 }
 const styles = StyleSheet.create({
     button: {
-        width: 100,
-        height: 50,
+        width: width * .25,
+        height: height * .08,
         borderRadius: 20,
         borderWidth: 3,
         backgroundColor: COLORS.mainColor,

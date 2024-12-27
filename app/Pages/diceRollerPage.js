@@ -1,8 +1,10 @@
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions } from "react-native";
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DiceButton from "../../components/buttons/diceButton";
 import { useState } from "react";
+
+const {width, height} = Dimensions.get('screen');
 
 export default DiceRoller = () =>
 {
@@ -65,8 +67,8 @@ const styles = StyleSheet.create(
         
     },
     clearButton: {
-        width: 150,
-        height: 40,
+        width: width * .25,
+        height: height * .05,
         borderRadius: 20,
         borderWidth: 3,
         backgroundColor: COLORS.mainColor,
@@ -75,7 +77,7 @@ const styles = StyleSheet.create(
         alignItems: 'center'
     },
     sumBorder: {
-        width: 308,
+        width: 300,
         height: 161,
         borderRadius: 30,
         borderWidth: 2,
@@ -84,7 +86,7 @@ const styles = StyleSheet.create(
     },
     sumMath: {
         flex: 2,
-        width: 350,
+        width: width * .8,
         // height: 85,
         padding: 10,
         backgroundColor: 'tan',
@@ -93,7 +95,7 @@ const styles = StyleSheet.create(
         marginBottom: 10
     },
     mathText:{
-        width: 320,
+        width: width * .75,
         justifyContent: 'center',
         alignContent: 'center',
         fontWeight: 'bold',
