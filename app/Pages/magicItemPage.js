@@ -34,7 +34,7 @@ function displayMagicRings()
 function displayWondorousItems()
 {
     return MAGICITEMS_WONDROUS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunment={armor.attunement} decription={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+        <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunment={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
 export default MagicItemPage = ({navigation, route}) =>
