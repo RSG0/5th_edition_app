@@ -2,6 +2,7 @@ import { Text, StyleSheet, View, Dimensions } from "react-native"
 import { Dropdown } from "react-native-element-dropdown"
 import { COLORS, FONTSIZE, DROPDOWNSTYLE } from "../constants/theme"
 
+const {width, height} = Dimensions.get('screen');
 
 export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, value}) =>
 {
@@ -38,7 +39,6 @@ export default AbilityDropdown = ({name, data, isStandardArray, onAbilityPress, 
         </View>
     )
 }
-const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
     labelStyle: {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginRight: width * .01,
     },
     dropdownLevel: {
-        width: 70,
+        minWidth: width * .15,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,

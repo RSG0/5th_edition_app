@@ -1,10 +1,11 @@
-import { View, StyleSheet, Text, StatusBar } from "react-native";
+import { View, StyleSheet, Text, StatusBar, Dimensions } from "react-native";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dropdown } from "react-native-element-dropdown";
 import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS } from "../../../constants/characterinformation/subclassinfo";
 import { useEffect, useState } from "react";
 import NextButton from "../../../components/buttons/nextButton";
+const {width, height} = Dimensions.get('screen');
 
 export default SubclassesPage = ({navigation, route}) =>
 {
@@ -163,7 +164,7 @@ const styles = StyleSheet.create(
     },
     dropdown: 
     {
-        width: 250,
+        width: width * .4,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,

@@ -25,13 +25,14 @@ const styles = StyleSheet.create(
     button: {
         backgroundColor: COLORS.mainColor,
         borderWidth: 2,
-        width: width * .6, 
+        minWidth: width * .5, 
         // height: height *.05,
         // maxWidth: width * .9,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
+        paddingHorizontal: 10,
         marginHorizontal: width * .02,
         marginVertical: height * .01,
 
@@ -49,7 +50,7 @@ const styles = StyleSheet.create(
     disableFixedWidth: {
         width: 'auto',
         paddingHorizontal: 15,
-        marginHorizontal: width * 0.02, // Explicitly add margins for this case
+        marginHorizontal: width * 0.0, // Explicitly add margins for this case
         marginVertical: height * 0.01,
     }
 

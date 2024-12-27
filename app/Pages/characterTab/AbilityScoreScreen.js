@@ -9,6 +9,9 @@ import AbilityDropdown from '../../../components/abilityDropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NUMBER_TWENTY } from '../../../constants/characterinformation/characterinfo';
 
+const {width, height} = Dimensions.get('screen');
+
+
 const AbilityScoreScreen = ({ navigation, route }) => {
     const {name, classes, backgrounds, level, selectedRace, selectedSubrace} = route.params;
     const [abilityArray, setAbilityArray] = useState([]);

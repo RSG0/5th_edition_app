@@ -1,10 +1,13 @@
-import { View, StyleSheet, Text, StatusBar, FlatList, TouchableOpacity, } from "react-native";
+import { View, StyleSheet, Text, StatusBar, FlatList, TouchableOpacity, ScrollView, Dimensions} from "react-native";
 import { FONTSIZE, COLORS } from "../../../constants/theme";
 import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformation/characterinfo";
 import NextButton from "../../../components/buttons/nextButton";
 import SkillsButton from "../../../components/buttons/selectionButton"
 import { SafeAreaView } from "react-native-safe-area-context";
 import {useState } from "react";
+
+const {width, height} = Dimensions.get('screen');
+
 const SelectingSkillsScreen = ({route, navigation}) =>
 {
     const {name, backgrounds, classes, level, selectedRace, con, int, wis, cha} = route.params;
@@ -28,7 +31,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
             return combinedSkills
         }
     }
-    const handleSkills = (skill) =>
+    const handleSkills = (skill, i) =>
     {
         setSelectSkills(prevSkills => { 
         // remove redundant skills that conflict with background
@@ -52,15 +55,23 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     function displayClassSkills(selectedClass, selectedBackground) 
     { 
         const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass); // finds the chosen class
-        const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground) //finds the chosen background
-        const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s)) //removes all skills that are in BOTH CLASS_SKILLS and backgroundSkills
+        const backgroundSkills = BACKGROUNDS.find((skill) => skill.label === selectedBackground); //finds the chosen background
+        const filterSkills = classSkills.skills.filter(s => !backgroundSkills.skillProficiencies.includes(s)); //removes all skills that are in BOTH CLASS_SKILLS and backgroundSkills
 
-        console.log(selectSkills);
-        if (filterSkills) { // if the filterSkills array contains something
-            return filterSkills.map((skill, index) => (
-                <SkillsButton key={index} name={skill} disableFixedWidth={true} isSelected={selectSkills.includes(skill)}     onSelectionPress={() => handleSkills(skill)} // Ensure proper callback
-                ></SkillsButton>
-                /* <TouchableOpacity style={{width: 10, height: 20, backgroundColor: 'red'}}></TouchableOpacity> */
+        // console.log(selectSkills);
+        if (filterSkills) { 
+            // if the filterSkills array contains something
+            console.log(filterSkills);
+            return filterSkills.map((skill, i) => (
+                <SkillsButton 
+                    key={i} 
+                    name={skill} 
+                    disableFixedWidth={true} 
+                    isSelected={selectSkills.includes(skill)}     
+                    onSelectionPress={() => handleSkills(skill, i)} // Ensure proper callback
+                >
+
+                </SkillsButton>
                 
             ));
         } else {
@@ -74,25 +85,31 @@ const SelectingSkillsScreen = ({route, navigation}) =>
                 <Text key={index}>{skill}, </Text>
             ));
         } else {
-            return <Text>No skills available for this background.</Text>;
+            return <Text>No skills available for this background.</Text>
         }
     }
 
     return (
         <SafeAreaView style={styles.viewStyle}>
         <View style={styles.viewStyle}>
+
         <Text>Races: {selectedRace}</Text>
         <Text style={styles.text}>Background Skills: {displayBackgroundSkills(backgrounds)}</Text>
-        {/* {console.log(checkForChange(classes))} */}
         <Text style={styles.text}>Select {checkForSkills(classes)} Skills: </Text>
-        <Text>{(displayClassSkills(classes, backgrounds))} </Text> 
-            {/* <Text style={styles.textStyle}>This is the Selecting Skills Screen</Text> */}
+        <ScrollView 
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+         >
+        {displayClassSkills(classes, backgrounds)}
+        {/* <View style={styles.bottomSpacing} /> */}
+         </ScrollView>
         <NextButton
             navigation={navigation}
             nextScreen={"Select Subclasses"}
             params={{name, backgrounds, classes, selectedRace, level, con, int, wis, cha}}
             checkforChange={() => checkForChange}/>
         <Text>You've chosen: {skillChosen(selectSkills)} </Text>
+
         </View>
         </SafeAreaView>
     )
@@ -100,6 +117,27 @@ const SelectingSkillsScreen = ({route, navigation}) =>
 }
 const styles = StyleSheet.create(
 {
+    scrollViewContent: {
+        padding: 10,
+        flexGrow: 1, // Ensure the content can grow and trigger scrolling
+        justifyContent: 'flex-start', // Adjust to align items at the top
+        alignItems: 'center', // Center the content horizontally
+    },
+    bottomSpacing: {
+        height: height * 0.2, // Add extra spacing at the bottom
+    },
+    container: {
+        // flex: 1,
+        flexGrow: 1,
+        padding: 10,
+        backgroundColor: COLORS.background,
+        flexDirection: 'row',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center', // Adjust spacing between items
+        alignItems: 'center', // Center align items
+        marginBottom: 30
+    },
     skillsContainer:{
         flexWrap: 'wrap', // Allow buttons to wrap
         flexDirection: 'row', // Arrange buttons in a row

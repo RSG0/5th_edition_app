@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 import { CANTRIPS, FIRST_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS } from '../../../constants/characterinformation/spells';
-import { COLORS } from '../../../constants/theme';
+import { COLORS, FONT } from '../../../constants/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NextButton from '../../../components/buttons/nextButton';
 import { FONTSIZE } from '../../../constants/theme';
@@ -110,7 +110,7 @@ export default SpellPage = ({navigation, route}) =>
     const renderCantrips = () =>
     {
       return(
-        <Text>Cantrips: __/{calculateNumOfCantrips()}</Text>
+        <Text style={{fontSize: FONTSIZE.medium}}>Cantrips: __/{calculateNumOfCantrips()}</Text>
       )
     }
     const renderAll = () =>
@@ -121,8 +121,8 @@ export default SpellPage = ({navigation, route}) =>
     <View>
     {renderCantrips()}
     {renderSpells()}
-    <Text>Chosen Class: {classes}</Text>
-    <Text>Prepared Spells:</Text>
+    <Text style={{fontSize: FONTSIZE.medium}}>Chosen Class: {classes}</Text>
+    <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells:</Text>
     </View>  )
     }
     else 
@@ -141,7 +141,7 @@ export default SpellPage = ({navigation, route}) =>
         return calculateNumOfSpellsKnown() + Number(level)
       }
       return(
-        <Text>Prepared Spells: ___/{numOfSpellsKnown()} </Text> // Class Level + Class MOD
+        <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells: ___/{numOfSpellsKnown()} </Text> // Class Level + Class MOD
       )
     }
     const toggleDropdown = (toggle, toggleState) => {
@@ -170,7 +170,7 @@ export default SpellPage = ({navigation, route}) =>
           <View>
             <View style={[styles.dropdownClosed, {marginBottom: state? 0: 10 }]}>
             <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ fontSize: 18 }}>{text}</Text>
+                <Text style={{ fontSize: FONTSIZE.medium }}>{text}</Text>
                 <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
             </TouchableOpacity>
             </View>
@@ -179,7 +179,7 @@ export default SpellPage = ({navigation, route}) =>
       {state && (
           <View style={{ }}>
           {/* <Text>This is more information about the item.</Text> */}
-          <Text>{renderDropdown(spellList)}</Text>
+          <Text style={{fontSize: FONTSIZE.medium}}>{renderDropdown(spellList)}</Text>
           
         </View>
       )}

@@ -1,83 +1,36 @@
-// Testing Page
-import { View, StyleSheet, Text, ScrollView, SafeAreaView, TouchableOpacity, Dimensions, Modal, TouchableWithoutFeedback } from "react-native";
-import { characterBorderWidth, COLORS, FONTSIZE } from "../../../constants/theme";
-import { globalStyles } from "../../../constants/global";
-import MagicItemModalRough from "../../../components/modals/magicItemModal(Rough)";
-import MagicItemModal from "../../../components/modals/magicItemModal";
-import { useState } from "react";
-import MagicItemIcon from "../../../components/magicItemIcon";
+import { ScrollView, StyleSheet, View } from 'react-native';
+import SkillsButton from "../../../components/buttons/selectionButton"
+import { useState } from 'react';
 
-const {width, height} = Dimensions.get('screen');
-export default TestingPage = () =>
-{
+export default function SelectingSkillsScreen() {
+    const skills = ['Skill 1', 'Skill 2', 'Skill 3'];
+    const [selectedSkill, setSelectedSkill] = useState(null);
+
+    const handleSelectionPress = (name) => {
+        setSelectedSkill(name);
+    };
 
     return (
-        <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
-            <View style={[globalStyles.centerRow, {flex: 1}]}>
-                <MagicItemIcon key={"23"} name={"Dragon"} type={"Armor"} weight={23} attunment={true} decription={"Loren"} rarity={"Uncommon"} charges={true} numOfCharges={4}/>
-            </View>
-            
-        </SafeAreaView>
+        <ScrollView contentContainerStyle={styles.container}>
+            {skills.map((skill, index) => (
+                <SkillsButton
+                    key={index}
+                    name={skill}
+                    isSelected={selectedSkill === skill}
+                    onSelectionPress={handleSelectionPress}
+                />
+            ))}
+        </ScrollView>
     );
 }
-const squareSize = 50
-const styles = StyleSheet.create(
-{
-    grayBackground: {
-        paddingVertical: 10,
-        borderRadius: 10,
-        margin: 20,
-        // paddingVertical: 10,
-        backgroundColor: COLORS.grayBackground,
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        flex: 1
-    },
-    viewStyle: {
-        
-        // backgroundColor: COLORS.background,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
-    },
-    textStyle: {
-        fontWeight: 'bold',
-        fontSize: FONTSIZE.xxlarge,
-        textAlign: 'center'
-    },
-    spellcastingAbilityBox:
-    {
-        padding: 10,
-        borderWidth: 4,
-        borderRadius: 10,
-        backgroundColor: 'red'
-    },
-    box:
-    {
-        margin: 10,
-        justifyContent: 'center',
-        width: squareSize,
-        height: squareSize,
-        borderWidth: 4,
-        borderRadius: 10
-    },
-    modalOverlay: {
+
+const styles = StyleSheet.create({
+    container: {
         flex: 1,
-        backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent grey background
-        // justifyContent: "center", // Center vertically
-        // alignItems: "center", // Center horizontally
+        padding: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-    modalContent: {
-        position: "absolute", // Make content independent of the overlay
-        backgroundColor: "", // Ensure modal content has a white background
-        // borderRadius: 20,
-        // padding: 20,
-        // width: width * 0.9,
-        // height: height * 0.4,
-        alignSelf: "center",
-        top: height * 0.3, // Adjust to vertically center the modal content
-    },
-}
-)
+});

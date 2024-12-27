@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     button: {
         width: width * .3,
         height: height * .08,
-        marginTop: "5%",
+        marginTop: width * .01,
         backgroundColor: COLORS.mainColor,
         alignItems: 'center',
         justifyContent: 'center',
