@@ -6,6 +6,7 @@ import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WOND
 import MagicItemIcon from "../../components/magicItemIcon";
 import NewMagicItemButton from "../../components/buttons/newMagicItemButton";
 import { useState, useEffect } from "react";
+import CustomMagicItemIcon from "../../components/customMagicItemIcon";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -13,36 +14,23 @@ function displayMagicArmor()
 {
     return MAGICITEMS_ARMOR.map((armor, index) => (
 
-        <MagicItemIcon key={armor.name} name={armor.name} type={"Armor"} weight={armor.weight} attunment={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+        <MagicItemIcon key={armor.name} name={armor.name} type={"Armor"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
 function displayMagicPotions()
 {
     return MAGICITEMS_POTIONS.map((armor, index) => (
-        <MagicItemIcon key={index + 1} name={armor.name} type={"Potion"} weight={armor.weight} attunment={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+        <MagicItemIcon key={index + 1} name={armor.name} type={"Potion"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
 function displayMagicRings()
 {
     return MAGICITEMS_RINGS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Ring"} weight={armor.weight} attunment={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+        <MagicItemIcon key={index} name={armor.name} type={"Ring"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
-function displayCustomItems(customMagicItems) {
-    return customMagicItems.map((item, index) => (
-        <MagicItemIcon
-            key={index}
-            name={item.name}
-            type={item.itemType || "Custom Item"}
-            weight={item.weight || 0}
-            attunment={item.attunement}
-            description={item.description}
-            rarity={item.rarity}
-            charges={item.isChargable}
-            numOfCharges={item.numOfCharges}
-        />
-    ));
-}
+
+
 function displayWondorousItems()
 {
     return MAGICITEMS_WONDROUS.map((armor, index) => (
@@ -89,6 +77,26 @@ export default MagicItemPage = ({navigation, route}) =>
         const updatedMagicItem = customMagicItem.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
         setCustomMagicItem(updatedMagicItem);
     };
+
+    function displayCustomItems(customMagicItems) {
+        return customMagicItems.map((item, index) => (
+            <CustomMagicItemIcon
+                key={index}
+                name={item.name}
+                type={item.itemType || "Custom Item"}
+                weight={item.weight || 0}
+                attunement={item.attunement}
+                description={item.description || "N/A"}
+                rarity={item.rarity}
+                charges={item.isChargable}
+                numOfCharges={item.numOfCharges}
+                removeItem={() => removeMagicItem(index)}
+                
+            />
+
+        ));
+
+    }
 
     useEffect(() => {
         if (name) {

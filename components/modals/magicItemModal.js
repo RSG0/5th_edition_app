@@ -3,9 +3,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { globalStyles } from "../../constants/global";
-export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,rarity, description, weight}) =>
+export default MagicItemModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
 {
-    // {console.log("Rarity is: " + rarity)}
+    // {console.log("Are charges detected: " + charges)}
     const getRarityStyle = (rarity) => {
         switch (rarity?.toLowerCase()) {
             case "uncommon":
@@ -33,26 +33,28 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
     }
     const handleAttunement = (isAttunement) =>
     {
-        if (isAttunement === true)
+        if (isAttunement === String)
+        {
+            console.log("isAttunement is a String");
+        }
+        if (isAttunement === "True")
             return "Yes"
-        else if (isAttunement === false)
+        else if (isAttunement === "False")
         {
             return "No"
         }
-        else
-        {
-            return "No"
-        }
+
     }
     const handleCharges = (isACharge, num) =>
     {
-        if (isACharge === true)
+        if (isACharge === "True")
         {
             // console.log(num);
             return `(${Number(numOfCharges)}/${num})`;
         }
         else
         {
+            console.log("No Charges Detected");
             return "N/A"
         }
     }
@@ -84,14 +86,14 @@ export default MagicItemModal = ({name, type, attunment, charges, numOfCharges,r
                     <Text >Weight: {weight} lbs.</Text>
                     <View style={{ position: 'absolute', right: -10, width: width * 0.5, justifyContent: 'center', height: height * 0.08, flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', backgroundColor: '' }}>
                         <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>Attunement: </Text>
-                        <Text style={styles.upperPortion}>{handleAttunement(attunment)}</Text>
+                        <Text style={styles.upperPortion}>{handleAttunement(attunement)}</Text>
                         <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold' }}>Charges: </Text>
                         <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
                         
                         <Text style={{ fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }}>Rarity: </Text>
                         <Text style={[{ fontSize: FONTSIZE.small, fontStyle: 'italic' }, getRarityStyle(rarity)]}>{rarity}</Text>
                     </View>
-
+                    {/* {    console.log("The description is: \n\n" + description) } */}
                     </View>
         </View>
 

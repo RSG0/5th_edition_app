@@ -13,14 +13,14 @@ const {width, height} = Dimensions.get('screen');
 
 export default NewMagicItemPage = ({navigation}) => {
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState("Test03");
     const [itemType, setItemType] = useState(null);
     const [weaponType, setWeaponType] = useState(null);
     const [isChargable, setIsChargable] = useState(null);
     const [numOfCharges, setNumOfCharges] = useState(null);
     const [attunement, setAttunment] = useState(false);
     const [rarity, setRarity] = useState(null);
-    const [description, setDescription] = useState(null);
+    const [description, setDescription] = useState("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
     const [weight, setWeight] = useState(0);
 
     const [itemOptions, setItemOptions] = useState([]);
@@ -172,16 +172,18 @@ export default NewMagicItemPage = ({navigation}) => {
                             placeholder="enter text here...  (optional)"
                             style={[styles.textInput]} 
                             value={description} 
-                            onChangeText={item => setDescription(item)}
                             multiline={true}
                             textAlignVertical="top"
                             scrollEnabled={false}
+                            onChangeText={setDescription}
+
                             // onScroll={false}
                         />
                     </View>
                  <View style={styles.inputRow}>
                      <Text style={styles.labelStyle}>Weight:</Text>
                      <TextInput style={styles.weightinput} 
+                        keyboardType="numeric"
                         placeholderStyle={styles} 
                         placeholder={"..."} 
                         value={weight} 
@@ -191,7 +193,7 @@ export default NewMagicItemPage = ({navigation}) => {
                  <NextButton 
                  navigation={navigation} 
                  nextScreen={"Magic-Item Page"} 
-                 params={{name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, weight}}
+                 params={{name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, weight, description}}
                  checkforChange={() => checkForChange(name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight)}/>
                  </View>
                     {console.log("Name: " + name)}

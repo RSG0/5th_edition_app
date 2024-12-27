@@ -6,9 +6,10 @@ import { globalStyles } from "../constants/global";
 const {width, height} = Dimensions.get('screen');
 
 
-export default MagicItemIcon = ({name, type, attunement, charges, numOfCharges,rarity, description, weight} ) =>
+export default CustomMagicItemIcon = ({name, type, attunement, charges, numOfCharges, rarity, description, weight, removeItem} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
+
     // Function to map rarity to styles
     const getRarityStyle = (rarity) => {
         switch (rarity?.toLowerCase()) {
@@ -29,8 +30,11 @@ export default MagicItemIcon = ({name, type, attunement, charges, numOfCharges,r
 
     return(
         <View style={styles.item}>
+
             <TouchableOpacity style={styles.touchable} onPress={ () => setIsModalVisible(true)}>
-                <View style={styles.square}/> 
+                <TouchableOpacity style={[styles.square, {justifyContent: 'center'}]} onPress={removeItem}>
+                    <Text style={[globalStyles.centerRow, {fontSize: FONTSIZE.small, textAlign: 'center', fontWeight: 'black'}]}>X</Text>
+                </TouchableOpacity> 
                 {/**Print the square */}
                 <View style={styles.textContainer}>
                     <Text style={styles.itemTitle}>{name}</Text>
@@ -60,6 +64,8 @@ export default MagicItemIcon = ({name, type, attunement, charges, numOfCharges,r
                         </View>
                     ) : null}
                 </View>
+                {/* {    console.log("The description is: \n" + description) } */}
+
             </TouchableOpacity>
 
                 <Modal
@@ -79,11 +85,10 @@ export default MagicItemIcon = ({name, type, attunement, charges, numOfCharges,r
                                 type={type}
                                 attunement={attunement}
                                 charges={charges}
-                                description={description}
                                 numOfCharges={numOfCharges}
-                                weight={weight}
                                 rarity={rarity}
-
+                                description={description}
+                                weight={weight}
                                 />
                             </View>
                 </Modal>
