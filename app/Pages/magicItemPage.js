@@ -125,6 +125,7 @@ export default MagicItemPage = ({navigation, route}) =>
                 <Text style={styles.textStyle}>Custom Magic Items:</Text>
                 {displayCustomItems(customMagicItem)}
             </View>
+            <View style={{margin: height * .25}}/>
             </ScrollView>
             <NewMagicItemButton navigation={navigation} nextScreen={"Create Magic-Item Page"}/>
 
