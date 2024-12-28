@@ -53,10 +53,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
             return (
                 <>
                     <Text style={[styles.textStyle, { marginLeft: 10 }]}>Select 1 Item</Text>
-                    <ScrollView
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                    >
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         {equip.map((item, i) => (
                             <SelectButton 
                                 key={i} 
@@ -122,7 +119,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
             </ScrollView>
         </SafeAreaView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     viewStyle: {
