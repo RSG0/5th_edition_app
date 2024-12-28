@@ -6,6 +6,7 @@ import { COLORS, FONT } from '../../../constants/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NextButton from '../../../components/buttons/nextButton';
 import { FONTSIZE } from '../../../constants/theme';
+import SelectionButton from '../../../components/buttons/selectionButton';
 
 export default SpellPage = ({navigation, route}) => 
 {
@@ -19,18 +20,23 @@ export default SpellPage = ({navigation, route}) =>
     return true
   }
 
-  // drops down spells
+  // 
+  // Drops down spells
   const [cantripDropdown, setCantripDropdown] = useState(false); 
   const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
   const [secondLevelDropdown, setSecondLevelDropdown] = useState(false);
   const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
   const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
 
-  const [isSpellcaster, setIsSpellcaster] = useState(false);
+  const [isSpellcaster, setIsSpellcaster] = useState(false); 
 
   const [isSecondLevel, setIsSecondLevel] = useState(false);
   const [isThirdLevel, setIsThirdLevel] = useState(false);
   const [isFourthLevel, setIsFourthLevel] = useState(false);
+
+  // const [numOfFirstLevelSpells, setNumOfFirstLevelSpells] = useState([]);
+  const [numOfLevelSpells, setNumOfLevelSpells] = useState([]);
+  const [numOfCantrips, setNumOfCantrips] = useState([]);
 
 
     useEffect( () =>
@@ -42,7 +48,7 @@ export default SpellPage = ({navigation, route}) =>
 
     const verifySpellcaster = () =>
     {
-      if (classes === "Fighter" || classes === "Monk" || classes === "Barbarian") {setIsSpellcaster(false)}
+      if (classes === "Fighter" || classes === "Monk" || classes === "Barbarian") {setIsSpellcaster(false)} //
       else {setIsSpellcaster(true)}
     }
     const calculateScoreMod = (score) =>
@@ -81,8 +87,13 @@ export default SpellPage = ({navigation, route}) =>
           else if (level <= 9) return 5;
           else if (level <= 20) return 6;
         }
+      else 
+      {
+        //ERROR
+        return -1;
+      }
     }
-    const calculateNumOfSpellsKnown = () =>
+    const calculateRelavantMOD = () =>
     {
       if (classes === "Cleric" || classes === "Druid" || classes === "Ranger") {return calculateScoreMod(wis)}
       else if (classes === "Wizard" || classes === "Artificer") {return calculateScoreMod(int)}
@@ -92,6 +103,7 @@ export default SpellPage = ({navigation, route}) =>
     {
       if (classes === "Cleric" || classes === "Wizard" || classes === "Sorceror" || classes === "Druid")
       {
+        //5th-9th still require spells to be added to spells.js
         if (level >= 17) {} // opens 9th level spells
         if (level >= 15) {} // opens 8th level spells
         if (level >= 13) {} // opens 7th level spells
@@ -102,15 +114,18 @@ export default SpellPage = ({navigation, route}) =>
         if (level >= 3) {setIsSecondLevel(true)}  // opens 2rd level spells
           
       }
-      else if (classes === "Paladin" || classes === "Ranger")
+      else if (classes === "Paladin" || classes === "Ranger") //Paladin and Ranger are half casters and require different spells
       {
-
+        if (level >= 17) {}  // opens 5th level spells
+        if (level >= 13) {setIsFourthLevel(true)}  // opens 4th level spells
+        if (level >= 9) {setIsThirdLevel(true)}  // opens 3rd level spells
+        if (level >= 5) {setIsSecondLevel(true)}  // opens 2rd level spells
       }
     }
     const renderCantrips = () =>
     {
       return(
-        <Text style={{fontSize: FONTSIZE.medium}}>Cantrips: __/{calculateNumOfCantrips()}</Text>
+        <Text style={{fontSize: FONTSIZE.medium}}>Cantrips: {numOfCantrips.length}/{calculateNumOfCantrips()}</Text>
       )
     }
     const renderAll = () =>
@@ -118,30 +133,46 @@ export default SpellPage = ({navigation, route}) =>
     if (isSpellcaster)
     {
     return(      
-    <View>
-    {renderCantrips()}
-    {renderSpells()}
-    <Text style={{fontSize: FONTSIZE.medium}}>Chosen Class: {classes}</Text>
-    <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells:</Text>
-    </View>  )
+      <View>
+      {renderCantrips()}
+      {renderSpells()}
+      <Text style={{fontSize: FONTSIZE.medium}}>Chosen Class: {classes}</Text>
+      <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells:</Text>
+      </View>  )
     }
     else 
     {
       return(<Text style={styles.textStyle}>No Spells currently available</Text>)
     }
   }
+
+  const numOfSpellsKnown = () =>
+    {
+      if (calculateRelavantMOD() + Number(level) < 1)
+      {
+        console.log("calculateRelavantMOD" + calculateRelavantMOD() );
+        console.log("Level:", level);
+        return 1; //Further testing is needed to see if this works as intended
+      }
+      return calculateRelavantMOD() + Number(level)
+    }
+  
+  // const numOfCantripsKnown = () =>
+  // {
+  //   if (classes === "Wizard" || classes === "Cleric")
+  //   {
+
+  //   }
+  //   else if (classes === "Sorcerer" || )
+  //   {}
+  // }
     const renderSpells = () =>
     {
-      const numOfSpellsKnown = () =>
-      {
-        if (calculateNumOfSpellsKnown() + Number(level) < 1)
-        {
-          return 1;
-        }
-        return calculateNumOfSpellsKnown() + Number(level)
-      }
+      console.log("NumOfCantrips:", numOfCantrips.length);
+
+      console.log("NumOfLevelSpells:", numOfLevelSpells.length);
       return(
-        <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells: ___/{numOfSpellsKnown()} </Text> // Class Level + Class MOD
+        <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells: {numOfLevelSpells.length}/{numOfSpellsKnown()} </Text> // Class Level + Class MOD
       )
     }
     const toggleDropdown = (toggle, toggleState) => {
@@ -151,7 +182,7 @@ export default SpellPage = ({navigation, route}) =>
     {
       // const availableSpells = CANTRIPS.filter(spell => spell.usableBy.map(class_in_list => {class_in_list === classes; console.log(class_in_list)}))
       const availableSpells = spellList.filter(spell => spell.usableBy.includes(classes))
-      console.log(classes);
+      console.log("Classes: " + classes);
       availableSpells.forEach(spell => console.log(spell.name))
       const availableString = availableSpells.map(spells => spells.name).join(", ")
       console.log(availableString)
@@ -162,6 +193,68 @@ export default SpellPage = ({navigation, route}) =>
         </>
       )
     }
+    function checkForSpells()
+    {
+        return 
+    }
+    const handleSpells = (spell, calculateMaxSpells, setSpells) =>
+      {
+          // console.log("NumOfSpell:", numOfSpell);
+          setSpells(prevSpells => { 
+          // remove redundant spells that conflict with background
+          if (prevSpells.includes(spell))  // if the spell is already selected remove it from the array
+          {
+            console.log("Already exists")
+              return prevSpells.filter((s) => s !== spell)
+          }
+          else if (prevSpells.length < calculateMaxSpells() ) // if the spell is less than the max than add it to the array
+          {
+              console.log("Adding to Array");
+              return  [...prevSpells, spell] 
+  
+          }
+          else // if the spell selected are more than the max remove the oldest skill in the array
+          {
+              console.log("More than accepted paramater")
+              return [...prevSpells.slice(1), spell]
+          }
+      })
+  
+      }
+    const renderDropDownButtons = (spellList, spellLevel) =>
+      {
+        //availableSpells: Lists all the spells the player can access
+        const availableSpells = spellList.filter(spell => spell.usableBy.includes(classes))
+        if (spellLevel == "Cantrips") // If the spell is a Cantrip have it have its own numbering system
+        {
+          return availableSpells.map((spell, i) => (
+            <SelectionButton
+              key={i}
+              name={spell.name}
+              disableFixedWidth={true}
+              // Uncomment the lines below if these props are needed
+              isSelected={numOfCantrips.includes(spell)}
+              onSelectionPress={() => handleSpells(spell, calculateNumOfCantrips, setNumOfCantrips)}
+            />
+          ));        
+        }
+        // availableSpells.forEach(spell => console.log(spell.name))
+        else
+        {
+          return availableSpells.map((spell, i) => (
+            <SelectionButton
+              key={i}
+              name={spell.name}
+              disableFixedWidth={true}
+              // Uncomment the lines below if these props are needed
+              isSelected={numOfLevelSpells.includes(spell)}
+              onSelectionPress={() => handleSpells(spell, numOfSpellsKnown, setNumOfLevelSpells)}
+            />
+          ));
+        }
+    };
+    //Semi Colons matter
+    
     const dropdown = (text, setState, state, spellList, isActive) =>
     {
       if (isActive && isSpellcaster)
@@ -179,8 +272,8 @@ export default SpellPage = ({navigation, route}) =>
       {state && (
           <View style={{ }}>
           {/* <Text>This is more information about the item.</Text> */}
-          <Text style={{fontSize: FONTSIZE.medium}}>{renderDropdown(spellList)}</Text>
-          
+          {/* <Text style={{fontSize: FONTSIZE.medium}}>{renderDropDownButtons(spellList)}</Text> */}
+          {renderDropDownButtons(spellList, text)}          
         </View>
       )}
       </View>
@@ -199,7 +292,7 @@ export default SpellPage = ({navigation, route}) =>
         {renderAll()}
         <Text>Races: {selectedRace}</Text>
 
-        {console.log(selectedRace)}
+        {/* {console.log(selectedRace)} */}
         {dropdown("Cantrips", setCantripDropdown, cantripDropdown, CANTRIPS, true)}
         {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, FIRST_LEVEL_SPELLS, true)}
         {dropdown("2nd Level Spells", setSecondLevelDropdown, secondLevelDropdown, SECOND_LEVEL_SPELLS, isSecondLevel)}
@@ -208,7 +301,7 @@ export default SpellPage = ({navigation, route}) =>
         <View style={styles.nextButton}> 
           <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level, selectedRace, con ,int, wis, cha}}
+            params={{name, classes, backgrounds, level, selectedRace, con ,int, wis, cha, numOfCantrips, numOfLevelSpells}}
             checkforChange={() => checkForChange()}
             nextScreen={"Hit Point"}
           />
