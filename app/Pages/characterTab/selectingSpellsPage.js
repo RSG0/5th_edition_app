@@ -41,6 +41,7 @@ export default SpellPage = ({navigation, route}) =>
 
     useEffect( () =>
     {
+      console.log("Classes: " + classes);
       verifySpellcaster()
       // console.log(isSpellcaster.length)
       calculateLevelOfSpellsKnown()
@@ -81,7 +82,7 @@ export default SpellPage = ({navigation, route}) =>
           else if (level <= 9) return 4;
           else if (level <= 20) return 5;
         }
-      else if (classes == "Sorceror")
+      else if (classes == "Sorcerer")
         {
           if (level <= 3) return 4;
           else if (level <= 9) return 5;
@@ -97,11 +98,11 @@ export default SpellPage = ({navigation, route}) =>
     {
       if (classes === "Cleric" || classes === "Druid" || classes === "Ranger") {return calculateScoreMod(wis)}
       else if (classes === "Wizard" || classes === "Artificer") {return calculateScoreMod(int)}
-      else if (classes === "Paladin" || classes === "Warlock" || classes === "Bard") {return calculateScoreMod(cha)}
+      else if (classes === "Paladin" || classes === "Warlock" || classes === "Bard" || classes === "Sorcerer") {return calculateScoreMod(cha)}
     }
     const calculateLevelOfSpellsKnown = () =>
     {
-      if (classes === "Cleric" || classes === "Wizard" || classes === "Sorceror" || classes === "Druid")
+      if (classes === "Cleric" || classes === "Wizard" || classes === "Sorcerer" || classes === "Druid")
       {
         //5th-9th still require spells to be added to spells.js
         if (level >= 17) {} // opens 9th level spells
@@ -150,8 +151,8 @@ export default SpellPage = ({navigation, route}) =>
     {
       if (calculateRelavantMOD() + Number(level) < 1)
       {
-        console.log("calculateRelavantMOD" + calculateRelavantMOD() );
-        console.log("Level:", level);
+        // console.log("calculateRelavantMOD" + calculateRelavantMOD() );
+        // console.log("Level:", level);
         return 1; //Further testing is needed to see if this works as intended
       }
       return calculateRelavantMOD() + Number(level)
@@ -168,9 +169,9 @@ export default SpellPage = ({navigation, route}) =>
   // }
     const renderSpells = () =>
     {
-      console.log("NumOfCantrips:", numOfCantrips.length);
+      // console.log("NumOfCantrips:", numOfCantrips.length);
 
-      console.log("NumOfLevelSpells:", numOfLevelSpells.length);
+      // console.log("NumOfLevelSpells:", numOfLevelSpells.length);
       return(
         <Text style={{fontSize: FONTSIZE.medium}}>Prepared Spells: {numOfLevelSpells.length}/{numOfSpellsKnown()} </Text> // Class Level + Class MOD
       )
@@ -183,9 +184,9 @@ export default SpellPage = ({navigation, route}) =>
       // const availableSpells = CANTRIPS.filter(spell => spell.usableBy.map(class_in_list => {class_in_list === classes; console.log(class_in_list)}))
       const availableSpells = spellList.filter(spell => spell.usableBy.includes(classes))
       console.log("Classes: " + classes);
-      availableSpells.forEach(spell => console.log(spell.name))
+      // availableSpells.forEach(spell => console.log(spell.name))
       const availableString = availableSpells.map(spells => spells.name).join(", ")
-      console.log(availableString)
+      // console.log(availableString)
         return(
         <>
         <Text>{availableString}</Text>
@@ -204,18 +205,18 @@ export default SpellPage = ({navigation, route}) =>
           // remove redundant spells that conflict with background
           if (prevSpells.includes(spell))  // if the spell is already selected remove it from the array
           {
-            console.log("Already exists")
+            // console.log("Already exists")
               return prevSpells.filter((s) => s !== spell)
           }
           else if (prevSpells.length < calculateMaxSpells() ) // if the spell is less than the max than add it to the array
           {
-              console.log("Adding to Array");
+              // console.log("Adding to Array");
               return  [...prevSpells, spell] 
   
           }
           else // if the spell selected are more than the max remove the oldest skill in the array
           {
-              console.log("More than accepted paramater")
+              // console.log("More than accepted paramater")
               return [...prevSpells.slice(1), spell]
           }
       })
