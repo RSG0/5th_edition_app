@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet,ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, FONTSIZE } from "../../constants/theme";
-import EquipmentIcon from "../../components/equipmentIcon";
-import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../constants/characterinformation/equipment"
+import { COLORS, FONTSIZE } from "../../../constants/theme";
+import EquipmentIcon from "../../../components/equipmentIcon";
+import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../../constants/characterinformation/equipment"
 
 
 function displayArmor() {

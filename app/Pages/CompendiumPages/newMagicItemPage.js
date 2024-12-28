@@ -1,12 +1,12 @@
 import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
-import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
+import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import NextButton from "../../components/buttons/nextButton";
-import { MAGICITEMS_RARITY, MAGICITEMS_TYPE as MAGICITEMS_Type, MAGICITEMS_TYPE_WEAPONS } from "../../constants/characterinformation/magicitems";
-import { NUMBER_TWENTY, TRUEORFALSE } from "../../constants/characterinformation/characterinfo";
+import NextButton from "../../../components/buttons/nextButton";
+import { MAGICITEMS_RARITY, MAGICITEMS_TYPE as MAGICITEMS_Type, MAGICITEMS_TYPE_WEAPONS } from "../../../constants/characterinformation/magicitems";
+import { NUMBER_TWENTY, TRUEORFALSE } from "../../../constants/characterinformation/characterinfo";
 
 
 const {width, height} = Dimensions.get('screen');

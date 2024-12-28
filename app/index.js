@@ -8,7 +8,7 @@ import HitPoint from './Pages/characterTab/hitPointScreen';
 import FeaturesPage from './Pages/characterTab/featuresPage';
 
 import AbilityScoreScreen from "./Pages/characterTab/AbilityScoreScreen";
-import SpellPage from './Pages/characterTab/spellPage';
+import SelectingSpellsPage from './Pages/characterTab/selectingSpellsPage';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { COLORS } from "../constants/theme";
@@ -18,8 +18,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import DiceRoller from "./Pages/diceRollerPage"
 import SettingPage from "./Pages/SettingPage";
-import CompendiumPage from "./Pages/compendiumPage";
-import EquipmentPage from "./Pages/equipmentPage";
 
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import CharacterPage from './Pages/characterTab/characterPage';
@@ -29,8 +27,12 @@ import featuresPage from './Pages/characterTab/featuresPage';
 
 import CharacterCarousel from './Pages/CharacterPages/characterCarousel';
 import TestingPage from './Pages/CharacterPages/testingPage2';
-import magicItemPage from './Pages/magicItemPage';
-import NewMagicItemPage from './Pages/newMagicItemPage';
+
+import CompendiumPage from "./Pages/CompendiumPages/compendiumPage";
+import EquipmentPage from "./Pages/CompendiumPages/equipmentPage";
+import magicItemPage from './Pages/CompendiumPages/magicItemPage';
+import NewMagicItemPage from './Pages/CompendiumPages/newMagicItemPage';
+import SpellPage from './Pages/CompendiumPages/spellPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,6 +45,7 @@ function StackNavigator2()
         <Stack.Screen name="Equipment Page" component={EquipmentPage}/>
         <Stack.Screen name="Magic-Item Page" component={magicItemPage}/>
         <Stack.Screen name="Create Magic-Item Page" component={NewMagicItemPage} />
+        <Stack.Screen name="Spells Page" component={SpellPage} />
      </Stack.Navigator>  
     )
 }
@@ -102,7 +105,7 @@ function StackNavigator() {
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
       <Stack.Screen name="Select Subclasses" component={SubclassesPage} />
-      <Stack.Screen name="Spell Page" component={SpellPage} />
+      <Stack.Screen name="Spell Page" component={SelectingSpellsPage} />
       <Stack.Screen name="Hit Point" component={HitPoint} />
       <Stack.Screen name="Select Equipment" component={selectEquipmentScreen} />
       <Stack.Screen name="Secondary Features" component={featuresPage} />
