@@ -15,7 +15,7 @@ const FONT = {
 const { width, height } = Dimensions.get("window");
 
 // Scale function
-const scale = (size) => (width / 375) * size; // Use 375px as a base width for scaling
+export const scale = (size) => (width / 375) * size; // Use 375px as a base width for scaling
 
 const FONTSIZE = {
     xxxsmall: scale(5), // Used for Reach Part of Actions Page

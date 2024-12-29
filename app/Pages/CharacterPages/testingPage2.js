@@ -1,26 +1,16 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import SkillsButton from "../../../components/buttons/selectionButton"
 import { useState } from 'react';
+import { COLORS } from '../../../constants/theme';
+import SpellModal from '../../../components/modals/spellModal(Rough)';
 
-export default function SelectingSkillsScreen() {
-    const skills = ['Skill 1', 'Skill 2', 'Skill 3'];
-    const [selectedSkill, setSelectedSkill] = useState(null);
-
-    const handleSelectionPress = (name) => {
-        setSelectedSkill(name);
-    };
+export default TestingPage = () => 
+{
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            {skills.map((skill, index) => (
-                <SkillsButton
-                    key={index}
-                    name={skill}
-                    isSelected={selectedSkill === skill}
-                    onSelectionPress={handleSelectionPress}
-                />
-            ))}
-        </ScrollView>
+        <View style={{backgroundColor: COLORS.background, flex: 1}}>
+            <SpellModal/>
+        </View>
     );
 }
 

@@ -2,63 +2,36 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Modal, TouchableW
 import { characterBorderWidth, COLORS, FONTSIZE } from "../constants/theme"
 import { useState } from "react";
 import { globalStyles } from "../constants/global";
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5'; //Fire Damage Icon: fire-alt, Cold Damage Icon: snowflake
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6'; //Force Damage Icon: burst, Lightning Damage Icon: bolt-lightning , Bludeoning Damage Icon: hammer, Radiant Damage Icon: cross, Necrotic Damage Icon: "skull", Thunder Damage Icon: "cloud"
+//Piercing Damage Icon "crosshairs": 
+import Entypo from '@expo/vector-icons/Entypo'; //Psychic Damage Icon: eye
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'; //Poison/Acid Damage Icon: bottle-tonic-skull, Slashing Damage Icon "sword", ""
 
 const {width, height} = Dimensions.get('screen');
 
 
-export default SpellIcon = ({name, type, attunement, charges, numOfCharges,rarity, description, weight} ) =>
+
+export default SpellIcon = ({name, school, range, effect, isVocal, isSomatic, requiresMaterials} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    // Function to map rarity to styles
-    const getRarityStyle = (rarity) => {
-        switch (rarity?.toLowerCase()) {
-            case "uncommon":
-                return globalStyles.uncommonRarityBackgroundColor;
-            case "rare":
-                return globalStyles.rareRarityBackgroundColor;
-            case "very rare":
-                return globalStyles.veryRareRarityBackgroundColor;
-            case "legendary":
-                return globalStyles.legendaryRarityBackgroundColor;
-            case "artifact":
-                return globalStyles.artifactRarityBackgroundColor;
-            default:
-                return null; // Default to no background color if rarity is not recognized
-        }
-    };
-
+    
     return(
         <View style={styles.item}>
             <TouchableOpacity style={styles.touchable} onPress={ () => setIsModalVisible(true)}>
                 <View style={styles.square}/> 
                 {/**Print the square */}
                 <View style={styles.textContainer}>
-                    <Text style={styles.itemTitle}>{name}</Text>
-                    <Text style={styles.itemSubtitle}>{type}</Text>
-                    <Text style={styles.itemWeight}>{weight} lbs.</Text>
+                    <Text style={styles.itemTitle}>Fireball</Text>
+                    <Text style={styles.itemSubtitle}>Evocation</Text>
+                    <Text style={styles.itemWeight}>150 FT. Reach</Text>
                 </View>
                 <View style={styles.circleContainer}>
-                    {/* Attunement */}
-                    {attunement ? (
-                        <View style={[styles.circle]}>
-                            <Text style={styles.circleText}>A</Text>
-                        </View>
-                    ) : null}
-
-                    {/* Rarity DONT HAVE COMMENTS ON THE SAME LINE AS CODE. GLITCHES WILL OCCUR*/}
-                    {rarity ? (
-                        <View style={[styles.circle, getRarityStyle(rarity)]}>
-                            <Text style={styles.circleText}>R</Text>
-                        </View>
-                    ) : null}
-
-                    {/* Charges */}
-                    {charges && numOfCharges > 0 ? (
-                        <View style={[styles.circle, styles.chargesColor]}>
-                            <View style={styles.circleCharge} />
-                            <Text style={styles.circleText}>C</Text>
-                        </View>
-                    ) : null}
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={{fontSize: FONTSIZE.small, fontWeight: 'bold', marginRight: width * .01}}>Effect: 8d6</Text>
+                        <FontAwesome6 name="bolt-lightning" size={FONTSIZE.xsmall} color="black" />
+                    </View>
+                    <Text style={{fontSize: FONTSIZE.small, fontWeight: 'bold'}}>V, S, M</Text>
                 </View>
             </TouchableOpacity>
 
@@ -74,7 +47,7 @@ export default SpellIcon = ({name, type, attunement, charges, numOfCharges,rarit
                     </TouchableWithoutFeedback>
                             <View style={styles.modalContent}>
                                 {/* <MagicItemModalRough /> */}
-                                <MagicItemModal
+                                {/* <SpellModal
                                 name={name}
                                 type={type}
                                 attunement={attunement}
@@ -84,7 +57,7 @@ export default SpellIcon = ({name, type, attunement, charges, numOfCharges,rarit
                                 weight={weight}
                                 rarity={rarity}
 
-                                />
+                                /> */}
                             </View>
                 </Modal>
 
@@ -98,7 +71,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',
-        height: height * .1,
+        height: height * .11,
         borderRadius: 10,
         justifyContent: 'space-between',
         marginBottom: 10,
@@ -148,11 +121,11 @@ const styles = StyleSheet.create({
         marginHorizontal: width * .01,
     },
     circleContainer: {
+        margin: width * .02,
+        width: width * .25,
         backgroundColor: "",
-        // flex: 1 /2,
-
         justifyContent: "center",
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: "center", // Centers text inside the red square
     },
     redSquareText: {

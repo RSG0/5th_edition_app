@@ -1,9 +1,9 @@
 import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
+import { characterBorderWidth, COLORS, FONT, FONTSIZE, scale } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { globalStyles } from "../../constants/global";
-export default MagicItemModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
+export default spellModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
 {
     // {console.log("Are charges detected: " + charges)}
     const getRarityStyle = (rarity) => {
@@ -37,28 +37,24 @@ export default MagicItemModal = ({name, type, attunement, charges, numOfCharges,
         {
             console.log("isAttunement is a String");
         }
-        if (isAttunement === true)
+        if (isAttunement === "True")
             return "Yes"
-        else if (isAttunement === false)
+        else if (isAttunement === "False")
         {
             return "No"
-        }
-        else
-        {
-            console.log("isAttunement:", isAttunement)
         }
 
     }
     const handleCharges = (isACharge, num) =>
     {
-        if (isACharge === true)
+        if (isACharge === "True")
         {
             // console.log(num);
             return `(${Number(numOfCharges)}/${num})`;
         }
         else
         {
-            console.log("No Charges Detected");
+            // console.log("No Charges Detected");
             return "N/A"
         }
     }
@@ -77,24 +73,26 @@ export default MagicItemModal = ({name, type, attunement, charges, numOfCharges,
         <View style={styles.viewStyle}>
                     <View style={{ justifyContent: 'space-between', flexDirection:'column'}}>
                     <View>
-                        <Text style={[styles.title]}>{name}:</Text>
-                        <Text style={{fontStyle:'italic', fontSize: FONTSIZE.small}}>{type}</Text>
+                        <Text style={[styles.title]}>Fireball:</Text>
+                        <Text style={{fontStyle:'italic', fontSize: scale(10), width: "44%", backgroundColor: ''}}>3rd Level Transmutation (ritual)</Text>
+                        <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold', marginTop: height* .02, width: "40%", backgroundColor: ''}}>Usable By: <Text style={{fontWeight:'regular'}}>Bard, Druid, Ranger, Sorceror, Wizard </Text></Text>
+
 
                     </View>
                     <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
                         <Text style={{padding: 10, fontSize: FONTSIZE.xsmall}}>
-                        {description}
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
   
                         </Text>
                     </ScrollView>
-                    <Text >Weight: {weight} lbs.</Text>
-                    <View style={{ position: 'absolute', right: -10, width: width * 0.5, justifyContent: 'center', height: height * 0.08, flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', backgroundColor: '' }}>
-                        <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>Attunement: </Text>
+                    <Text >  </Text>
+                    <View style={{ position: 'absolute', right: -10, width: width * 0.47,  justifyContent: 'center', height: "40%", flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', alignItems: 'center', backgroundColor: '' }}>
+                        <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>CT: 1 action</Text>
                         <Text style={styles.upperPortion}>{handleAttunement(attunement)}</Text>
-                        <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold' }}>Charges: </Text>
-                        <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
+                        <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold', marginBottom: height * .05  }}>Range: 10 miles. </Text>
+                        {/* <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text> */}
                         
-                        <Text style={{ fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }}>Rarity: </Text>
+                        <Text style={{ fontSize: FONTSIZE.xsmall, backgroundColor: 'white', fontWeight: 'bold', textAlign: 'center'}}>Duration: Concentration, Up to 10 minutes </Text>
                         <Text style={[{ fontSize: FONTSIZE.small, fontStyle: 'italic' }, getRarityStyle(rarity)]}>{rarity}</Text>
                     </View>
                     {/* {    console.log("The description is: \n\n" + description) } */}
@@ -113,14 +111,15 @@ const styles = StyleSheet.create(
         justifyContent: 'center',
         alignItems: 'center',
         margin: 20,
-        width: width *.9,
-        height: height * .4,
+        width: width * .9,
+        height: height * .5,
         // alignItems: 'center',
         backgroundColor: 'white',
         flexDirection: 'row',
         display: 'flex',
         // justifyContent: 'space-between',
         // alignItems: 'center',
+        
         padding: 20,
         paddingHorizontal: 20,
         borderRadius: 50,

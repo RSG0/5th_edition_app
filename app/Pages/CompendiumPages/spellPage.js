@@ -7,6 +7,7 @@ import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newMagicItemButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
+import SpellIconRough from "../../../components/spellIcon(Rough)";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -112,7 +113,7 @@ export default SpellPage = ({navigation, route}) =>
             <View style={styles.viewStyle}>
                 {/**Armor Section*/}
                 <Text style={styles.textStyle}>Armor:</Text>
-                {displayMagicArmor()}
+                <SpellIconRough/>
                 {/**Potion Section */}
                 <Text style={styles.textStyle}>Potions:</Text>
                 {displayMagicPotions()}

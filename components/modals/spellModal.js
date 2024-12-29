@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { globalStyles } from "../../constants/global";
-export default MagicItemModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
+export default spellModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
 {
     // {console.log("Are charges detected: " + charges)}
     const getRarityStyle = (rarity) => {
@@ -37,21 +37,17 @@ export default MagicItemModal = ({name, type, attunement, charges, numOfCharges,
         {
             console.log("isAttunement is a String");
         }
-        if (isAttunement === true)
+        if (isAttunement === "True")
             return "Yes"
-        else if (isAttunement === false)
+        else if (isAttunement === "False")
         {
             return "No"
-        }
-        else
-        {
-            console.log("isAttunement:", isAttunement)
         }
 
     }
     const handleCharges = (isACharge, num) =>
     {
-        if (isACharge === true)
+        if (isACharge === "True")
         {
             // console.log(num);
             return `(${Number(numOfCharges)}/${num})`;
@@ -114,7 +110,7 @@ const styles = StyleSheet.create(
         alignItems: 'center',
         margin: 20,
         width: width *.9,
-        height: height * .4,
+        height: height * .5,
         // alignItems: 'center',
         backgroundColor: 'white',
         flexDirection: 'row',
