@@ -8,6 +8,7 @@ import NewMagicItemButton from "../../../components/buttons/newMagicItemButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import SpellIconRough from "../../../components/spellIcon(Rough)";
+import SpellIcon from "../../../components/spellIcon";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -17,6 +18,23 @@ function displayMagicArmor()
 
         <MagicItemIcon key={armor.name} name={armor.name} type={"Armor"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
+}
+
+let checkVocal, checkSomatic, checkMaterial;
+const handleComponents = (components) =>
+{
+    if (components.find("V"))
+    {
+        checkVocal = true
+    }
+    if (components.find("S"))
+    {
+        checkSomatic = true
+    }
+    if (components.find("M"))
+    {
+        checkMaterial = true
+    }
 }
 function displayMagicPotions()
 {
@@ -112,19 +130,12 @@ export default SpellPage = ({navigation, route}) =>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
                 {/**Armor Section*/}
-                <Text style={styles.textStyle}>Armor:</Text>
+                <Text style={styles.textStyle}>Cantrips:</Text>
                 <SpellIconRough/>
+                {/* {handleComponents} */}
+                <SpellIcon name={"Create or Destroy Water Tasha Caustic Brew"} school={"Evocation"} range={"150 feet"} effect={"22d10"} damageType={"Fire"}  isVocal={true} isSomatic={true} description={"radius"} requiresMaterials={true}/>
                 {/**Potion Section */}
-                <Text style={styles.textStyle}>Potions:</Text>
-                {displayMagicPotions()}
-                {/**Ring Section */}
-                <Text style={styles.textStyle}>Rings:</Text>
-                {displayMagicRings()}
-                {/**Wondorous Items Section */}
-                <Text style={styles.textStyle}>Wondorous Items:</Text>
-                {displayWondorousItems()}
-                <Text style={styles.textStyle}>Custom Magic Items:</Text>
-                {displayCustomItems(customMagicItem)}
+
             </View>
             <View style={{margin: height * .25}}/>
             </ScrollView>
