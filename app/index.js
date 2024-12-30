@@ -45,6 +45,7 @@ function StackNavigator2()
         <Stack.Screen name="Equipment Page" component={EquipmentPage}/>
         <Stack.Screen name="Magic-Item Page" component={magicItemPage}/>
         <Stack.Screen name="Create Magic-Item Page" component={NewMagicItemPage} />
+        <Stack.Screen name="Create Spell Page" component={NewMagicItemPage} />
         <Stack.Screen name="Spells Page" component={SpellPage} />
      </Stack.Navigator>  
     )

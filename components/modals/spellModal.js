@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE, scale } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { capitalized, globalStyles } from "../../constants/global";
-export default spellModal = ({name, school, isARitual, spellLevel, usableBy, castingTime, range, concentration,duration, description, }) =>
+export default spellModal = ({name, school, isARitual, spellLevel, usableBy, castingTime, range, concentration,duration, description, materials }) =>
 {
     const handleNameSize = (name) =>
     {
@@ -25,9 +25,9 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
                 }
                 return capitalized(duration)
             }
-            console.log(concen);
-            console.log(duration);
-            console.log(handleConcentration());
+            // console.log(concen);
+            // console.log(duration);
+            // console.log(handleConcentration());
             return handleConcentration()
         }
 
@@ -48,6 +48,18 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
         }
         return lvlSpell + " "+ school + " " + rit
     }
+    const handleMaterials = (mat) =>
+    {
+        console.log(mat);
+        if (typeof mat === "string")
+        {
+            return(<Text style={{fontStyle: 'italic'}}>Materials: {mat}{"\n\n"}</Text> )
+        }
+        else
+        {
+            // return(<Text>DRAGon</Text>)
+        }
+    }
     const handleUsability = (isUse) =>
     {
         let use = [];
@@ -67,7 +79,7 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
                 </View>
                 <View style={{width: width * 0.5,  justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', alignItems: 'center', backgroundColor: '' }}>
                     <View>
-                        <Text style={[styles.upperPortion, { fontWeight: 'bold', textAlign: 'center'}]}>CT: 1 action <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.001, fontWeight: 'bold', marginBottom: height * .05  }}>Range: { capitalized(range)} </Text>  </Text>
+                        <Text style={[styles.upperPortion, { fontWeight: 'bold', textAlign: 'center'}]}>CT: {castingTime} <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.001, fontWeight: 'bold', marginBottom: height * .05  }}>Range: { capitalized(range)} </Text>  </Text>
                         {/* <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text> */}
                         
                         <Text style={{ fontSize: FONTSIZE.xsmall, backgroundColor: '', fontWeight: 'bold', textAlign: 'center', marginTop: height * .01}}>Duration: {handleDuration(duration, concentration)} </Text>
@@ -77,7 +89,9 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
 
             <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
                 <Text style={{padding: 10, fontSize: FONTSIZE.xsmall}}>
+                {handleMaterials(materials)} 
                 {description}
+                
   
                 </Text>
             </ScrollView>

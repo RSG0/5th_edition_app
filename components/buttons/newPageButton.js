@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-nati
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-export default NewMagicItemButton = ({ navigation, nextScreen}) =>
+export default NewPageButton = ({ navigation, nextScreen}) =>
 {
     const handlePress = () =>
     {

@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 
 import MagicItemIcon from "../../../components/magicItemIcon";
-import NewMagicItemButton from "../../../components/buttons/newMagicItemButton";
+import NewMagicItemButton from "../../../components/buttons/newPageButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import SpellIconRough from "../../../components/spellIcon(Rough)";
@@ -56,7 +56,7 @@ function displayCantrips()
     (
         <SpellIcon 
         key={index} name={spell.name} spellLevel={"Cantrip"} usableBy={spell.usableBy} school={spell.school} 
-        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} 
+        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} materials={spell.material}
         isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} concentration={spell.concentration} 
         requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description} castingTime={spell.castingTime} duration={spell.duration}/>
     ));
@@ -67,7 +67,7 @@ function displayFirstLevel()
     (
         <SpellIcon 
         key={index} name={spell.name} spellLevel={"1st"} usableBy={spell.usableBy} school={spell.school} 
-        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} 
+        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} materials={spell.material}
         isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} concentration={spell.concentration} 
         requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description} castingTime={spell.castingTime} duration={spell.duration}/>
     ));
@@ -165,9 +165,9 @@ export default SpellPage = ({navigation, route}) =>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
                 {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displayCantrips)}
-                {line()}     
+                {/* {line()}      */}
                 {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel)}
-                {line()}     
+                {/* {line()}      */}
 
                 {/* <SpellIcon name={"Create or Destroy Water Tasha Caustic Brew"} school={"Evocation"} range={"150 feet"} effect={"22d10"} damageType={"Fire"}  isVocal={true} isSomatic={true} description={"radius"} requiresMaterials={true}/> */}
 

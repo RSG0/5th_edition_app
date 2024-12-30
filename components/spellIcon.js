@@ -19,7 +19,7 @@ const capitalized = (word) =>
   return word.charAt(0).toUpperCase()
   + word.slice(1)
 }
-export default SpellIcon = ({name, school, range, effect, castingTime, damageType, ritual, isVocal, isSomatic, description, requiresMaterials, spellLevel, usableBy, duration, concentration} ) =>
+export default SpellIcon = ({name, school, range, effect, castingTime, damageType, ritual, isVocal, isSomatic, description, requiresMaterials, spellLevel, usableBy, duration, concentration, materials} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
     // console.log(usableBy);
@@ -168,7 +168,6 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
                     <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold'}}>{handleComponents(isVocal, isSomatic, requiresMaterials)}</Text>
                 </View>
             </TouchableOpacity>
-
                 <Modal
                     visible={isModalVisible}
                     transparent={true}
@@ -189,6 +188,8 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
                                 spellLevel={spellLevel}
                                 usableBy={usableBy}
                                 description={description}
+                                castingTime={castingTime}
+                                materials={materials}
                                 duration={duration}
                                 concentration={concentration}
                                 />
