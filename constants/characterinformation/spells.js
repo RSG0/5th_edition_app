@@ -1,4 +1,4 @@
-const schools_of_magic = ["abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"]
+export const schools_of_magic = ["abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"]
 // reminder the array starts at 0
 // schools_of_magic[0] = abjuration
 // schools_of_magic[1] = conjuration

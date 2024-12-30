@@ -174,7 +174,7 @@ export default SpellPage = ({navigation, route}) =>
             </View>
             <View style={{margin: height * .25}}/>
             </ScrollView>
-            <NewMagicItemButton navigation={navigation} nextScreen={"Create Magic-Item Page"}/>
+            <NewMagicItemButton navigation={navigation} nextScreen={"Create Spell Page"}/>
 
         </SafeAreaView>
     )

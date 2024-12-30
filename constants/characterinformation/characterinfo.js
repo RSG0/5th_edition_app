@@ -19,6 +19,122 @@ export const TRUEORFALSE = [
     {label: "True"},
     {label: "False"}
 ]
+export const SPELL_LEVEL =
+[
+    {label: "Cantrip"},
+    {label: "1st"},
+    {label: "2nd"},
+    {label: "3rd"},
+    {label: "4th"},
+    {label: "5th"},
+    {label: "6th"},
+    {label: "7th"},
+    {label: "8th"},
+    {label: "9th"},
+
+]
+export const RANGE_TYPES = [
+    {label: "Cone"},
+    {label: "Cube"},
+    {label: "Cylinder"},
+    {label: "Line"},
+    {label: "Sphere"},
+];
+
+export const CASTING_TIMES = 
+[
+    { label: "1 Action" },
+    { label: "1 Bonus Action" },
+    { label: "1 Reaction" },
+    { label: "1 Minute" },
+    { label: "10 Minutes" },
+    { label: "1 Hour" },
+    { label: "8 Hours" },
+    { label: "12 Hours" },
+    { label: "24 Hours" },
+];
+export const RANGES = [
+    { label: "Self" },
+    { label: "Touch" },
+    { label: "10 feet" },
+    { label: "15 feet" },
+    { label: "30 feet" },
+    { label: "60 feet" },
+    { label: "90 feet" },
+    { label: "120 feet" },
+    { label: "150 feet" },
+    { label: "300 feet" },
+    { label: "500 feet" },
+    { label: "1 mile" },
+    { label: "Unlimited" },
+    { label: "Special" },
+];
+export const SPECIFIC_RANGE_TYPES = [
+    {label: "5-foot-radius"},
+    {label: "10-foot-radius"},
+    {label: "15-foot-radius"},
+    {label: "20-foot-radius"},
+    {label: "30-foot-radius"},
+    {label: "40-foot-radius"},
+    {label: "50-foot-radius"},
+    {label: "60-foot-radius"},
+    {label: "5-foot-cube"},
+    {label: "10-foot-cube"},
+    {label: "15-foot-cube"},
+    {label: "20-foot-cube"},
+    {label: "30-foot-cube"},
+    {label: "40-foot-cube"},
+    {label: "50-foot-cube"},
+    {label: "60-foot-cube"},
+    {label: "10-foot-cone"},
+    {label: "15-foot-cone"},
+    {label: "30-foot-cone"},
+    {label: "60-foot-cone"},
+    {label: "5-foot-line"},
+    {label: "10-foot-line"},
+    {label: "15-foot-line"},
+    {label: "20-foot-line"},
+    {label: "30-foot-line"},
+    {label: "40-foot-line"},
+    {label: "50-foot-line"},
+    {label: "60-foot-line"},
+    {label: "10-foot-sphere"},
+    {label: "20-foot-sphere"},
+    {label: "30-foot-sphere"},
+    {label: "40-foot-sphere"},
+    {label: "50-foot-sphere"},
+    {label: "60-foot-sphere"},
+];
+export const DURATION_TYPES = [
+    {label: "Instantaneous"},
+    {label: "1 round"},
+    {label: "1 minute"},
+    {label: "10 minutes"},
+    {label: "1 hour"},
+    {label: "8 hours"},
+    {label: "24 hours"},
+    {label: "Until dispelled"},
+    {label: "Until triggered"},
+    {label: "Special"},
+];
+
+export const SPELLCASTERS = 
+[
+    {label: "Bard"},
+    {label: "Cleric"},
+    {label: "Druid"},
+    {label: "Paladin"},
+    {label: "Ranger"},
+    {label: "Sorcerer"},
+    {label: "Warlock"},
+    {label: "Wizard"},
+];
+export const COMPONENTS = 
+[
+    {label: "Vocal"},
+    {label: "Somatic"},
+    {label: "Material"},
+];
 const CLASS_SKILLS = [
     { label: "Barbarian", skills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"] },
     { label: "Bard", skills: ["Acrobatics", "Animal Handling", "Arcana", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth"] },

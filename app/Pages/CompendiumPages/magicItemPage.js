@@ -4,7 +4,7 @@ import { COLORS, FONTSIZE } from "../../../constants/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WONDROUS } from "../../../constants/characterinformation/magicitems";
 import MagicItemIcon from "../../../components/magicItemIcon";
-import NewMagicItemButton from "../../../components/buttons/newMagicItemButton";
+import NewMagicItemButton from "../../../components/buttons/newPageButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 

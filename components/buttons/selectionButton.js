@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, Dimensions, View} from "react-native
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import { useState, useEffect } from "react";
 
-export default SelectionButton = ({name, isSelected, onSelectionPress, disableFixedWidth}) =>
+export default SelectionButton = ({name, isSelected, onSelectionPress, disableFixedWidth, setCustomMinWidth, setHorizontalMargin}) =>
 {
     const handlePress = () => {
         // console.log(`${skill} was pressed`);
@@ -11,7 +11,7 @@ export default SelectionButton = ({name, isSelected, onSelectionPress, disableFi
 
     return (
         <TouchableOpacity 
-        style={[styles.button, isSelected && styles.buttonPressed, disableFixedWidth]} 
+        style={[styles.button, { minWidth: setCustomMinWidth || Dimensions.get('screen').width * 0.5 }, {marginHorizontal: setHorizontalMargin || width * .02},isSelected && styles.buttonPressed, disableFixedWidth]} 
         onPress={handlePress} >
             <Text style={styles.textStyle}>{name}</Text>
         </TouchableOpacity>
@@ -25,15 +25,12 @@ const styles = StyleSheet.create(
     button: {
         backgroundColor: COLORS.mainColor,
         borderWidth: 2,
-        minWidth: width * .5, 
-        // height: height *.05,
-        // maxWidth: width * .9,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
         paddingHorizontal: 10,
-        marginHorizontal: width * .02,
+        // marginHorizontal: width * .02,
         marginVertical: height * .01,
 
 
