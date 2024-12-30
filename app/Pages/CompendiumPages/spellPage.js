@@ -2,63 +2,89 @@ import { View, Text, TouchableOpacity, StyleSheet,ScrollView, Dimensions } from 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WONDROUS } from "../../../constants/characterinformation/magicitems";
+import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
+
 import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newMagicItemButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import SpellIconRough from "../../../components/spellIcon(Rough)";
 import SpellIcon from "../../../components/spellIcon";
+import { CANTRIPS, FIRST_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
 
 const {width, height} = Dimensions.get('screen');
 
-function displayMagicArmor()
-{
-    return MAGICITEMS_ARMOR.map((armor, index) => (
 
-        <MagicItemIcon key={armor.name} name={armor.name} type={"Armor"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
-    ));
-}
-
-let checkVocal, checkSomatic, checkMaterial;
-const handleComponents = (components) =>
-{
-    if (components.find("V"))
+const toggleDropdown = (toggle, toggleState) => {
+    toggle(!toggleState);
+};
+const dropdown = (text, setState, state, isActive, renderSpells) =>
     {
-        checkVocal = true
+      if (isActive)
+      {
+      return(
+          <View>
+            <View style={[styles.dropdownClosed, {marginBottom: state? 0: 10 }]}>
+            <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.textStyle}>{text}</Text>
+                <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
+            </TouchableOpacity>
+            </View>
+  
+        {/**This feature is a JSX exclusive */}
+      {state && (
+          <View style={{ }}>
+
+          {renderSpells()}          
+        </View>
+      )}
+      </View>
+      )
+      }
+      else
+      {
+        // return(<Text>No Spells Available</Text>)
+        //Not needed any more
+      }
     }
-    if (components.find("S"))
-    {
-        checkSomatic = true
-    }
-    if (components.find("M"))
-    {
-        checkMaterial = true
-    }
-}
-function displayMagicPotions()
+
+
+function displayCantrips()
 {
-    return MAGICITEMS_POTIONS.map((armor, index) => (
-        <MagicItemIcon key={index + 1} name={armor.name} type={"Potion"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+    return CANTRIPS.map((spell, index) => 
+    (
+        <SpellIcon key={index} name={spell.name} school={spell.school} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description}  />
     ));
 }
-function displayMagicRings()
+function displayFirstLevel()
 {
-    return MAGICITEMS_RINGS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Ring"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+    return FIRST_LEVEL_SPELLS.map((spell, index) => 
+    (
+        <SpellIcon key={index} name={spell.name} school={spell.school} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description}  />
     ));
 }
 
+const handleComponents = (components) => {
+    // Determine if the array contains specific characters
+    const isVocal = components.includes("V"); // Check if "V" is in the array
+    const isSomatic = components.includes("S"); // Check if "S" is in the array
+    const requiresMaterials = components.includes("M"); // Check if "M" is in the array
 
-function displayWondorousItems()
-{
-    return MAGICITEMS_WONDROUS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunment={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
-    ));
-}
+    // Return the values to be used in a component
+    return {
+        isVocal,
+        isSomatic,
+        requiresMaterials,
+    };
+};
+
+
 export default SpellPage = ({navigation, route}) =>
 {
     const { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight} = route.params || {};
+    const [cantripDropdown, setCantripDropdown] = useState(false);
+    const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
+
 
     //Used in tandem with Async Storage
     const [customMagicItem, setCustomMagicItem] = useState([]);
@@ -129,12 +155,10 @@ export default SpellPage = ({navigation, route}) =>
             <ScrollView>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
-                {/**Armor Section*/}
-                <Text style={styles.textStyle}>Cantrips:</Text>
-                <SpellIconRough/>
-                {/* {handleComponents} */}
-                <SpellIcon name={"Create or Destroy Water Tasha Caustic Brew"} school={"Evocation"} range={"150 feet"} effect={"22d10"} damageType={"Fire"}  isVocal={true} isSomatic={true} description={"radius"} requiresMaterials={true}/>
-                {/**Potion Section */}
+                {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displayCantrips)}
+                {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel)}
+
+                {/* <SpellIcon name={"Create or Destroy Water Tasha Caustic Brew"} school={"Evocation"} range={"150 feet"} effect={"22d10"} damageType={"Fire"}  isVocal={true} isSomatic={true} description={"radius"} requiresMaterials={true}/> */}
 
             </View>
             <View style={{margin: height * .25}}/>
@@ -156,7 +180,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textStyle: {
-        width: width,
+        width: width * .9,
+        backgroundColor: '',
         fontWeight: 'bold',
         fontSize: FONTSIZE.xxlarge,
         textAlign: 'left',

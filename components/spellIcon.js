@@ -11,7 +11,11 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'; 
 const {width, height} = Dimensions.get('screen');
 
 
-
+const capitalized = (word) =>
+{
+  return word.charAt(0).toUpperCase()
+  + word.slice(1)
+}
 export default SpellIcon = ({name, school, range, effect, damageType, isVocal, isSomatic, description, requiresMaterials} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -25,6 +29,14 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
         {
             // console.log("Feet has been reached")
             mod = rng.replace("feet", "FT. Reach")
+        }
+        else if (rng.includes("self") || rng.includes("Self"))
+        {
+            return rng
+        }
+         if (rng.includes("touch"))
+        {
+            return "Touch"
         }
         if (description.includes("radius") === true)
         {
@@ -41,6 +53,10 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
         else if (description.includes("cone"))
         {
             aoe = "(cone)"
+        }
+        else
+        {
+            aoe = ""
         }
 
         return mod + " " + aoe 
@@ -71,7 +87,7 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
             }
             else if ("Cold" === damageType)
             {
-                return <FontAwesome5 name="snow-flake" size={FONTSIZE.xsmall} color="black"/>
+                return <FontAwesome5 name="snowflake" size={FONTSIZE.xsmall} color="black"/>
             }
             else if ("Force" === damageType)
             {
@@ -127,7 +143,7 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
 
         else
         {
-            return "See Description"
+            return (<Text style={{fontStyle:'italic'}}>See Description</Text>)
         }
     }
 
@@ -138,14 +154,14 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
                 {/**Print the square */}
                 <View style={styles.textContainer}>
                     <Text style={styles.itemTitle}>{name}</Text>
-                    <Text style={styles.itemSubtitle}>{school}</Text>
-                    <Text style={styles.itemWeight}>{handleReach(range)}</Text>
+                    <Text style={styles.itemSubtitle}>{capitalized(school)}</Text>
+                    <Text style={styles.itemReach}>{handleReach(range)}</Text>
                 </View>
-                <View style={styles.circleContainer}>
+                <View style={styles.rightContainer}>
                     <View style={{flexDirection: 'row', alignItems: 'center',}}>
-                        <Text style={{fontSize: FONTSIZE.small, fontWeight: 'bold', backgroundColor: ''}}>Effect: {handleEffect(effect, damageType)}</Text>
+                        <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold', backgroundColor: '', textAlign: 'center'}}>Effect: {handleEffect(effect, damageType)}</Text>
                     </View>
-                    <Text style={{fontSize: FONTSIZE.small, fontWeight: 'bold'}}>{handleComponents(isVocal, isSomatic, requiresMaterials)}</Text>
+                    <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold'}}>{handleComponents(isVocal, isSomatic, requiresMaterials)}</Text>
                 </View>
             </TouchableOpacity>
 
@@ -209,7 +225,7 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.xsmall,
         fontStyle: "italic",
     },
-    itemWeight: {
+    itemReach: {
         fontSize: FONTSIZE.xxsmall,
         marginTop: height * 0.02,
     },
@@ -234,10 +250,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginHorizontal: width * .01,
     },
-    circleContainer: {
+    rightContainer: {
         margin: width * .02,
         width: width * .3,
-        backgroundColor: "",
+        // backgroundColor: "red",
         justifyContent: "center",
         flexDirection: 'column',
         alignItems: "center", // Centers text inside the red square
