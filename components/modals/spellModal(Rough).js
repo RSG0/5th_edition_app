@@ -3,25 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE, scale } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { globalStyles } from "../../constants/global";
-export default spellModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
+export default spellModal = ({name, school, isARitual, levelSpell, usableBy, castingTime, range, concentration,duration, description, }) =>
 {
-    // {console.log("Are charges detected: " + charges)}
-    const getRarityStyle = (rarity) => {
-        switch (rarity?.toLowerCase()) {
-            case "uncommon":
-                return globalStyles.uncommonRarityColor;
-            case "rare":
-                return globalStyles.rareRarityColor;
-            case "very rare":
-                return globalStyles.veryRareRarityColor;
-            case "legendary":
-                return globalStyles.legendaryRarityColor;
-            case "artifact":
-                return globalStyles.artifactRarityColor;
-            default:
-                return null; // Default to no background color if rarity is not recognized
-        }
-    }
     const handleNameSize = (name) =>
     {
         if (name.length <= 15)
@@ -31,44 +14,7 @@ export default spellModal = ({name, type, attunement, charges, numOfCharges,rari
         else {return FONTSIZE.small}
 
     }
-    const handleAttunement = (isAttunement) =>
-    {
-        if (isAttunement === String)
-        {
-            console.log("isAttunement is a String");
-        }
-        if (isAttunement === "True")
-            return "Yes"
-        else if (isAttunement === "False")
-        {
-            return "No"
-        }
 
-    }
-    const handleCharges = (isACharge, num) =>
-    {
-        if (isACharge === "True")
-        {
-            // console.log(num);
-            return `(${Number(numOfCharges)}/${num})`;
-        }
-        else
-        {
-            // console.log("No Charges Detected");
-            return "N/A"
-        }
-    }
-    const handleRarity = (rarity) =>
-    {
-        if (rarity === "Uncommon")
-        {
-            //Change text color to green
-        }
-        else if (rarity === "Rare")
-        {
-            //Change text color
-        }
-    }
     return (
         <View style={styles.viewStyle}>
                     <View style={{ justifyContent: 'space-between', flexDirection:'column'}}>
@@ -88,12 +34,10 @@ export default spellModal = ({name, type, attunement, charges, numOfCharges,rari
                     <Text >  </Text>
                     <View style={{ position: 'absolute', right: -10, width: width * 0.47,  justifyContent: 'center', height: "40%", flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', alignItems: 'center', backgroundColor: '' }}>
                         <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>CT: 1 action</Text>
-                        <Text style={styles.upperPortion}>{handleAttunement(attunement)}</Text>
                         <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold', marginBottom: height * .05  }}>Range: 10 miles. </Text>
                         {/* <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text> */}
                         
                         <Text style={{ fontSize: FONTSIZE.xsmall, backgroundColor: 'white', fontWeight: 'bold', textAlign: 'center'}}>Duration: Concentration, Up to 10 minutes </Text>
-                        <Text style={[{ fontSize: FONTSIZE.small, fontStyle: 'italic' }, getRarityStyle(rarity)]}>{rarity}</Text>
                     </View>
                     {/* {    console.log("The description is: \n\n" + description) } */}
                     </View>

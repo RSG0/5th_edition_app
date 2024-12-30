@@ -7,6 +7,9 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6'; //Force Damage Icon:
 //Piercing Damage Icon "crosshairs": 
 import Entypo from '@expo/vector-icons/Entypo'; //Psychic Damage Icon: eye
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'; //Poison/Acid Damage Icon: bottle-tonic-skull, Slashing Damage Icon "sword", ""
+import SpellModal from "./modals/spellModal";
+import SpellIconRough from "./spellIcon(Rough)";
+import SpellModalRough from "./modals/spellModal(Rough)";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -16,9 +19,10 @@ const capitalized = (word) =>
   return word.charAt(0).toUpperCase()
   + word.slice(1)
 }
-export default SpellIcon = ({name, school, range, effect, damageType, isVocal, isSomatic, description, requiresMaterials} ) =>
+export default SpellIcon = ({name, school, range, effect, castingTime, damageType, ritual, isVocal, isSomatic, description, requiresMaterials, spellLevel, usableBy, duration, concentration} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    // console.log(usableBy);
     
     const handleReach = (rng) =>
     {
@@ -32,9 +36,9 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
         }
         else if (rng.includes("self") || rng.includes("Self"))
         {
-            return rng
+            return capitalized(rng)
         }
-         if (rng.includes("touch"))
+         if (rng.includes("touch") || rng.includes("Touch"))
         {
             return "Touch"
         }
@@ -63,6 +67,7 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
 
         //Goal is 120 FT. (radius)
     }
+
     const handleComponents = (v, s, m) => {
         let components = [];
         if (v) {
@@ -82,7 +87,6 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
         {
             if ("Fire" === damageType)
             {
-                console.log("is fire");
                 return <FontAwesome5 name="fire-alt" size={FONTSIZE.xsmall} color="black"/>
             }
             else if ("Cold" === damageType)
@@ -177,17 +181,17 @@ export default SpellIcon = ({name, school, range, effect, damageType, isVocal, i
                     </TouchableWithoutFeedback>
                             <View style={styles.modalContent}>
                                 {/* <MagicItemModalRough /> */}
-                                {/* <SpellModal
+                                <SpellModal
                                 name={name}
-                                type={type}
-                                attunement={attunement}
-                                charges={charges}
+                                school={school}
+                                isARitual={ritual}
+                                range={range}
+                                spellLevel={spellLevel}
+                                usableBy={usableBy}
                                 description={description}
-                                numOfCharges={numOfCharges}
-                                weight={weight}
-                                rarity={rarity}
-
-                                /> */}
+                                duration={duration}
+                                concentration={concentration}
+                                />
                             </View>
                 </Modal>
 
@@ -238,18 +242,7 @@ const styles = StyleSheet.create({
         marginHorizontal: width * .02,
         borderRadius: 5
     },
-    circle:
-    {
-        width: width * circleSize,
-        height: width * circleSize,
-        borderWidth: characterBorderWidth /2,
-        // backgroundColor: 'red',
-        // flex: 1,
-        borderRadius: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: width * .01,
-    },
+
     rightContainer: {
         margin: width * .02,
         width: width * .3,
@@ -272,13 +265,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute'
     },
-    circleCharge:{
-        width: width * .05,
-        height: width * .05,
-        borderWidth: characterBorderWidth /4,
-        position: 'absolute',
-        borderRadius: 60,
-    },
+
     chargesColor:
     {
         backgroundColor: "#B5B5B5"
@@ -286,17 +273,18 @@ const styles = StyleSheet.create({
     modalOverlay: {
         flex: 1,
         backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent grey background
-        // justifyContent: "center", // Center vertically
+        justifyContent: "center", // Center vertically
         // alignItems: "center", // Center horizontally
     },
     modalContent: {
         position: "absolute", // Make content independent of the overlay
+        justifyContent: 'center',
         backgroundColor: "", // Ensure modal content has a white background
         // borderRadius: 20,
         // padding: 20,
         // width: width * 0.9,
         // height: height * 0.4,
         alignSelf: "center",
-        top: height * 0.3, // Adjust to vertically center the modal content
+        top: height * 0.2, // Adjust to vertically center the modal content
     },
 })

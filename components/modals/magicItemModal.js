@@ -123,8 +123,8 @@ const styles = StyleSheet.create(
         // alignItems: 'center',
         padding: 20,
         paddingHorizontal: 20,
-        borderRadius: 50,
-        borderWidth: characterBorderWidth    
+        borderRadius: width * .05,
+        borderWidth: width * .01
     },
     box:{
     width: 20,

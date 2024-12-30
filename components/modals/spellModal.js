@@ -1,27 +1,10 @@
 import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../constants/theme";
+import { characterBorderWidth, COLORS, FONT, FONTSIZE, scale } from "../../constants/theme";
 import { Title } from "react-native-paper";
-import { globalStyles } from "../../constants/global";
-export default spellModal = ({name, type, attunement, charges, numOfCharges,rarity, description, weight}) =>
+import { capitalized, globalStyles } from "../../constants/global";
+export default spellModal = ({name, school, isARitual, spellLevel, usableBy, castingTime, range, concentration,duration, description, }) =>
 {
-    // {console.log("Are charges detected: " + charges)}
-    const getRarityStyle = (rarity) => {
-        switch (rarity?.toLowerCase()) {
-            case "uncommon":
-                return globalStyles.uncommonRarityColor;
-            case "rare":
-                return globalStyles.rareRarityColor;
-            case "very rare":
-                return globalStyles.veryRareRarityColor;
-            case "legendary":
-                return globalStyles.legendaryRarityColor;
-            case "artifact":
-                return globalStyles.artifactRarityColor;
-            default:
-                return null; // Default to no background color if rarity is not recognized
-        }
-    }
     const handleNameSize = (name) =>
     {
         if (name.length <= 15)
@@ -31,70 +14,76 @@ export default spellModal = ({name, type, attunement, charges, numOfCharges,rari
         else {return FONTSIZE.small}
 
     }
-    const handleAttunement = (isAttunement) =>
-    {
-        if (isAttunement === String)
+
+    const handleDuration = (duration, concen) =>
         {
-            console.log("isAttunement is a String");
-        }
-        if (isAttunement === "True")
-            return "Yes"
-        else if (isAttunement === "False")
-        {
-            return "No"
+            const handleConcentration = () =>
+            {
+                if (concen === true)
+                {
+                    return "Concentration, Up to " + duration
+                }
+                return capitalized(duration)
+            }
+            console.log(concen);
+            console.log(duration);
+            console.log(handleConcentration());
+            return handleConcentration()
         }
 
-    }
-    const handleCharges = (isACharge, num) =>
+    const handleSpellLevel = (lvlSpell, school, ritual) =>
     {
-        if (isACharge === "True")
+        let rit = ""
+        if (lvlSpell === "Cantrip")
         {
-            // console.log(num);
-            return `(${Number(numOfCharges)}/${num})`;
+            lvlSpell = "Cantrip"
         }
-        else
+        else if (lvlSpell === "1st")
         {
-            console.log("No Charges Detected");
-            return "N/A"
+            lvlSpell = "1st Level"
         }
+        if (ritual === true)
+        {
+            rit = "(ritual)"
+        }
+        return lvlSpell + " "+ school + " " + rit
     }
-    const handleRarity = (rarity) =>
+    const handleUsability = (isUse) =>
     {
-        if (rarity === "Uncommon")
+        let use = [];
+        for (let i = 0; i < isUse.length; i++)
         {
-            //Change text color to green
+            use.push(isUse[i])
         }
-        else if (rarity === "Rare")
-        {
-            //Change text color
-        }
+        return use.join(", "); 
     }
     return (
         <View style={styles.viewStyle}>
-                    <View style={{ justifyContent: 'space-between', flexDirection:'column'}}>
+            <View style={{flexDirection: 'row'}}>
+                <View style={{backgroundColor:'', width: width * .3}}>
+                    <Text style={[styles.title]}>{name}:</Text>
+                    <Text style={{fontStyle:'italic', fontSize: scale(10), backgroundColor: ''}}>{handleSpellLevel(spellLevel, school, isARitual)}</Text>
+                    <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold', marginTop: height* .02, backgroundColor: ''}}>Usable By: <Text style={{fontWeight:'regular'}}>{handleUsability(usableBy)} </Text></Text>
+                </View>
+                <View style={{width: width * 0.5,  justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', alignItems: 'center', backgroundColor: '' }}>
                     <View>
-                        <Text style={[styles.title]}>{name}:</Text>
-                        <Text style={{fontStyle:'italic', fontSize: FONTSIZE.small}}>{type}</Text>
-
-                    </View>
-                    <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
-                        <Text style={{padding: 10, fontSize: FONTSIZE.xsmall}}>
-                        {description}
-  
-                        </Text>
-                    </ScrollView>
-                    <Text >Weight: {weight} lbs.</Text>
-                    <View style={{ position: 'absolute', right: -10, width: width * 0.5, justifyContent: 'center', height: height * 0.08, flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', backgroundColor: '' }}>
-                        <Text style={[styles.upperPortion, { fontWeight: 'bold' }]}>Attunement: </Text>
-                        <Text style={styles.upperPortion}>{handleAttunement(attunement)}</Text>
-                        <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.01, fontWeight: 'bold' }}>Charges: </Text>
-                        <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text>
+                        <Text style={[styles.upperPortion, { fontWeight: 'bold', textAlign: 'center'}]}>CT: 1 action <Text style={{ fontSize: FONTSIZE.xsmall, marginLeft: width * 0.001, fontWeight: 'bold', marginBottom: height * .05  }}>Range: { capitalized(range)} </Text>  </Text>
+                        {/* <Text style={styles.upperPortion}>{handleCharges(charges, numOfCharges)}</Text> */}
                         
-                        <Text style={{ fontSize: FONTSIZE.small, backgroundColor: 'white', fontWeight: 'bold' }}>Rarity: </Text>
-                        <Text style={[{ fontSize: FONTSIZE.small, fontStyle: 'italic' }, getRarityStyle(rarity)]}>{rarity}</Text>
+                        <Text style={{ fontSize: FONTSIZE.xsmall, backgroundColor: '', fontWeight: 'bold', textAlign: 'center', marginTop: height * .01}}>Duration: {handleDuration(duration, concentration)} </Text>
                     </View>
-                    {/* {    console.log("The description is: \n\n" + description) } */}
-                    </View>
+                </View>
+            </View>
+
+            <ScrollView style={{backgroundColor: '', width: width * .8, height: height * .2, borderRadius: 20, alignSelf: 'center', flex: 1, borderWidth: characterBorderWidth, marginVertical: height * .01}} >
+                <Text style={{padding: 10, fontSize: FONTSIZE.xsmall}}>
+                {description}
+  
+                </Text>
+            </ScrollView>
+            <Text >  </Text>
+
+            {/* {    console.log("The description is: \n\n" + description) } */}
         </View>
 
     );
@@ -105,32 +94,23 @@ const styles = StyleSheet.create(
 {
     viewStyle: {
         // flex: .4,
-        alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 20,
-        width: width *.9,
-        height: height * .5,
+        width: width * .9,
+        minHeight: height * .5,
         // alignItems: 'center',
         backgroundColor: 'white',
-        flexDirection: 'row',
+        // flexDirection: 'row',
         display: 'flex',
-        // justifyContent: 'space-between',
-        // alignItems: 'center',
         padding: 20,
         paddingHorizontal: 20,
-        borderRadius: 50,
-        borderWidth: characterBorderWidth    
-    },
-    box:{
-    width: 20,
-    margin: 10,
-    height: 20,
-    backgroundColor: 'red'
+        borderRadius: width * .05,
+        borderWidth: width * .01
     },
     title: {
-        justifyContent: 'space-between',
-        width: width * .35,
+        // justifyContent: 'space-between',
+        // width: width * .35,
         // margin: 20,
         fontWeight: 'bold',
         fontSize: FONTSIZE.medium,

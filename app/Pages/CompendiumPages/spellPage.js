@@ -11,6 +11,7 @@ import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import SpellIconRough from "../../../components/spellIcon(Rough)";
 import SpellIcon from "../../../components/spellIcon";
 import { CANTRIPS, FIRST_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
+import { line } from "../../../constants/global";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -23,8 +24,8 @@ const dropdown = (text, setState, state, isActive, renderSpells) =>
       if (isActive)
       {
       return(
-          <View>
-            <View style={[styles.dropdownClosed, {marginBottom: state? 0: 10 }]}>
+          <View style={styles.viewStyle}>
+            <View style={[{marginBottom: state? 0: 10 }]}>
             <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={styles.textStyle}>{text}</Text>
                 <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
@@ -35,7 +36,7 @@ const dropdown = (text, setState, state, isActive, renderSpells) =>
       {state && (
           <View style={{ }}>
 
-          {renderSpells()}          
+          {renderSpells()}     
         </View>
       )}
       </View>
@@ -53,14 +54,22 @@ function displayCantrips()
 {
     return CANTRIPS.map((spell, index) => 
     (
-        <SpellIcon key={index} name={spell.name} school={spell.school} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description}  />
+        <SpellIcon 
+        key={index} name={spell.name} spellLevel={"Cantrip"} usableBy={spell.usableBy} school={spell.school} 
+        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} 
+        isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} concentration={spell.concentration} 
+        requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description} castingTime={spell.castingTime} duration={spell.duration}/>
     ));
 }
 function displayFirstLevel()
 {
     return FIRST_LEVEL_SPELLS.map((spell, index) => 
     (
-        <SpellIcon key={index} name={spell.name} school={spell.school} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description}  />
+        <SpellIcon 
+        key={index} name={spell.name} spellLevel={"1st"} usableBy={spell.usableBy} school={spell.school} 
+        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} 
+        isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} concentration={spell.concentration} 
+        requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description} castingTime={spell.castingTime} duration={spell.duration}/>
     ));
 }
 
@@ -156,7 +165,9 @@ export default SpellPage = ({navigation, route}) =>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
                 {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displayCantrips)}
+                {line()}     
                 {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel)}
+                {line()}     
 
                 {/* <SpellIcon name={"Create or Destroy Water Tasha Caustic Brew"} school={"Evocation"} range={"150 feet"} effect={"22d10"} damageType={"Fire"}  isVocal={true} isSomatic={true} description={"radius"} requiresMaterials={true}/> */}
 

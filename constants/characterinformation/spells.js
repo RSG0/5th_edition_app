@@ -17,7 +17,7 @@ export const CANTRIPS =
     //might need to add the ritual tag to each item
     //Inccomplete
     //SRD compliant
-    {name: "Acid Splash", school: schools_of_magic[1], castingTime: "1 action", range: "60 feet", components: ["V", "S"], material: null, concentration: false, ritual: false, duration: "instantaneous", usableBy:["sorcerer", "Wizard"], damageDie: "1d6", damageType: "Acid",
+    {name: "Acid Splash", school: schools_of_magic[1], castingTime: "1 action", range: "60 feet", components: ["V", "S"], material: null, concentration: false, ritual: false, duration: "instantaneous", usableBy:["Sorcerer", "Wizard"], damageDie: "1d6", damageType: "Acid",
         description: "You hurl a bubble of acid. Choose one creature you can see within range, or choose two creatures you can see within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage."},
     {name: "Chill Touch", school: schools_of_magic[6], castingTime: "1 action", range: "120 feet", components: ["V", "S"], material: null, concentration: false, ritual: false, duration: "1 round", usableBy: ["Sorcerer", "Warlock", "Wizard"], damageDie: "1d8", damageType: "Necrotic",
         description: "You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can't regain hit points until the start of your next turn. Until then, the hand clings to the target."},

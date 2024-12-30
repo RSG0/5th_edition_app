@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-
+import React from "react";
+import { StyleSheet, View } from "react-native";
 export const globalStyles = StyleSheet.create({
     centerRow: {
         flexDirection: "row",
@@ -20,3 +20,17 @@ export const globalStyles = StyleSheet.create({
     artifactRarityColor: {color: "#A448FF"},
 
 })
+export const capitalized = (word) =>
+{
+  return word.charAt(0).toUpperCase()
+  + word.slice(1)
+}
+export const line = () => {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ width: '80%', height: 2, backgroundColor: 'black' }} />
+        {console.log("Line is being printed")}
+      </View>
+    );
+  };
+  
