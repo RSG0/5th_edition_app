@@ -34,6 +34,8 @@ export const SPELL_LEVEL =
 
 ]
 export const RANGE_TYPES = [
+    {label: "None"},
+
     {label: "Cone"},
     {label: "Cube"},
     {label: "Cylinder"},
@@ -70,6 +72,7 @@ export const RANGES = [
     { label: "Special" },
 ];
 export const SPECIFIC_RANGE_TYPES = [
+    {label: "None"},
     {label: "5-foot-radius"},
     {label: "10-foot-radius"},
     {label: "15-foot-radius"},
@@ -129,6 +132,32 @@ export const SPELLCASTERS =
     {label: "Warlock"},
     {label: "Wizard"},
 ];
+export const DICE_TYPES = 
+[
+    {label: "d4"},
+    {label: "d6"},
+    {label: "d8"},
+    {label: "d10"},
+    {label: "d12"}
+];
+export const DAMAGE_TYPES = 
+[
+    {label: "Acid"},
+    {label: "Bludgeoning"},
+    {label: "Cold"},
+    {label: "Fire"},
+    {label: "Force"},
+    {label: "Lightning"},
+    {label: "Necrotic"},
+    {label: "Piercing"},
+    {label: "Poison"},
+    {label: "Psychic"},
+    {label: "Radiant"},
+    {label: "Slashing"},
+    {label: "Thunder"},
+    {label: "Special"}
+];
+
 export const COMPONENTS = 
 [
     {label: "Vocal"},

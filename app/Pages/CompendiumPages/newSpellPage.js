@@ -1,12 +1,11 @@
-import { Button, ScrollView, StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback, Alert, Dimensions } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, TextInput, View, Alert, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NextButton from "../../../components/buttons/nextButton";
-import { MAGICITEMS_RARITY, MAGICITEMS_TYPE as MAGICITEMS_Type, MAGICITEMS_TYPE_WEAPONS } from "../../../constants/characterinformation/magicitems";
-import { CASTING_TIMES, COMPONENTS, DURATION_TYPES, NUMBER_TWENTY, RANGE_TYPES, RANGES, SPECIFIC_RANGE_TYPES, SPELL_LEVEL, SPELLCASTERS, TRUEORFALSE } from "../../../constants/characterinformation/characterinfo";
+import { CASTING_TIMES, COMPONENTS, DAMAGE_TYPES, DICE_TYPES, DURATION_TYPES, NUMBER_TWENTY, RANGE_TYPES, RANGES, SPECIFIC_RANGE_TYPES, SPELL_LEVEL, SPELLCASTERS, TRUEORFALSE } from "../../../constants/characterinformation/characterinfo";
 import { schools_of_magic } from "../../../constants/characterinformation/spells";
 import { capitalized } from "../../../constants/global";
 import SelectionButton from "../../../components/buttons/selectionButton";
@@ -14,37 +13,53 @@ import SelectionButton from "../../../components/buttons/selectionButton";
 
 const {width, height} = Dimensions.get('screen');
 
-export default NewMagicItemPage = ({navigation}) => {
+export default NewMagicSpellPage = ({navigation}) => {
 
     const [name, setName] = useState("Red's Groovy Lute");
     const [spellLevel, setSpellLevel] = useState(null);
     const [school, setSchool] = useState(null);
     const [castingTime, setCastingTime] = useState(null);
     const [ritual, setRitual] = useState(false);
+    const [rangeDrop, setRangeDrop] = useState(false);
     const [range, setRange] = useState(false);
+    const [rangeType, setRangeType] = useState(false);
     const [concentration, setConcentration] = useState(null);
     const [duration, setDuration] = useState(null);
 
     const [components, setComponents] = useState([]);
-    const [usability, setUsability] = useState([]);
-
-
-
-    const [rarity, setRarity] = useState(null);
-
+    const [usableBy, setUsableBy] = useState([]);
 
     const [isMaterialUsable, setIsMaterialVisible] = useState(false);
     const [material, setMaterial] = useState("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.");
     const [description, setDescription] = useState("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-    const [weight, setWeight] = useState(0);
+
+    const [damageTORF, setDamageTORF] = useState(false);
+    const [effect, setEffect] = useState(false);
+    const [damageType, setDamageType] = useState(false);
+    const [numOfDice, setNumOfDice] = useState(false);
+    const [dice, setDice] = useState(false);
 
     const [rangeTypeOption, setRangeTypeOption] = useState([]);
-                        //name, spellLevel, school, castingTime, ritual, range, rangeTypeOption, concentration, duration, usability ,rarity, description, weight
+    const [damageTypeOption, setDamageTypeOption] = useState([]);
+    const [numOfDiceOptions, setNumOfDiceOptions] = useState([]);
+    const [diceOptions, setDiceOptions] = useState([]);
 
-    const checkForChange = (nameCheck, spellLevelCheck, schoolCheck, castingTimeCheck, ritualCheck, rangeCheck, rangeTypeCheck, concentration, duration, usability, description,) =>
+    const checkForChange = (nameCheck, spellLevelCheck, schoolCheck, castingTimeCheck, ritualCheck, rangeCheck, rangeTypeCheck, concentration, duration, usability, description) =>
     {
-        if (!nameCheck || spellLevelCheck == null || castingTimeCheck == null || rangeCheck == null || rangeTypeCheck == null || !duration)
+        if (!nameCheck || spellLevelCheck == null || castingTimeCheck == null || rangeCheck == null || rangeTypeCheck == null || !duration || !schoolCheck || !ritualCheck || !concentration || !usability || !description)
         {
+            if (description)
+            {
+                console.log("Decription Exists")
+            }
+            if (schoolCheck)
+            {
+                console.log("School Exists")
+            }
+            if (duration)
+            {
+                console.log("Duration Exists")
+            }
             Alert.alert("OOPS", "You need to fill all the information")
             return false; //This should be false
         }
@@ -56,7 +71,38 @@ export default NewMagicItemPage = ({navigation}) => {
         handleMaterials()
         //This use effect is needed because the way state updates are batched and don't immediately update
     }, [components])
+    useEffect(() =>
+    {
+        handleRange(rangeDrop, rangeType)
+    }, [rangeDrop, rangeType])
+    // useEffect(() => 
+    // {
+    //     console.log(name);
+    //     console.log(spellLevel);
+    //     console.log(school)
+    //     console.log(castingTime)
+    //     console.log(ritual)
+    //     console.log(range)
+    //     console.log(rangeType)
+    //     console.log(concentration)
+    //     console.log(duration)
+    //     console.log(damageTORF)
+    //     console.log(damageType)
+    //     console.log(numOfDice)
+    //     console.log(dice)
+    //     console.log(isVocal)
+    //     console.log(isSomatic)
+    //     console.log(isMaterial)
+    //     console.log(usableBy)
+    //     console.log(material)
+    //     console.log("Effect:", effect)
+    //     console.log("Description:",description)
 
+    // },[description])
+    useEffect(()=>
+    {
+        handleDamageDie();
+    }, [numOfDice, dice])
     const transformedSchools = schools_of_magic.map(school => ({ label:capitalized(school)}));
 
     const handleMaterials = () =>
@@ -71,14 +117,33 @@ export default NewMagicItemPage = ({navigation}) => {
         }
         
     }
+    const handleDamage = (item) =>
+    {
+        setDamageTORF(item.label)
+        if (item.label === "True" || item === "true")
+        {
+            setDamageTypeOption(DAMAGE_TYPES)
+            setNumOfDiceOptions(NUMBER_TWENTY);
+            setDiceOptions(DICE_TYPES)
+        }
+        else if (item.label === "False" || item === "false")
+        {
+            setDamageTypeOption([])
+            setNumOfDiceOptions([]);
+            setDiceOptions([])
+        }
+    }
     const handleRangeChange = (item) =>
         {
-            setRange(item.label);
+
+            setRangeDrop(item.label);
+            console.log("Item:", item.label)
+            // console.log(range)
             if (item.label === "Self")
             {
                 setRangeTypeOption(SPECIFIC_RANGE_TYPES);
             }
-            if (item.label === "Touch")
+            else if (item.label === "Touch")
             {
                 setRangeTypeOption([]); //should be empty
             }
@@ -88,8 +153,32 @@ export default NewMagicItemPage = ({navigation}) => {
             }
 
         }
+    const handleRange = (rng, rngType) =>
+    {
+        if (rng === "Self" && rngType !== "None")
+        {
+            setRange(rng + " (" + rngType + ")")
+        }
+        else if (rngType === "None")
+        {
+            setRange(rng)
+        }
+        else if (rngType !== "None")
+        {
+            setRange(rng + " (" + rngType + ")")
+        }
+        else if (rng === "Self" && rngType === "None")
+        {
+            setRange(rng)
+        }
+        
+        // else
+        // {
+        //     console.log("Doing nothing")
+        // }
+    }
     const handleCasterSelectionPress = (name) => {
-        setUsability((prevSelected) => {
+        setUsableBy((prevSelected) => {
             if (prevSelected.includes(name)) {
                 // Remove the caster if already selected
                 return prevSelected.filter((caster) => caster !== name);
@@ -109,8 +198,28 @@ export default NewMagicItemPage = ({navigation}) => {
                 return [...prevSelected, name];
             }
         });
-        console.log(components)
+        // console.log(components)
 
+    };
+    const handleDamageDie = () =>
+    {
+        console.log("numOfDice:", numOfDice)
+        console.log("dice:", dice)
+        setEffect(numOfDice + dice)
+    }
+
+    const handleComponents = (components) => {
+        // Determine if the array contains specific characters
+        const isVocal = components.includes("Vocal"); // Check if "V" is in the array
+        const isSomatic = components.includes("Somatic"); // Check if "S" is in the array
+        const requiresMaterials = components.includes("Material"); // Check if "M" is in the array
+    
+        // Return the values to be used in a component
+        return {
+            isVocal,
+            isSomatic,
+            requiresMaterials,
+        };
     };
         // const handleUsability = () =>
         // {
@@ -120,7 +229,7 @@ export default NewMagicItemPage = ({navigation}) => {
         //         <SelectionButton key={i} name={caster.label} onSelectionPress={handleSelectionPress} isSelected={usability.includes(caster.label)} disableFixedWidth={true}/> 
         //     }));
         // };
-        const handleUsability = () => {
+        const renderUsabilityButtons = () => {
             return SPELLCASTERS.map((caster, i) => (
                 <SelectionButton
                     setCustomMinWidth={width * .15}
@@ -128,12 +237,12 @@ export default NewMagicItemPage = ({navigation}) => {
                     key={i}
                     name={caster.label}
                     onSelectionPress={handleCasterSelectionPress} 
-                    isSelected={usability.includes(caster.label)} 
+                    isSelected={usableBy.includes(caster.label)} 
                     disableFixedWidth={true}
                 />
             ));
         };
-        const handleComponents = () => {
+        const renderComponentsButtons = () => {
             return COMPONENTS.map((compo, i) => (
                 <SelectionButton
                     setCustomMinWidth={width * .15}
@@ -162,6 +271,11 @@ export default NewMagicItemPage = ({navigation}) => {
             setNumOfChargesOptions([]);
         }
     }
+
+    const isVocal = handleComponents(components).isVocal
+    const isSomatic = handleComponents(components).isSomatic
+    const isMaterial = handleComponents(components).requiresMaterials
+
     return (
         // <TouchableWithoutFeedback onPress={ () => console.log("User has touched the screen")}>
 
@@ -184,7 +298,7 @@ export default NewMagicItemPage = ({navigation}) => {
                          value={spellLevel}
                          labelField={"label"}
                          valueField={"label"}
-                         onChange={item => setSpellLevel(item)}
+                         onChange={item => setSpellLevel(item.label)}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="..."
                          maxHeight={200}
@@ -197,7 +311,7 @@ export default NewMagicItemPage = ({navigation}) => {
                            value={school}
                            labelField={"label"}
                            valueField={"label"}
-                           onChange={item => setSchool(item)}
+                           onChange={item => setSchool(item.label)}
                            placeholderStyle={styles.placeholderColor}
                            placeholder="..."
                            maxHeight={200}
@@ -233,7 +347,7 @@ export default NewMagicItemPage = ({navigation}) => {
                         <Dropdown style={styles.dropdown}
                          selectedTextStyle={styles.dropdownTextStyle}
                          data={RANGES}
-                         value={range}
+                         value={rangeDrop}
                          labelField={"label"}
                          valueField={"label"}
                          onChange={handleRangeChange}
@@ -246,10 +360,10 @@ export default NewMagicItemPage = ({navigation}) => {
                         <Dropdown style={styles.dropdown}
                          selectedTextStyle={styles.dropdownTextStyle}
                          data={rangeTypeOption}
-                         value={rarity}
+                         value={rangeType}
                         labelField={"label"}
                          valueField={"label"}
-                         onChange={item => setRarity(item.label)}
+                         onChange={item => setRangeType(item.label)}
                          placeholderStyle={styles.placeholderColor}
                          placeholder="---"
                          maxHeight={200}
@@ -282,10 +396,64 @@ export default NewMagicItemPage = ({navigation}) => {
                          maxHeight={200}
                          />
                     </View>
+
+                    <View style={styles.inputRow}>
+                        <Text style={styles.labelStyle}>Damage:</Text>
+                        <Dropdown style={[styles.dropdown, {minWidth: "7%"}]}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={TRUEORFALSE}
+                         value={damageTORF}
+                         labelField={"label"}
+                         valueField={"label"}
+                         onChange={handleDamage}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200}
+                         />
+                        <Text style={styles.labelStyle}>Dmg T:</Text>
+                        <Dropdown style={styles.dropdown}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={damageTypeOption}
+                         value={damageType}
+                        labelField={"label"}
+                         valueField={"label"}
+                         onChange={item => setDamageType(item.label)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200}
+                         />
+                    </View>
+
+                    <View style={styles.inputRow}>
+                        <Text style={styles.labelStyle}>Num Of Dice:</Text>
+                        <Dropdown style={[styles.dropdownNumOfDice]}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={numOfDiceOptions}
+                         value={numOfDice}
+                         labelField={"value"}
+                         valueField={"value"}
+                         onChange={item => setNumOfDice(item.value)}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="--"
+                         maxHeight={200}/>
+                        <Text style={styles.labelStyle}>Die:</Text>
+                        <Dropdown style={[styles.dropdown, {minWidth: "5%"} ]}
+                         selectedTextStyle={styles.dropdownTextStyle}
+                         data={diceOptions}
+                         value={dice}
+                        labelField={"label"}
+                         valueField={"label"}
+                         onChange={item => [setDice(item.label), handleDamageDie]}
+                         placeholderStyle={styles.placeholderColor}
+                         placeholder="---"
+                         maxHeight={200}
+                         />
+                    </View>
+
                     <View style={styles.inputRow}>
                         <Text style={styles.labelStyle}>Components:</Text>
                         <ScrollView horizontal={true} contentContainerStyle={styles.inputRow}>
-                        {handleComponents()}
+                        {renderComponentsButtons()}
                     </ScrollView>
                     </View>
 
@@ -293,7 +461,7 @@ export default NewMagicItemPage = ({navigation}) => {
                         <Text style={styles.labelStyle}>Usable By:</Text>
                     </View>
                     <ScrollView horizontal={true} contentContainerStyle={styles.inputRow}>
-                        {handleUsability()}
+                        {renderUsabilityButtons()}
                     </ScrollView>
                     <View style={styles.inputRow}>
                         <Text style={styles.labelStyle}>Material:</Text>
@@ -328,13 +496,12 @@ export default NewMagicItemPage = ({navigation}) => {
                             // onScroll={false}
                         />
                     </View>
-
                  <View style={styles.inputRow}>
                  <NextButton 
                  navigation={navigation} 
-                 nextScreen={"Spell Page"} 
-                 params={{name, spellLevel, school, castingTime, ritual, range, rangeTypeOption, concentration, duration, usability , description}}
-                 checkforChange={() => checkForChange(name, spellLevel, school, castingTime, ritual, range, rangeTypeOption, concentration, duration, usability, description)}/>
+                 nextScreen={"Spells Page"} 
+                 params={{name, school, range, effect, damageTORF, castingTime, damageType, dice, ritual, isVocal, isSomatic, description, isSomatic, isMaterial, spellLevel, usableBy, duration, concentration, material}}
+                 checkforChange={() => checkForChange(name, spellLevel, school, castingTime, ritual, range, rangeTypeOption, concentration, duration, usableBy, description, concentration, material)}/>
                  </View>
                     <View style={{marginBottom: 200}}></View>
              </View>
@@ -410,8 +577,10 @@ const styles = StyleSheet.create({
         padding: 10,
         marginRight: 10,
     },
-    dropdownSubrace: {
-        width: width * .2,
+    dropdownNumOfDice: 
+    {
+        minWidth: width * .15,
+        // fontSize: FONTSIZE.medium,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,

@@ -45,6 +45,7 @@ export default MagicItemPage = ({navigation, route}) =>
     const [customMagicItem, setCustomMagicItem] = useState([]);
 
     useEffect(() => {
+        console.log("Custom Magic Items: " + customMagicItem)
         load();
     }, []);
 
@@ -74,6 +75,7 @@ export default MagicItemPage = ({navigation, route}) =>
 
 
     const removeMagicItem = (index) => {
+        console.log("Trying to delete")
         const updatedMagicItem = customMagicItem.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
         setCustomMagicItem(updatedMagicItem);
     };

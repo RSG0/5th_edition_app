@@ -3,8 +3,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONT, FONTSIZE, scale } from "../../constants/theme";
 import { Title } from "react-native-paper";
 import { capitalized, globalStyles } from "../../constants/global";
+import { useEffect } from "react";
 export default spellModal = ({name, school, isARitual, spellLevel, usableBy, castingTime, range, concentration,duration, description, materials }) =>
 {
+    useEffect(() =>
+    {
+        // console.log("Ritual:", isARitual)
+    }, [isARitual])
     const handleNameSize = (name) =>
     {
         if (name.length <= 15)
@@ -19,10 +24,13 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
         {
             const handleConcentration = () =>
             {
-                if (concen === true)
+                if (concen === "True" || concen === true)
                 {
+                    // console.log("Concentration is true")
                     return "Concentration, Up to " + duration
                 }
+                // console.log("Concentration:", concen)
+
                 return capitalized(duration)
             }
             // console.log(concen);
@@ -33,6 +41,7 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
 
     const handleSpellLevel = (lvlSpell, school, ritual) =>
     {
+        console.log("Ritual:", ritual)
         let rit = ""
         if (lvlSpell === "Cantrip")
         {
@@ -42,16 +51,21 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
         {
             lvlSpell = "1st Level"
         }
-        if (ritual === true)
+        else if (lvlSpell === "2nd")
         {
+            lvlSpell = "2nd Level"
+        }
+        if (ritual === true || ritual === "True")
+        {
+            // console.log("ritual has been achieved:")
             rit = "(ritual)"
         }
         return lvlSpell + " "+ school + " " + rit
     }
     const handleMaterials = (mat) =>
     {
-        console.log(mat);
-        if (typeof mat === "string")
+        console.log("Material:",mat);
+        if (mat === "True")
         {
             return(<Text style={{fontStyle: 'italic'}}>Materials: {mat}{"\n\n"}</Text> )
         }
@@ -63,6 +77,7 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
     const handleUsability = (isUse) =>
     {
         let use = [];
+        // console.log("reached")
         for (let i = 0; i < isUse.length; i++)
         {
             use.push(isUse[i])

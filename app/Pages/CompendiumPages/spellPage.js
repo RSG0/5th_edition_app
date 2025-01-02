@@ -8,10 +8,10 @@ import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newPageButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
-import SpellIconRough from "../../../components/spellIcon(Rough)";
 import SpellIcon from "../../../components/spellIcon";
 import { CANTRIPS, FIRST_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
 import { line } from "../../../constants/global";
+import CustomSpellIcon from "../../../components/customSpellIcon";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -90,36 +90,61 @@ const handleComponents = (components) => {
 
 export default SpellPage = ({navigation, route}) =>
 {
-    const { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight} = route.params || {};
+    const { name, spellLevel, school, castingTime, ritual, range, concentration, duration, components, description, effect, material, usableBy, damageType, isVocal, isSomatic, materials} = route.params || {};
     const [cantripDropdown, setCantripDropdown] = useState(false);
     const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
 
+    function displayCustomSpells(customSpell) {
+        return customSpell.map((item, i) => (
+            <CustomSpellIcon
+                key={i}
+                name={item.name || "DNE Spell Name"}
+                school={item.school || "DNE School"}
+                range={item.range || "[DNE Range]"}
+                effect={item.effect}
+                castingTime={item.castingTime || "[DNE action]"}
+                damageType={item.damageType || "N/A"}
+                ritual={item.ritual || "DNE Ritual"}
+                isVocal={item.isVocal || "DNE Vocal"}
+                isSomatic={item.isSomatic || "DNE Somatic"}
+                description={item.description || "DNE Description"}
+                duration={item.duration || "DNE Dur"}
+                requiresMaterials={item.requiresMaterials || "[DNE M]"}
+                spellLevel={item.spellLevel || "[DNE Lvl]"}
+                usableBy={item.usableBy || "[DNE]"}
+                concentration={item.concentration || "[DNE CON]"}
+                materials={item.material || "[DNE Material Description]"}
+                removeSpell={() => removeCustomSpell(i)}/>
+
+        ));
+
+    }
 
     //Used in tandem with Async Storage
-    const [customMagicItem, setCustomMagicItem] = useState([]);
+    const [customSpells, setCustomSpells] = useState([]);
 
     useEffect(() => {
         load();
     }, []);
 
     useEffect(() => {
-        if (customMagicItem.length > 0) {
+        if (customSpells.length > 0) {
             save();
         }
-    }, [customMagicItem]);
+    }, [customSpells]);
 
     const save = async () => {
         try {
-            await AsyncStorage.setItem("MagicItem1", JSON.stringify(customMagicItem));
+            await AsyncStorage.setItem("Spell1", JSON.stringify(customSpells));
         } catch (err) {
             console.log(err);
         }
     };
     const load = async () => {
         try {
-            const magicItemJSON = await AsyncStorage.getItem("MagicItem1");
-            if (magicItemJSON) {
-                setCustomMagicItem(JSON.parse(magicItemJSON));
+            const spellJSON = await AsyncStorage.getItem("Spell1");
+            if (spellJSON) {
+                setCustomSpells(JSON.parse(spellJSON));
             }
         } catch (err) {
             console.log(err);
@@ -127,37 +152,22 @@ export default SpellPage = ({navigation, route}) =>
     };
 
 
-    const removeMagicItem = (index) => {
-        const updatedMagicItem = customMagicItem.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
-        setCustomMagicItem(updatedMagicItem);
+    const removeCustomSpell = (index) => {
+        console.log("Trying to delete");
+        const updatedSpell = customSpells.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
+        setCustomSpells(updatedSpell);
     };
-
-    function displayCustomItems(customMagicItems) {
-        return customMagicItems.map((item, index) => (
-            <CustomMagicItemIcon
-                key={index}
-                name={item.name}
-                type={item.itemType || "Custom Item"}
-                weight={item.weight || 0}
-                attunement={item.attunement}
-                description={item.description || "N/A"}
-                rarity={item.rarity}
-                charges={item.isChargable}
-                numOfCharges={item.numOfCharges}
-                removeItem={() => removeMagicItem(index)}
-                
-            />
-
-        ));
-
-    }
 
     useEffect(() => {
         if (name) {
-            const newMagicItems = { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight};
-            setCustomMagicItem((prevMagicItems) => [...prevMagicItems, newMagicItems]);
+            const setSpells = { name, spellLevel, school, castingTime, ritual, range, concentration, duration, components, description, effect, material, usableBy, damageType, isVocal, isSomatic, materials};
+            //Works, name, school, castingTime, range, duration, material, damageType, isSomatic, isVocal, materials
+            //Doesn't work: usableBy, Ritual school
+
+            console.log("Spe:", spellLevel)
+            setCustomSpells((prevMagicItems) => [...prevMagicItems, setSpells]);
         }
-    }, [name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight]);
+    }, [name, spellLevel, school, castingTime, ritual, range, concentration, duration, components, description, effect, material, usableBy, isVocal, isSomatic, materials]);
 
     return(
         <SafeAreaView style={{backgroundColor: COLORS.background, flex:1}}>
@@ -168,8 +178,7 @@ export default SpellPage = ({navigation, route}) =>
                 {/* {line()}      */}
                 {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel)}
                 {/* {line()}      */}
-
-                {/* <SpellIcon name={"Create or Destroy Water Tasha Caustic Brew"} school={"Evocation"} range={"150 feet"} effect={"22d10"} damageType={"Fire"}  isVocal={true} isSomatic={true} description={"radius"} requiresMaterials={true}/> */}
+                {displayCustomSpells(customSpells)}                
 
             </View>
             <View style={{margin: height * .25}}/>

@@ -20,7 +20,7 @@ const capitalized = (word) => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
   
-export default SpellIcon = ({name, school, range, effect, castingTime, damageType, ritual, isVocal, isSomatic, description, requiresMaterials, isMaterial, spellLevel, usableBy, duration, concentration, materials} ) =>
+export default SpellIcon = ({name, school, range, effect, castingTime, damageType, ritual, isVocal, isSomatic, description, requiresMaterials, spellLevel, usableBy, duration, concentration, materials, removeSpell} ) =>
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
     // console.log(usableBy);
@@ -152,36 +152,37 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
             return (<Text style={{fontStyle:'italic'}}>See Description</Text>)
         }
     }
-    // useEffect(() =>
-    // {
-    //     console.log("")
-    //     console.log("Name:",name);
-    //     console.log("Spell Level:",spellLevel);
-    //     console.log("School:",school)
-    //     console.log("Casting Time: ", castingTime)
-    //     console.log("Ritual:",ritual)
-    //     console.log("Range:",range)
-    //     // console.log("Range Type:",rangeType)
-    //     console.log("Concentration:",concentration)
-    //     console.log("Duration:",duration)
-    //     console.log("Damage:",effect)
-    //     console.log("Damage type:",damageType)
-    //     // console.log("# of Dice:",numOfDice)
-    //     // console.log("Dice:",dice)
-    //     console.log("IsVocal:",isVocal)
-    //     console.log("IsSomatic:",isSomatic)
-    //     console.log("IsMaterial:",requiresMaterials)
-    //     console.log("Usability:",usableBy)
-    //     console.log("Material:",requiresMaterials)
-    //     console.log("Description:",description)
-    //     console.log("")
-    //     console.log("PRINTING")
-    // }, [])
+    useEffect(() =>
+    {
+        console.log("")
+        console.log("Name:",name);
+        console.log("Spell Level:",spellLevel);
+        console.log("School:",school)
+        console.log("Casting Time: ", castingTime)
+        console.log("Ritual:",ritual)
+        console.log("Range:",range)
+        // console.log("Range Type:",rangeType)
+        console.log("Concentration:",concentration)
+        console.log("Duration:",duration)
+        console.log("Damage:",effect)
+        console.log("Damage type:",damageType)
+        // console.log("# of Dice:",numOfDice)
+        // console.log("Dice:",dice)
+        console.log("IsVocal:",isVocal)
+        console.log("IsSomatic:",isSomatic)
+        console.log("IsMaterial:",requiresMaterials)
+        console.log("Usability:",usableBy)
+        console.log("Material:",requiresMaterials)
+        console.log("Description:",description)
+        console.log("")
+        console.log("PRINTING")
+    }, [])
     return(
         <View style={styles.item}>
             <TouchableOpacity style={styles.touchable} onPress={ () => setIsModalVisible(true)}>
-                <View style={styles.square}/> 
-                {/**Print the square */}
+                <TouchableOpacity style={[styles.square, {justifyContent: 'center'}]} onPress={removeSpell}>
+                    <Text style={[globalStyles.centerRow, {fontSize: FONTSIZE.small, textAlign: 'center', fontWeight: 'black'}]}>X</Text>
+                </TouchableOpacity> 
                 <View style={styles.textContainer}>
                     <Text style={styles.itemTitle}>{name}</Text>
                     {/* {console.log("School value:", school)}
@@ -193,7 +194,7 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
                     <View style={{flexDirection: 'row', alignItems: 'center',}}>
                         <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold', backgroundColor: '', textAlign: 'center'}}>Effect: {handleEffect(effect, damageType)}</Text>
                     </View>
-                    <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold'}}>{handleComponents(isVocal, isSomatic, isMaterial)}</Text>
+                    <Text style={{fontSize: FONTSIZE.xsmall, fontWeight: 'bold'}}>{handleComponents(isVocal, isSomatic, requiresMaterials)}</Text>
                 </View>
             </TouchableOpacity>
                 <Modal
