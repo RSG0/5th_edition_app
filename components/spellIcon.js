@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Modal, TouchableWithoutFeedback } from "react-native"
-import { characterBorderWidth, COLORS, FONTSIZE } from "../constants/theme"
+import { characterBorderWidth, COLORS, FONT, FONTSIZE } from "../constants/theme"
 import { useEffect, useState } from "react";
 import { globalStyles } from "../constants/global";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'; //Fire Damage Icon: fire-alt, Cold Damage Icon: snowflake
@@ -7,6 +7,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6'; //Force Damage Icon:
 //Piercing Damage Icon "crosshairs": 
 import Entypo from '@expo/vector-icons/Entypo'; //Psychic Damage Icon: eye
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'; //Poison/Acid Damage Icon: bottle-tonic-skull, Slashing Damage Icon "sword", ""
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import SpellModal from "./modals/spellModal";
 
 const {width, height} = Dimensions.get('screen');
@@ -135,6 +136,10 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
             {
                 return <MaterialCommunityIcons name="sword" size={FONTSIZE.xsmall} color="black"/>
             }
+            else if ("Healing" === damageType)
+            {
+                return <MaterialIcons name="healing" size={FONTSIZE.xsmall} color="black" />
+            }
             else
             {
                 return <FontAwesome6 name="square" size={FONTSIZE.small} color="black"/>
@@ -152,31 +157,31 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
             return (<Text style={{fontStyle:'italic'}}>See Description</Text>)
         }
     }
-    // useEffect(() =>
-    // {
-    //     console.log("")
-    //     console.log("Name:",name);
-    //     console.log("Spell Level:",spellLevel);
-    //     console.log("School:",school)
-    //     console.log("Casting Time: ", castingTime)
-    //     console.log("Ritual:",ritual)
-    //     console.log("Range:",range)
-    //     // console.log("Range Type:",rangeType)
-    //     console.log("Concentration:",concentration)
-    //     console.log("Duration:",duration)
-    //     console.log("Damage:",effect)
-    //     console.log("Damage type:",damageType)
-    //     // console.log("# of Dice:",numOfDice)
-    //     // console.log("Dice:",dice)
-    //     console.log("IsVocal:",isVocal)
-    //     console.log("IsSomatic:",isSomatic)
-    //     console.log("IsMaterial:",requiresMaterials)
-    //     console.log("Usability:",usableBy)
-    //     console.log("Material:",requiresMaterials)
-    //     console.log("Description:",description)
-    //     console.log("")
-    //     console.log("PRINTING")
-    // }, [])
+    useEffect(() =>
+    {
+        // console.log("")
+        // console.log("Name:",name);
+        // console.log("Spell Level:",spellLevel);
+        // console.log("School:",school)
+        // console.log("Casting Time: ", castingTime)
+        // console.log("Ritual:",ritual)
+        // console.log("Range:",range)
+        // // console.log("Range Type:",rangeType)
+        // console.log("Concentration:",concentration)
+        // console.log("Duration:",duration)
+        // console.log("Damage:",effect)
+        // console.log("Damage type:",damageType)
+        // console.log("# of Dice:",numOfDice)
+        // console.log("Dice:",dice)
+        console.log("IsVocal:",isVocal)
+        console.log("IsSomatic:",isSomatic)
+        console.log("IsMaterial:",requiresMaterials)
+        // console.log("Usability:",usableBy)
+        // console.log("Material:",requiresMaterials)
+        // console.log("Description:",description)
+        // console.log("")
+        // console.log("PRINTING")
+    }, [])
     return(
         <View style={styles.item}>
             <TouchableOpacity style={styles.touchable} onPress={ () => setIsModalVisible(true)}>

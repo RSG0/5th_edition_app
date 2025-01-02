@@ -41,7 +41,7 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
 
     const handleSpellLevel = (lvlSpell, school, ritual) =>
     {
-        console.log("Ritual:", ritual)
+        // console.log("Ritual:", ritual)
         let rit = ""
         if (lvlSpell === "Cantrip")
         {
@@ -55,6 +55,18 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
         {
             lvlSpell = "2nd Level"
         }
+        else if (lvlSpell === "3rd")
+        {
+            lvlSpell = "3rd Level"
+        }
+        else if (lvlSpell === "4th")
+        {
+            lvlSpell = "4th Level"
+        }
+        else if (lvlSpell === "5th")
+        {
+            lvlSpell = "5th Level"
+        }
         if (ritual === true || ritual === "True")
         {
             // console.log("ritual has been achieved:")
@@ -64,7 +76,7 @@ export default spellModal = ({name, school, isARitual, spellLevel, usableBy, cas
     }
     const handleMaterials = (mat) =>
     {
-        console.log("Material:",mat);
+        // console.log("Material:",mat);
         if (mat === "True")
         {
             return(<Text style={{fontStyle: 'italic'}}>Materials: {mat}{"\n\n"}</Text> )
