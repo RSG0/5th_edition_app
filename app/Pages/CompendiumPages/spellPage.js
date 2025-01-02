@@ -9,7 +9,7 @@ import NewMagicItemButton from "../../../components/buttons/newPageButton";
 import { useState, useEffect } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import SpellIcon from "../../../components/spellIcon";
-import { CANTRIPS, FIRST_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
+import { CANTRIPS, FIRST_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS, SECOND_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
 import { line } from "../../../constants/global";
 import CustomSpellIcon from "../../../components/customSpellIcon";
 
@@ -93,10 +93,45 @@ export default SpellPage = ({navigation, route}) =>
     const { name, spellLevel, school, castingTime, ritual, range, concentration, duration, components, description, effect, material, usableBy, damageType, isVocal, isSomatic, materials} = route.params || {};
     const [cantripDropdown, setCantripDropdown] = useState(false);
     const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
+    const [secondLevelDropdown, setSecondLevelDropdown] = useState(false);
+    const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
+    const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
 
-    function displayCustomSpells(customSpell) {
-        return customSpell.map((item, i) => (
+
+    const [customLevelDropdown, setCustomLevelDropdown] = useState(false);
+    
+    function displaySpells(customSpell) {
+        
+        const sortedSpells = customSpell.sort((a, b) => {return a.name.localeCompare(b.name);});
+        return sortedSpells.map((item, i) => (
             <CustomSpellIcon
+                key={i}
+                name={item.name || "DNE Spell Name"}
+                school={item.school || "DNE School"}
+                range={item.range || "[DNE Range]"}
+                effect={item.effect}
+                castingTime={item.castingTime || "[DNE action]"}
+                damageType={item.damageType || "N/A"}
+                ritual={item.ritual || "DNE Ritual"}
+                isVocal={item.isVocal || "DNE Vocal"}
+                isSomatic={item.isSomatic || "DNE Somatic"}
+                description={item.description || "DNE Description"}
+                duration={item.duration || "DNE Dur"}
+                requiresMaterials={item.requiresMaterials || "[DNE M]"}
+                spellLevel={item.spellLevel || "[DNE Lvl]"}
+                usableBy={item.usableBy || "[DNE]"}
+                concentration={item.concentration || "[DNE CON]"}
+                materials={item.material || "[DNE Material Description]"}
+                removeSpell={() => removeCustomSpell(i)}/>
+
+        ));
+
+    }
+    function displaySpells(spell) {
+        
+        const sortedSpells = spell.sort((a, b) => {return a.name.localeCompare(b.name);});
+        return sortedSpells.map((item, i) => (
+            <SpellIcon
                 key={i}
                 name={item.name || "DNE Spell Name"}
                 school={item.school || "DNE School"}
@@ -177,8 +212,13 @@ export default SpellPage = ({navigation, route}) =>
                 {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displayCantrips)}
                 {/* {line()}      */}
                 {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel)}
+                {dropdown("2nd Level Spells",setSecondLevelDropdown, secondLevelDropdown, true, () => displaySpells(SECOND_LEVEL_SPELLS) )}                
+
+                {dropdown("4th Level Spells",setFourthLevelDropdown, fourthLevelDropdown, true, () => displaySpells(FOURTH_LEVEL_SPELLS) )}                
+
                 {/* {line()}      */}
-                {displayCustomSpells(customSpells)}                
+                {dropdown("Custom Spells",setCustomLevelDropdown, customLevelDropdown, true, () => displaySpells(customSpells) )}                
+
 
             </View>
             <View style={{margin: height * .25}}/>

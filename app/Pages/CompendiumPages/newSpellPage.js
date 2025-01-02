@@ -256,21 +256,6 @@ export default NewMagicSpellPage = ({navigation}) => {
             ));
         };
         
-    const handleChargeChange = (item) =>
-    {
-        console.log(item);
-        setIsChargable(item.label);
-        if (item.label == "True")
-        {
-            console.log("Printing")
-            setNumOfChargesOptions(NUMBER_TWENTY);
-        }
-        else
-        {
-            console.log("not working...")
-            setNumOfChargesOptions([]);
-        }
-    }
 
     const isVocal = handleComponents(components).isVocal
     const isSomatic = handleComponents(components).isSomatic
