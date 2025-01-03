@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 
 export default AbilityScoreIcon = ({abilityName,score,mod}) =>
@@ -24,15 +24,18 @@ export default AbilityScoreIcon = ({abilityName,score,mod}) =>
         </>
     );
 }
-const squareSize = 125
+// const squareSize = 125
+const squareSize = width * .2
+const {width, height} = Dimensions.get('screen');
+
 
 const styles = StyleSheet.create(
 {
     viewStyle: {
         margin: 5,
         marginBottom: 20,
-        width: squareSize,
-        height: squareSize,
+        width: width * .3,
+        height: width * .3,
         backgroundColor: COLORS.mainColor,
         // justifyContent: 'center',
         alignItems: 'center',
@@ -45,7 +48,7 @@ const styles = StyleSheet.create(
         alignSelf: 'center',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: FONTSIZE.large,
+        fontSize: FONTSIZE.medium,
     },
     textStyle: {
         marginTop: 10,
@@ -58,8 +61,11 @@ const styles = StyleSheet.create(
         position: 'absolute',
         bottom:-20,
         // alignSelf: 'center',
-        width: 60,
-        height: 45,
+        // width: 60,
+        width: width * .15,
+        // height: 45,
+        height: height * .06,
+
         // alignItems: 'center',
         justifyContent: 'center',
 

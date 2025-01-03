@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 // import Icon from 'react-native-vector-icons/FontAwesome6';
 import Icon from '@expo/vector-icons/Ionicons'
 
@@ -20,11 +20,14 @@ export default ArmorClassIcon = ({ ac }) => {
         </View>
     );
 }
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
     iconContainer: {
-        height: armorSize,
-        width: armorSize,
+        // height: armorSize,
+        height: width * .25,
+        // width: armorSize,
+        width : width * .25,
         justifyContent: 'center',
         alignItems: 'center'
     },

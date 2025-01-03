@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 import { useEffect } from "react";
 
@@ -23,21 +23,25 @@ export default savingThrowIcon = ({abilityName, isProfcient, mod}) =>
         </View>
     );
 }
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create(
 {
     viewStyle: {
-        width: 180,
-        height: 35,
+        // width: 180,
+        // height: 35,
+        width: width * .45,
+        height: height * .04,
         backgroundColor: COLORS.mainColor,
         justifyContent: 'center',
-        alignSelf: 'center',
+        alignItems: 'center',
         borderRadius: 40,
         borderWidth: characterBorderWidth    
     },
     textStyle: {
         marginRight: 20,
         textAlign: 'center',
+        alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: FONTSIZE.xsmall,
     },

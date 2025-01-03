@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 export default hitDiceIcon = ({level, hitDice}) =>
@@ -11,11 +11,15 @@ export default hitDiceIcon = ({level, hitDice}) =>
         </View>
     );
 }
+const {width, height} = Dimensions.get('screen');
+
 const styles = StyleSheet.create(
 {
     viewStyle: {
-        width: 100,
-        height: 50,
+        // width: 100,
+        // height: 50,
+        width: width * .25,
+        height: height * .07,
         backgroundColor: COLORS.mainColor,
         // display: 'flex',
         justifyContent: 'center',
@@ -25,7 +29,7 @@ const styles = StyleSheet.create(
     },
     textStyle: {
         fontWeight: 'bold',
-        fontSize: FONTSIZE.medium,
+        fontSize: FONTSIZE.small,
         textAlign: 'center'
     },
 

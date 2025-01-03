@@ -14,7 +14,7 @@ function displayMagicArmor()
 {
     return MAGICITEMS_ARMOR.map((armor, index) => (
 
-        <MagicItemIcon key={armor.name} name={armor.name} type={"Armor"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+        <MagicItemIcon key={index} name={armor.name} type={"Armor"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
 function displayMagicPotions()
@@ -34,7 +34,7 @@ function displayMagicRings()
 function displayWondorousItems()
 {
     return MAGICITEMS_WONDROUS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunment={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
+        <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
 export default MagicItemPage = ({navigation, route}) =>
@@ -81,7 +81,8 @@ export default MagicItemPage = ({navigation, route}) =>
     };
 
     function displayCustomItems(customMagicItems) {
-        return customMagicItems.map((item, index) => (
+        const sortedItems = customMagicItems.sort((a, b) => {return a.name.localeCompare(b.name);});
+        return sortedItems.map((item, index) => (
             <CustomMagicItemIcon
                 key={index}
                 name={item.name}

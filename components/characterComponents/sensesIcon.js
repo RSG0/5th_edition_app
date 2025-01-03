@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 
 export default SensesIcon = ({abilityName, isProfcient, mod}) =>
@@ -19,12 +19,13 @@ export default SensesIcon = ({abilityName, isProfcient, mod}) =>
         </View>
     );
 }
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create(
 {
     viewStyle: {
-        width: 300,
-        height: 30,
+        width: width * .8,
+        height: height * .05,
         backgroundColor: COLORS.mainColor,
         justifyContent: 'center',
         alignSelf: 'center',
@@ -40,8 +41,8 @@ const styles = StyleSheet.create(
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center', // Center horizontally
-        width: 50,
-        height: 50,
+        width: width * .14,
+        height: width * .14,
         backgroundColor: COLORS.mainColor,
         left: -20,
         borderWidth: characterBorderWidth,

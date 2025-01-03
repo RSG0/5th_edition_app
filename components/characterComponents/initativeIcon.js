@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 export default InitativeIcon = ({dex}) =>
 {
@@ -15,13 +15,16 @@ export default InitativeIcon = ({dex}) =>
     );
 }
 const squareSize = 90
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create(
 {
     viewStyle: {
         margin: 10,
-        width: squareSize,
-        height: squareSize,
+        // width: squareSize,
+        // height: squareSize,
+        width: width * .22,
+        height: width * .22,
         backgroundColor: COLORS.mainColor,
         justifyContent: 'center',
         // alignItems: 'center',

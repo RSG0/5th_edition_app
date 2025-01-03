@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 
 export default profBonusAndSpeedIcon = ({prof,speed}) =>
@@ -18,12 +18,15 @@ export default profBonusAndSpeedIcon = ({prof,speed}) =>
     );
 }
 const squareSize = 125
+const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create(
 {
     viewStyle: {
-        width: 300,
-        height: 80,
+        // width: 300,
+        width: width * .75,
+        // height: 80,
+        height: height * .1,
         flexDirection: 'row',
         flexGrow: '',
         backgroundColor: COLORS.mainColor,
