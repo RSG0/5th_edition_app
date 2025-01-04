@@ -8,12 +8,13 @@ import Feather from '@expo/vector-icons/Feather';
 const armorSize = 100;
 //INCOMPLETE
 export default ArmorClassIcon = ({ ac }) => {
+    const ArmorClass = (ac || "20")
     return (
         <View style={styles.iconContainer}>
             {/* <Feather name="shield" size={100} color={"black"}/>         */}
-            <Icon style={styles.filledShield} name="shield" color={COLORS.mainColor} size={armorSize}/>
+            <Icon style={styles.filledShield} name="shield" color={COLORS.mainColor} size={width * .25}/>
 
-            <Icon name="shield-outline" color="black" size={armorSize}/>
+            <Icon name="shield-outline" color="black" size={width * .25}/>
             <Text style={styles.acText}>20</Text>
 
             {/* <View style={{backgroundColor: 'red', width: 100, height: 100}}/> */}
@@ -25,9 +26,9 @@ const {width, height} = Dimensions.get('screen');
 const styles = StyleSheet.create({
     iconContainer: {
         // height: armorSize,
-        height: width * .25,
+        // height: width * .25,
         // width: armorSize,
-        width : width * .25,
+        // width : width * .25,
         justifyContent: 'center',
         alignItems: 'center'
     },

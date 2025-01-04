@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import HitDiceIcon from "../../../components/characterComponents/hitDiceIcon";
@@ -97,15 +97,19 @@ export default CharacterPage1 = () =>
     );
 }
 const circleSize = 130;
+const {width, height} = Dimensions.get('screen');
+
 const styles = StyleSheet.create(
 {
     circle:
     {
-        margin:10,
+        margin:width * .02,
         backgroundColor: COLORS.mainColor,
-        width: circleSize,
-        height: circleSize,
-        borderRadius: 80,
+        // width: circleSize,
+        // height: circleSize,
+        width: width * .3,
+        height: width * .3,
+        borderRadius: width * .5,
         borderWidth: 5
     },
     viewStyle: {

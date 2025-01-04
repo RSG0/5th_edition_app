@@ -1,12 +1,24 @@
 import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
-export default hitPointIcon = ({level, hitDice}) =>
+export default hitPointIcon = ({currentHP, maxHP}) =>
 {
+    const handleHP = (hp, mHp) => 
+    {
+        if (hp == null && mHp == null)
+        {
+            return "NN/NN"
+        }
+        else
+        {
+            return hp + "/" + mHp
+        }
+    }
+
     return (
         <View style={styles.viewStyle}>
             {/* <Text style={styles.textStyle} >Hit Dice:{"\n"}{level}{hitDice}</Text> */}
-            <Text style={styles.textStyle} >Hit Points:{"\n"}23/40</Text>
+            <Text style={styles.textStyle} >Hit Points:{"\n"}{handleHP(currentHP, maxHP)}</Text>
 
         </View>
     );

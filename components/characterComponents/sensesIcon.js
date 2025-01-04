@@ -8,7 +8,7 @@ export default SensesIcon = ({abilityName, isProfcient, mod}) =>
     const displayMod = mod || "2N"
 
     return (
-        <View style={[styles.viewStyle, {margin: 15}]}>
+        <View style={[styles.viewStyle]}>
             <Text style={styles.textStyle} >
                 {displayAbilityName}{"\n"} 
             </Text>
@@ -24,6 +24,7 @@ const {width, height} = Dimensions.get('screen');
 const styles = StyleSheet.create(
 {
     viewStyle: {
+        marginVertical: height * .03,
         width: width * .8,
         height: height * .05,
         backgroundColor: COLORS.mainColor,
@@ -46,7 +47,7 @@ const styles = StyleSheet.create(
         backgroundColor: COLORS.mainColor,
         left: -20,
         borderWidth: characterBorderWidth,
-        borderRadius: 50 
+        borderRadius: width * .5 
     },
     modifierText: {
         textAlign: 'center',

@@ -3,10 +3,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 export default hitDiceIcon = ({level, hitDice}) =>
 {
+    const hitD = (level + hitDice || "Nd4N")
     return (
         <View style={styles.viewStyle}>
             {/* <Text style={styles.textStyle} >Hit Dice:{"\n"}{level}{hitDice}</Text> */}
-            <Text style={styles.textStyle} >Hit Dice:{"\n"}4d10</Text>
+            <Text style={styles.textStyle} >Hit Dice:{"\n"}{hitD}</Text>
 
         </View>
     );
