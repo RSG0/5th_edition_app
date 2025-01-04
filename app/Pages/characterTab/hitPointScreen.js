@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Dimensions } from "react-native";
+import { View, StyleSheet, Text, ScrollView, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Dimensions, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import { CLASSES } from "../../../constants/characterinformation/characterinfo";
@@ -8,20 +8,25 @@ import NextButton from "../../../components/buttons/nextButton";
 
 export default HitPoint = ({navigation, route}) =>
 {
-    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params; 
+    const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells} = route.params; 
     //REMINDER: level IS A STRING
 
     const selectedClass = CLASSES.find(cls => cls.label === classes)
     const selectedHitDice = selectedClass.hitDice
     const conMOD = calculateScoreMod(con);
 
+    // const [hitPoints, setHitPoints] = useState(0)
     const [standard, setStandard] = useState(true)
     const [maxHp, setMaxHp] = useState(0);
     const [customHpInputs, setCustomHpInputs] = useState([]);
 
     const checkforChange = () =>
     {
-        // Need to add functionality and alerts
+        if (maxHp === 0)
+        {
+            Alert.alert("OOPS", "You need to fill all the information")
+            return false;
+        }
         return true
     }
 
@@ -102,7 +107,7 @@ export default HitPoint = ({navigation, route}) =>
             <View style={styles.bottom}></View>
             <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level,selectedRace, con, int, wis, cha}}
+            params={{name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp}}
             checkforChange={() => checkforChange()}
             nextScreen={"Select Equipment"}></NextButton>
 

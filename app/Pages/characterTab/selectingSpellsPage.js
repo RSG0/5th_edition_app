@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 import { CANTRIPS, FIRST_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS } from '../../../constants/characterinformation/spells';
 import { COLORS, FONT } from '../../../constants/theme';
@@ -12,10 +12,20 @@ export default SpellPage = ({navigation, route}) =>
 {
 
 
-  const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params;
+  const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass} = route.params;
 
   const checkForChange = () =>
   {
+    if ((numOfLevelSpells.length !== numOfSpellsKnown() ) && (numOfCantrips.length !== calculateNumOfCantrips ()))
+    {
+      console.log(`Number of Level Spells: ${numOfLevelSpells.length}`)
+      console.log(`Number of Level Spells: ${numOfLevelSpells}`)
+      console.log(`Number of Level Spells Known: ${numOfSpellsKnown()}`)
+      console.log(`Number of Cantrips Known: ${calculateNumOfCantrips()}`)
+
+      Alert.alert("OOPS", "You need to fill all the information")
+      return false;
+    }
     //include important infomration
     return true
   }
@@ -302,7 +312,7 @@ export default SpellPage = ({navigation, route}) =>
         <View style={styles.nextButton}> 
           <NextButton
             navigation={navigation}
-            params={{name, classes, backgrounds, level, selectedRace, con ,int, wis, cha, numOfCantrips, numOfLevelSpells}}
+            params={{name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells}}
             checkforChange={() => checkForChange()}
             nextScreen={"Hit Point"}
           />

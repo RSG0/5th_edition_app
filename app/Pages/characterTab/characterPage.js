@@ -42,14 +42,17 @@ export default CharacterPage = ({ navigation, route }) => {
         setCharacters(updatedCharacters);
     };
 
-    const { name, classes, level, selectedRace, image } = route.params || {};
+    const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments} = route.params || {};
 
-    useEffect(() => {
-        if (name) {
+    useEffect(() => 
+    {
+        if (name) 
+            {
             const newCharacter = { name, classes, level, race: selectedRace, image };
             setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
         }
-    }, [name, classes, level, selectedRace, image]);
+    }, [{name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, 
+        selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments}]);
 
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.background, flex: 1 }}>

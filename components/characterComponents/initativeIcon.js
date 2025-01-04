@@ -2,11 +2,12 @@ import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 export default InitativeIcon = ({dex}) =>
 {
+    const dexMod = (dex || "+N")
     return (
         <View style={styles.viewStyle}>
             <Text style={styles.textStyle} >
                 Initative:{"\n"} 
-                <Text style={{fontSize: FONTSIZE.xxlarge}}>+4</Text>  
+                <Text style={{fontSize: FONTSIZE.xxlarge}}>{dexMod}</Text>  
             </Text>
             {/* <Text style={styles.textStyle } >0</Text> */}
 

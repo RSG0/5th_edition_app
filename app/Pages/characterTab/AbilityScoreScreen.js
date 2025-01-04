@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions, Alert } from 'react-native';
 import NextButton from '../../../components/buttons/nextButton';
 import { COLORS, FONTSIZE } from '../../../constants/theme';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -50,6 +50,11 @@ const AbilityScoreScreen = ({ navigation, route }) => {
     // console.log(STANDARD_ARRAY)
     const checkForChange = () =>
     {
+        if (!str || !dex || !con || !int|| !wis || !cha)
+        {
+            Alert.alert("OOPS", "You need to fill all the information")
+            return true;
+        }
         return true;
     }
     useEffect(() => {
@@ -114,11 +119,11 @@ const AbilityScoreScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.viewStyle}>
-        <Text>Name: {name}</Text>
+        {/* <Text>Name: {name}</Text>
         <Text>Class: {classes}</Text>
         <Text>Races: {selectedRace}</Text>
         <Text>Backgrounds: {backgrounds}</Text>
-        <Text>Level: {level}</Text>
+        <Text>Level: {level}</Text> */}
 
         {/* <ScrollView style={{}} contentContainerStyle={{flexGrow: 1}} horizontal={true}> */}
         <View style={styles.inputRow}>
@@ -139,7 +144,7 @@ const AbilityScoreScreen = ({ navigation, route }) => {
 
         <NextButton 
             navigation={navigation} 
-            params={{classes, backgrounds, name, level, selectedRace, selectedSubrace, con, int, wis, cha}}
+            params={{classes, backgrounds, name, level, selectedRace, selectedSubrace, str, dex, con, int, wis, cha}}
             checkforChange={() => checkForChange()}
 
             nextScreen={"Select Skills"}/>

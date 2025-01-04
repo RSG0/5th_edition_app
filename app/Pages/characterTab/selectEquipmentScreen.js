@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinformation/characterinfo";
@@ -6,7 +6,7 @@ import SelectButton from "../../../components/buttons/selectionButton";
 import { useEffect, useState } from "react";
 
 export default SelectEquipmentPage = ({navigation,route}) => {
-    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params; 
+    const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp} = route.params; 
 
     const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes);
     const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds);
@@ -43,11 +43,17 @@ export default SelectEquipmentPage = ({navigation,route}) => {
             return updatedSelection;
         });
     };
-    const checkforChange = () =>
+    const checkforChange = () => {
+        const allSelected = selectedEquipments.every(item => item !== null); // Check if all rows have a selected item
+    
+        if (!allSelected) 
         {
-            // Need to add functionality and alerts
-            return true
+            Alert.alert("OOPS", "You need to fill all the information")
+            return false; // Prevent navigation
         }
+    
+        return true; // Allow navigation
+    };
     const renderClassEquipment = (equip, index) => {
         if (equip) {
             return (
@@ -98,7 +104,20 @@ export default SelectEquipmentPage = ({navigation,route}) => {
 
     const renderEquipment = () => 
     {
+        console.log("STR:", str )
+        console.log("DEX:", dex )
+        console.log("CON:", con )
+        console.log("INT:", int )
+        console.log("WIS:", wis )
+        console.log("CHA:", cha )
+        console.log("WIS:", wis )
+        console.log("Selected Skills:", selectSkills)
+        console.log("Class:", classes )
+        console.log("Max Hp:", maxHp)
+        console.log("Subclass:", subclass)
+
         return backgroundEquipment.join(", ") //+ ", " + selectedEquipments.join(", ")
+
     }
 
     return (
@@ -112,7 +131,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
                     <View style={{paddingBottom: 30}}/>
                     <NextButton
                 navigation={navigation}
-                params={{name, classes, backgrounds, level, selectedRace, con, int, wis, cha}}
+                params={{name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments}}
                 checkforChange={() => checkforChange()}
                 nextScreen={"Secondary Features"}></NextButton>
                 </View>

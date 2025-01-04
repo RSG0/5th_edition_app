@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, StatusBar, Dimensions } from "react-native";
+import { View, StyleSheet, Text, StatusBar, Dimensions, Alert } from "react-native";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dropdown } from "react-native-element-dropdown";
@@ -9,7 +9,7 @@ const {width, height} = Dimensions.get('screen');
 
 export default SubclassesPage = ({navigation, route}) =>
 {
-    const {name, classes, backgrounds, level, selectedRace, con, int, wis, cha} = route.params;
+    const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills} = route.params;
     const [subclass, setSubclass] = useState(null);
     const [subclassSpells, setSubclassSpells] = useState(null);
     const [subclassFeatures, setSubclassFeatures] = useState(null);
@@ -63,9 +63,13 @@ export default SubclassesPage = ({navigation, route}) =>
             // set their classes subclass options to what the user has selected
             setSubclassOptions(options) 
         }
-    function checkForChange(parameters)
+    const checkForChange = () =>
     {
-        // need to include infromation that requires the user to enter subclass to move on
+        if (subclass === false || subclass === null)
+        {
+            Alert.alert("OOPS", "You need to fill all the information")
+            return false
+        }
         return true;
     }
     function handleSpells(sp)
@@ -141,7 +145,7 @@ export default SubclassesPage = ({navigation, route}) =>
             <Text>{handleFeatures(subclassFeatures)}</Text>
             <NextButton 
                 navigation={navigation}
-                params={{name, classes, backgrounds, subclass, level, selectedRace, con,int, wis, cha}}
+                params={{name, classes, backgrounds, subclass, level, selectedRace, str, dex, con,int, wis, cha, selectSkills, subclass}}
                 checkforChange={(item) => checkForChange(item)}
                 nextScreen={"Spell Page"}
                 ></NextButton>

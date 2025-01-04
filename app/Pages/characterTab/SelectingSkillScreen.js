@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, StatusBar, FlatList, TouchableOpacity, ScrollView, Dimensions} from "react-native";
+import { View, StyleSheet, Text, StatusBar, FlatList, TouchableOpacity, ScrollView, Dimensions, Alert} from "react-native";
 import { FONTSIZE, COLORS } from "../../../constants/theme";
 import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformation/characterinfo";
 import NextButton from "../../../components/buttons/nextButton";
@@ -10,11 +10,16 @@ const {width, height} = Dimensions.get('screen');
 
 const SelectingSkillsScreen = ({route, navigation}) =>
 {
-    const {name, backgrounds, classes, level, selectedRace, con, int, wis, cha} = route.params;
+    const {name, backgrounds, classes, level, selectedRace, str, dex, con, int, wis, cha} = route.params;
     const [selectSkills, setSelectSkills] = useState([]);
 
     const checkForChange = () =>
     {
+        if (selectSkills.length !== checkForSkills(classes))
+        {
+            Alert.alert("OOPS", "You need to fill all the information")
+            return false;
+        }
         return true;
     }
     function checkForSkills(classes)
@@ -106,8 +111,8 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         <NextButton
             navigation={navigation}
             nextScreen={"Select Subclasses"}
-            params={{name, backgrounds, classes, selectedRace, level, con, int, wis, cha}}
-            checkforChange={() => checkForChange}/>
+            params={{name, backgrounds, classes, selectedRace, level, str, dex, con, int, wis, cha, selectSkills}}
+            checkforChange={() => checkForChange()}/>
         <Text>You've chosen: {skillChosen(selectSkills)} </Text>
 
         </View>
