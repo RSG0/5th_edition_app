@@ -15,14 +15,14 @@ export default savingThrowIcon = ({abilityName, isProfcient, profMod, score }) =
     {
         if (displayIsProfcient === true) 
             {
-                console.log("DisplayProfMod:", (displayProfMod) )
-                console.log("DisplayMod: ", (displayMod))
+                // console.log("DisplayProfMod:", (displayProfMod) )
+                // console.log("DisplayMod: ", (displayMod))
                 return checkPositive(Number(displayMod) + Number(displayProfMod) )
             }
         else {return checkPositive(displayMod)}
     }
     return (
-        <View style={[styles.viewStyle, {margin: 10, marginTop: 10}]}>
+        <View style={[styles.viewStyle, {margin: width * .02, marginTop: 10}]}>
             <Text style={styles.textStyle} >
                 {displayAbilityName}{"\n"} 
             </Text>
@@ -61,8 +61,8 @@ const styles = StyleSheet.create(
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 20,
-        height: 15,
+        width: width * .04,
+        height: height * .02,
         left: -10,
         backgroundColor: COLORS.mainColor,
         borderRadius: 30,
@@ -70,8 +70,8 @@ const styles = StyleSheet.create(
     },
     profcientMark: {
         alignSelf: 'center',
-        width: 10,
-        height: 7,
+        width: width * .02,
+        height: height * .01,
         backgroundColor: 'black',
         borderRadius: 30,
     },
@@ -79,8 +79,8 @@ const styles = StyleSheet.create(
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center', // Center horizontally
-        width: 50,
-        height: 45,
+        width: width * .1,
+        height: height * .06,
         backgroundColor: COLORS.mainColor,
         right: -10,
         borderWidth: characterBorderWidth,

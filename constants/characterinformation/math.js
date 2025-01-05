@@ -1,9 +1,11 @@
+import { CLASS_EQUIPMENT, CLASS_SKILLS } from "./characterinfo";
+
 export const calculateScoreMod = (score) =>
 {
 // console.log("Ability Score:", score)
 if (score == 10) 
     {
-    console.log("Score is 10")
+    // console.log("Score is 10")
     return 0;
 }
 else
@@ -23,6 +25,29 @@ export const translateHitDice = (hitDice) =>
 export const calculatePassive = (mod) => //Incomplete
 {
     return 10 + mod;
+}
+export const calculateSkillProf = (skill, classes, profBonus, score) =>
+{
+    // console.log("Skill:", skill)
+    // console.log("Classes:", classes)
+    // console.log("Prof Bonus:", profBonus)
+    // console.log("Score:", calculateScoreMod(score) )
+
+
+    const selectedClass = CLASS_SKILLS.find(cs => cs.label === classes)
+    const selectedSkill = selectedClass.skills
+    // console.log("Selected Skills:", selectedSkill)
+    if (selectedSkill.includes(skill))
+    {
+        // console.log(10 + profBonus + calculateScoreMod(score))
+        // console.log("Skill:", skill + "Exists")
+        return 10 + profBonus + calculateScoreMod(score)
+    }
+    else
+    {
+        // console.log(10 + calculateScoreMod(score))
+        return 10 + calculateScoreMod(score)
+    }
 }
 export const averageHitDice = (hitdiceNum) =>
 {
@@ -100,4 +125,4 @@ const myWeapon = {
 
 const abilityModifier = 3; // Assume this is Strength or Dexterity modifier
 const proficiencyBonus = calculateProficiencyBonus(5); // Example level
-console.log("Weapon Damage:", calculateWeaponDamage(myWeapon, abilityModifier, proficiencyBonus));
+// console.log("Weapon Damage:", calculateWeaponDamage(myWeapon, abilityModifier, proficiencyBonus));

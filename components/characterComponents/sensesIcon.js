@@ -1,11 +1,13 @@
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
+import { calculateSkillProf } from "../../constants/characterinformation/math";
 
-export default SensesIcon = ({abilityName, modName,isProfcient, mod}) =>
+export default SensesIcon = ({abilityName, modName, profBonus, score, classes}) =>
 {
     const displayAbilityName = abilityName || ": Nvestigation"
-    const displayIsProfcient = isProfcient || true
-    const displayMod = mod || "2N"
+    // const displayIsProfcient = isProfcient || true
+    const displayMod = score || "2N"
+    const senseBonus = calculateSkillProf(abilityName, classes,profBonus, score) 
 
     return (
         <View style={[styles.viewStyle]}>
@@ -14,7 +16,7 @@ export default SensesIcon = ({abilityName, modName,isProfcient, mod}) =>
             </Text>
 
             <View style={styles.modifierContainer}>
-                <Text style={styles.modifierText}>{displayMod}</Text>
+                <Text style={styles.modifierText}>{senseBonus}</Text>
             </View>
         </View>
     );

@@ -20,10 +20,10 @@ export default CharacterPage1 = ({ name, classes, race, backgrounds, level, sele
     const imageSize = width * .3
     const findHitDice = () =>
     {
-        console.log("Classes:", classes)
-        console.log("Name:", name)
+        // console.log("Classes:", classes)
+        // console.log("Name:", name)
         const findClass = CLASSES.find(c => c.label === classes)
-        console.log("HD:", findClass.hitDice)
+        // console.log("HD:", findClass.hitDice)
         return findClass.hitDice
         
     }
@@ -77,7 +77,7 @@ export default CharacterPage1 = ({ name, classes, race, backgrounds, level, sele
         return(
         <>
         <View>
-            {displayValues()}
+            {/* {displayValues()} */}
             {/**First Row: */}
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
                 {/* {displayValues()} */}
@@ -156,9 +156,9 @@ export default CharacterPage1 = ({ name, classes, race, backgrounds, level, sele
         {/**6th Row: Senses Icon */}
         <Text style={styles.subTitleText}>Senses:</Text>
         <View style={{justifyContent: 'center'}}>
-            <SensesIcon abilityName={"Investigation"} modName={"INT"} mod={int}/>
-            <SensesIcon abilityName={"Perception"} modName={"WIS"} mod={wis}/>
-            <SensesIcon abilityName={"Insight"} modName={"WIS"} mod={wis}/>
+            <SensesIcon abilityName={"Investigation"} modName={"INT"} score={int} profBonus={profBonus} classes={classes}/>
+            <SensesIcon abilityName={"Perception"} modName={"WIS"} score={wis} profBonus={profBonus} classes={classes}/>
+            <SensesIcon abilityName={"Insight"} modName={"WIS"} score={wis} profBonus={profBonus} classes={classes}/>
 
         </View>
 

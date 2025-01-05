@@ -4,7 +4,7 @@ import { BACKGROUNDS, CLASS_SKILLS } from "../../../constants/characterinformati
 import NextButton from "../../../components/buttons/nextButton";
 import SkillsButton from "../../../components/buttons/selectionButton"
 import { SafeAreaView } from "react-native-safe-area-context";
-import {useState } from "react";
+import {useState, useEffect } from "react";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -13,9 +13,32 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     const {name, backgrounds, classes, level, selectedRace, str, dex, con, int, wis, cha} = route.params;
     const [selectSkills, setSelectSkills] = useState([]);
 
+
+    // Initialize selectSkills with background skills 
+    // useEffect(() => 
+    // { 
+    //     const backgroundSkills = BACKGROUNDS.find(skill => skill.label === backgrounds); 
+    //     if (backgroundSkills) 
+    //     { 
+    //         console.log("Code is working")
+        
+    //     } 
+    // }, [backgrounds]);
+
+    useEffect(() => {
+        const backgroundSkills = BACKGROUNDS.find(skill => skill.label === backgrounds);
+        if (backgroundSkills) {
+          // Add background skills to the state only once and preserve them
+          setSelectSkills(prevSkills => {
+            // Ensure background skills are included without duplication
+            return [...new Set([...prevSkills, ...backgroundSkills.skillProficiencies])];
+          });
+        }
+      }, [backgrounds]); // This effect runs once when the component mounts
     const checkForChange = () =>
     {
-        if (selectSkills.length !== checkForSkills(classes))
+        console.log("ALL SKILLS:", selectSkills)
+        if (selectSkills.length !== (checkForSkills(classes) + 2))
         {
             Alert.alert("OOPS", "You need to fill all the information")
             return false;
@@ -44,7 +67,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         {
             return prevSkills.filter((s) => s !== skill)
         }
-        else if (prevSkills.length < checkForSkills(classes)) // if the skill is less than the max than add it to the array
+        else if (prevSkills.length < (checkForSkills(classes) + 2) ) // if the skill is less than the max than add it to the array
         {
             return  [...prevSkills, skill] 
 
@@ -66,7 +89,8 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         // console.log(selectSkills);
         if (filterSkills) { 
             // if the filterSkills array contains something
-            console.log(filterSkills);
+            console.log("Select Skills:", selectSkills)
+            // console.log(filterSkills);
             return filterSkills.map((skill, i) => (
                 <SkillsButton 
                     key={i} 
