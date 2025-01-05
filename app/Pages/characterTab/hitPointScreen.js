@@ -24,12 +24,30 @@ export default HitPoint = ({navigation, route}) =>
     {
         if (maxHp === 0)
         {
+            console.log("MAXHP:", maxHp)
+
             Alert.alert("OOPS", "You need to fill all the information")
             return false;
         }
+
+        displayValues()
         return true
     }
 
+    const displayValues= () =>
+        {
+            console.log("NAME:", name)
+            console.log("STR:", str )
+            console.log("DEX:", dex )
+            console.log("CON:", con )
+            console.log("INT:", int )
+            console.log("WIS:", wis )
+            console.log("CHA:", cha )
+            console.log("Selected Skills:", selectSkills)
+            console.log("Class:", classes )
+            console.log("Max Hp:", maxHp)
+            console.log("Subclass:", subclass)
+        }
     useEffect(() =>
     {
         if (standard) {setMaxHp(averageMaxHp(translateHitDice(selectedHitDice), Number(level), conMOD)) }
@@ -99,6 +117,7 @@ export default HitPoint = ({navigation, route}) =>
             {renderButton("Custom", false)}
 
         </View>
+        
 
             <Text style={styles.textStyle}>CON MOD: {checkPositive(conMOD)}</Text>
             {displayCustomHitDice()}

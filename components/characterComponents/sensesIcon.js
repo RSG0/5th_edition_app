@@ -1,16 +1,16 @@
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 
-export default SensesIcon = ({abilityName, isProfcient, mod}) =>
+export default SensesIcon = ({abilityName, modName,isProfcient, mod}) =>
 {
-    const displayAbilityName = abilityName || "Passive (NNN): Nvestigation"
+    const displayAbilityName = abilityName || ": Nvestigation"
     const displayIsProfcient = isProfcient || true
     const displayMod = mod || "2N"
 
     return (
         <View style={[styles.viewStyle]}>
             <Text style={styles.textStyle} >
-                {displayAbilityName}{"\n"} 
+                Passive {modName} : {displayAbilityName}{"\n"} 
             </Text>
 
             <View style={styles.modifierContainer}>

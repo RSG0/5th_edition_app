@@ -1,16 +1,38 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
-
-export default NewCharacterIcon = ({name, classes, race, image, level, removeCharacter}) =>
+import { useNavigation } from '@react-navigation/native';
+export default NewCharacterIcon = ({navigation, name, classes, race, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, 
+    subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image, personalityTraits, bonds, 
+    ideals, flaw, alliesAndOrgs, addtitionalFeatures, backstory, removeCharacter}) =>
 {
+    // const navigation = useNavigation();
+
     const moreButton = 
     <TouchableOpacity style={styles.moreButton} onPress={removeCharacter}>
         <Text style={styles.moreButtonIcon}>...</Text>
     </TouchableOpacity>
+    const displayValues= () =>
+    {
+        console.log("NAME:", name)
+        console.log("STR:", str )
+        console.log("DEX:", dex )
+        console.log("CON:", con )
+        console.log("INT:", int )
+        console.log("WIS:", wis )
+        console.log("CHA:", cha )
+        console.log("Selected Skills:", selectSkills)
+        console.log("Class:", classes )
+        console.log("Max Hp:", maxHp)
+        console.log("Subclass:", subclass)
+    }
     return(
         <View style={styles.item}>
 
-            <TouchableOpacity style={{width: "100%", display:'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity style={{width: "100%", display:'flex', flexDirection: 'row', alignItems: 'center'}} 
+            onPress={() => [navigation.navigate("Character Carousel",{name, classes, race, backgrounds, level, selectedRace, 
+            str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, 
+            image, personalityTraits, bonds, ideals, flaw, alliesAndOrgs, addtitionalFeatures, backstory } )]}>
+
             {moreButton}
                 <View style={styles.square}>
                     {image ? (

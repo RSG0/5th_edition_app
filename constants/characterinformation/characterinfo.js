@@ -15,6 +15,21 @@ const CLASSES =
     {label: "Warlock", value: '13', hitDice: "d8"},
     {label: "Wizard", value: '14', hitDice: "d6"}
 ];
+export const CLASS_SAVING_THROWS = [
+    {label: "Barbarian", value: '2', savingThrows: ["Strength", "Constitution"]},
+    {label: "Bard", value: '3', savingThrows: ["Dexterity", "Charisma"]},
+    {label: "Cleric", value: '5', savingThrows: ["Wisdom", "Charisma"]},
+    {label: "Druid", value: '6', savingThrows: ["Intelligence", "Wisdom"]},
+    {label: "Fighter", value: '7', savingThrows: ["Strength", "Constitution"]},
+    {label: "Monk", value: '8', savingThrows: ["Strength", "Dexterity"]},
+    {label: "Paladin", value: '9', savingThrows: ["Wisdom", "Charisma"]},
+    {label: "Ranger", value: '10', savingThrows: ["Strength", "Dexterity"]},
+    {label: "Rogue", value: '11', savingThrows: ["Dexterity", "Intelligence"]},
+    {label: "Sorcerer", value: '12', savingThrows: ["Constitution", "Charisma"]},
+    {label: "Warlock", value: '13', savingThrows: ["Wisdom", "Charisma"]},
+    {label: "Wizard", value: '14', savingThrows: ["Intelligence", "Wisdom"]}
+];
+
 export const TRUEORFALSE = [
     {label: "True"},
     {label: "False"}

@@ -3,14 +3,15 @@ import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 
 export default profBonusAndSpeedIcon = ({prof,speed}) =>
 {
+    const displaySpeed = speed || "NN Feet"
     return (
         <>
         <View style={styles.viewStyle}>
             <Text style={styles.titleTextStyle} >
-                Prof. Bonus {"\n"} +2
+                Prof. Bonus {"\n"} +{prof}
             </Text>
             <Text style={styles.titleTextStyle} >
-                Speed {"\n"} 30 feet.
+                Speed {"\n"} {displaySpeed}.
             </Text>            
 
         </View>

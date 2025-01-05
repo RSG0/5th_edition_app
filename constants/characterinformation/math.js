@@ -1,6 +1,15 @@
 export const calculateScoreMod = (score) =>
 {
-  return Math.floor((score - 10)/2);
+// console.log("Ability Score:", score)
+if (score == 10) 
+    {
+    console.log("Score is 10")
+    return 0;
+}
+else
+{
+    return Math.floor((score - 10)/2);
+}
 }
 export const translateHitDice = (hitDice) =>
 {
@@ -10,6 +19,10 @@ export const translateHitDice = (hitDice) =>
     else if (hitDice === "d10") return 10;
     else if (hitDice === "d12") return 12;
     else if (hitDice === "d20") return 20;
+}
+export const calculatePassive = (mod) => //Incomplete
+{
+    return 10 + mod;
 }
 export const averageHitDice = (hitdiceNum) =>
 {
@@ -83,6 +96,7 @@ const myWeapon = {
     properties: ["Versatile: d10"],
     currency: "gp"
 };
+
 
 const abilityModifier = 3; // Assume this is Strength or Dexterity modifier
 const proficiencyBonus = calculateProficiencyBonus(5); // Example level

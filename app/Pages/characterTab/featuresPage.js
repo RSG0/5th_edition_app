@@ -9,7 +9,17 @@ import * as ImagePicker from 'expo-image-picker'
 export default FeaturesPage = ({route, navigation}) =>
 {
     const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments} = route.params; 
-
+    const handleImage =() =>
+        {
+            if (image)
+            {
+                console.log("Image exists")
+            }
+            else
+            {
+                console.log("Image DNE")
+            }
+        }
     const [personalityTraits, setPersonalityTraits] = useState("")
     const [bonds, setBonds] = useState("")
     const [ideals, setIdeals] = useState("")
@@ -20,9 +30,27 @@ export default FeaturesPage = ({route, navigation}) =>
 
     const [image, setImage] = useState('')
 
+
     const iconSize = 30
     const imageSquareSize = 150
-
+    const displayValues= () =>
+        {
+            console.log("NAME:", name)
+            console.log("STR:", str )
+            console.log("DEX:", dex )
+            console.log("CON:", con )
+            console.log("INT:", int )
+            console.log("WIS:", wis )
+            console.log("CHA:", cha )
+            console.log("Selected Skills:", selectSkills)
+            console.log("Class:", classes )
+            console.log("Max Hp:", maxHp)
+            console.log("Subclass:", subclass)
+        }
+    useEffect(()=>
+    {
+        displayValues()
+    }, [image])
     const checkforChange = () =>
         {
             // Need to add functionality and alerts

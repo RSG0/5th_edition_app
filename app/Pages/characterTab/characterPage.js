@@ -5,7 +5,9 @@ import { COLORS, FONTSIZE } from "../../../constants/theme";
 import NewCharacterIcon from "../../../components/newCharacterIcon";
 import NewCharacterButton from "../../../components/buttons/newCharacterButton";
 
-export default CharacterPage = ({ navigation, route }) => {
+export default CharacterPage = ({ navigation, route }) => 
+    {
+
     const [characters, setCharacters] = useState([]);
 
     useEffect(() => {
@@ -42,30 +44,47 @@ export default CharacterPage = ({ navigation, route }) => {
         setCharacters(updatedCharacters);
     };
 
-    const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments} = route.params || {};
-
-    useEffect(() => 
-    {
-        if (name) 
-            {
-            const newCharacter = { name, classes, level, race: selectedRace, image };
-            setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
+    const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image} = route.params || {};
+    const clearAllCharacters = async () => {
+        try {
+            await AsyncStorage.removeItem("Character1");
+            setCharacters([]); // Reset state
+            console.log("All characters cleared!");
+        } catch (err) {
+            console.log("Error clearing characters:", err);
         }
-    }, [{name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, 
-        selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments}]);
+    };
+    
+    useEffect(() => {
+        if (name) {
+            const newCharacter = { name, classes, backgrounds, level, race: selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image};
+            setCharacters((prevCharacters) => {
+                // Avoid duplicating the same character in the array
+                const alreadyExists = prevCharacters.some((character) => character.name === newCharacter.name);
+                return alreadyExists ? prevCharacters : [...prevCharacters, newCharacter];
+            });
+        }
+    }, [name]); // Only trigger when 'name' changes
 
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.background, flex: 1 }}>
             <ScrollView>
                 <View style={styles.viewStyle}>
+                    {/* {clearAllCharacters()} */}
                     {characters.map((character, index) => (
                         <NewCharacterIcon
                             key={index}
                             name={character.name}
-                            classes={character.classes}
+                            navigation={navigation}
+                            classes={character.classes}                            
                             level={character.level}
                             race={character.race}
                             image={character.image}
+                            str={character.str} dex={character.dex} con={character.con} int={character.int} wis={character.wis} cha={character.cha}
+                            maxHp={character.maxHp}
+                            subclass={character.subclass}
+                            selectSkills={character.selectSkills}
+                            
                             removeCharacter={() => removeCharacter(index)}
                         />
                     ))}

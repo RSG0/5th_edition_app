@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONT, FONTSIZE } from "../../../constants/theme";
 import HitDiceIcon from "../../../components/characterComponents/hitDiceIcon";
@@ -10,26 +10,87 @@ import SavingThrowIcon from "../../../components/characterComponents/savingThrow
 import ProfBonusAndSpeedIcon from "../../../components/characterComponents/profBonusAndSpeedIcon";
 import SensesIcon from "../../../components/characterComponents/sensesIcon";
 import MagicItemModal from "../../../components/modals/magicItemModal(Rough)";
+import { calculateProficiencyBonus, calculateScoreMod, checkPositive, maxHitDice } from "../../../constants/characterinformation/math";
+import { CLASS_SAVING_THROWS, CLASSES } from "../../../constants/characterinformation/characterinfo";
+import { capitalized } from "../../../constants/global";
 
-export default CharacterPage1 = () =>
+export default CharacterPage1 = ({ name, classes, race, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, maxHp, image, selectedSkills}) =>
 {
+
+    const imageSize = width * .3
+    const findHitDice = () =>
+    {
+        console.log("Classes:", classes)
+        console.log("Name:", name)
+        const findClass = CLASSES.find(c => c.label === classes)
+        console.log("HD:", findClass.hitDice)
+        return findClass.hitDice
+        
+    }
+    const handleSavingThrow = () =>
+    {
+        const selectedSavingThrows = CLASS_SAVING_THROWS.find(sv => sv.label === classes )
+        return selectedSavingThrows.savingThrows;
+    }
+    const handleIsProficent = (svName) =>
+    {
+        const correctCapital = capitalized(svName.toLowerCase()) 
+        if (handleSavingThrow().includes(correctCapital))
+        {
+            // console.log("Exists:", handleSavingThrow().includes(correctCapital))
+            return true
+        }
+        else
+        {
+            // console.log("DNE")
+            return null
+        }
+    }
+    const handleImage = () =>
+    {
+        if (image)
+        {
+            console.log("Image Exists");
+        }
+        else
+        {
+            console.log("Image DNE")
+        }
+    }
+    const profBonus = calculateProficiencyBonus(level)
+    const displayValues= () =>
+        {
+            console.log("NAME:", name)
+            console.log("STR:", str )
+            console.log("DEX:", dex )
+            console.log("CON:", con )
+            console.log("INT:", int )
+            console.log("WIS:", wis )
+            console.log("CHA:", cha )
+            // console.log("Selected Skills:", selectSkills)
+            console.log("Class:", classes )
+            // console.log("Max Hp:", maxHp)
+            // console.log("Subclass:", subclass)
+        }
     const displayAbilityScores = () =>
     {
         return(
         <>
         <View>
+            {displayValues()}
             {/**First Row: */}
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
+                {/* {displayValues()} */}
+                <AbilityScoreIcon abilityName={"STRENGTH"} score={str}/>
+                <AbilityScoreIcon abilityName={"DEXTERITY"} score={dex}/>
+                <AbilityScoreIcon abilityName={"CONSTITUTION"} score={con}/>
             </View>
             {/**Second Row: */}
         </View>
         <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
-                <AbilityScoreIcon/>
+                <AbilityScoreIcon abilityName={"INTELLIGENCE"} score={int}/>
+                <AbilityScoreIcon abilityName={"WISDOM"} score={wis}/>
+                <AbilityScoreIcon abilityName={"CHARISMA"} score={cha}/>
             </View>
         <View></View>
         </>)
@@ -41,16 +102,16 @@ export default CharacterPage1 = () =>
         <View>
             <Text style={{marginTop: 10, fontSize: FONTSIZE.large, fontWeight: 'bold', marginLeft: 20}}>Saving Throws:</Text>
             <View style={styles.savingThrowRow}>
-                <SavingThrowIcon/>
-                <SavingThrowIcon/>
+                <SavingThrowIcon abilityName={"STRENGTH"} isProfcient={handleIsProficent("STRENGTH")} profMod={profBonus} score={str}/>
+                <SavingThrowIcon abilityName={"DEXTERITY"} isProfcient={handleIsProficent("DEXTERITY")} profMod={profBonus} score={dex}/>
             </View>
             <View style={styles.savingThrowRow}>
-                <SavingThrowIcon/>
-                <SavingThrowIcon/>
+                <SavingThrowIcon abilityName={"CONSTITUTION"} isProfcient={handleIsProficent("CONSTITUTION")} profMod={profBonus} score={con}/>
+                <SavingThrowIcon abilityName={"INTELLIGENCE"} isProfcient={handleIsProficent("INTELLIGENCE")} profMod={profBonus} score={int}/>
             </View>
             <View style={styles.savingThrowRow}>
-                <SavingThrowIcon/>
-                <SavingThrowIcon/>
+                <SavingThrowIcon abilityName={"WISDOM"} isProfcient={handleIsProficent("WISDOM")} profMod={profBonus} score={wis}/>
+                <SavingThrowIcon abilityName={"CHARISMA"} isProfcient={handleIsProficent("CHARISMA")} profMod={profBonus} score={cha}/>
             </View>
         </View>
         </>
@@ -62,21 +123,30 @@ export default CharacterPage1 = () =>
         {/**First Row: */}
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <HitDiceIcon/>       
-                <InitativeIcon/>
+                <HitDiceIcon hitDice={findHitDice()} level={level} />      
+                <InitativeIcon dex={checkPositive(calculateScoreMod(dex))}/>
             </View>
             <View style={{justifyContent: 'center'}}>
-                <View style={styles.circle} />
+                <View style={styles.circle}>
+                    {image ? (
+                            <Image
+                                source={{ uri: image}}
+                                style={{ width: imageSize, height: imageSize, borderRadius: 10 }}
+                            />
+                        ) : (
+                            <Text style={styles.imagePlaceholder}>No Image</Text>
+                        )}     
+                </View>
             </View>
             <View>
-                <HitPointIcon/>
+                <HitPointIcon currentHP={2} maxHP={maxHp}/>
                 <ArmorClassIcon/>
             </View>
         </View>
 
         {/**Second Row: */}
         <View>
-            <ProfBonusAndSpeedIcon/>
+            <ProfBonusAndSpeedIcon prof={profBonus}/>
         </View>
 
         {/**Third Row: Ability Score Rows 1-2 */}
@@ -86,9 +156,9 @@ export default CharacterPage1 = () =>
         {/**6th Row: Senses Icon */}
         <Text style={styles.subTitleText}>Senses:</Text>
         <View style={{justifyContent: 'center'}}>
-            <SensesIcon/>
-            <SensesIcon/>
-            <SensesIcon/>
+            <SensesIcon abilityName={"Investigation"} modName={"INT"} mod={int}/>
+            <SensesIcon abilityName={"Perception"} modName={"WIS"} mod={wis}/>
+            <SensesIcon abilityName={"Insight"} modName={"WIS"} mod={wis}/>
 
         </View>
 
@@ -110,7 +180,14 @@ const styles = StyleSheet.create(
         width: width * .3,
         height: width * .3,
         borderRadius: width * .5,
-        borderWidth: 5
+        borderWidth: 5,
+        overflow: 'hidden', // Ensures image stays within the circle
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageInCircle: {
+        width: '100%',
+        height: '100%',
     },
     viewStyle: {
         

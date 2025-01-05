@@ -71,7 +71,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
                         ))}
                     </ScrollView>
                 </>
-            );
+            )
         }
     };
 
@@ -104,18 +104,6 @@ export default SelectEquipmentPage = ({navigation,route}) => {
 
     const renderEquipment = () => 
     {
-        console.log("STR:", str )
-        console.log("DEX:", dex )
-        console.log("CON:", con )
-        console.log("INT:", int )
-        console.log("WIS:", wis )
-        console.log("CHA:", cha )
-        console.log("WIS:", wis )
-        console.log("Selected Skills:", selectSkills)
-        console.log("Class:", classes )
-        console.log("Max Hp:", maxHp)
-        console.log("Subclass:", subclass)
-
         return backgroundEquipment.join(", ") //+ ", " + selectedEquipments.join(", ")
 
     }

@@ -1,14 +1,26 @@
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
 import { useEffect } from "react";
+import { calculateScoreMod, checkPositive } from "../../constants/characterinformation/math";
 
-export default savingThrowIcon = ({abilityName, isProfcient, mod}) =>
+export default savingThrowIcon = ({abilityName, isProfcient, profMod, score }) =>
 {
 
     //Display Dummy Values 
     const displayAbilityName = abilityName || "CONSTITUTION";
-    const displayIsProfcient = isProfcient || true;
-    const displayMod = mod || "+N";
+    const displayIsProfcient = isProfcient || null;
+    const displayMod = (calculateScoreMod(score))
+    const displayProfMod = profMod || "+N";
+    const finalMod = () =>
+    {
+        if (displayIsProfcient === true) 
+            {
+                console.log("DisplayProfMod:", (displayProfMod) )
+                console.log("DisplayMod: ", (displayMod))
+                return checkPositive(Number(displayMod) + Number(displayProfMod) )
+            }
+        else {return checkPositive(displayMod)}
+    }
     return (
         <View style={[styles.viewStyle, {margin: 10, marginTop: 10}]}>
             <Text style={styles.textStyle} >
@@ -18,7 +30,7 @@ export default savingThrowIcon = ({abilityName, isProfcient, mod}) =>
                 {displayIsProfcient && <View style={styles.profcientMark}></View>}
             </View>
             <View style={styles.modifierContainer}>
-                <Text style={styles.modifierText}>{displayMod}</Text>
+                <Text style={styles.modifierText}>{finalMod()}</Text>
             </View>
         </View>
     );

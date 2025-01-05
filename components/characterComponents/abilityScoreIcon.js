@@ -1,17 +1,31 @@
 import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
-import { characterBorderWidth, COLORS, FONTSIZE } from "../../constants/theme";
+import { characterBorderWidth, COLORS, FONT, FONTSIZE, scale } from "../../constants/theme";
+import { averageHitDice, calculateScoreMod, checkPositive } from "../../constants/characterinformation/math";
 
-export default AbilityScoreIcon = ({abilityName,score,mod}) =>
+export default AbilityScoreIcon = ({abilityName,score}) =>
 {
     //Display Dummy Values 
+
     const displayAbilityName = abilityName || "STRENGTH";
     const displayScore = score || "NN";
-    const displayMod = mod || "+N";
+    const displayMod = checkPositive(calculateScoreMod(score) ) || "+N";
+
+    const handleAbilityName = (abilName) =>
+    {
+        if (abilName.length >= 10)
+        {
+            return {fontSize: scale(13)}
+        }
+        else
+        {
+            return {fontSize: FONTSIZE.medium}
+        }
+    }
 
     return (
         <>
         <View style={styles.viewStyle}>
-            <Text style={styles.titleTextStyle} >
+            <Text style={[styles.titleTextStyle, handleAbilityName(displayAbilityName)]} >
                 {displayAbilityName} {/**Need to lower fontSize for Constiution */}
             </Text>
             <Text style={styles.textStyle}>{displayMod}</Text>
