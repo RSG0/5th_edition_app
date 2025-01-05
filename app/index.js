@@ -34,6 +34,7 @@ import magicItemPage from './Pages/CompendiumPages/magicItemPage';
 import NewMagicItemPage from './Pages/CompendiumPages/newMagicItemPage';
 import SpellPage from './Pages/CompendiumPages/spellPage';
 import NewSpellPage from './Pages/CompendiumPages/newSpellPage';
+import newActionPage from './Pages/CharacterPages/newActionPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,7 +82,7 @@ function TabNavigator() {
       <Tab.Screen name="Character Page" component={StackNavigator} options={{ headerShown: false }} />
       <Tab.Screen name="Dice Roller Page" component={DiceRoller} />
       <Tab.Screen name="Compendium Page" component={StackNavigator2} />
-      <Tab.Screen name="Setting Page" component={CharacterCarousel} />
+      <Tab.Screen name="Setting Page" component={SettingPage} />
     </Tab.Navigator>
   );
 }
@@ -112,6 +113,8 @@ function StackNavigator() {
       <Stack.Screen name="Hit Point" component={HitPoint} />
       <Stack.Screen name="Select Equipment" component={selectEquipmentScreen} />
       <Stack.Screen name="Secondary Features" component={featuresPage} />
+
+      <Stack.Screen name="New Action Page" component={newActionPage}/>
       {/* <Stack.Screen name="Character Page 1" component={CharacterPage1} /> */}
 
 

@@ -3,9 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import ActionComponent from "../../../components/actionComponent";
 import Seperator from "../../../components/seperator";
-import NewPageButton from "../../../components/buttons/newPageButton";
 
-export default characterPage3 = ({navigation}) =>
+export default characterPage3 = () =>
 {
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
@@ -32,10 +31,9 @@ export default characterPage3 = ({navigation}) =>
             <View style={{alignItems: 'center'}}> 
                 <ActionComponent/>
             </View>
+
         </View>
-        <View style={{marginVertical: 100}} />
         </ScrollView>
-        <NewPageButton navigation={navigation} nextScreen={"New Action Page"}/>
         </SafeAreaView>
     );
 }

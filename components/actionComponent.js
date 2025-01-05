@@ -58,7 +58,8 @@ export default ActionCompnent = ({name, type, range, hit_DC, effectDie, isVersat
 const styles = StyleSheet.create({
     item:{
         margin:5,
-        width: 335,
+        minWidth: 335,
+        width: "90%",
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',

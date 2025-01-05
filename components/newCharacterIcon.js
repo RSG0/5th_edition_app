@@ -31,7 +31,7 @@ export default NewCharacterIcon = ({navigation, name, classes, race, backgrounds
             <TouchableOpacity style={{width: "100%", display:'flex', flexDirection: 'row', alignItems: 'center'}} 
             onPress={() => [navigation.navigate("Character Carousel",{name, classes, race, backgrounds, level, selectedRace, 
             str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, 
-            image, personalityTraits, bonds, ideals, flaw, alliesAndOrgs, addtitionalFeatures, backstory } )]}>
+            image, personalityTraits, bonds, ideals, flaw, alliesAndOrgs, addtitionalFeatures, backstory, navigation } )]}>
 
             {moreButton}
                 <View style={styles.square}>

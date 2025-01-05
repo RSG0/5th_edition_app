@@ -9,7 +9,7 @@ import CharacterPage4 from './characterPage4';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-export default CharacterCarousel =({ route }) => 
+export default CharacterCarousel =({ route, navigation }) => 
  {
 
   // Extract parameters from route
@@ -33,7 +33,7 @@ export default CharacterCarousel =({ route }) =>
     const data = [
         { key: '1', component: <CharacterPage1 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
         { key: '2', component: <CharacterPage2 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
-        { key: '3', component: <CharacterPage3 /> },
+        { key: '3', component: <CharacterPage3 navigation={navigation}/> },
         { key: '4', component: <CharacterPage4 /> },
 
     ];
