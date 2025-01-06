@@ -5,6 +5,24 @@ import { CLASS_EQUIPMENT, BACKGROUNDS } from "../../../constants/characterinform
 import SelectButton from "../../../components/buttons/selectionButton";
 import { useEffect, useState } from "react";
 
+
+export const removeIndefinteArticles_and = (word) => {
+    let newWord = word;
+    if (newWord.includes("an ")) {
+        newWord = newWord.replace("an ", "");
+    }
+    if (newWord.includes("a ")) {
+        newWord = newWord.replace("a ", "");
+    }
+    if (newWord.includes("any ")) {
+        newWord = newWord.replace("any ", "");
+    } 
+    if (newWord.includes(" and ")) {
+        newWord = newWord.replace(" and ", " & "); // Optional: Replace 'and' with '&' for better visual rendering
+    }
+    return newWord.trim();
+};
+
 export default SelectEquipmentPage = ({navigation,route}) => {
     const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp} = route.params; 
 
@@ -81,22 +99,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
         return (firstLetter + remainingLetters);
     };
 
-    const removeIndefinteArticles_and = (word) => {
-        let newWord = word;
-        if (newWord.includes("an ")) {
-            newWord = newWord.replace("an ", "");
-        }
-        if (newWord.includes("a ")) {
-            newWord = newWord.replace("a ", "");
-        }
-        if (newWord.includes("any ")) {
-            newWord = newWord.replace("any ", "");
-        } 
-        if (newWord.includes(" and ")) {
-            newWord = newWord.replace(" and ", " & "); // Optional: Replace 'and' with '&' for better visual rendering
-        }
-        return newWord.trim();
-    };
+
 
     const renderBackgroundEquipment = (equip) => {
         return equip.join(", ");

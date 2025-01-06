@@ -3,11 +3,18 @@ import { COLORS, FONTSIZE } from "../../../constants/theme";
 import SelectionButton from "../../../components/buttons/selectionButton";
 import { useState } from "react";
 import Seperator from "../../../components/seperator";
+import { MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, SIMPLE_MELEE_WEAPONS, SIMPLE_RANGED_WEAPONS } from "../../../constants/characterinformation/equipment";
+import { removeIndefinteArticles_and } from "../characterTab/selectEquipmentScreen";
+import { capitalized } from "../../../constants/global";
 
 export default NewActionPage = ({ route }) => {
-    const { selectedSpells, selectedCantrips, selectedWeapons } = route.params;
+    const { selectedSpells, selectedCantrips, selectedEquipment } = route.params;
     const allspells = selectedCantrips.concat(selectedSpells)
-
+    const allWeapons =  MARTIAL_MELEE_WEAPONS.concat(SIMPLE_MELEE_WEAPONS).concat(SIMPLE_RANGED_WEAPONS).concat(MARTIAL_RANGED_WEAPONS).map(w => w.title)
+    // const selectedWeapons = selectedEquipment.map( e => capitalized(removeIndefinteArticles_and(e)))
+    // const selectedWeapons = selectedEquipment.filter((e) =>  allWeapons.includes(capitalized(removeIndefinteArticles_and(e))));
+    const selectedWeapons = selectedEquipment.filter((e) => allWeapons.includes(capitalized(removeIndefinteArticles_and(e))));
+    const selectedWeaponsCapital = selectedWeapons.map(w => capitalized(removeIndefinteArticles_and(w)))
     // State to track the currently selected action
     const [selectedAction, setSelectedAction] = useState(null);
 
@@ -18,6 +25,8 @@ export default NewActionPage = ({ route }) => {
 
     // Render spell names or any other content based on the selected action
     const renderActionContent = () => {
+        console.log("All Weapons:", allWeapons)
+        console.log("Current Equipment:", (selectedWeaponsCapital) )
         if (selectedAction === "Spell") {
             return allspells.map((spell, index) => (
                 //Needs to be Changed
@@ -28,7 +37,13 @@ export default NewActionPage = ({ route }) => {
         } else if (selectedAction === "Magic-Item") {
             return <Text style={styles.textStyle}>Magic Items content goes here</Text>;
         } else if (selectedAction === "Weapon") {
-            return <Text style={styles.textStyle}>Weapon content goes here</Text>;
+            return selectedWeaponsCapital.map((equip, i) =>
+                (
+                    <Text key={i} style={styles.textStyle2}>
+                        {}
+                        {equip}
+                    </Text>                
+                ));
         } else {
             return <Text style={styles.textStyle}>Please select an action type.</Text>;
         }
@@ -54,10 +69,10 @@ export default NewActionPage = ({ route }) => {
                     name={"Spell"}
                     isSelected={selectedAction === "Spell"}
                     onSelectionPress={() => handleSelection("Spell")}
-                />
-                <View style={{ marginTop: 20 }}>{renderActionContent()}</View>
-            
+                />            
             </View>
+            <View style={{ marginTop: 20 }}>{renderActionContent()}</View>
+
             </ScrollView>
         </SafeAreaView>
     );
