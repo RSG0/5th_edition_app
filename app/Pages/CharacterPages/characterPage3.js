@@ -5,12 +5,13 @@ import ActionComponent from "../../../components/actionComponent";
 import Seperator from "../../../components/seperator";
 import NewPageButton from "../../../components/buttons/newPageButton";
 
-export default characterPage3 = ({navigation}) =>
+export default characterPage3 = ({navigation, selectedCantrips, selectedSpells}) =>
 {
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.grayBackground}>
+            {console.log("Cantrips:", selectedCantrips)}
             <Text style={styles.textStyle}> <Text style={{fontWeight: 'bold'}}>ACTIONS</Text> - Attacks Per Action: 1</Text>
             <Seperator/>
 
@@ -35,7 +36,7 @@ export default characterPage3 = ({navigation}) =>
         </View>
         <View style={{marginVertical: 100}} />
         </ScrollView>
-        <NewPageButton navigation={navigation} nextScreen={"New Action Page"}/>
+        <NewPageButton navigation={navigation} nextScreen={"New Action Page"} params={{selectedCantrips, selectedSpells}}/>
         </SafeAreaView>
     );
 }

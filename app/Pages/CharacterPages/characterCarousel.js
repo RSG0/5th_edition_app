@@ -29,11 +29,14 @@ export default CharacterCarousel =({ route, navigation }) =>
             console.log("Class:", classes )
             console.log("Max Hp:", maxHp)
             console.log("Subclass:", subclass)
+            console.log("Backstory:", backstory)
+            console.log("Cantrips:", numOfCantrips)
+            console.log("Selected Equipments:",selectedEquipments)
         }
     const data = [
         { key: '1', component: <CharacterPage1 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
         { key: '2', component: <CharacterPage2 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
-        { key: '3', component: <CharacterPage3 navigation={navigation}/> },
+        { key: '3', component: <CharacterPage3 navigation={navigation} selectedSpells={numOfLevelSpells} selectedCantrips={numOfCantrips} selectedEquipment={selectedEquipments}/> },
         { key: '4', component: <CharacterPage4 /> },
 
     ];
@@ -41,7 +44,7 @@ export default CharacterCarousel =({ route, navigation }) =>
     const renderItem = ({ item }) => {
         return (
             <View style={{ width: screenWidth }}>
-                        {/* {displayValues()} */}
+                        {displayValues()}
                 {item.component}
             </View>
         );

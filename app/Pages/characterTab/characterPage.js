@@ -81,7 +81,10 @@ export default CharacterPage = ({ navigation, route }) =>
                             race={character.race}
                             image={character.image}
                             str={character.str} dex={character.dex} con={character.con} int={character.int} wis={character.wis} cha={character.cha}
+                            numOfCantrips={character.numOfCantrips}
+                            numOfLevelSpells={character.numOfLevelSpells}
                             maxHp={character.maxHp}
+                            selectedEquipments={character.selectedEquipments}
                             subclass={character.subclass}
                             selectSkills={character.selectSkills}
                             

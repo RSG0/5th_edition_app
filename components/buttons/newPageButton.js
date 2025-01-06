@@ -2,12 +2,13 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-nati
 import { COLORS, FONTSIZE } from "../../constants/theme";
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-export default NewPageButton = ({ navigation, nextScreen}) =>
+export default NewPageButton = ({ navigation, nextScreen, params}) =>
 {
     const handlePress = () =>
     {
-        navigation.navigate(nextScreen);
+        navigation.navigate(nextScreen, params);
     }
+
     return(
     <View style={{justifyContent: 'center', alignItems: 'center'}}>
     <TouchableOpacity style={styles.addButton} onPress={handlePress}>

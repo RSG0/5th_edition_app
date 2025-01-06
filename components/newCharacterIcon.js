@@ -24,6 +24,8 @@ export default NewCharacterIcon = ({navigation, name, classes, race, backgrounds
         console.log("Class:", classes )
         console.log("Max Hp:", maxHp)
         console.log("Subclass:", subclass)
+        console.log("Backstory:", backstory)
+        console.log("Cantrips:", numOfCantrips)
     }
     return(
         <View style={styles.item}>
@@ -31,10 +33,11 @@ export default NewCharacterIcon = ({navigation, name, classes, race, backgrounds
             <TouchableOpacity style={{width: "100%", display:'flex', flexDirection: 'row', alignItems: 'center'}} 
             onPress={() => [navigation.navigate("Character Carousel",{name, classes, race, backgrounds, level, selectedRace, 
             str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, 
-            image, personalityTraits, bonds, ideals, flaw, alliesAndOrgs, addtitionalFeatures, backstory, navigation } )]}>
+            image, personalityTraits, bonds, ideals, flaw, alliesAndOrgs, addtitionalFeatures, backstory, navigation } ), displayValues()]}>
 
             {moreButton}
                 <View style={styles.square}>
+                
                     {image ? (
                             <Image
                                 source={{ uri: image}}

@@ -105,6 +105,7 @@ function StackNavigator() {
       {/* <Stack.Screen name="View a Character" component={characterPage}/> */}
       <Stack.Screen name="Character Selection" component={CharacterPage} /> 
       <Stack.Screen name="Character Carousel" component={CharacterCarousel}/>
+      <Stack.Screen name="New Action Page" component={newActionPage}/>
       <Stack.Screen name="Create Character" component={CreateCharacter} /> 
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />
@@ -114,7 +115,6 @@ function StackNavigator() {
       <Stack.Screen name="Select Equipment" component={selectEquipmentScreen} />
       <Stack.Screen name="Secondary Features" component={featuresPage} />
 
-      <Stack.Screen name="New Action Page" component={newActionPage}/>
       {/* <Stack.Screen name="Character Page 1" component={CharacterPage1} /> */}
 
 

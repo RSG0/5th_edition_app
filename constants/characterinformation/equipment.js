@@ -82,3 +82,30 @@ export const MARTIAL_MELEE_WEAPONS = [
     {title: "Warhammer", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "bludgeoning", cost: 15, weight: 2, properties: ["Versatile: d10"], currency: "gp"},
     {title: "Whip", numOfDice: 1, reach: 10, damageDie: "d4", damageType: "slashing", cost: 2, weight: 3, properties: ["Finesse", "Reach"], currency: "gp"}
 ];
+export const SIMPLE_MELEE_WEAPONS = [
+    {title: "Club", numOfDice: 1, reach: 5, damageDie: "d4", damageType: "bludgeoning", cost: 0.1, weight: 2, properties: ["Light"], currency: "gp"},
+    {title: "Dagger", numOfDice: 1, reach: 5, damageDie: "d4", damageType: "piercing", cost: 2, weight: 1, properties: ["Finesse", "Light", "Thrown: range 20/60"], currency: "gp"},
+    {title: "Greatclub", numOfDice: 1, reach: 5, damageDie: "d8", damageType: "bludgeoning", cost: 0.2, weight: 10, properties: ["Two-handed"], currency: "gp"},
+    {title: "Handaxe", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "slashing", cost: 5, weight: 2, properties: ["Light", "Thrown: range 20/60"], currency: "gp"},
+    {title: "Javelin", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "piercing", cost: 0.5, weight: 2, properties: ["Thrown: range 30/120"], currency: "gp"},
+    {title: "Light Hammer", numOfDice: 1, reach: 5, damageDie: "d4", damageType: "bludgeoning", cost: 2, weight: 2, properties: ["Light", "Thrown: range 20/60"], currency: "gp"},
+    {title: "Mace", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "bludgeoning", cost: 5, weight: 4, properties: [], currency: "gp"},
+    {title: "Quarterstaff", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "bludgeoning", cost: 0.2, weight: 4, properties: ["Versatile: d8"], currency: "gp"},
+    {title: "Sickle", numOfDice: 1, reach: 5, damageDie: "d4", damageType: "slashing", cost: 1, weight: 2, properties: ["Light"], currency: "gp"},
+    {title: "Spear", numOfDice: 1, reach: 5, damageDie: "d6", damageType: "piercing", cost: 1, weight: 3, properties: ["Thrown: range 20/60", "Versatile: d8"], currency: "gp"}
+];
+
+export const SIMPLE_RANGED_WEAPONS = [
+    {title: "Light Crossbow", numOfDice: 1, reach: 80, damageDie: "d8", damageType: "piercing", cost: 25, weight: 5, properties: ["Ammunition: range 80/320", "Loading", "Two-handed"], currency: "gp"},
+    {title: "Dart", numOfDice: 1, reach: 20, damageDie: "d4", damageType: "piercing", cost: 0.05, weight: 0.25, properties: ["Finesse", "Thrown: range 20/60"], currency: "gp"},
+    {title: "Shortbow", numOfDice: 1, reach: 80, damageDie: "d6", damageType: "piercing", cost: 25, weight: 2, properties: ["Ammunition: range 80/320", "Two-handed"], currency: "gp"},
+    {title: "Sling", numOfDice: 1, reach: 30, damageDie: "d4", damageType: "bludgeoning", cost: 0.1, weight: 0, properties: ["Ammunition: range 30/120"], currency: "gp"}
+];
+
+export const MARTIAL_RANGED_WEAPONS = [
+    {title: "Blowgun", numOfDice: 1, reach: 25, damageDie: "d1", damageType: "piercing", cost: 10, weight: 1, properties: ["Ammunition: range 25/100", "Loading"], currency: "gp"},
+    {title: "Hand Crossbow", numOfDice: 1, reach: 30, damageDie: "d6", damageType: "piercing", cost: 75, weight: 3, properties: ["Ammunition: range 30/120", "Light", "Loading"], currency: "gp"},
+    {title: "Heavy Crossbow", numOfDice: 1, reach: 100, damageDie: "d10", damageType: "piercing", cost: 50, weight: 18, properties: ["Ammunition: range 100/400", "Heavy", "Loading", "Two-handed"], currency: "gp"},
+    {title: "Longbow", numOfDice: 1, reach: 150, damageDie: "d8", damageType: "piercing", cost: 50, weight: 2, properties: ["Ammunition: range 150/600", "Heavy", "Two-handed"], currency: "gp"},
+    {title: "Net", numOfDice: 0, reach: 5, damageDie: "0", damageType: "none", cost: 1, weight: 3, properties: ["Thrown: range 5/15", "Special"], currency: "gp"}
+];

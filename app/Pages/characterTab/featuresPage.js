@@ -46,6 +46,8 @@ export default FeaturesPage = ({route, navigation}) =>
             console.log("Class:", classes )
             console.log("Max Hp:", maxHp)
             console.log("Subclass:", subclass)
+            console.log("Backstory:", backstory)
+            console.log("Cantrips:", numOfCantrips)
         }
     useEffect(()=>
     {
