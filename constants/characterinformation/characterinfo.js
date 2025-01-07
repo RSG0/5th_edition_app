@@ -193,21 +193,21 @@ const CLASS_SKILLS = [
     { label: "Warlock", skills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"] },
     { label: "Wizard", skills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"] }
 ];
-const CLASS_EQUIPMENT = 
-[
+const CLASS_EQUIPMENT = [
     {label: "Barbarian", equipmentA: ["a greataxe", "any martial weapon"], equipmentB: ["two handaxes", "any simple weapon"], equipmentC: ["an explorer's pack"], equipmentD: ["four javelins"]},
-    {label: "Bard", equipmentA: ["a rapier", "a longsword", "any simple weapon"], equipmentB: ["a diplomat's pack", "an entertainer's pack", "any simple weapon"], equipmentC: ["a lute", "any other musical instrument"], equipmentD: ["leather armor"], equipmentE: ["a dagger"]},
+    {label: "Bard", equipmentA: ["a rapier", "a longsword", "any simple weapon"], equipmentB: ["a diplomat's pack", "an entertainer's pack"], equipmentC: ["a lute", "any other musical instrument"], equipmentD: ["leather armor"], equipmentE: ["a dagger"]},
     {label: "Cleric", equipmentA: ["a mace", "a warhammer"], equipmentB: ["scale mail", "leather armor", "chain mail"], equipmentC: ["a light crossbow and x20 bolts", "any simple weapons"], equipmentD: ["a priest's pack", "an explorer's pack"], equipmentE: ["a shield"], equipmentF: ["a holy symbol"]},
-    {label: "Druid", value: '4', hitDice: "d8"},
-    {label: "Fighter", value: '5', hitDice: "d10"},
-    {label: "Monk", value: '6', hitDice: "d8"},
-    {label: "Paladin", value: '7', hitDice: "d10"},
-    {label: "Ranger", value: '8', hitDice: "d10"},
-    {label: "Rogue", value: '9', hitDice: "d8"},
-    {label: "Sorcerer", value: '10', hitDice: "d6"},
-    {label: "Warlock", value: '11', hitDice: "d8"},
-    {label: "Wizard", value: '12', hitDice: "d6"}
+    {label: "Druid", equipmentA: ["a wooden shield", "any simple weapon"], equipmentB: ["a scimitar", "any simple melee weapon"], equipmentC: ["a druidic focus"], equipmentD: ["an explorer's pack"]},
+    {label: "Fighter", equipmentA: ["chain mail", "leather armor, a longbow, and 20 arrows"], equipmentB: ["a martial weapon and a shield", "two martial weapons"], equipmentC: ["a light crossbow and 20 bolts", "two handaxes"], equipmentD: ["a dungeoneer's pack", "an explorer's pack"]},
+    {label: "Monk", equipmentA: ["a shortsword", "any simple weapon"], equipmentB: ["a dungeoneer's pack", "an explorer's pack"], equipmentC: ["10 darts"]},
+    {label: "Paladin", equipmentA: ["a martial weapon and a shield", "two martial weapons"], equipmentB: ["five javelins", "any simple melee weapon"], equipmentC: ["a priest's pack", "an explorer's pack"], equipmentD: ["chain mail"], equipmentE: ["a holy symbol"]},
+    {label: "Ranger", equipmentA: ["scale mail", "leather armor"], equipmentB: ["two shortswords", "two simple melee weapons"], equipmentC: ["a dungeoneer's pack", "an explorer's pack"], equipmentD: ["a longbow and a quiver of 20 arrows"]},
+    {label: "Rogue", equipmentA: ["a rapier", "a shortsword"], equipmentB: ["a shortbow and a quiver of 20 arrows", "a shortsword"], equipmentC: ["a burglar's pack", "a dungeoneer's pack", "an explorer's pack"], equipmentD: ["leather armor"], equipmentE: ["two daggers"], equipmentF: ["thieves' tools"]},
+    {label: "Sorcerer", equipmentA: ["a light crossbow and 20 bolts", "any simple weapon"], equipmentB: ["a component pouch", "an arcane focus"], equipmentC: ["a dungeoneer's pack", "an explorer's pack"], equipmentD: ["two daggers"]},
+    {label: "Warlock", equipmentA: ["a light crossbow and 20 bolts", "any simple weapon"], equipmentB: ["a component pouch", "an arcane focus"], equipmentC: ["a scholar's pack", "a dungeoneer's pack"], equipmentD: ["leather armor"], equipmentE: ["any simple weapon"], equipmentF: ["two daggers"]},
+    {label: "Wizard", equipmentA: ["a quarterstaff", "a dagger"], equipmentB: ["a component pouch", "an arcane focus"], equipmentC: ["a scholar's pack", "an explorer's pack"], equipmentD: ["a spellbook"]}
 ];
+
 const BACKGROUNDS = 
 [
     {label: "Acolyte", skillProficiencies: ["Insight", "Religion"], toolProficiencies: null, languages: ["", ""], 

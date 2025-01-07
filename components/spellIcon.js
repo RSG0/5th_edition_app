@@ -153,7 +153,9 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
 
         else
         {
+            // console.log("Damage Type:", damageType)
             // console.log("Effect Die:", effectDie)
+
             return (<Text style={{fontStyle:'italic'}}>See Description</Text>)
         }
     }
@@ -173,9 +175,9 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
         // console.log("Damage type:",damageType)
         // console.log("# of Dice:",numOfDice)
         // console.log("Dice:",dice)
-        console.log("IsVocal:",isVocal)
-        console.log("IsSomatic:",isSomatic)
-        console.log("IsMaterial:",requiresMaterials)
+        // console.log("IsVocal:",isVocal)
+        // console.log("IsSomatic:",isSomatic)
+        // console.log("IsMaterial:",requiresMaterials)
         // console.log("Usability:",usableBy)
         // console.log("Material:",requiresMaterials)
         // console.log("Description:",description)
@@ -235,7 +237,8 @@ export default SpellIcon = ({name, school, range, effect, castingTime, damageTyp
 const circleSize = .08
 const styles = StyleSheet.create({
     item:{
-        width: width * .9,
+        // width: width * .9,
+        width: "90%",
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',

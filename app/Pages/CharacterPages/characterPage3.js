@@ -4,22 +4,73 @@ import { COLORS, FONTSIZE } from "../../../constants/theme";
 import ActionComponent from "../../../components/actionComponent";
 import Seperator from "../../../components/seperator";
 import NewPageButton from "../../../components/buttons/newPageButton";
+import { act, useEffect, useState } from "react";
 
-export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment}) =>
+
+
+export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment, route}) =>
 {
+    useEffect((()=>
+    {
+        if (navigation)
+        {
+            console.log("Navigation:", navigation)
+        }
+    }),[navigation])
+    useEffect(()=>
+    {
+
+        console.log("Screen has loaded")
+    },[])
+
+    const [actionIcons, setActionIcons] = useState([])
+    const [bonusActionIcons, setBonusActionIcons] = useState([])
+    const [reactionIcons, setReactionIcons] = useState([])
+
+    // const {actions, bonusActions, reactions} = route.params || {};
+    // useEffect(() => 
+    //     {
+    //         if (actions) {
+    //             const newActionIcon = { iconName, type, range, hitDC, effectDie, damageType};
+    //             setActionIcons((prevActions) => {
+    //                 // Avoid duplicating the same character in the array
+    //                 const alreadyExists = prevActions.some((action) => action.name === newActionIcon.name);
+    //                 return alreadyExists ? prevActions : [...prevActions, newActionIcon];
+    //             });
+    //         }
+    //         else if (bonusActions) 
+    //         {
+    //             const newBonusActionIcon = { iconName, type, range, hitDC, effectDie, damageType};
+    //             setBonusActionIcons((prevActions) => {
+    //                 // Avoid duplicating the same character in the array
+    //                 const alreadyExists = prevActions.some((action) => action.name === newActionIcon.name);
+    //                 return alreadyExists ? prevActions : [...prevActions, newActionIcon];
+    //             });
+    //         }
+    //         else if (reactions) 
+    //         {
+    //             const newReactionIcon = { iconName, type, range, hitDC, effectDie, damageType};
+    //             setReactionIcons((prevActions) => {
+    //                 // Avoid duplicating the same character in the array
+    //                 const alreadyExists = prevActions.some((action) => action.name === newActionIcon.name);
+    //                 return alreadyExists ? prevActions : [...prevActions, newActionIcon];
+    //             });
+    //         }
+    //     }, [actions, bonusActions, reactions])
     return (
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.grayBackground}>
-            {console.log("Selected: ")}
-            {console.log("Cantrips:", selectedCantrips)}
+            {/* {console.log("Selected: ")}
+            {console.log("Cantrips:", selectedCantrips)} */}
             <Text style={styles.textStyle}> <Text style={{fontWeight: 'bold'}}>ACTIONS</Text> - Attacks Per Action: 1</Text>
             <Seperator/>
 
             <View style={{alignItems: 'center'}}> 
-                <ActionComponent/>
-                <ActionComponent/>
-                <ActionComponent/>
+                {/* {actions.map((action,i) => 
+                    (
+                        <ActionComponent/>
+                    ) )} */}
 
             </View>
             <Text style={[styles.textStyle, {fontWeight: 'bold'}]}> BONUS ACTIONS - </Text>

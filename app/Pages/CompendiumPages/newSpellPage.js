@@ -159,6 +159,10 @@ export default NewMagicSpellPage = ({navigation}) => {
         {
             setRange(rng + " (" + rngType + ")")
         }
+        else if (rng === "Touch")
+        {
+            setRange(rng)
+        }
         else if (rngType === "None")
         {
             setRange(rng)
@@ -171,7 +175,7 @@ export default NewMagicSpellPage = ({navigation}) => {
         {
             setRange(rng)
         }
-        
+
         // else
         // {
         //     console.log("Doing nothing")

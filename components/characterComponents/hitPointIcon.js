@@ -31,7 +31,7 @@ const styles = StyleSheet.create(
         // width: 100,
         // height: 50,
         width: width * .25,
-        height: height * .07,
+        height: height * .078,
         backgroundColor: COLORS.mainColor,
         // display: 'flex',
         justifyContent: 'center',

@@ -35,6 +35,7 @@ import NewMagicItemPage from './Pages/CompendiumPages/newMagicItemPage';
 import SpellPage from './Pages/CompendiumPages/spellPage';
 import NewSpellPage from './Pages/CompendiumPages/newSpellPage';
 import newActionPage from './Pages/CharacterPages/newActionPage';
+import characterPage3 from './Pages/CharacterPages/characterPage3';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,6 +107,7 @@ function StackNavigator() {
       <Stack.Screen name="Character Selection" component={CharacterPage} /> 
       <Stack.Screen name="Character Carousel" component={CharacterCarousel}/>
       <Stack.Screen name="New Action Page" component={newActionPage}/>
+      <Stack.Screen name="Character Page 3" component={characterPage3}/>
       <Stack.Screen name="Create Character" component={CreateCharacter} /> 
       <Stack.Screen name="Ability Score" component={AbilityScoreScreen} />
       <Stack.Screen name="Select Skills" component={SelectingSkillsScreen} />

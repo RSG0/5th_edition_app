@@ -67,7 +67,7 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         {
             return prevSkills.filter((s) => s !== skill)
         }
-        else if (prevSkills.length < (checkForSkills(classes) + 2) ) // if the skill is less than the max than add it to the array
+        else if (prevSkills.length < (checkForSkills(classes))) // if the skill is less than the max than add it to the array
         {
             return  [...prevSkills, skill] 
 
