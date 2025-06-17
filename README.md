@@ -37,7 +37,7 @@ npm install
 ### 5. Start the Development Server
 Run the following command to start the development server:
 ```sh
-expo start
+npx expo start
 ```
 Use the QR code displayed in the terminal or Expo Developer Tools in the browser to open the app on your device:
 On physical devices: Install the Expo Go app from the App Store or Google Play, and scan the QR code.
