@@ -44,7 +44,7 @@ function StackNavigator2()
 {
     return(
      <Stack.Navigator initialRouteName="Compendium Page" screenOptions={{headerShown:false}}>
-        <Stack.Screen name="Compendium Page Stack" component={CompendiumPage}/>
+        <Stack.Screen name="Compendium Page" component={CompendiumPage}/>
         <Stack.Screen name="Equipment Page" component={EquipmentPage}/>
         <Stack.Screen name="Magic-Item Page" component={magicItemPage}/>
         <Stack.Screen name="Create Magic-Item Page" component={NewMagicItemPage} />
@@ -126,10 +126,8 @@ function StackNavigator() {
 
 const App = () => {
   return (
-    <NavigationContainer independent={true}>
-      {/* <Text>Testing</Text> */}
-      <TabNavigator />
-    </NavigationContainer>
+
+    <TabNavigator />
     // <View style={{backgroundColor: 'red', flex: 1}}>
     //   <Text>TESTING CREATED BY YOU{"\n"}ADSFEW</Text>
     // </View>
