@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet,ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, FONTSIZE } from "../../../constants/theme";
+import { COLORS, FONTSIZE, moderateScale, scale } from "../../../constants/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
         width: width * .9,
         backgroundColor: '',
         fontWeight: 'bold',
-        fontSize: FONTSIZE.xxlarge,
+        fontSize: scale(FONTSIZE.xxlarge),
         textAlign: 'left',
         marginBottom: 10
     },

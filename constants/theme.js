@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, PixelRatio } from "react-native";
 
 const COLORS =
 {
@@ -12,10 +12,18 @@ const FONT = {
     medium: "DMMedium",
     bold: "DMBold",
 };
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
+const scaleWidth = width / 375;
+const scaleHeight = height / 812;
 
-// Scale function
-export const scale = (size) => (width / 375) * size; // Use 375px as a base width for scaling
+export const scale = (size) => size * Math.min(scaleWidth, scaleHeight);
+export const verticalScale = (size) => size * scaleHeight;
+export const moderateScale = (size, factor = 0.5) => 
+    { 
+        size + (scale(size) - size) * factor;
+        console.log("width", width, "height", height, "scale:", scale(20));
+
+    }
 
 const FONTSIZE = {
     xxxsmall: scale(5), // Used for Reach Part of Actions Page
