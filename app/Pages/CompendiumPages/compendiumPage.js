@@ -15,8 +15,8 @@ export default CompendiumPage = ({navigation}) =>
         <ScrollView>
         <View style={styles.viewStyle}>
             <CompendiumButton text={"Equipment"} nextScreen={"Equipment Page"} navigation={navigation}/>
-            <CompendiumButton text={"Classes"} />
-            <CompendiumButton text={"Races"}/>
+            {/* <CompendiumButton text={"Classes"} />
+            <CompendiumButton text={"Races"}/> */}
             <CompendiumButton text={"Magic-Items"} nextScreen={"Magic-Item Page"} navigation={navigation}/>
             <CompendiumButton text={"Spells"} nextScreen={"Spells Page"} navigation={navigation}/>
 

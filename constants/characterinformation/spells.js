@@ -294,36 +294,6 @@ export const THIRD_LEVEL_SPELLS =
             description: "You create an invisible, magical eye within range that hovers in the air for the duration. You mentally receive visual information from the eye, which has normal vision and darkvision out to 30 feet. The eye can look in every direction. As an action, you can move the eye up to 30 feet in any direction. There is no limit to how far away from you the eye can move, but it can't enter another plane of existence. A solid barrier blocks the eye’s movement, but the eye can pass through an opening as small as 1 inch in diameter."
         },
         {
-            name: "Banishment",
-            school: schools_of_magic[3], // Enchantment
-            castingTime: "1 action",
-            range: "60 feet",
-            components: ["V", "S", "M"],
-            material: "an item distasteful to the target",
-            concentration: true,
-            duration: "1 minute",
-            usableBy: ["Cleric", "Paladin", "Sorcerer", "Warlock", "Wizard"],
-            level: "4th",
-            damageDie: null,
-            damageType: null,
-            description: "You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished. If the target is native to the plane of existence you’re on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. If the target is native to a different plane of existence than the one you’re on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn’t return."
-        },
-        {
-            name: "Blight",
-            school: schools_of_magic[6], // Necromancy
-            castingTime: "1 action",
-            range: "30 feet",
-            components: ["V", "S"],
-            material: null,
-            concentration: false,
-            duration: "instantaneous",
-            usableBy: ["Druid", "Sorcerer", "Warlock", "Wizard"],
-            level: "4th",
-            damageDie: "8d8",
-            damageType: "Necrotic",
-            description: "Necromantic energy washes over a creature of your choice that you can see within range, draining moisture and vitality from it. The target must make a Constitution saving throw. The target takes 8d8 necrotic damage on a failed save, or half as much damage on a successful one. This spell has no effect on undead or constructs. If you target a plant creature or a magical plant, it makes the saving throw with disadvantage, and the spell deals maximum damage to it. If you target a nonmagical plant that isn’t a creature, such as a tree or shrub, it doesn’t make a saving throw; it simply withers and dies."
-        },
-        {
             name: "Confusion",
             school: schools_of_magic[3], // Enchantment
             castingTime: "1 action",
