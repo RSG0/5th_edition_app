@@ -23,6 +23,7 @@ While not required for Expo projects, having the React Native CLI installed can 
 - **Install React Native CLI**:
   ```sh
   npm install -g react-native-cli
+  npm install -g expo
   ```
 - After installation, verify the installation by running:
   ```sh
@@ -42,3 +43,15 @@ npx expo start
 Use the QR code displayed in the terminal or Expo Developer Tools in the browser to open the app on your device:
 On physical devices: Install the Expo Go app from the App Store or Google Play, and scan the QR code.
 On emulators: Ensure you have an Android Emulator or iOS Simulator set up, then select the appropriate option in the Expo Developer Tools.
+
+### DEBUGGING
+
+If you encounter issues with Expo versions not matching the SDK, run the following command:
+```sh
+npx expo install --check      
+```
+
+If you get an error that, "There was a problem running the requested app" and the IP address it returns matches yours run the following command:
+```sh
+npx expo start --tunnel
+```
