@@ -307,3 +307,13 @@ export const BARBARIAN_SUBCLASS =
     {label: "Path of the Beast", value: '7'},
     {label: "Path of Wild Magic", value: '8'}
 ];
+export const DRUID_SUBCLASS = 
+[
+    {label: "Dreams", value: '1'},
+    {label: "Land", value: '2'},
+    {label: "Moon", value: '3'},
+    {label: "Sheperd", value: '4'},
+    {label: "Spores", value: '5'},
+    {label: "Stars", value: '6'},
+    {label: "Wildfire", value: '7'},
+];

@@ -26,17 +26,17 @@ export const removeIndefinteArticles_and = (word) => {
 export default SelectEquipmentPage = ({navigation,route}) => {
     const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp} = route.params; 
 
-    const selectedClass = CLASS_EQUIPMENT.find(cls => cls.label === classes);
+    const selectedClassEquipment = CLASS_EQUIPMENT.find(cls => cls.label === classes);
     const selectedBackground = BACKGROUNDS.find(back => back.label === backgrounds);
 
     const equipmentOptions = [
-        selectedClass.equipmentA,
-        selectedClass.equipmentB,
-        selectedClass.equipmentC,
-        selectedClass.equipmentD,
-        selectedClass.equipmentE,
-        selectedClass.equipmentF,
-    ];
+        selectedClassEquipment.equipmentA,
+        selectedClassEquipment.equipmentB,
+        selectedClassEquipment.equipmentC,
+        selectedClassEquipment.equipmentD,
+        selectedClassEquipment.equipmentE,
+        selectedClassEquipment.equipmentF,
+    ].filter(option => option); // filters out undefined/null/false/etc.
 
     const [selectedEquipments, setSelectedEquipments] = useState(Array(equipmentOptions.length).fill(null));
 
@@ -63,7 +63,7 @@ export default SelectEquipmentPage = ({navigation,route}) => {
     };
     const checkforChange = () => {
         const allSelected = selectedEquipments.every(item => item !== null); // Check if all rows have a selected item
-    
+        console.log("All Selected Item: " + selectedEquipments)
         if (!allSelected) 
         {
             Alert.alert("OOPS", "You need to fill all the information")

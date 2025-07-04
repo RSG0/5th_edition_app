@@ -140,7 +140,7 @@ export default CharacterPage1 = ({ name, classes, race, backgrounds, level, sele
             </View>
             <View>
                 <HitPointIcon currentHP={2} maxHP={maxHp}/>
-                <ArmorClassIcon/>
+                <ArmorClassIcon ac={10 + calculateScoreMod(dex)}/>
             </View>
         </View>
 

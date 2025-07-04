@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, StatusBar, Dimensions, Alert } from "react-nati
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dropdown } from "react-native-element-dropdown";
-import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS } from "../../../constants/characterinformation/subclassinfo";
+import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS, DRUID_SUBCLASS } from "../../../constants/characterinformation/subclassinfo";
 import { useEffect, useState } from "react";
 import NextButton from "../../../components/buttons/nextButton";
 const {width, height} = Dimensions.get('screen');
@@ -55,6 +55,10 @@ export default SubclassesPage = ({navigation, route}) =>
             else if (classes == "Barbarian")
             {
                options = (BARBARIAN_SUBCLASS)
+            }
+            else if (classes == "Druid")
+            {
+                options = DRUID_SUBCLASS
             }
             else
             {

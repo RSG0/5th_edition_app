@@ -11,7 +11,8 @@ const {width, height} = Dimensions.get('screen');
 const SelectingSkillsScreen = ({route, navigation}) =>
 {
     const {name, backgrounds, classes, level, selectedRace, str, dex, con, int, wis, cha} = route.params;
-    const [selectSkills, setSelectSkills] = useState([]);
+    const [backgroundSkills, setBackgroundSkills] = useState([]);
+    const [chosenClassSkills, setChosenClassSkills] = useState([]);
 
 
     // Initialize selectSkills with background skills 
@@ -26,21 +27,19 @@ const SelectingSkillsScreen = ({route, navigation}) =>
     // }, [backgrounds]);
 
     useEffect(() => {
-        const backgroundSkills = BACKGROUNDS.find(skill => skill.label === backgrounds);
-        if (backgroundSkills) {
-          // Add background skills to the state only once and preserve them
-          setSelectSkills(prevSkills => {
-            // Ensure background skills are included without duplication
-            return [...new Set([...prevSkills, ...backgroundSkills.skillProficiencies])];
-          });
+        const bg = BACKGROUNDS.find(skill => skill.label === backgrounds);
+        if (bg) {
+            setBackgroundSkills(bg.skillProficiencies);
+            console.log("Background Skills: " + backgroundSkills)
         }
-      }, [backgrounds]); // This effect runs once when the component mounts
+    }, [backgrounds]);
+
     const checkForChange = () =>
     {
-        console.log("ALL SKILLS:", selectSkills)
-        if (selectSkills.length !== (checkForSkills(classes) + 2))
+        // console.log("ALL SKILLS:", selectSkills)
+        if (chosenClassSkills.length !== checkForSkills(classes)) 
         {
-            Alert.alert("OOPS", "You need to fill all the information")
+            Alert.alert("OOPS", "You need to add more skills");
             return false;
         }
         return true;
@@ -59,27 +58,19 @@ const SelectingSkillsScreen = ({route, navigation}) =>
             return combinedSkills
         }
     }
-    const handleSkills = (skill, i) =>
-    {
-        setSelectSkills(prevSkills => { 
-        // remove redundant skills that conflict with background
-        if (prevSkills.includes(skill))  // if the skill is already selected remove it from the array
-        {
-            return prevSkills.filter((s) => s !== skill)
-        }
-        else if (prevSkills.length < (checkForSkills(classes))) // if the skill is less than the max than add it to the array
-        {
-            return  [...prevSkills, skill] 
+    const handleSkills = (skill, i) => {
+        setChosenClassSkills(prevSkills => {
+            if (prevSkills.includes(skill)) {
+                return prevSkills.filter(s => s !== skill);
+            } else if (prevSkills.length < checkForSkills(classes)) {
+                return [...prevSkills, skill];
+            } else {
+                // Remove the oldest and add the new one
+                return [...prevSkills.slice(1), skill];
+            }
+        });
+    };
 
-        }
-        else // if the skills selected are more than the max remove the oldest skill in the array
-        {
-            console.log("More than accepted paramater")
-            return [...prevSkills.slice(1), skill]
-        }
-    })
-
-    }
     function displayClassSkills(selectedClass, selectedBackground) 
     { 
         const classSkills = CLASS_SKILLS.find(skill => skill.label === selectedClass); // finds the chosen class
@@ -89,14 +80,14 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         // console.log(selectSkills);
         if (filterSkills) { 
             // if the filterSkills array contains something
-            console.log("Select Skills:", selectSkills)
+            console.log("Select Skills:", chosenClassSkills)
             // console.log(filterSkills);
             return filterSkills.map((skill, i) => (
                 <SkillsButton 
                     key={i} 
                     name={skill} 
                     disableFixedWidth={true} 
-                    isSelected={selectSkills.includes(skill)}     
+                    isSelected={chosenClassSkills.includes(skill)}
                     onSelectionPress={() => handleSkills(skill, i)} // Ensure proper callback
                 >
 
@@ -135,9 +126,13 @@ const SelectingSkillsScreen = ({route, navigation}) =>
         <NextButton
             navigation={navigation}
             nextScreen={"Select Subclasses"}
-            params={{name, backgrounds, classes, selectedRace, level, str, dex, con, int, wis, cha, selectSkills}}
-            checkforChange={() => checkForChange()}/>
-        <Text>You've chosen: {skillChosen(selectSkills)} </Text>
+        params={{
+        name, backgrounds, classes, selectedRace, level, str, dex, con, int, wis, cha,
+        selectSkills: [...backgroundSkills, ...chosenClassSkills]
+        }}
+        checkforChange={() => checkForChange()}/>
+        <View style={{paddingBottom: "5%"}} ></View>
+        {/* <Text>You've chosen: {skillChosen(selectSkills)} </Text> */}
 
         </View>
         </SafeAreaView>
