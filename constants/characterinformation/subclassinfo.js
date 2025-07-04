@@ -317,3 +317,98 @@ export const DRUID_SUBCLASS =
     {label: "Stars", value: '6'},
     {label: "Wildfire", value: '7'},
 ];
+export const FIGHTER_SUBCLASS = 
+[
+    {label: "Champion", value: '1'},
+    {label: "Battle Master", value: '2'},
+    {label: "Eldritch Knight", value: '3'},
+    {label: "Arcane Archer", value: '4'},
+    {label: "Cavalier", value: '5'},
+    {label: "Samurai", value: '6'},
+    {label: "Psi Warrior", value: '7'},
+    {label: "Rune Knight", value: '8'}
+];
+
+export const MONK_SUBCLASS = 
+[
+    {label: "Way of the Open Hand", value: '1'},
+    {label: "Way of Shadow", value: '2'},
+    {label: "Way of the Four Elements", value: '3'},
+    {label: "Way of the Drunken Master", value: '4'},
+    {label: "Way of the Kensei", value: '5'},
+    {label: "Way of the Sun Soul", value: '6'},
+    {label: "Way of Mercy", value: '7'},
+    {label: "Way of the Astral Self", value: '8'}
+];
+
+export const PALADIN_SUBCLASS = 
+[
+    {label: "Oath of Devotion", value: '1'},
+    {label: "Oath of the Ancients", value: '2'},
+    {label: "Oath of Vengeance", value: '3'},
+    {label: "Oath of Conquest", value: '4'},
+    {label: "Oath of Redemption", value: '5'},
+    {label: "Oath of Glory", value: '6'},
+    {label: "Oath of the Crown", value: '7'},
+    {label: "Oath of the Watchers", value: '8'}
+];
+
+export const RANGER_SUBCLASS = 
+[
+    {label: "Hunter", value: '1'},
+    {label: "Beast Master", value: '2'},
+    {label: "Gloom Stalker", value: '3'},
+    {label: "Horizon Walker", value: '4'},
+    {label: "Monster Slayer", value: '5'},
+    {label: "Fey Wanderer", value: '6'},
+    {label: "Swarmkeeper", value: '7'}
+];
+
+export const ROGUE_SUBCLASS = 
+[
+    {label: "Thief", value: '1'},
+    {label: "Assassin", value: '2'},
+    {label: "Arcane Trickster", value: '3'},
+    {label: "Mastermind", value: '4'},
+    {label: "Swashbuckler", value: '5'},
+    {label: "Inquisitive", value: '6'},
+    {label: "Phantom", value: '7'},
+    {label: "Soulknife", value: '8'}
+];
+
+export const SORCERER_SUBCLASS = 
+[
+    {label: "Draconic Bloodline", value: '1'},
+    {label: "Wild Magic", value: '2'},
+    {label: "Divine Soul", value: '3'},
+    {label: "Shadow Magic", value: '4'},
+    {label: "Storm Sorcery", value: '5'},
+    {label: "Aberrant Mind", value: '6'},
+    {label: "Clockwork Soul", value: '7'}
+];
+
+export const WARLOCK_SUBCLASS = 
+[
+    {label: "The Archfey", value: '1'},
+    {label: "The Fiend", value: '2'},
+    {label: "The Great Old One", value: '3'},
+    {label: "The Hexblade", value: '4'},
+    {label: "The Celestial", value: '5'},
+    {label: "The Fathomless", value: '6'},
+    {label: "The Genie", value: '7'}
+];
+export const WIZARD_SUBCLASS = 
+[
+    {label: "School of Abjuration", value: '1'},
+    {label: "School of Conjuration", value: '2'},
+    {label: "School of Divination", value: '3'},
+    {label: "School of Enchantment", value: '4'},
+    {label: "School of Evocation", value: '5'},
+    {label: "School of Illusion", value: '6'},
+    {label: "School of Necromancy", value: '7'},
+    {label: "School of Transmutation", value: '8'},
+    {label: "Bladesinging", value: '9'},
+    {label: "Chronurgy Magic", value: '10'},
+    {label: "Graviturgy Magic", value: '11'},
+    {label: "Order of Scribes", value: '12'}
+];

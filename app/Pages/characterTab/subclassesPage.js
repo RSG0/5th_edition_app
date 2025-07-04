@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, StatusBar, Dimensions, Alert } from "react-nati
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dropdown } from "react-native-element-dropdown";
-import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS, DRUID_SUBCLASS } from "../../../constants/characterinformation/subclassinfo";
+import { BARD_SUBCLASS, BARBARIAN_SUBCLASS, CLERIC_SUBCLASS, DRUID_SUBCLASS, FIGHTER_SUBCLASS, MONK_SUBCLASS, PALADIN_SUBCLASS, RANGER_SUBCLASS, ROGUE_SUBCLASS, SORCERER_SUBCLASS, WARLOCK_SUBCLASS, WIZARD_SUBCLASS } from "../../../constants/characterinformation/subclassinfo";
 import { useEffect, useState } from "react";
 import NextButton from "../../../components/buttons/nextButton";
 const {width, height} = Dimensions.get('screen');
@@ -60,8 +60,20 @@ export default SubclassesPage = ({navigation, route}) =>
             {
                 options = DRUID_SUBCLASS
             }
+            else if (classes == "Fighter")
+            {
+                options = FIGHTER_SUBCLASS
+            }
+            else if (classes == "Monk") {options = MONK_SUBCLASS}
+            else if (classes == "Paladin") {options = PALADIN_SUBCLASS}
+            else if (classes == "Ranger") {options = RANGER_SUBCLASS}
+            else if (classes == "Rogue") {options = ROGUE_SUBCLASS}
+            else if (classes == "Sorcerer") {options = SORCERER_SUBCLASS}
+            else if (classes == "Warlock") {options = WARLOCK_SUBCLASS}
+            else if (classes == "Wizard") {options = WIZARD_SUBCLASS}
             else
             {
+                console.log("User has selected: " + classes)
                 console.log("User has selected an invalid options")
             }
             // set their classes subclass options to what the user has selected
