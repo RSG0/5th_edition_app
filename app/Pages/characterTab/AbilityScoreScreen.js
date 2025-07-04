@@ -67,12 +67,12 @@ const AbilityScoreScreen = ({ navigation, route }) => {
 
     function renderRacialBonus() {
         const bonuses = [];
-        if (strBonus) { bonuses.push(`STR: ${strBonus}`); }
-        if (dexBonus) { bonuses.push(`DEX: ${dexBonus}`); }
-        if (conBonus) { bonuses.push(`CON: ${conBonus}`); }
-        if (intBonus) { bonuses.push(`INT: ${intBonus}`); }
-        if (wisBonus) { bonuses.push(`WIS: ${wisBonus}`); }
-        if (chaBonus) { bonuses.push(`CHA: ${chaBonus}`); }
+        if (strBonus) { bonuses.push(`STR: +${strBonus}`); }
+        if (dexBonus) { bonuses.push(`DEX: +${dexBonus}`); }
+        if (conBonus) { bonuses.push(`CON: +${conBonus}`); }
+        if (intBonus) { bonuses.push(`INT: +${intBonus}`); }
+        if (wisBonus) { bonuses.push(`WIS: +${wisBonus}`); }
+        if (chaBonus) { bonuses.push(`CHA: +${chaBonus}`); }
         return bonuses.length > 0 ? bonuses.join(', ') : "Need to add in information for this subrace";
     }
     function racialStatBonus(race, subrace)
