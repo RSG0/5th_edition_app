@@ -2,8 +2,18 @@ import { View, Text, TouchableOpacity, StyleSheet,ScrollView } from "react-nativ
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import EquipmentIcon from "../../../components/equipmentIcon";
-import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS} from "../../../constants/characterinformation/equipment"
+import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
+import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, ADVENTURING_GEAR} from "../../../constants/characterinformation/equipment"
+import { useState } from "react";
+import Seperator from "../../../components/seperator";
 
+
+
+
+
+const toggleDropdown = (toggle, toggleState) => {
+    toggle(!toggleState);
+};
 
 function displayArmor() {
     return ARMOR.map((armor, index) => (
@@ -17,7 +27,12 @@ function displayArmor() {
         />
     ));
 }
-
+function displayAdventuringGear()
+{
+    return ADVENTURING_GEAR.map((weapons, index) => (
+        <EquipmentIcon key={index} itemName={weapons.title} type={"Melee Weapon"} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
+    ));
+}
 function displayMeleeWeapons()
 {
     return MARTIAL_MELEE_WEAPONS.map((weapons, index) => (
@@ -30,23 +45,66 @@ function displayTools()
         <EquipmentIcon key={index} itemName={tools.title} type={"Tools"} cost={tools.cost} weight={tools.weight}> </EquipmentIcon>
     ));
 }
+function displayRangedWeapons()
+{
+    return MARTIAL_RANGED_WEAPONS.map((weapons, index) => (
+        <EquipmentIcon key={index} itemName={weapons.title} type={"Ranged Weapon"} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
+    ));
+}
 export default EquipmentPage = ({navigation}) =>
 {
-    return(
+
+    const [adventuringGearDropdown, setAdventuringGearDropdown] = useState(false)
+    const [armorDropdown, setArmorDropdown] = useState(false)
+    const [toolDropdown, setToolDropdown] = useState(false)
+    const [martialWeaponDropdown, setMartialWeaponDropdown] = useState(false)
+    const [rangedWeaponDropdown, setRangedWeaponDropdown] = useState(false)
+
+        const dropdown = (text, setState, state, displayItems) =>
+        {
+
+          return(
+              <View style={styles.viewStyle}>
+                <View style={[{marginBottom: state? 0: 10 }]}>
+                <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={styles.textStyle}>{text}</Text>
+                    <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
+                </TouchableOpacity>
+                <Seperator/>
+
+
+                </View>
+      
+            {/**This feature is a JSX exclusive */}
+          {state && (
+              <View style={{ }}>
+    
+              {displayItems()}     
+            </View>
+          )}
+
+          </View>
+          )
+
+          }
+
+        
+        return(
         <SafeAreaView style={{backgroundColor: COLORS.background, flex:1}}>
             <ScrollView>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
-                {/**Armor Section*/}
-                <Text style={styles.textStyle}>Armor:</Text>
-                {displayArmor()}
-                {/* <EquipmentIcon itemName={"Dragon"} type={"Tool"} cost={12} weight={230}/> */}
-                {/**Tools Section */}
-                <Text style={styles.textStyle}>Tools:</Text>
-                {/* <>{displayTools()}</> */}
-                {/**Martial Weapons */}
-                <Text style={styles.textStyle}>Martial Weapon:</Text>
-                {/* <View>{displayMeleeWeapons()}</View> */}
+                {/* <Seperator/> */}
+                {dropdown("Adventuring Gear", setAdventuringGearDropdown, adventuringGearDropdown, displayAdventuringGear)}
+                {/* <Seperator/> */}
+                {dropdown("Armor", setArmorDropdown, armorDropdown, displayArmor)}
+                {dropdown("Tools", setToolDropdown, toolDropdown, displayTools)}
+                {dropdown("Martial Melee Weapons", setMartialWeaponDropdown, martialWeaponDropdown, displayMeleeWeapons)}
+                {dropdown("Martial Ranged Weapons", setRangedWeaponDropdown, rangedWeaponDropdown, displayRangedWeapons)}
+
+
+
+
             </View>
             </ScrollView>
         </SafeAreaView>

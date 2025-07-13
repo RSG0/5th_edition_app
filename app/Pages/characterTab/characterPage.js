@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { View, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import NewCharacterIcon from "../../../components/newCharacterIcon";
@@ -16,6 +16,7 @@ export default CharacterPage = ({ navigation, route }) =>
 
     useEffect(() => {
         if (characters.length > 0) {
+            console.log("Character created")
             save();
         }
     }, [characters]);
@@ -91,6 +92,7 @@ export default CharacterPage = ({ navigation, route }) =>
                             removeCharacter={() => removeCharacter(index)}
                         />
                     ))}
+                {/* <TouchableOpacity style={styles.addButton} onPress={clearAllCharacters}/> */}
                 </View>
             </ScrollView>
             <NewCharacterButton navigation={navigation} nextScreen={"Create Character"} />
