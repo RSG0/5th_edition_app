@@ -298,14 +298,76 @@ export const BARD_SUBCLASS =
 
 export const BARBARIAN_SUBCLASS = 
 [
-    {label: "Path of the Berserker", value: '1'},
+    {label: "Path of the Berserker", value: '1',
+        additionalSkills: [], //none
+        bonusProficiency: [], //none
+        level3Feature: [{label: "Frenzy", description: "You can go into a frenzy when you rage. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion."}, ],
+        level6Feature: {label: "Mindless Rage", description: "You can't be charmed or frightened while raging. If you are charmed or frightened when you enter your rage, the effect is suspended for the duration of the rage."},
+        level10Feature: {label: "Intimidating Presence", description: "You can use your action to frighten someone with your menacing presence. When you do so, choose one creature that you can see within 30 feet of you. If the creature can see or hear you, it must succeed on a Wisdom saving throw (DC equal to 8 + your proficiency bonus + your Charisma modifier) or be frightened of you until the end of your next turn. On subsequent turns, you can use your action to extend the duration of this effect on the frightened creature until the end of your next turn. This effect ends if the creature ends its turn out of line of sight or more than 60 feet away from you.\nIf the creature succeeds on its saving throw, you can't use this feature on that creature again for 24 hours."},
+        level14Feature: {label:"Retailation", description: "when you take damage from a creature that is within 5 feet of you, you can use your reaction to make a melee weapon attack against that creature."}
+    },
     {label: "Path of the Totem Warrior", value: '2'},
-    {label: "Path of the Battlerager", value: '3'},
-    {label: "Path of the Ancestral Guardian", value: '4'},
-    {label: "Path of the Storm Herald", value: '5'},
-    {label: "Path of the Zealot", value: '6'},
-    {label: "Path of the Beast", value: '7'},
-    {label: "Path of Wild Magic", value: '8'}
+  {
+    label: "Path of the Battlerager", value: '3',
+    additionalSkills: [], bonusProficiency: [],
+    level3Feature: [
+      { label: "Battlerager Armor", description: "While raging and wearing spiked armor, you can use a bonus action to make one melee weapon attack with your armor spikes against a target within 5 feet of you. If the attack hits, the spikes deal 1d4 piercing damage. You use your Strength modifier for the attack and damage rolls.\nAdditionally, when you use the Attack action to grapple a creature, the target takes 3 piercing damage if your grapple check succeeds." }
+    ],
+    level6Feature: { label: "Reckless Abandon", description: "Using Reckless Attack while raging gives temp HP equal to your Con mod." },
+    level10Feature: { label: "Battlerager Charge", description: "You can Dash as a bonus action while raging." },
+    level14Feature: { label: "Spiked Retribution", description: "When a creature within 5 feet of you hits you with a melee attack, the attacker takes 3 piercing damage if you are raging, aren't incapacitated, and are wearing spiked armor." }
+  },
+  {
+    label: "Path of the Ancestral Guardian", value: '4',
+    additionalSkills: [], bonusProficiency: [],
+    level3Feature: [
+      { label: "Ancestral Protectors", description: "First creature you hit while raging has disadvantage on attacks (except vs. you) and its allies gain resistance to its damage until your next turn." }
+    ],
+    level6Feature: { label: "Spirit Shield", description: "While raging, reaction to reduce damage to an ally by 2d6 (scales to 3d6 at L10, 4d6 at L14)." },
+    level10Feature: { label: "Consult the Spirits", description: "Cast Augury or Clairvoyance without slots/materials; once per short/long rest." },
+    level14Feature: { label: "Vengeful Ancestors", description: "When you use Spirit Shield, the attacker takes force damage equal to the amount prevented." }
+  },
+  {
+    label: "Path of the Storm Herald", value: '5',
+    additionalSkills: [], bonusProficiency: [],
+    level3Feature: [
+      { label: "Storm Aura", description: "Create an aura (Desert: fire; Sea: lightning; Tundra: cold) that affects creatures around you while raging." }
+    ],
+    level6Feature: { label: "Shielding Storm", description: "Aura grants damage resistance to you and allies in range." },
+    level10Feature: { label: "Storm Soul", description: "You become partially immune to your storm type; may gain bonuses like flying or telepathy." },
+    level14Feature: { label: "Raging Storm", description: "While raging, you can activate a powerful storm effect once on your turn." }
+  },
+  {
+    label: "Path of the Zealot", value: '6',
+    additionalSkills: [], bonusProficiency: [],
+    level3Feature: [
+      { label: "Divine Fury", description: "First hit each turn while raging deals +1d6 + half barbarian level (necrotic or radiant)." },
+      { label: "Warrior of the Gods", description: "If a spell would restore you to life, no material components are needed." }
+    ],
+    level6Feature: { label: "Fanatical Focus", description: "Once per rage, if you fail a save while raging, you can reroll." },
+    level10Feature: { label: "Zealous Presence", description: "Bonus action to grant up to 10 creatures advantage on attack rolls and saves until next turn; once per long rest." },
+    level14Feature: { label: "Rage Beyond Death", description: "While raging, you can drop to 0 HP without falling unconscious; you only die when rage ends if still at 0." }
+  },
+  {
+    label: "Path of the Beast", value: '7',
+    additionalSkills: [], bonusProficiency: [],
+    level3Feature: [
+      { label: "Form of the Beast", description: "While raging, gain natural weapon form: climb speed (claws), swim speed (tail), or venom bite." }
+    ],
+    level6Feature: { label: "Bestial Soul", description: "You gain a natural weapon and benefits based on it even when not raging." },
+    level10Feature: { label: "Infectious Fury", description: "When you score a critical hit with your natural weapon, the target takes extra damage and another creature within 5 ft takes psychic damage." },
+    level14Feature: { label: "Call the Hunt", description: "When you hit a creature you haven't attacked this turn, you have advantage on the next attack roll against it." }
+  },
+  {
+    label: "Path of Wild Magic", value: '8',
+    additionalSkills: [], bonusProficiency: [],
+    level3Feature: [
+      { label: "Wild Surge", description: "Swing weapon recklessly while raging to trigger a random magic effect from the Wild Magic Barbarian surge table." }
+    ],
+    level6Feature: { label: "Bend Luck", description: "Use a reaction to add/subtract 1d4 to a roll you or another make, after seeing the roll." },
+    level10Feature: { label: "Bolstering Magic", description: "When you expend a spell slot for True Strike or Shield, you gain temporary HP equal to twice the slot level." },
+    level14Feature: { label: "Unstable Backlash", description: "When a creature hits you while raging, roll on the Wild Magic table." }
+  }
 ];
 export const DRUID_SUBCLASS = 
 [
