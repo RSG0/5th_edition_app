@@ -43,11 +43,11 @@ export default FeaturesPage = ({route, navigation}) =>
             console.log("WIS:", wis )
             console.log("CHA:", cha )
             console.log("Selected Skills:", selectSkills)
-            console.log("Class:", classes )
+            // console.log("Class:", classes )
             console.log("Max Hp:", maxHp)
-            console.log("Subclass:", subclass)
-            console.log("Backstory:", backstory)
-            console.log("Cantrips:", numOfCantrips)
+            // console.log("Subclass:", subclass)
+            // console.log("Backstory:", backstory)
+            // console.log("Cantrips:", numOfCantrips)
         }
     useEffect(()=>
     {
@@ -55,6 +55,7 @@ export default FeaturesPage = ({route, navigation}) =>
     }, [image])
     const checkforChange = () =>
         {
+
             // Need to add functionality and alerts
             return true
         }
@@ -80,7 +81,7 @@ export default FeaturesPage = ({route, navigation}) =>
     const handleImagePickerPress_Camera = async() =>
     {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ['images'],
             allowsEditing: true,
             aspect: [1,1],
             quality: 1
@@ -93,7 +94,7 @@ export default FeaturesPage = ({route, navigation}) =>
     const handleImagePickerPress_Gallery = async() =>
         {
             let result = await ImagePicker.launchCameraAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                mediaTypes: ['images'],
                 allowsEditing: true,
                 aspect: [1,1],
                 quality: 1
