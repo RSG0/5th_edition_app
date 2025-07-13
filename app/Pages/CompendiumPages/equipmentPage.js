@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textStyle: {
-        width: 350,
+        width: "90%",
         fontWeight: 'bold',
         fontSize: FONTSIZE.xxlarge,
         textAlign: 'left',

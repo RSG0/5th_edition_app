@@ -6,9 +6,43 @@ import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WOND
 import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newPageButton";
 import { useState, useEffect } from "react";
+import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 
 const {width, height} = Dimensions.get('screen');
+
+const toggleDropdown = (toggle, toggleState) => {
+    toggle(!toggleState);
+};
+
+        const dropdown = (text, setState, state, displayItems) =>
+        {
+
+          return(
+              <View style={styles.viewStyle}>
+                <View style={[{marginBottom: state? 0: 10 }]}>
+                <TouchableOpacity onPress={() => toggleDropdown(setState, state)} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={styles.textStyle}>{text}</Text>
+                    <AntDesign name={state ? 'up' : 'down'} size={24} color="black" style={{ marginLeft: 10 }} />
+                </TouchableOpacity>
+                <Seperator/>
+
+
+                </View>
+      
+            {/**This feature is a JSX exclusive */}
+          {state && (
+              <View style={{ }}>
+    
+              {displayItems()}     
+            </View>
+          )}
+
+          </View>
+          )
+
+          }
+
 
 function displayMagicArmor()
 {
@@ -39,7 +73,16 @@ function displayWondorousItems()
 }
 export default MagicItemPage = ({navigation, route}) =>
 {
+
     const { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight} = route.params || {};
+
+    const [armorDropdown, setArmorDropdown] = useState(false)
+    const [potionDropdown, setPotionDropdown] = useState(false)
+    const [ringDropdown, setRingDropdown] = useState(false)
+    const [wondrousDropdown, setWondrousDropdown] = useState(false)
+
+    const [customDropdown, setCustomDropdown] = useState(false)
+
 
     //Used in tandem with Async Storage
     const [customMagicItem, setCustomMagicItem] = useState([]);
@@ -80,8 +123,9 @@ export default MagicItemPage = ({navigation, route}) =>
         setCustomMagicItem(updatedMagicItem);
     };
 
-    function displayCustomItems(customMagicItems) {
-        const sortedItems = customMagicItems.sort((a, b) => {return a.name.localeCompare(b.name);});
+    function displayCustomItems() {
+        if (!Array.isArray(customMagicItem)) return null;
+        const sortedItems = customMagicItem.sort((a, b) => {return a.name.localeCompare(b.name);});
         return sortedItems.map((item, index) => (
             <CustomMagicItemIcon
                 key={index}
@@ -114,19 +158,16 @@ export default MagicItemPage = ({navigation, route}) =>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
                 {/**Armor Section*/}
-                <Text style={styles.textStyle}>Armor:</Text>
-                {displayMagicArmor()}
+                {dropdown("Armor:", setArmorDropdown, armorDropdown, displayMagicArmor)}
+
+                {/* <Text style={styles.textStyle}>Armor:</Text>
+                {displayMagicArmor()} */}
                 {/**Potion Section */}
-                <Text style={styles.textStyle}>Potions:</Text>
-                {displayMagicPotions()}
+                {dropdown("Potion:", setPotionDropdown, potionDropdown, displayMagicPotions)}
                 {/**Ring Section */}
-                <Text style={styles.textStyle}>Rings:</Text>
-                {displayMagicRings()}
-                {/**Wondorous Items Section */}
-                <Text style={styles.textStyle}>Wondorous Items:</Text>
-                {displayWondorousItems()}
-                <Text style={styles.textStyle}>Custom Magic Items:</Text>
-                {displayCustomItems(customMagicItem)}
+                {dropdown("Rings:", setRingDropdown, ringDropdown, displayMagicRings)}
+                {dropdown("Wondrous Items:", setWondrousDropdown, wondrousDropdown, displayWondorousItems)}
+                {dropdown("Custom Magic Items", setCustomDropdown, customDropdown, displayCustomItems )}
             </View>
             <View style={{margin: height * .25}}/>
             </ScrollView>
@@ -147,7 +188,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textStyle: {
-        width: width,
+        width: "90%",
         fontWeight: 'bold',
         fontSize: FONTSIZE.xxlarge,
         textAlign: 'left',
