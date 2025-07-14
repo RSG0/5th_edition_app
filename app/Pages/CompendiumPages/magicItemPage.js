@@ -71,6 +71,13 @@ function displayWondorousItems()
         <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
     ));
 }
+
+function display(equipment, equipmentType)
+{
+    return equipment.map((weapons, index) => (
+        <EquipmentIcon key={index} itemName={weapons.title} type={equipmentType} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
+    ));
+}
 export default MagicItemPage = ({navigation, route}) =>
 {
 
@@ -159,15 +166,11 @@ export default MagicItemPage = ({navigation, route}) =>
             <View style={styles.viewStyle}>
                 {/**Armor Section*/}
                 {dropdown("Armor:", setArmorDropdown, armorDropdown, displayMagicArmor)}
-
-                {/* <Text style={styles.textStyle}>Armor:</Text>
-                {displayMagicArmor()} */}
-                {/**Potion Section */}
                 {dropdown("Potion:", setPotionDropdown, potionDropdown, displayMagicPotions)}
-                {/**Ring Section */}
                 {dropdown("Rings:", setRingDropdown, ringDropdown, displayMagicRings)}
                 {dropdown("Wondrous Items:", setWondrousDropdown, wondrousDropdown, displayWondorousItems)}
                 {dropdown("Custom Magic Items", setCustomDropdown, customDropdown, displayCustomItems )}
+                {drop}
             </View>
             <View style={{margin: height * .25}}/>
             </ScrollView>

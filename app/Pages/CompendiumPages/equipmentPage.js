@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import EquipmentIcon from "../../../components/equipmentIcon";
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
-import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, ADVENTURING_GEAR} from "../../../constants/characterinformation/equipment"
+import {ARMOR, TOOLS, MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, ADVENTURING_GEAR, SIMPLE_MELEE_WEAPONS, SIMPLE_RANGED_WEAPONS} from "../../../constants/characterinformation/equipment"
 import { useState } from "react";
 import Seperator from "../../../components/seperator";
 
@@ -51,14 +51,22 @@ function displayRangedWeapons()
         <EquipmentIcon key={index} itemName={weapons.title} type={"Ranged Weapon"} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
     ));
 }
+function display(equipment, equipmentType)
+{
+    return equipment.map((weapons, index) => (
+        <EquipmentIcon key={index} itemName={weapons.title} type={equipmentType} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
+    ));
+}
 export default EquipmentPage = ({navigation}) =>
 {
 
     const [adventuringGearDropdown, setAdventuringGearDropdown] = useState(false)
     const [armorDropdown, setArmorDropdown] = useState(false)
     const [toolDropdown, setToolDropdown] = useState(false)
-    const [martialWeaponDropdown, setMartialWeaponDropdown] = useState(false)
-    const [rangedWeaponDropdown, setRangedWeaponDropdown] = useState(false)
+    const [m_MeleeWeaponDropdown, set_m_MeleeWeaponDropdown] = useState(false) //Martial
+    const [s_meleeWeaponDropdown, set_s_meleeWeaponDropdown] = useState(false) //Simple
+    const [m_rangedWeaponDropdown, set_m_RangedWeaponDropdown] = useState(false)
+    const [s_rangedWeaponDropdown, set_s_RangedWeaponDropdown] = useState(false)
 
         const dropdown = (text, setState, state, displayItems) =>
         {
@@ -99,8 +107,10 @@ export default EquipmentPage = ({navigation}) =>
                 {/* <Seperator/> */}
                 {dropdown("Armor", setArmorDropdown, armorDropdown, displayArmor)}
                 {dropdown("Tools", setToolDropdown, toolDropdown, displayTools)}
-                {dropdown("Martial Melee Weapons", setMartialWeaponDropdown, martialWeaponDropdown, displayMeleeWeapons)}
-                {dropdown("Martial Ranged Weapons", setRangedWeaponDropdown, rangedWeaponDropdown, displayRangedWeapons)}
+                {dropdown("Martial Melee Weapons", set_m_MeleeWeaponDropdown, m_MeleeWeaponDropdown, displayMeleeWeapons)}
+                {dropdown("Simple Melee Weapons", set_s_meleeWeaponDropdown, s_meleeWeaponDropdown, () => display(SIMPLE_MELEE_WEAPONS, "Simple Melee Weapons"))}
+                {dropdown("Martial Ranged Weapons", set_m_RangedWeaponDropdown, m_rangedWeaponDropdown, displayRangedWeapons)}
+                {dropdown("Simple Ranged Weapons", set_s_RangedWeaponDropdown, s_rangedWeaponDropdown, () => display(SIMPLE_RANGED_WEAPONS, "Simple Ranged Weapons"))}
 
 
 
