@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet,ScrollView, Dimensions } from 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_WONDROUS } from "../../../constants/characterinformation/magicitems";
+import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_RODS, MAGICITEMS_SCROLLS, MAGICITEMS_STAFFS, MAGICITEMS_TYPE_WEAPONS, MAGICITEMS_WANDS, MAGICITEMS_WEAPONS, MAGICITEMS_WONDROUS } from "../../../constants/characterinformation/magicitems";
 import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newPageButton";
 import { useState, useEffect } from "react";
@@ -74,8 +74,8 @@ function displayWondorousItems()
 
 function display(equipment, equipmentType)
 {
-    return equipment.map((weapons, index) => (
-        <EquipmentIcon key={index} itemName={weapons.title} type={equipmentType} cost={weapons.cost} weight={weapons.weight}> </EquipmentIcon>
+    return equipment.map((item, index) => (
+        <MagicItemIcon key={index} name={item.name} type={equipmentType} weight={item.weight} attunement={item.attunement} description={item.description} rarity={item.rarity}charges={item.charges} numOfCharges={item.numOfCharges}/>
     ));
 }
 export default MagicItemPage = ({navigation, route}) =>
@@ -86,8 +86,12 @@ export default MagicItemPage = ({navigation, route}) =>
     const [armorDropdown, setArmorDropdown] = useState(false)
     const [potionDropdown, setPotionDropdown] = useState(false)
     const [ringDropdown, setRingDropdown] = useState(false)
+    const [rodDropdown, setRodDropdown] = useState(false)
+    const [scrollDropdown, setScrollDropdown] = useState(false)
+    const [staffDropdown, setStaffDropdown] = useState(false)
+    const [wandDropdown, setWandDropdown] = useState(false)
+    const [weaponDropdown, setWeaponDropdown] = useState(false)
     const [wondrousDropdown, setWondrousDropdown] = useState(false)
-
     const [customDropdown, setCustomDropdown] = useState(false)
 
 
@@ -168,9 +172,14 @@ export default MagicItemPage = ({navigation, route}) =>
                 {dropdown("Armor:", setArmorDropdown, armorDropdown, displayMagicArmor)}
                 {dropdown("Potion:", setPotionDropdown, potionDropdown, displayMagicPotions)}
                 {dropdown("Rings:", setRingDropdown, ringDropdown, displayMagicRings)}
+                {dropdown("Rod:", setRodDropdown, rodDropdown, () => display(MAGICITEMS_RODS, "Rod"))}
+                {dropdown("Scroll:", setScrollDropdown, scrollDropdown, () => display(MAGICITEMS_SCROLLS, "Scroll"))}
+                {dropdown("Staff:", setStaffDropdown, staffDropdown, () => display(MAGICITEMS_STAFFS, "Staff"))}
+                {dropdown("Wand:", setWandDropdown, wandDropdown, () => display(MAGICITEMS_WANDS, "Wand"))}
+                {dropdown("Weapon:", setWeaponDropdown, weaponDropdown, () => display(MAGICITEMS_WEAPONS, "Weapon"))}
                 {dropdown("Wondrous Items:", setWondrousDropdown, wondrousDropdown, displayWondorousItems)}
                 {dropdown("Custom Magic Items", setCustomDropdown, customDropdown, displayCustomItems )}
-                {drop}
+
             </View>
             <View style={{margin: height * .25}}/>
             </ScrollView>
