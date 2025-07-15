@@ -41,11 +41,11 @@ export default SettingPage = ({navigation}) =>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignItems: 'center', width: "90%", height: "30%", backgroundColor: 'gray', padding: "2%"}}>
                 <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.redColor}]} onPress={() => setMainColor(COLORS.redColor)} />
                 <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.blueColor}]} onPress={() => setMainColor(COLORS.blueColor)}/>
-                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.greenColor}]} />
-                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.orangeColor}]} />
-                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.yellowColor}]} />
-                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.lightGrayColor}]} />
-                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.darkGrayColor}]} />
+                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.greenColor}]} onPress={() => setMainColor(COLORS.greenColor)}/>
+                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.orangeColor}]} onPress={() => setMainColor(COLORS.orangeColor)}/>
+                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.yellowColor}]} onPress={() => setMainColor(COLORS.yellowColor)}/>
+                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.lightGrayColor}]} onPress={() => setMainColor(COLORS.lightGrayColor)}/>
+                <TouchableOpacity style={[styles.themeButton, {backgroundColor: COLORS.darkGrayColor}]} onPress={() => setMainColor(COLORS.darkGrayColor)}/>
             </View>
             <Text style={styles.textStyle}>Delete All Data:</Text>
             <TouchableOpacity style={[styles.themeButton, {backgroundColor: "black"}]} onPress={() => clearAllData()}/>
