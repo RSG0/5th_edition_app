@@ -1,29 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS, FONTSIZE } from "../../../constants/theme";
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 import NewCharacterIcon from "../../../components/newCharacterIcon";
 import NewCharacterButton from "../../../components/buttons/newCharacterButton";
 
 export default CharacterPage = ({ navigation, route }) => 
     {
-
     const [characters, setCharacters] = useState([]);
+    const isInitialLoad = useRef(true); //Prevent save on first load
+    const [isLoaded, setIsLoaded] = useState(false);
 
+    //Loads when screen is loaded
     useEffect(() => {
         load();
     }, []);
 
+    //Occurs when new character is added
     useEffect(() => {
-        if (characters.length > 0) {
-            console.log("Character created")
-            save();
+        if (isInitialLoad.current) {
+            isInitialLoad.current = false;
+            return;
         }
+        save();
     }, [characters]);
+
+    
+    useFocusEffect(
+        useCallback(() => 
+        {
+            console.log("Reloading on focus");
+            load();
+            return () => 
+            {
+                console.log("Cleanup on unfocus (optional)");
+            };
+        }, [])
+    );
 
     const save = async () => {
         try {
             await AsyncStorage.setItem("Character1", JSON.stringify(characters));
+            console.log("Character saved")
         } catch (err) {
             console.log(err);
         }
@@ -34,9 +54,12 @@ export default CharacterPage = ({ navigation, route }) =>
             const charactersJSON = await AsyncStorage.getItem("Character1");
             if (charactersJSON) {
                 setCharacters(JSON.parse(charactersJSON));
+                console.log("Characters loaded");
             }
         } catch (err) {
             console.log(err);
+        } finally {
+            setIsLoaded(true); 
         }
     };
 
@@ -46,26 +69,30 @@ export default CharacterPage = ({ navigation, route }) =>
     };
 
     const {name, classes, backgrounds, level, selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image} = route.params || {};
-    const clearAllCharacters = async () => {
-        try {
-            await AsyncStorage.removeItem("Character1");
-            setCharacters([]); // Reset state
-            console.log("All characters cleared!");
-        } catch (err) {
-            console.log("Error clearing characters:", err);
-        }
-    };
     
     useEffect(() => {
+        if (!isLoaded) return; // Wait until characters are loaded
+
         if (name) {
-            const newCharacter = { name, classes, backgrounds, level, race: selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image};
+            const newCharacter = { name, classes, backgrounds, level, race: selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image };
             setCharacters((prevCharacters) => {
-                // Avoid duplicating the same character in the array
-                const alreadyExists = prevCharacters.some((character) => character.name === newCharacter.name);
+                const alreadyExists = prevCharacters.some((c) => c.name === newCharacter.name);
                 return alreadyExists ? prevCharacters : [...prevCharacters, newCharacter];
             });
         }
-    }, [name]); // Only trigger when 'name' changes
+    }, [isLoaded, name]);
+
+    useEffect(() => {
+        console.log("Loaded characters:", characters);
+    }, [characters]);
+
+    useEffect(() => {
+        console.log("Received params:", route.params);
+    }, [route.params]);
+
+    useEffect(() => {
+    console.log("params:", route.params);
+    }, [route.params]);
 
     return (
         <SafeAreaView style={{ backgroundColor: COLORS.background, flex: 1 }}>

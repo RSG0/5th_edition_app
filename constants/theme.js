@@ -6,6 +6,13 @@ const COLORS =
     grayBackground: '#D9D9D9',
     dropdown: "#d1c899",
     mainColor: "#CE3F3F",
+    redColor: "#CE3F3F",
+    blueColor: "#252388ff",
+    greenColor: "#238839ff",
+    orangeColor: "#f65c20ff",
+    yellowColor: "#f7dc6f",
+    lightGrayColor: "#aaaaaaff",
+    darkGrayColor: "#333333",
 };
 const FONT = {
     regular: "DMRegular",
