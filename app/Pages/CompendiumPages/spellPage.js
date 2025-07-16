@@ -6,13 +6,12 @@ import { AntDesign } from '@expo/vector-icons'; // package provides a variety of
 
 import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newPageButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import SpellIcon from "../../../components/spellIcon";
 import { CANTRIPS, FIRST_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
-import { line } from "../../../constants/global";
 import CustomSpellIcon from "../../../components/customSpellIcon";
-import Seperator from "../../../components/seperator";
+import { useFocusEffect } from "expo-router";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -118,6 +117,7 @@ function displaySpells(spell, spellLevel) {
 
 export default SpellPage = ({navigation, route}) =>
 {
+    
     const { name, spellLevel, school, castingTime, ritual, range, concentration, duration, components, description, effect, material, usableBy, damageType, isVocal, isSomatic, materials} = route.params || {};
     const [cantripDropdown, setCantripDropdown] = useState(false);
     const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
@@ -125,6 +125,7 @@ export default SpellPage = ({navigation, route}) =>
     const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
     const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
 
+    const isInitialLoad = useRef(true); //Prevent save on first load
 
     const [customLevelDropdown, setCustomLevelDropdown] = useState(false);
     
@@ -163,27 +164,48 @@ export default SpellPage = ({navigation, route}) =>
         load();
     }, []);
 
+    //Occurs when new character is added
     useEffect(() => {
-        if (customSpells.length > 0) {
-            save();
+        if (isInitialLoad.current) {
+            isInitialLoad.current = false;
+            return;
         }
+        save();
     }, [customSpells]);
+
+    
+    useFocusEffect(
+        useCallback(() => 
+        {
+            console.log("Reloading on focus");
+            load();
+            return () => 
+            {
+                // console.log("Cleanup on unfocus (optional)");
+            };
+        }, [])
+    );
 
     const save = async () => {
         try {
             await AsyncStorage.setItem("Spell1", JSON.stringify(customSpells));
+            console.log("Custom spell saved")
         } catch (err) {
             console.log(err);
         }
     };
+
     const load = async () => {
         try {
             const spellJSON = await AsyncStorage.getItem("Spell1");
             if (spellJSON) {
-                setCustomSpells(JSON.parse(spellJSON));
+                setCharacters(JSON.parse(spellJSON));
+                console.log("Magic-item loaded");
             }
         } catch (err) {
             console.log(err);
+        } finally {
+            setIsLoaded(true); 
         }
     };
 
@@ -211,19 +233,12 @@ export default SpellPage = ({navigation, route}) =>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
                 {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displayCantrips)}
-                <Seperator/>
                 {/* {line()}      */}
                 {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel, "1st") }
-                <Seperator/>
                 {dropdown("2nd Level Spells",setSecondLevelDropdown, secondLevelDropdown, true, () => displaySpells(SECOND_LEVEL_SPELLS, "2nd") )}                
-                <Seperator/>
                 {dropdown("3rd Level Spells",setThirdLevelDropdown, thirdLevelDropdown, true, () => displaySpells(THIRD_LEVEL_SPELLS, "3rd") )}                
-                <Seperator/>
                 {dropdown("4th Level Spells",setFourthLevelDropdown, fourthLevelDropdown, true, () => displaySpells(FOURTH_LEVEL_SPELLS , "4th") )}                
-                <Seperator/>
-                {/* {line()}      */}
                 {dropdown("Custom Spells",setCustomLevelDropdown, customLevelDropdown, true, () => displayCustomSpells(customSpells) )}                
-                <Seperator/>
 
 
             </View>

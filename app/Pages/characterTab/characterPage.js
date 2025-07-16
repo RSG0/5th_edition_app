@@ -35,7 +35,7 @@ export default CharacterPage = ({ navigation, route }) =>
             load();
             return () => 
             {
-                console.log("Cleanup on unfocus (optional)");
+                // console.log("Cleanup on unfocus (optional)");
             };
         }, [])
     );

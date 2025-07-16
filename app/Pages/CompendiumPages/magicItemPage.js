@@ -5,9 +5,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MAGICITEMS_ARMOR, MAGICITEMS_POTIONS, MAGICITEMS_RINGS, MAGICITEMS_RODS, MAGICITEMS_SCROLLS, MAGICITEMS_STAFFS, MAGICITEMS_TYPE_WEAPONS, MAGICITEMS_WANDS, MAGICITEMS_WEAPONS, MAGICITEMS_WONDROUS } from "../../../constants/characterinformation/magicitems";
 import MagicItemIcon from "../../../components/magicItemIcon";
 import NewMagicItemButton from "../../../components/buttons/newPageButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
+import { useFocusEffect } from "expo-router";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -81,7 +82,11 @@ function display(equipment, equipmentType)
 export default MagicItemPage = ({navigation, route}) =>
 {
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight} = route.params || {};
+    const isInitialLoad = useRef(true); //Prevent save on first load
+
 
     const [armorDropdown, setArmorDropdown] = useState(false)
     const [potionDropdown, setPotionDropdown] = useState(false)
@@ -103,29 +108,51 @@ export default MagicItemPage = ({navigation, route}) =>
         load();
     }, []);
 
+    //Occurs when new character is added
     useEffect(() => {
-        if (customMagicItem.length > 0) {
-            save();
+        if (isInitialLoad.current) {
+            isInitialLoad.current = false;
+            return;
         }
+        save();
     }, [customMagicItem]);
+
+    
+    useFocusEffect(
+        useCallback(() => 
+        {
+            console.log("Reloading on focus");
+            load();
+            return () => 
+            {
+                // console.log("Cleanup on unfocus (optional)");
+            };
+        }, [])
+    );
 
     const save = async () => {
         try {
             await AsyncStorage.setItem("MagicItem1", JSON.stringify(customMagicItem));
+            console.log("Magic-Item saved")
         } catch (err) {
             console.log(err);
         }
     };
+
     const load = async () => {
         try {
             const magicItemJSON = await AsyncStorage.getItem("MagicItem1");
             if (magicItemJSON) {
-                setCustomMagicItem(JSON.parse(magicItemJSON));
+                setCharacters(JSON.parse(magicItemJSON));
+                console.log("Magic-item loaded");
             }
         } catch (err) {
             console.log(err);
+        } finally {
+            setIsLoaded(true); 
         }
     };
+
 
 
     const removeMagicItem = (index) => {
@@ -159,10 +186,25 @@ export default MagicItemPage = ({navigation, route}) =>
     useEffect(() => {
         if (name) {
             const newMagicItems = { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight};
-            setCustomMagicItem((prevMagicItems) => [...prevMagicItems, newMagicItems]);
+            setCustomMagicItem((prevMagicItems) => {
+            
+                const alreadyExists = prevMagicItems.some((mg) => mg.name === newMagicItems.name)
+                return alreadyExists ? prevMagicItems : [...prevMagicItems, newMagicItems] ; 
+            })
         }
     }, [name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight]);
 
+    /**
+     *     useEffect(() => {
+             if (name) {
+                 const newCharacter = { name, classes, backgrounds, level, race: selectedRace, str, dex, con, int, wis, cha, selectSkills, subclass, numOfCantrips, numOfLevelSpells, maxHp, selectedEquipments, image };
+                 setCharacters((prevCharacters) => {
+                     const alreadyExists = prevCharacters.some((c) => c.name === newCharacter.name);
+                     return alreadyExists ? prevCharacters : [...prevCharacters, newCharacter];
+                 });
+             }
+         }, [name]);
+     */
     return(
         <SafeAreaView style={{backgroundColor: COLORS.background, flex:1}}>
             <ScrollView>
