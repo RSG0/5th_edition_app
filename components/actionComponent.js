@@ -1,18 +1,19 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { COLORS, FONTSIZE } from "../constants/theme"
 
-export default ActionCompnent = ({name, type, range, hit_DC, effectDie, isVersatileDie, versatileDie,damageType}) =>
+export default ActionCompnent = ({name, type, range, hit_DC, effectDie, isVersatileDie, versatileDie, damageType, damageMod}) =>
 {
-    const extraChars = " & Dragon Slayer Katanna"
-    const displayName = name || "NNNNNNN" 
+    const extraChars = ""
+    const displayName = name || "NNN Weapon" 
     const displayType = type || "Melee NNNN" 
     const displayRange = range || "NN." 
     const displayHit_DC = hit_DC || " + NN" 
-    const displayEffectDie = effectDie || "1dN + 2" 
+    const displayEffectDie = effectDie || "" 
     const displayIsVersatile = isVersatileDie || "true"
     const displayVersatileTile = versatileDie || "1dN + "
-    const displayDamageType = damageType || "Ndiatnt" 
+    const displayDamageType = damageType || "See Desc." 
     const textArea = 120
+    const displayDamageMod = damageMod || "-1"
 
 
     return (
@@ -24,11 +25,11 @@ export default ActionCompnent = ({name, type, range, hit_DC, effectDie, isVersat
                     <Text style={{fontSize: 12, marginTop: 5}}>{displayRange} FT. Reach</Text>
                 </View>
                 <View style={{width: 60, height: 60, backgroundColor: 'teal'}}>
-                    <Text style={{fontSize: 50, textAlign: 'center', alignSelf: 'center', justifyContent: 'center'}}>+5</Text>
+                    <Text style={{fontSize: 50, textAlign: 'center', alignSelf: 'center', justifyContent: 'center'}}>{displayDamageMod}</Text>
                 </View>
                 <View style={{textAlign: 'right', width: 100, alignItems: 'center', backgroundColor: 'teal', marginRight: 10}}>
                     <Text style={{fontSize: 20}}>
-                        {displayEffectDie + displayDamageType}
+                        {displayEffectDie + " " +displayDamageType}
                     </Text>
                 </View>
             </TouchableOpacity>

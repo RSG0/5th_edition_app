@@ -85,7 +85,6 @@ export default MagicItemPage = ({navigation, route}) =>
     const [isLoaded, setIsLoaded] = useState(false);
 
     const { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight} = route.params || {};
-    const isInitialLoad = useRef(true); //Prevent save on first load
 
 
     const [armorDropdown, setArmorDropdown] = useState(false)
@@ -103,6 +102,7 @@ export default MagicItemPage = ({navigation, route}) =>
     //Used in tandem with Async Storage
     const [customMagicItem, setCustomMagicItem] = useState([]);
 
+    //Occurs on when screen loads up
     useEffect(() => {
         console.log("Custom Magic Items: " + customMagicItem)
         load();
@@ -117,7 +117,7 @@ export default MagicItemPage = ({navigation, route}) =>
         save();
     }, [customMagicItem]);
 
-    
+    //Occurs when user navigates away from screen
     useFocusEffect(
         useCallback(() => 
         {
@@ -129,6 +129,7 @@ export default MagicItemPage = ({navigation, route}) =>
             };
         }, [])
     );
+
 
     const save = async () => {
         try {
@@ -157,8 +158,17 @@ export default MagicItemPage = ({navigation, route}) =>
 
     const removeMagicItem = (index) => {
         console.log("Trying to delete")
-        const updatedMagicItem = customMagicItem.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
-        setCustomMagicItem(updatedMagicItem);
+        try
+        {
+            const updatedMagicItem = customMagicItem.filter((_, i) => i !== index); //_ refers to the current item (gets ingnored)
+            setCustomMagicItem(updatedMagicItem);
+        }
+        catch (e)
+        {
+            console.log("An error occurred");
+            console.log(e);
+        }
+
     };
 
     function displayCustomItems() {
