@@ -20,6 +20,12 @@ export const removeIndefinteArticles_and = (word) => {
     if (newWord.includes(" and ")) {
         newWord = newWord.replace(" and ", " & "); // Optional: Replace 'and' with '&' for better visual rendering
     }
+    if (newWord.includes("handaxe")) {
+        newWord = newWord.replace(newWord, "Handaxe");
+    }
+    else if (newWord.includes("light crossbow")) {
+        newWord = newWord.replace(newWord, "Light Crossbow");
+    }
     return newWord.trim();
 };
 

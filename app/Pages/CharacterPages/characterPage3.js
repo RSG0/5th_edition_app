@@ -15,13 +15,24 @@ import { CANTRIPS, FIRST_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS, SECOND_LEVEL_SPELLS,
 
 export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment, route, str, dex, con, int, wis, cha, level, classes}) => 
 {
+ 
+ 
+    const trimWeapons = (equipment) =>
+    {
+        if (equipment.find(eq => eq.title.includes("crossbow")) )
+        {
+            equipment.find
+        }
+
+    }
+ 
     useEffect((()=>
     {
         if (navigation)
         {
             // console.log("Selected Spells:", selectedSpells)
             // console.log("Navigation:", navigation)
-            // console.log("Equipment:", selectedEquipment)
+            console.log("Equipment:", selectedEquipment)
         }
     }),[navigation])
     useEffect(()=>
