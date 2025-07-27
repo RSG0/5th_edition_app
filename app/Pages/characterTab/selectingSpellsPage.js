@@ -16,8 +16,9 @@ export default SpellPage = ({navigation, route}) =>
 
   const checkForChange = () =>
   {
-    if ((numOfLevelSpells.length !== numOfSpellsKnown() ) && (numOfCantrips.length !== calculateNumOfCantrips ()) || classes != "Fighter" || classes != "Barbarian" || classes != "Monk")
+    if ((numOfLevelSpells.length !== numOfSpellsKnown() ) && (numOfCantrips.length !== calculateNumOfCantrips ()) && (classes !== "Fighter" && classes && "Barbarian" && classes !== "Monk") )
     {
+      console.log("Class is", classes)
       console.log(`Number of Level Spells: ${numOfLevelSpells.length}`)
       console.log(`Number of Level Spells: ${numOfLevelSpells}`)
       console.log(`Number of Level Spells Known: ${numOfSpellsKnown()}`)

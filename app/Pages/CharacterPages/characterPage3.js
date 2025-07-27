@@ -109,7 +109,7 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
                 // Need to add more levels of spells here
             if (spell === null )
             {
-                console.error("BONUS ACTION SPELL HAS ERROR")
+                console.error("REACTION SPELL HAS ERROR")
             }
             return spell || null;
         }).filter(Boolean); // Removes null entries
