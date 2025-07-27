@@ -8,12 +8,12 @@ import { act, useEffect, useState } from "react";
 import { capitalized } from "../../../constants/global";
 import { removeIndefinteArticles_and } from "../characterTab/selectEquipmentScreen";
 import { MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, SIMPLE_MELEE_WEAPONS, SIMPLE_RANGED_WEAPONS } from "../../../constants/characterinformation/equipment";
-import { calculateProficiencyBonus, calculateScoreMod, checkPositive } from "../../../constants/characterinformation/math";
+import { calculateProficiencyBonus, calculateScoreMod, calculateSpellDC, checkPositive } from "../../../constants/characterinformation/math";
 import { CANTRIPS, FIRST_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
 
 
 
-export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment, route, str, dex, con, int, wis, cha, level}) => 
+export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment, route, str, dex, con, int, wis, cha, level, classes}) => 
 {
     useEffect((()=>
     {
@@ -114,7 +114,7 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
             return spell || null;
         }).filter(Boolean); // Removes null entries
     }
-    const checkStrOrDex = (e) => 
+    const checkMod = (e) => 
     {
         const cleanedName = capitalized(removeIndefinteArticles_and(e));
         let mod
@@ -124,9 +124,23 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
         {
             mod = "STR";
         }
+        else if (CANTRIPS.find(sp => sp.name === cleanedName && classes === "Wizard"))
+        {
+            mod = "INT"
+        }
+        else if (CANTRIPS.find(sp => sp.name === cleanedName && (classes === "Paladin" || classes === "Bard" || classes === "Warlock" || 
+            classes === "Sorcerer"
+        ) ) )
+        {
+            mod = "CHA";
+        }
+        else if (CANTRIPS.find(sp => sp.name === cleanedName && (classes === "Cleric" || classes === "Druid" || classes === "Ranger") ))
+        {
+            mod = "WIS"
+        }
         else
         {
-            mod = "DEX";
+            mod = "DEX"
         }
         
         if (mod == "STR")
@@ -137,30 +151,59 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
         {
             return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(dex));
         }
+        else if (mod == "CON")
+        {
+            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(con));
+        }
+        else if (mod == "INT")
+        {
+            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(int));
+        }
+        else if (mod == "WIS")
+        {
+            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(wis));
+        }
+        else if (mod == "CHA")
+        {
+            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(cha));
+        }
         else
         {
             return -1; //Haven't gotten to this point yet
         }
     }
 
-const organizeActions = () => {
-    const spells = spellActionInformation();
-    const equipment = equipmentInformation();
+    const organizeActions = () => {
+        const spells = spellActionInformation();
+        const equipment = equipmentInformation();
 
-    // Combine both arrays
-    const actions = [...spells, ...equipment];
+        // Combine both arrays
+        const actions = [...spells, ...equipment];
 
-    // Sort alphabetically by title (for weapons) or name (for spells)
-    const sortedActions = actions.sort((a, b) => {
-        const aName = a.title || a.name;
-        const bName = b.title || b.name;
-        return aName.localeCompare(bName);
-    });
+        // Sort alphabetically by title (for weapons) or name (for spells)
+        const sortedActions = actions.sort((a, b) => {
+            const aName = a.title || a.name;
+            const bName = b.title || b.name;
+            return aName.localeCompare(bName);
+        });
 
-    console.log("Sorted Actions:", spells.map(s => s.name));
+        console.log("Sorted Actions:", spells.map(s => s.name));
 
-    return sortedActions;
-};
+        return sortedActions;
+    };
+
+    const DCORAttack = (action) =>
+    {
+            if (action.damageType === null)
+            {
+                return calculateSpellDC(Number(checkMod(action.name).slice(1)), Number( calculateProficiencyBonus(level) ))
+            }
+            else
+            {
+                return checkMod(action.title || action.name)
+            }
+    }
+
 
     const checkMeleeOrRanged = (e) =>
     {
@@ -176,21 +219,33 @@ const organizeActions = () => {
             return "Ranged Weapon";
         }
     }
-    const checkRange = (e) => {
-        const cleanedName = capitalized(removeIndefinteArticles_and(e));
+const checkRange = (e) => {
+    const cleanedName = capitalized(removeIndefinteArticles_and(e));
 
-        const weapon = SIMPLE_MELEE_WEAPONS.find(w =>
-            w.title === cleanedName && !w.properties.includes("Reach")
-        ) || MARTIAL_MELEE_WEAPONS.find(w =>
-            w.title === cleanedName && !w.properties.includes("Reach")
-        );
+    // Try to find a melee weapon with no "Reach" property (assumed 5 ft)
+    const weapon = SIMPLE_MELEE_WEAPONS.find(w =>
+        w.title === cleanedName && !w.properties.includes("Reach")
+    ) || MARTIAL_MELEE_WEAPONS.find(w =>
+        w.title === cleanedName && !w.properties.includes("Reach")
+    );
 
-        if (weapon) {
-            return "5." // 5 feet reach
-        }
+    if (weapon) {
+        return "5."; 
+    }
 
-        return null; // or something else if you want to handle ranged/melee differently
-    };
+    const spell = FIRST_LEVEL_SPELLS.find(s => s.name === cleanedName) ||
+                  SECOND_LEVEL_SPELLS.find(s => s.name === cleanedName) ||
+                  THIRD_LEVEL_SPELLS.find(s => s.name === cleanedName) ||
+                  FOURTH_LEVEL_SPELLS.find(s => s.name === cleanedName) ||
+                  CANTRIPS.find(s => s.name === cleanedName)
+
+    if (spell) {
+        return spell.range.replace(" feet", "") || "Varies";
+    }
+
+    return null;
+};
+
 
     const displayActions = () => {
         return organizeActions().map((act, index) => (
@@ -200,7 +255,7 @@ const organizeActions = () => {
                 description={act.description}
                 effectDie={act.damageDie}
                 damageType={act.damageType}
-                damageMod={checkStrOrDex(act.title || act.name)}
+                damageMod={ DCORAttack(act) }
                 type={checkMeleeOrRanged(act.title || act.name)}
                 range={checkRange(act.title || act.name)}
 
@@ -216,7 +271,7 @@ const organizeActions = () => {
                 description={act.description}
                 effectDie={act.damageDie}
                 damageType={act.damageType}
-                damageMod={checkStrOrDex(act.title || act.name)}
+                damageMod={checkMod(act.title || act.name)}
                 type={checkMeleeOrRanged(act.title || act.name)}
                 range={checkRange(act.title || act.name)}
 
@@ -232,7 +287,7 @@ const organizeActions = () => {
                 description={act.description}
                 effectDie={act.damageDie}
                 damageType={act.damageType}
-                damageMod={checkStrOrDex(act.title || act.name)}
+                damageMod={checkMod(act.title || act.name)}
                 type={checkMeleeOrRanged(act.title || act.name)}
                 range={checkRange(act.title || act.name)}
 

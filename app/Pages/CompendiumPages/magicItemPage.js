@@ -204,6 +204,9 @@ export default MagicItemPage = ({navigation, route}) =>
         }
     }, [name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight]);
 
+    const isInitialLoad = useRef(true); //Prevent save on first load
+
+
     /**
      *     useEffect(() => {
              if (name) {

@@ -58,7 +58,7 @@ export default CharacterCarousel =({ route, navigation }) =>
     const data = [
         { key: '1', component: <CharacterPage1 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
         { key: '2', component: <CharacterPage2 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
-        { key: '3', component: <CharacterPage3 navigation={navigation} selectedSpells={numOfLevelSpells} selectedCantrips={numOfCantrips} selectedEquipment={selectedEquipments} str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} level={level}/> },
+        { key: '3', component: <CharacterPage3 navigation={navigation} selectedSpells={numOfLevelSpells} selectedCantrips={numOfCantrips} selectedEquipment={selectedEquipments} str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} level={level} classes={classes}/> },
         { key: '4', component: <CharacterPage4 spellcastClass={handleSpellcastingClass()} spellAttackMod={checkPositive(spellAttackBonus)} spellSaveDC={handleSpellSaveDC()} profBonus={profBonus()} spells={allSpells} numOfSpells={numOfLevelSpells}/> },
          //Inventory Screen
 
