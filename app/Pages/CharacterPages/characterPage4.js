@@ -10,11 +10,7 @@ import SpellIcon from "../../../components/spellIcon";
 export default characterPage4 = ({spellcastClass, spellAttackMod, spellSaveDC, profBonus, spells, numOfSpells }) =>
 {
     const [spellDropdown, setSpellDropdown] = useState(false);
-    const [cantripDropdown, setCantripDropdown] = useState(false);
-    const [firstLevelDropdown, setFirstLevelDropdown] = useState(false);
-    const [secondLevelDropdown, setSecondLevelDropdown] = useState(false);
-    const [thirdLevelDropdown, setThirdLevelDropdown] = useState(false);
-    const [fourthLevelDropdown, setFourthLevelDropdown] = useState(false);
+
 
     function displaySpells(spell, spellLevel) {
         const sortedNameSpells = spell.sort((a, b) => {return a.name.localeCompare(b.name);});

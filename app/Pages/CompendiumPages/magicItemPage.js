@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { AntDesign } from '@expo/vector-icons'; // package provides a variety of icons including up and down arrows.
 import CustomMagicItemIcon from "../../../components/customMagicItemIcon";
 import { useFocusEffect } from "expo-router";
+import { ARMOR } from "../../../constants/characterinformation/equipment";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -43,35 +44,6 @@ const toggleDropdown = (toggle, toggleState) => {
           )
 
           }
-
-
-function displayMagicArmor()
-{
-    return MAGICITEMS_ARMOR.map((armor, index) => (
-
-        <MagicItemIcon key={index} name={armor.name} type={"Armor"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
-    ));
-}
-function displayMagicPotions()
-{
-    return MAGICITEMS_POTIONS.map((armor, index) => (
-        <MagicItemIcon key={index + 1} name={armor.name} type={"Potion"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity} charges={armor.charges} numOfCharges={armor.numOfCharges}/>
-    ));
-}
-function displayMagicRings()
-{
-    return MAGICITEMS_RINGS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Ring"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
-    ));
-}
-
-
-function displayWondorousItems()
-{
-    return MAGICITEMS_WONDROUS.map((armor, index) => (
-        <MagicItemIcon key={index} name={armor.name} type={"Wondorous Items"} weight={armor.weight} attunement={armor.attunement} description={armor.description} rarity={armor.rarity}charges={armor.charges} numOfCharges={armor.numOfCharges}/>
-    ));
-}
 
 function display(equipment, equipmentType)
 {
@@ -171,28 +143,6 @@ export default MagicItemPage = ({navigation, route}) =>
 
     };
 
-    function displayCustomItems() {
-        if (!Array.isArray(customMagicItem)) return null;
-        const sortedItems = customMagicItem.sort((a, b) => {return a.name.localeCompare(b.name);});
-        return sortedItems.map((item, index) => (
-            <CustomMagicItemIcon
-                key={index}
-                name={item.name}
-                type={item.itemType || "Custom Item"}
-                weight={item.weight || 0}
-                attunement={item.attunement}
-                description={item.description || "N/A"}
-                rarity={item.rarity}
-                charges={item.isChargable}
-                numOfCharges={item.numOfCharges}
-                removeItem={() => removeMagicItem(index)}
-                
-            />
-
-        ));
-
-    }
-
     useEffect(() => {
         if (name) {
             const newMagicItems = { name, itemType, weaponType, isChargable, numOfCharges, attunement, rarity, description, weight};
@@ -224,15 +174,15 @@ export default MagicItemPage = ({navigation, route}) =>
             {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
                 {/**Armor Section*/}
-                {dropdown("Armor:", setArmorDropdown, armorDropdown, displayMagicArmor)}
-                {dropdown("Potion:", setPotionDropdown, potionDropdown, displayMagicPotions)}
-                {dropdown("Rings:", setRingDropdown, ringDropdown, displayMagicRings)}
+                {dropdown("Armor:", setArmorDropdown, armorDropdown, display(MAGICITEMS_ARMOR, "Armor"))}
+                {dropdown("Potion:", setPotionDropdown, potionDropdown, display(MAGICITEMS_POTIONS))}
+                {dropdown("Rings:", setRingDropdown, ringDropdown, display(MAGICITEMS_RINGS, "Ring") )}
                 {dropdown("Rod:", setRodDropdown, rodDropdown, () => display(MAGICITEMS_RODS, "Rod"))}
                 {dropdown("Scroll:", setScrollDropdown, scrollDropdown, () => display(MAGICITEMS_SCROLLS, "Scroll"))}
                 {dropdown("Staff:", setStaffDropdown, staffDropdown, () => display(MAGICITEMS_STAFFS, "Staff"))}
                 {dropdown("Wand:", setWandDropdown, wandDropdown, () => display(MAGICITEMS_WANDS, "Wand"))}
                 {dropdown("Weapon:", setWeaponDropdown, weaponDropdown, () => display(MAGICITEMS_WEAPONS, "Weapon"))}
-                {dropdown("Wondrous Items:", setWondrousDropdown, wondrousDropdown, displayWondorousItems)}
+                {dropdown("Wondrous Items:", setWondrousDropdown, wondrousDropdown, display(MAGICITEMS_WONDROUS, "Wondorous Item"))}
                 {dropdown("Custom Magic Items", setCustomDropdown, customDropdown, displayCustomItems )}
 
             </View>

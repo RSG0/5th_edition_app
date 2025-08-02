@@ -19,16 +19,16 @@ export default ActionCompnent = ({name, type, range, hit_DC, effectDie, isVersat
     return (
         <View style={styles.item}>
             <TouchableOpacity style={{width: 335, flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                <View style={{flexDirection:'column', maxWidth: "80%", width: textArea, marginLeft: 10, backgroundColor: 'teal'}}>
+                <View style={{flexDirection:'column', maxWidth: "80%", width: textArea, marginLeft: 10, backgroundColor: ''}}>
                     <Text style={{fontSize:16, fontWeight:'bold'}}>{displayName + extraChars}</Text>
                     <Text style={{fontSize: 12, fontStyle: 'italic'}}>{displayType}</Text>
                     <Text style={{fontSize: 12, marginTop: 5}}>{displayRange} FT. Reach</Text>
                 </View>
-                <View style={{width: 60, height: 60, backgroundColor: 'teal'}}>
+                <View style={{width: 60, height: 60, backgroundColor: ''}}>
                     <Text style={{fontSize: 50, textAlign: 'center', alignSelf: 'center', justifyContent: 'center'}}>{displayDamageMod}</Text>
                 </View>
-                <View style={{textAlign: 'right', width: 100, alignItems: 'center', backgroundColor: 'teal', marginRight: 10}}>
-                    <Text style={{fontSize: 20}}>
+                <View style={{textAlign: 'right', width: 100, alignItems: 'center', backgroundColor: '', marginRight: 10}}>
+                    <Text style={{fontSize: 20, fontStyle: 'italic', textAlign: 'center'}}>
                         {displayEffectDie + " " +displayDamageType}
                     </Text>
                 </View>

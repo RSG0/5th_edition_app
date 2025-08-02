@@ -48,31 +48,6 @@ const dropdown = (text, setState, state, isActive, renderSpells) =>
         //Not needed any more
       }
     }
-
-
-function displayCantrips()
-{
-    return CANTRIPS.map((spell, index) => 
-    (
-        <SpellIcon 
-        key={index} name={spell.name} spellLevel={"Cantrip"} usableBy={spell.usableBy} school={spell.school} 
-        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} materials={spell.material}
-        isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} concentration={spell.concentration} 
-        requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description} castingTime={spell.castingTime} duration={spell.duration}/>
-    ));
-}
-function displayFirstLevel()
-{
-    return FIRST_LEVEL_SPELLS.map((spell, index) => 
-    (
-        <SpellIcon 
-        key={index} name={spell.name} spellLevel={"1st"} usableBy={spell.usableBy} school={spell.school} 
-        ritual={spell.ritual} range={spell.range} effect={spell.damageDie} damageType={spell.damageType} materials={spell.material}
-        isVocal={handleComponents(spell.components).isVocal} isSomatic={handleComponents(spell.components).isSomatic} concentration={spell.concentration} 
-        requiresMaterials={handleComponents(spell.components).requiresMaterials} description={spell.description} castingTime={spell.castingTime} duration={spell.duration}/>
-    ));
-}
-
 const handleComponents = (components) => {
     // Determine if the array contains specific characters
     const isVocal = components.includes("V"); // Check if "V" is in the array
@@ -230,11 +205,9 @@ export default SpellPage = ({navigation, route}) =>
     return(
         <SafeAreaView style={{backgroundColor: COLORS.background, flex:1}}>
             <ScrollView>
-            {/* {console.log(ARMOR)} */}
             <View style={styles.viewStyle}>
-                {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displayCantrips)}
-                {/* {line()}      */}
-                {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displayFirstLevel, "1st") }
+                {dropdown("Cantrips", setCantripDropdown, cantripDropdown, true, displaySpells(CANTRIPS, "Cantrips"))}
+                {dropdown("1st Level Spells", setFirstLevelDropdown, firstLevelDropdown, true, displaySpells(FIRST_LEVEL_SPELLS, "1st")) }
                 {dropdown("2nd Level Spells",setSecondLevelDropdown, secondLevelDropdown, true, () => displaySpells(SECOND_LEVEL_SPELLS, "2nd") )}                
                 {dropdown("3rd Level Spells",setThirdLevelDropdown, thirdLevelDropdown, true, () => displaySpells(THIRD_LEVEL_SPELLS, "3rd") )}                
                 {dropdown("4th Level Spells",setFourthLevelDropdown, fourthLevelDropdown, true, () => displaySpells(FOURTH_LEVEL_SPELLS , "4th") )}                

@@ -11,21 +11,8 @@ import { MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, SIMPLE_MELEE_WEAPONS, SI
 import { calculateProficiencyBonus, calculateScoreMod, calculateSpellDC, checkPositive } from "../../../constants/characterinformation/math";
 import { CANTRIPS, FIRST_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
 
-
-
 export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment, route, str, dex, con, int, wis, cha, level, classes}) => 
 {
- 
- 
-    const trimWeapons = (equipment) =>
-    {
-        if (equipment.find(eq => eq.title.includes("crossbow")) )
-        {
-            equipment.find
-        }
-
-    }
- 
     useEffect((()=>
     {
         if (navigation)
@@ -64,27 +51,9 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
                 || THIRD_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 action"))
                 || FOURTH_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 action"));
                 // Need to add more levels of spells here
-            if (!spell || spell === null )
-            {
-                console.error("SPELL HAS ERROR")
-            }
-            return spell || null;
-        }).filter(Boolean); // Removes null entries
-    }
-    const spellBonusActionInformation = () =>
-    {
-        return selectedSpells.map((e) => {
-            const spellName = (e.name);
-
-            let spell = CANTRIPS.find(w => (w.name === spellName) && (w.castingTime === "1 action")) 
-                || FIRST_LEVEL_SPELLS.find(w => (w.name === spellName) && (w.castingTime === "1 bonus action"))
-                || SECOND_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 bonus action"))
-                || THIRD_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 bonus action"))
-                || FOURTH_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 bonus action"));
-                // Need to add more levels of spells here
             if (spell === null )
             {
-                console.error("BONUS ACTION SPELL HAS ERROR")
+                console.error("SPELL HAS ERROR")
             }
             return spell || null;
         }).filter(Boolean); // Removes null entries
@@ -103,24 +72,6 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
             if (spell === null )
             {
                 console.error("BONUS ACTION SPELL HAS ERROR")
-            }
-            return spell || null;
-        }).filter(Boolean); // Removes null entries
-    }
-    const spellReactionInformation = () =>
-    {
-        return selectedSpells.map((e) => {
-            const spellName = (e.name);
-
-            let spell = CANTRIPS.find(w => (w.name === spellName) && (w.castingTime === "1 action")) 
-                || FIRST_LEVEL_SPELLS.find(w => (w.name === spellName) && (w.castingTime === "1 reaction"))
-                || SECOND_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 reaction"))
-                || THIRD_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 reaction"))
-                || FOURTH_LEVEL_SPELLS.find(w => w.name === spellName && (w.castingTime === "1 reaction"));
-                // Need to add more levels of spells here
-            if (spell === null )
-            {
-                console.error("REACTION SPELL HAS ERROR")
             }
             return spell || null;
         }).filter(Boolean); // Removes null entries
@@ -233,15 +184,22 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
 const checkRange = (e) => {
     const cleanedName = capitalized(removeIndefinteArticles_and(e));
 
-    // Try to find a melee weapon with no "Reach" property (assumed 5 ft)
     const weapon = SIMPLE_MELEE_WEAPONS.find(w =>
         w.title === cleanedName && !w.properties.includes("Reach")
     ) || MARTIAL_MELEE_WEAPONS.find(w =>
         w.title === cleanedName && !w.properties.includes("Reach")
     );
-
     if (weapon) {
         return "5."; 
+    }
+    const ranged = SIMPLE_RANGED_WEAPONS.find(w =>
+        w.title === cleanedName
+    ) || MARTIAL_RANGED_WEAPONS.find(w =>
+        w.title === cleanedName
+    );
+
+    if (ranged) {
+        return ranged.reach; 
     }
 
     const spell = FIRST_LEVEL_SPELLS.find(s => s.name === cleanedName) ||
@@ -314,18 +272,14 @@ const checkRange = (e) => {
         <SafeAreaView style={{backgroundColor: COLORS.background, flex: 1}}>
         <ScrollView>
         <View style={styles.grayBackground}>
-            {/* {console.log("Selected: ")}
-            {console.log("Cantrips:", selectedCantrips)} */}
             <Text style={styles.textStyle}> <Text style={{fontWeight: 'bold'}}>ACTIONS</Text> - Attacks Per Action: 1</Text>
             <Seperator/>
 
             <View style={{alignItems: 'center', alignItems: 'center'}}> 
-            {/* {organizeActions()} */}
             {displayActions()}
             </View>
             <Text style={[styles.textStyle, {fontWeight: 'bold'}]}> BONUS ACTIONS - </Text>
             <Seperator/>
-
             <View style={{alignItems: 'center'}}> 
             {displayBonusActions()}
             </View>

@@ -39,6 +39,28 @@ export default SubclassesPage = ({navigation, route}) =>
         }
     }, [subclass])
 
+
+    const handleNextPage = () =>
+    {
+        if (
+        classes === "Wizard" ||
+        classes === "Sorcerer" ||  
+        classes === "Warlock" ||
+        classes === "Bard" ||
+        classes === "Cleric" ||
+        classes === "Druid" ||
+        classes === "Paladin" ||
+        classes === "Ranger"
+        )    
+        return "Spell Page"
+        else
+        {
+            return "Hit Point"            
+
+        }
+
+}
+
     function handleSubclassChange()
         {
             setSubclass(null);
@@ -163,7 +185,7 @@ export default SubclassesPage = ({navigation, route}) =>
                 navigation={navigation}
                 params={{name, classes, backgrounds, subclass, level, selectedRace, str, dex, con,int, wis, cha, selectSkills, subclass}}
                 checkforChange={(item) => checkForChange(item)}
-                nextScreen={"Spell Page"}
+                nextScreen={handleNextPage()}
                 ></NextButton>
         </SafeAreaView>
     );
