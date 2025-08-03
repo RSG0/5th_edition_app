@@ -11,24 +11,33 @@ import { MARTIAL_MELEE_WEAPONS, MARTIAL_RANGED_WEAPONS, SIMPLE_MELEE_WEAPONS, SI
 import { calculateProficiencyBonus, calculateScoreMod, calculateSpellDC, checkPositive } from "../../../constants/characterinformation/math";
 import { CANTRIPS, FIRST_LEVEL_SPELLS, FOURTH_LEVEL_SPELLS, SECOND_LEVEL_SPELLS, THIRD_LEVEL_SPELLS } from "../../../constants/characterinformation/spells";
 
-export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, selectedEquipment, route, str, dex, con, int, wis, cha, level, classes}) => 
+export default characterPage3 = ({navigation, route}) => 
 {
+    const { selectedSpells = [], selectedCantrips = [], selectedEquipments = [],
+    str = -1, dex = -1, con = -1, int = -1, wis = -1, cha = -1, level = -1, classes = []
+    } = route.params || {};
     useEffect((()=>
     {
         if (navigation)
         {
+            console.log("HERE")
             // console.log("Selected Spells:", selectedSpells)
             // console.log("Navigation:", navigation)
-            console.log("Equipment:", selectedEquipment)
+            // console.log("Equipment:", selectedEquipment)
         }
     }),[navigation])
     useEffect(()=>
     {
         console.log("Screen has loaded")
+        console.log("Selected Cantrips:", selectedCantrips.map(spell => spell.name))
+        console.log("Selected Spells:", selectedSpells.map( spell => spell.name))
+        console.log("Selected Equipment:", selectedEquipments)
+        // console.log("STR:", str)
+
     },[])
 
     const equipmentInformation = () => {
-        return selectedEquipment.map((e) => {
+        return selectedEquipments.map((e) => {
             const cleanedName = capitalized(removeIndefinteArticles_and(e));
             // console.log("Cleaned:", cleanedName);
 
@@ -76,64 +85,39 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
             return spell || null;
         }).filter(Boolean); // Removes null entries
     }
-    const checkMod = (e) => 
-    {
+    const checkMod = (e) => {
         const cleanedName = capitalized(removeIndefinteArticles_and(e));
-        let mod
+        let mod;
 
         if (SIMPLE_MELEE_WEAPONS.find(w => w.title === cleanedName) ||
-        MARTIAL_MELEE_WEAPONS.find(w => w.title === cleanedName))
-        {
+            MARTIAL_MELEE_WEAPONS.find(w => w.title === cleanedName)) {
             mod = "STR";
-        }
-        else if (CANTRIPS.find(sp => sp.name === cleanedName && classes === "Wizard"))
-        {
-            mod = "INT"
-        }
-        else if (CANTRIPS.find(sp => sp.name === cleanedName && (classes === "Paladin" || classes === "Bard" || classes === "Warlock" || 
-            classes === "Sorcerer"
-        ) ) )
-        {
+        } else if (CANTRIPS.find(sp => sp.name === cleanedName && classes.includes("Wizard"))) {
+            mod = "INT";
+        } else if (CANTRIPS.find(sp => sp.name === cleanedName && ["Paladin", "Bard", "Warlock", "Sorcerer"].some(cls => classes.includes(cls)))) {
             mod = "CHA";
+        } else if (CANTRIPS.find(sp => sp.name === cleanedName && ["Cleric", "Druid", "Ranger"].some(cls => classes.includes(cls)))) {
+            mod = "WIS";
+        } else {
+            mod = "DEX"; // fallback
         }
-        else if (CANTRIPS.find(sp => sp.name === cleanedName && (classes === "Cleric" || classes === "Druid" || classes === "Ranger") ))
-        {
-            mod = "WIS"
+
+        if (mod === "STR") {
+            return calculateProficiencyBonus(level) + calculateScoreMod(str);
+        } else if (mod === "DEX") {
+            return calculateProficiencyBonus(level) + calculateScoreMod(dex);
+        } else if (mod === "CON") {
+            return calculateProficiencyBonus(level) + calculateScoreMod(con);
+        } else if (mod === "INT") {
+            return calculateProficiencyBonus(level) + calculateScoreMod(int);
+        } else if (mod === "WIS") {
+            return calculateProficiencyBonus(level) + calculateScoreMod(wis);
+        } else if (mod === "CHA") {
+            return calculateProficiencyBonus(level) + calculateScoreMod(cha);
         }
-        else
-        {
-            mod = "DEX"
-        }
-        
-        if (mod == "STR")
-        {
-            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(str));
-        }
-        else if (mod == "DEX")
-        {
-            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(dex));
-        }
-        else if (mod == "CON")
-        {
-            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(con));
-        }
-        else if (mod == "INT")
-        {
-            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(int));
-        }
-        else if (mod == "WIS")
-        {
-            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(wis));
-        }
-        else if (mod == "CHA")
-        {
-            return checkPositive(calculateProficiencyBonus(level) + calculateScoreMod(cha));
-        }
-        else
-        {
-            return -1; //Haven't gotten to this point yet
-        }
-    }
+
+        return 0; // fallback default to avoid undefined
+    };
 
     const organizeActions = () => {
         const spells = spellActionInformation();
@@ -156,13 +140,16 @@ export default characterPage3 = ({navigation, selectedCantrips, selectedSpells, 
 
     const DCORAttack = (action) =>
     {
-            if (action.damageType === null)
+            if (action.damageType === null) 
             {
-                return calculateSpellDC(Number(checkMod(action.name).slice(1)), Number( calculateProficiencyBonus(level) ))
+                console.log("Actions from CharacterPage3:", action.name) // Should be a string like "+2"
+                console.log("DC:", calculateSpellDC(checkMod(action.name), calculateProficiencyBonus(level)) )
+                return calculateSpellDC(checkMod(action.name), calculateProficiencyBonus(level))
+
             }
             else
             {
-                return checkMod(action.title || action.name)
+                return checkPositive(checkMod(action.title || action.name) )
             }
     }
 
@@ -224,7 +211,7 @@ const checkRange = (e) => {
                 description={act.description}
                 effectDie={act.damageDie}
                 damageType={act.damageType}
-                damageMod={ DCORAttack(act) }
+                damageMod={ DCORAttack(act || -1) }
                 type={checkMeleeOrRanged(act.title || act.name)}
                 range={checkRange(act.title || act.name)}
 
@@ -291,7 +278,7 @@ const checkRange = (e) => {
         </View>
         <View style={{marginVertical: 100}} />
         </ScrollView>
-        <NewPageButton navigation={navigation} nextScreen={"New Action Page"} params={{selectedCantrips, selectedSpells, selectedEquipment}}/>
+        <NewPageButton navigation={navigation} nextScreen={"New Action Page"} params={{selectedCantrips, selectedSpells, selectedEquipments, str, dex, con, int, wis, cha}} />
         </SafeAreaView>
     );
 }

@@ -15,8 +15,8 @@ export default CharacterPage2 = ({ name, classes, race, backgrounds, level, sele
     {
 
         const selectedSkill = CLASS_SKILLS.find(sv => sv.label === classes )
-        console.log("Selected Skills:", selectedSkill.skills)
-        console.log("All Skills:",selectSkills);
+        // console.log("Selected Skills:", selectedSkill.skills)
+        // console.log("All Skills:",selectSkills);
         // return selectedSkills.skills;
     }
 

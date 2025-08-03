@@ -39,21 +39,21 @@ export default CharacterCarousel =({ route, navigation }) =>
     const spellAttackBonus = calculateSpellAttackBonus(calculateScoreMod(handleSpellMod()), calculateProficiencyBonus(level))
     const displayValues= () =>
         {
-            console.log("NAME:", name)
-            console.log("STR:", str )
-            console.log("DEX:", dex )
-            console.log("CON:", con )
-            console.log("INT:", int )
-            console.log("WIS:", wis )
-            console.log("CHA:", cha )
-            console.log("Selected Skills:", selectSkills)
-            console.log("Class:", classes )
-            console.log("Max Hp:", maxHp)
-            console.log("Subclass:", subclass)
-            console.log("Backstory:", backstory)
-            console.log("Cantrips:", numOfCantrips)
+            // console.log("NAME:", name)
+            // console.log("STR:", str )
+            // console.log("DEX:", dex )
+            // console.log("CON:", con )
+            // console.log("INT:", int )
+            // console.log("WIS:", wis )
+            // console.log("CHA:", cha )
+            // console.log("Selected Skills:", selectSkills)
+            // console.log("Class:", classes )
+            // console.log("Max Hp:", maxHp)
+            // console.log("Subclass:", subclass)
+            // console.log("Backstory:", backstory)
+            // console.log("Cantrips:", numOfCantrips)
             console.log("Selected Equipments:",selectedEquipments)
-            console.log("To be displayed:", handleSpellSaveDC())
+            // console.log("To be displayed:", handleSpellSaveDC())
         }
 const isSpellcaster = [
   "Wizard",
@@ -69,7 +69,8 @@ const isSpellcaster = [
 const data = [
     { key: '1', component: <CharacterPage1 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
     { key: '2', component: <CharacterPage2 str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} maxHp={maxHp} classes={classes} name={name} level={level} image={image} selectSkills={selectSkills}/> },
-    { key: '3', component: <CharacterPage3 navigation={navigation} selectedSpells={numOfLevelSpells} selectedCantrips={numOfCantrips} selectedEquipment={selectedEquipments} str={str} dex={dex} con={con} int={int} wis={wis} cha={cha} level={level} classes={classes}/> },
+    { key: '3', component: <CharacterPage3 navigation={navigation}  route={{params: {selectedSpells: numOfLevelSpells, selectedCantrips: numOfCantrips, 
+        selectedEquipments, str, dex, con, int, wis, cha, level, classes } }}/> },
     ...(isSpellcaster
         ? [{ key: '4', component: <CharacterPage4 spellcastClass={handleSpellcastingClass()} spellAttackMod={checkPositive(spellAttackBonus)} spellSaveDC={handleSpellSaveDC()} profBonus={profBonus()} spells={allSpells} numOfSpells={numOfLevelSpells}/> }]
         : [])

@@ -83,11 +83,11 @@ export default CharacterPage = ({ navigation, route }) =>
     }, [isLoaded, name]);
 
     useEffect(() => {
-        console.log("Loaded characters:", characters);
+        // console.log("Loaded characters:", characters);
     }, [characters]);
 
     useEffect(() => {
-        console.log("Received params:", route.params);
+        // console.log("Received params:", route.params);
     }, [route.params]);
 
     useEffect(() => {
